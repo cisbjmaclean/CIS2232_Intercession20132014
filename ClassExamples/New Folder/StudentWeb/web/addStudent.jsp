@@ -18,13 +18,13 @@
         <html:base/>
     </head>
     <body style="background-color: yellowgreen">
-        <html:form action="/Menu">
+        <html:form action="/Add">
             <center>
                 
                 <label class="alignCenter" for="studentId"><bean:message key="label.student.id"/></label><html:text property="studentId" /><br>
                 <label class="alignCenter" for="firstName"><bean:message key="label.first.name"/></label><html:text property="firstName" /><br>
                         <label class="alignCenter" for="lastName"><bean:message key="label.last.name"/></label><html:text property="lastName" /><br>
-                            <label class="alignCenter" for="dateofBirth"><bean:message key="label.dateOfBirth"/></label><html:text property="dateOfBirth" /><br>
+                            <label class="alignCenter" for="dateofBirth"><bean:message key="label.dob"/></label><html:text property="dob" /><br>
                 
 
                 <html:submit><bean:message key="label.submit"/></html:submit>

@@ -31,7 +31,11 @@ public class ProcessMenu extends Action {
         //Get the option chosen from the user.
         MenuForm menuForm = (MenuForm) request.getAttribute("menuForm");
         System.out.println("Option chosen="+menuForm.getOption());
-        return mapping.findForward("welcome");
+        ActionForward findForward = mapping.findForward("welcome");
+        if(menuForm.getOption().equalsIgnoreCase("add")){
+            findForward =  mapping.findForward("add");
+        }
+        return findForward;
 
     }
 

@@ -8,6 +8,7 @@
 <struts-config>
     <form-beans>
       <form-bean type="forms.MenuForm" name="menuForm"/>
+      <form-bean type="forms.Student" name="studentForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -25,6 +26,11 @@
                 type="actions.ProcessMenu"
                 name="menuForm"
                 input="welcomeStruts.jsp" 
+                scope="request"/>
+        <action path="/Add" 
+                type="actions.ProcessMenu"
+                name="studentForm"
+                input="addStudent.jsp" 
                 scope="request"/>
 
     </action-mappings>
