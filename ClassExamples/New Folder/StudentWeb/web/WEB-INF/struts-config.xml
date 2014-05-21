@@ -16,6 +16,7 @@
 
     <global-forwards>
         <forward name="welcome"  path="/Welcome.do"/>
+        <forward name="add"  path="/addStudent.jsp"/>
     </global-forwards>
 
     <action-mappings>
@@ -25,6 +26,7 @@
                 name="menuForm"
                 input="welcomeStruts.jsp" 
                 scope="request"/>
+
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
