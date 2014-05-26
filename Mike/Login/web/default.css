@@ -1,0 +1,45 @@
+/* 
+    Created on : May 25, 2014, 7:35:41 PM
+    Author     : Michael Fesser
+    This is some basic CSS to butify the page.  
+*/
+
+html {  /* Taken from http://paulmason.name/item/full-screen-background-image-pure-css-code Used to make backgroup 100% screen size.*/
+    height: 100%;
+    width:100%;
+}
+    
+body { /* Taken from http://ie.microsoft.com/TEStdrive/Graphics/CSSGradientBackgroundMaker/Default.html What can I say?  I like the colour.  Tried a few others and meh. */
+
+    /* IE10 Consumer Preview */ 
+    background-image: -ms-radial-gradient(center, circle farthest-corner, #83B2DE 0%, #5081BC 100%);
+
+    /* Mozilla Firefox */ 
+    background-image: -moz-radial-gradient(center, circle farthest-corner, #83B2DE 0%, #5081BC 100%);
+
+    /* Opera */ 
+    background-image: -o-radial-gradient(center, circle farthest-corner, #83B2DE 0%, #5081BC 100%);
+
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(radial, center center, 0, center center, 506, color-stop(0, #83B2DE), color-stop(1, #5081BC));
+
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-radial-gradient(center, circle farthest-corner, #83B2DE 0%, #5081BC 100%);
+
+    /* W3C Markup, IE10 Release Preview */ 
+    background-image: radial-gradient(circle farthest-corner at center, #83B2DE 0%, #5081BC 100%);
+    font-family: sans-serif;
+}
+
+.header {
+    text-align: center;
+}
+
+.mainDiv{ /* Main div formatting */
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+    background-color: white;
+    font-size: 14px;  
+    padding: 1px;
+}
