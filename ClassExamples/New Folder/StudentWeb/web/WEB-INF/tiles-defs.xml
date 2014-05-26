@@ -11,6 +11,26 @@
 
 <tiles-definitions>
 
+    <definition name=".mainLayout" path="/base.jsp">
+        <put name="header" value="header.jsp" />
+        <put name="body"   value="" />
+        <put name="footer" value="footer.jsp" />
+    </definition>
+
+    <definition name="welcomeTile" extends=".mainLayout">
+        
+        <put name="body"   value="/welcomeStruts.jsp" />
+        
+    </definition>
+
+    <definition name="addStudentTile" extends=".mainLayout">
+        <put name="body"   value="/addStudent.jsp" />
+    </definition>
+    
+    <definition name="viewAllTile" extends=".mainLayout">
+        <put name="body"   value="/viewAll.jsp" />
+    </definition>
+    
     <!-- sample tiles definitions
     <definition name=".mainLayout" path="/common/layouts/classicLayout.jsp">
         <put name="title"  value="Sample Page Title" />

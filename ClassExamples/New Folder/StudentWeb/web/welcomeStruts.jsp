@@ -14,8 +14,6 @@
     <body style="background-color: yellowgreen">
         <html:form action="/Menu">
         <center>      
-            <h3><bean:message key="welcome.heading"/></h3>
-            <p><u><bean:message key="welcome.message"/></u></p>
         <input type="radio" name="option" value="add"><bean:message key="menu.add"/><br>
         <input type="radio" name="option" value="viewall"><bean:message key="menu.view.all"/><br>
         <input type="radio" name="option" value="edit"><bean:message key="menu.edit"/><br>

@@ -6,6 +6,9 @@
 
 package student;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Scanner;
 import util.Util;
 
@@ -15,6 +18,11 @@ import util.Util;
  */
 public class Student {
 //<<<<<<< HEAD
+    
+    private static Path path = Paths.get("c:\\cis2232\\student.txt");
+    private static HashMap<String, Student> students = new HashMap();
+
+    
     
     //Student addition - Ian "The Uber" Mori
 //=======

@@ -8,7 +8,7 @@
 <struts-config>
     <form-beans>
       <form-bean type="forms.MenuForm" name="menuForm"/>
-      <form-bean type="forms.Student" name="studentForm"/>
+      <form-bean type="business.Student" name="studentForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -17,18 +17,24 @@
 
     <global-forwards>
         <forward name="welcome"  path="/Welcome.do"/>
-        <forward name="add"  path="/addStudent.jsp"/>
     </global-forwards>
 
     <action-mappings>
-        <action path="/Welcome" forward="/welcomeStruts.jsp"/>
+        
+        <action path="/Welcome" name="menuForm" forward="welcomeTile"/>
+        
         <action path="/Menu" 
                 type="actions.ProcessMenu"
                 name="menuForm"
                 input="welcomeStruts.jsp" 
-                scope="request"/>
+                scope="request">
+                <forward name="add" path="addStudentTile"/>
+                <forward name="viewAll" path="viewAllTile"/>
+                
+        </action>
+        
         <action path="/Add" 
-                type="actions.ProcessMenu"
+                type="actions.AddStudent"
                 name="studentForm"
                 input="addStudent.jsp" 
                 scope="request"/>
