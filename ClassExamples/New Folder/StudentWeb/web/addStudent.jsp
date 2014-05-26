@@ -17,7 +17,7 @@
         <title><bean:message key="welcome.title"/></title>
         <html:base/>
     </head>
-    <body style="background-color: yellowgreen">
+    <body style="background-color: yellow">
         <html:form action="/Add">
             <center>
                 
