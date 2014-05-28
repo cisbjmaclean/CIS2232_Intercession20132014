@@ -14,7 +14,7 @@
 <html:html lang="true">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><bean:message key="welcome.title"/></title>
+        <title><bean:message key="welcome.title"/>xx</title>
         <html:base/>
     </head>
     <body style="background-color: yellow">
@@ -22,7 +22,7 @@
         <center>
 
             <table>
-                <logic:iterate name="AllStudents" id="TheStudent" scope ="session">
+                <logic:iterate name="AllStudents2" id="TheStudent" scope ="session">
                     <tr>
                         <td>
                             <bean:write name="TheStudent" property="studentId"/> 

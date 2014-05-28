@@ -28,7 +28,7 @@
         <action path="/Menu" 
                 type="actions.ProcessMenu"
                 name="menuForm"
-                input="welcomeStruts.jsp" 
+                input="/welcomeStruts.jsp"
                 scope="request">
                 <forward name="add" path="addStudentTile"/>
                 <forward name="viewAll" path="viewAllTile"/>                
@@ -37,7 +37,7 @@
         <action path="/Initialize" 
                 type="actions.Initialize"
                 name="menuForm"
-                input="welcome.jsp" 
+                input="/welcome.jsp" 
                 scope="request">
         </action>
 
@@ -45,7 +45,7 @@
         <action path="/Add" 
                 type="actions.AddStudent"
                 name="studentForm"
-                input="addStudent.jsp" 
+                input="addStudentTile" 
                 scope="request"/>
 
     </action-mappings>

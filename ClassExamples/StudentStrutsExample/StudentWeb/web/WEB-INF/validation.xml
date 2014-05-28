@@ -24,19 +24,29 @@
     <formset>
 
         <!-- An example form -->
-        <form name="logonForm">
+        <form name="studentForm">
             <field
-                property="username"
+                property="firstName"
                 depends="required">
-                    <arg key="logonForm.username"/>
+                    <arg key="label.first.name"/>
             </field>
             <field
-                property="password"
+                property="lastName"
+                depends="required">
+                    <arg key="label.last.name"/>
+            </field>
+            <field
+                property="dob"
+                depends="required">
+                    <arg key="label.dob"/>
+            </field>
+            <field
+                property="studentId"
                 depends="required,mask">
-                    <arg key="logonForm.password"/>
+                    <arg key="label.student.id"/>
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[0-9]*$</var-value>
                     </var>
             </field>
         </form>

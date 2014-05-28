@@ -19,17 +19,25 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.struts.action.ActionForm;
+import org.apache.struts.validator.ValidatorForm;
+import util.ConnectionUtils;
+import util.DbUtils;
 import util.Util;
 
 /**
  *
  * @author bjmaclean
  */
-public class Student extends ActionForm {
+public class Student extends ValidatorForm {
 //<<<<<<< HEAD
 
     //Student addition - Ian "The Uber" Mori
@@ -130,7 +138,47 @@ public class Student extends ActionForm {
         this.dob = dob;
     }
 
-    public static void loadFile(HttpServletRequest request) {
+    public static void loadFromDatabase(HttpServletRequest request) {
+        PreparedStatement psAuthenticate = null;
+        String sql = null;
+        Connection conn=null;
+        try {
+            conn = ConnectionUtils.getConnection();
+        } catch (Exception ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ArrayList<Student> courtBookings = new ArrayList();
+
+        try {
+            sql = "SELECT `student_id`, `first_name`, `last_name`, `dob` FROM `student` ORDER BY 'student_id'";
+
+            psAuthenticate = conn.prepareStatement(sql);
+//            psAuthenticate.setString(1, bookingDate);
+            ResultSet rs = psAuthenticate.executeQuery();
+            while (rs.next()) {
+                // It is possible to get the columns via name
+                // also possible to get the columns via the column number
+                // which starts at 1
+
+                // e.g. resultSet.getSTring(2);
+                Student newStudent = new Student();
+
+                newStudent.setStudentId(rs.getString("student_id"));
+                newStudent.setFirstName(rs.getString("first_name"));
+                newStudent.setLastName(rs.getString("last_name"));
+                newStudent.setDob(rs.getString("dob"));
+                
+                
+                students.put(newStudent.getStudentId(), newStudent);
+            }
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
+            e.printStackTrace();
+        }
+
+    }
+
+        public static void loadFile(HttpServletRequest request) {
         //debug statement.
         if (Util.debugOn) {
             System.out.println("About to load the file.");
@@ -161,6 +209,39 @@ public class Student extends ActionForm {
 
     }
 
+
+    public static void convertFile(HttpServletRequest request) {
+        //debug statement.
+        if (Util.debugOn) {
+            System.out.println("About to convert the file.");
+        }
+        InputStream input;
+        System.out.println("About to load the file.");
+        BufferedReader reader = null;
+        try {
+            input = new BufferedInputStream(Files.newInputStream(path));
+            reader = new BufferedReader(new InputStreamReader(input));
+
+            String nextLine = reader.readLine();
+            while (nextLine != null) {
+                //Read the information and load the hashmap.
+                Student newStudent = new Student(nextLine);
+                 newStudent.saveStudent();
+                //next will be to add the new student to the hashmap.
+//                students.put(newStudent.getStudentId(), newStudent);
+                
+               
+                nextLine = reader.readLine();
+            }
+  //           request.getSession().setAttribute("AllStudents", students.values());
+  //           System.out.println("Finished loading students ("+students.values().size()+" loaded)");
+        } catch (IOException ioe) {
+            System.out.println("There was an error reading the file.");
+        }
+
+    }
+
+        
     public static void fileWrite(BufferedWriter writer, String toWrite) throws IOException {
         boolean writerOpened = false;
         if (writer == null) {
@@ -183,4 +264,49 @@ public class Student extends ActionForm {
         }
     }
 
+    
+    /**
+     * This method will save a student to the database.
+     */
+    public boolean saveStudent()  {
+
+        System.out.println("Saving a student "+this.toString());
+        PreparedStatement psAuthenticate = null;
+        String sql = null;
+        Connection conn = null;
+        try {
+            conn = ConnectionUtils.getConnection();
+        } catch (Exception ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        /*
+         * Setup the sql to insert the row.
+         */
+        
+        try {
+            sql = "INSERT INTO `student`(`student_id`, `first_name`, `last_name`, `dob`) VALUES (?,?,?,?)";
+
+            psAuthenticate = conn.prepareStatement(sql);
+            psAuthenticate.setInt(1, Integer.parseInt(studentId));
+            psAuthenticate.setString(2, firstName);
+            psAuthenticate.setString(3, lastName);
+            psAuthenticate.setString(4, dob);
+            psAuthenticate.executeUpdate();
+            //conn.commit();
+
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
+            e.printStackTrace();
+            return false;
+        } finally {
+            DbUtils.close(psAuthenticate, conn);        
+        }
+
+        return true;
+
+        
+        }
+
+    
 }

@@ -35,6 +35,8 @@ public class ProcessMenu extends Action {
         MenuForm menuForm = (MenuForm) request.getAttribute("menuForm");
         System.out.println("Option chosen="+menuForm.getOption());
         ActionForward findForward = mapping.findForward("welcome");
+        
+        System.out.println("Session_id="+request.getSession().getId());
         if(menuForm.getOption().equalsIgnoreCase("add")){
             findForward =  mapping.findForward("add");
             
