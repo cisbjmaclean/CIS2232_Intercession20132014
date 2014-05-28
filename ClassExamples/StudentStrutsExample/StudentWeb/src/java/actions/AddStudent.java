@@ -28,7 +28,7 @@ public class AddStudent extends Action {
 
         
         
-        ActionForward findForward = mapping.findForward("welcome");
+        ActionForward findForward = mapping.findForward("main");
 
         Student newStudent = (Student) request.getAttribute("studentForm");
         

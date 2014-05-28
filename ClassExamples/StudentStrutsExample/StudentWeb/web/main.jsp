@@ -17,7 +17,6 @@
         <input type="radio" name="option" value="add"><bean:message key="menu.add"/><br>
         <input type="radio" name="option" value="viewall"><bean:message key="menu.view.all"/><br>
         <input type="radio" name="option" value="edit"><bean:message key="menu.edit"/><br>
-        <input type="radio" name="option" value="load"><bean:message key="menu.load"/><br>
         <input type="radio" name="option" value="exit"><bean:message key="menu.exit"/><br>
         <html:submit><bean:message key="label.submit"/></html:submit>
         </center>

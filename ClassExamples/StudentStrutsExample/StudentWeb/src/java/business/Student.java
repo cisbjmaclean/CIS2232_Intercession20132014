@@ -150,9 +150,11 @@ public class Student extends ActionForm {
                 //next will be to add the new student to the hashmap.
                 students.put(newStudent.getStudentId(), newStudent);
                 
-                request.getSession().setAttribute("AllStudents", students.values());
+               
                 nextLine = reader.readLine();
             }
+             request.getSession().setAttribute("AllStudents", students.values());
+             System.out.println("Finished loading students ("+students.values().size()+" loaded)");
         } catch (IOException ioe) {
             System.out.println("There was an error reading the file.");
         }

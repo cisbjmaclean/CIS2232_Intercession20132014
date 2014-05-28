@@ -18,11 +18,11 @@
         <html:base/>
     </head>
     <body style="background-color: yellow">
-        <html:form action="/Welcome">
+        <html:form action="/Main">
         <center>
 
             <table>
-                <logic:iterate name="Students" id="TheStudent" scope ="request">
+                <logic:iterate name="AllStudents" id="TheStudent" scope ="session">
                     <tr>
                         <td>
                             <bean:write name="TheStudent" property="studentId"/> 
@@ -45,7 +45,7 @@
 
 
 
-            <html:submit><bean:message key="label.home"/></html:submit>
+            <html:submit><bean:message key="label.return"/></html:submit>
             </center>
     </html:form>
 </body>

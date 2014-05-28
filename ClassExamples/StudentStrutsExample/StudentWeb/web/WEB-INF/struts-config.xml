@@ -17,11 +17,13 @@
 
     <global-forwards>
         <forward name="welcome"  path="/Welcome.do"/>
+        <forward name="main"  path="mainTile"/>
     </global-forwards>
 
     <action-mappings>
         
-        <action path="/Welcome" name="menuForm" forward="welcomeTile"/>
+        <action path="/Welcome" name="menuForm" forward="/welcome.jsp"/>
+        <action path="/Main" name="menuForm" forward="mainTile"/>
         
         <action path="/Menu" 
                 type="actions.ProcessMenu"
@@ -29,9 +31,16 @@
                 input="welcomeStruts.jsp" 
                 scope="request">
                 <forward name="add" path="addStudentTile"/>
-                <forward name="viewAll" path="viewAllTile"/>
-                
+                <forward name="viewAll" path="viewAllTile"/>                
         </action>
+        
+        <action path="/Initialize" 
+                type="actions.Initialize"
+                name="menuForm"
+                input="welcome.jsp" 
+                scope="request">
+        </action>
+
         
         <action path="/Add" 
                 type="actions.AddStudent"

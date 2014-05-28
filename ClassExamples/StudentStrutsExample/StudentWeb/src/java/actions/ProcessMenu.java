@@ -39,14 +39,11 @@ public class ProcessMenu extends Action {
             findForward =  mapping.findForward("add");
             
             //will invoke code to add a student.
-        } else if (menuForm.getOption().equalsIgnoreCase("load")){
-            Student.loadFile(request);
-            findForward =  mapping.findForward("welcome");
         } else if (menuForm.getOption().equalsIgnoreCase("viewall")){
             
-            //Have to load the collection into the request.
-            ArrayList<Student> theStudents = new ArrayList<Student>(Student.getStudents().values());
-            request.setAttribute("Students", theStudents);
+//            //Have to load the collection into the request.
+//            ArrayList<Student> theStudents = new ArrayList<Student>(Student.getStudents().values());
+//            request.setAttribute("Students", theStudents);
             
             findForward =  mapping.findForward("viewAll");
         } 
