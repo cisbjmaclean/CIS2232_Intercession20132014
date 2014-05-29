@@ -28,9 +28,9 @@ public class Initialize extends Action {
         
         System.out.println("Initializing");
 
-        System.out.println("Loading the file");
+        System.out.println("Loading the students from database");
         Student.loadFromDatabase(request);
-        System.out.println("Loaded the file ("+Student.getStudents().size()+" students loaded)");
+        System.out.println("Loaded the students ("+Student.getStudents().size()+" students loaded)");
         
         request.getSession().setAttribute("AllStudents2", Student.getStudents().values());
         ActionForward findForward = mapping.findForward("main");
