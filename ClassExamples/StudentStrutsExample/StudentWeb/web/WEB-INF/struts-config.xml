@@ -8,7 +8,7 @@
 <struts-config>
     <form-beans>
       <form-bean type="forms.MenuForm" name="menuForm"/>
-      <form-bean type="business.Student" name="studentForm"/>
+      <form-bean type="forms.StudentForm" name="studentForm"/>
     </form-beans>
     
     <global-exceptions>

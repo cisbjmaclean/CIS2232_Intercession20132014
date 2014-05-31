@@ -6,8 +6,16 @@
 package actions;
 
 import business.Student;
+import forms.StudentForm;
+import java.io.StringReader;
+import java.io.StringWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -30,7 +38,10 @@ public class AddStudent extends Action {
 
         ActionForward findForward = mapping.findForward("main");
 
-        Student newStudent = (Student) request.getAttribute("studentForm");
+        StudentForm formStudent = (StudentForm) request.getAttribute("studentForm");
+
+        Student newStudent = new Student();
+        BeanUtils.copyProperties(newStudent, formStudent);
 
         System.out.println("newStudent.firstName=" + newStudent.getFirstName());
         System.out.println("newStudent.lastName=" + newStudent.getLastName());
@@ -49,6 +60,31 @@ public class AddStudent extends Action {
         }
         saveMessages(request, messages);
 
+        //**********************************************************************
+        //**********************************************************************
+        //**********************************************************************
+        //http://www.vogella.com/tutorials/JAXB/article.html
+        // create JAXB context and instantiate marshaller
+        JAXBContext context = JAXBContext.newInstance(Student.class);
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+        // Write to System.out
+        StringWriter sw = new StringWriter();
+        m.marshal(newStudent, sw);
+        String xmlStudent = sw.toString();
+        System.out.println("xmlEncodedStudent=" + xmlStudent);
+        //**********************************************************************
+        //**********************************************************************
+
+        //Unmarshall back for testing
+        Unmarshaller um = context.createUnmarshaller();
+        Student backStudent = (Student) um.unmarshal(new StringReader(xmlStudent));
+        System.out.println("Student back from xml:" + backStudent.toString());
+
+        //**********************************************************************
+        //**********************************************************************
+        //**********************************************************************
         return findForward;
 
     }

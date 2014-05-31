@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,34 +29,37 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.struts.validator.ValidatorForm;
-import util.ConnectionUtils;
-import util.DbUtils;
-import util.Util;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 /**
  *
  * @author bjmaclean
  */
-public class Student extends ValidatorForm {
-//<<<<<<< HEAD
 
-    //Student addition - Ian "The Uber" Mori
-//=======
-//>>>>>>> c6d0827f8fd1f27e2b6537ab3b04da1956dde685
-    Scanner input = new Scanner(System.in);
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import util.ConnectionUtils;
+import util.DbUtils;
+import util.Util;
+
+@XmlRootElement(name = "Student")
+public class Student {
+ 
     private String studentId;
     private String lastName, firstName, dob;
-
+    
+    @XmlTransient private static Scanner input = new Scanner(System.in);
     private static Path path = Paths.get("c:\\cis2232\\student.txt");
     private static HashMap<String, business.Student> students = new HashMap();
-
+    
+    
+    
     public static HashMap<String, Student> getStudents() {
         return students;
     }
 
-    
-    
     public Student() {
         System.out.println("Calling default constructor");
     }
@@ -93,10 +97,31 @@ public class Student extends ValidatorForm {
                 + "\nDate of Birth:\t" + dob;
     }
 
+    public String toStringXML(){
+        String xmlStudent = "";
+        try {
+            //http://www.vogella.com/tutorials/JAXB/article.html
+            // create JAXB context and instantiate marshaller
+            JAXBContext context = JAXBContext.newInstance(Student.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            
+            // Write to System.out
+            StringWriter sw = new StringWriter();
+            m.marshal(this, sw);
+            xmlStudent = sw.toString();
+            System.out.println("xmlEncodedStudent=" + xmlStudent);
+        } catch (JAXBException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return xmlStudent;
+    }
+    
     public String fileOutputString() {
         return studentId + "," + firstName + "," + lastName + "," + dob;
     }
 
+    @XmlTransient
     public Scanner getInput() {
         return input;
     }
