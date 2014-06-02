@@ -32,19 +32,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-
-/**
- *
- * @author bjmaclean
- */
-
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import util.ConnectionUtils;
 import util.DbUtils;
 import util.Util;
 
 @XmlRootElement(name = "Student")
+@XmlType(propOrder = { "studentId", "firstName", "lastName", "dob" })
 public class Student {
  
     private String studentId;
@@ -63,6 +59,15 @@ public class Student {
     public Student() {
         System.out.println("Calling default constructor");
     }
+
+    public Student(String studentId, String lastName, String firstName, String dob) {
+        this.studentId = studentId;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.dob = dob;
+    }
+    
+    
 
     public Student(boolean promptUser) {
         if (promptUser) {
@@ -117,10 +122,12 @@ public class Student {
         return xmlStudent;
     }
     
+
+    
     public String fileOutputString() {
         return studentId + "," + firstName + "," + lastName + "," + dob;
     }
-
+    
     @XmlTransient
     public Scanner getInput() {
         return input;
