@@ -43,6 +43,7 @@
             <label class="alignCenter" for="street"><bean:message key="create.user.label.street"/></label><html:text property="street"/>
             <label class="alignCenter" for="city"><bean:message key="create.user.label.city"/></label><html:text property="city"/>
             <label class="alignCenter" for="province"><bean:message key="create.user.label.province"/></label><html:text property="province"/>
+            <label class="alignCenter" for="postalCode"><bean:message key="create.user.label.postal.code"/></label><html:text property="postalCode"/>
             <label class="alignCenter" for="phoneNumber"><bean:message key="create.user.label.phone.number"/></label><html:text property="phoneNumber"/>
             <html:submit><bean:message key="create.user.label.submit"/></html:submit>
         </html:form>

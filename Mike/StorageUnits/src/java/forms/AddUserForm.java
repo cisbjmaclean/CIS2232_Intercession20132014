@@ -18,6 +18,7 @@ public class AddUserForm extends ValidatorForm {
     private String street;
     private String city;
     private String province;
+    private String postalCode;
     private String phoneNumber;
 
     public String getUserName() {
@@ -100,6 +101,14 @@ public class AddUserForm extends ValidatorForm {
         this.province = province;
     }
 
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+    
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -107,5 +116,4 @@ public class AddUserForm extends ValidatorForm {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
 }
