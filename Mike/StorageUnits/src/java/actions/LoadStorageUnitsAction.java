@@ -31,9 +31,8 @@ public class LoadStorageUnitsAction extends Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        LoadStorageUnits loadUnits = new LoadStorageUnits();
-        loadUnits.loadStorageUnits(request);       
-        request.getSession().setAttribute("storageUnits", loadUnits.getStorageUnits());
+        LoadStorageUnits loadUnits = new LoadStorageUnits();   
+        request.getSession().setAttribute("storageUnits", loadUnits.loadStorageUnits(request));
         
         // Used to define the page to be forwarded to.      
         ActionForward findForward = mapping.findForward("viewAll");  

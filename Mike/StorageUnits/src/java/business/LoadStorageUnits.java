@@ -32,7 +32,7 @@ public class LoadStorageUnits {
      *
      * @param request
      */
-    public void loadStorageUnits(HttpServletRequest request) {
+    public ArrayList loadStorageUnits(HttpServletRequest request) {
 
         // Try to connect to the database.
         try {
@@ -76,10 +76,6 @@ public class LoadStorageUnits {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(this.rs, this.psAuthenticate, this.con);
         }
-    }
-
-    public ArrayList<StorageUnitForm> getStorageUnits() {
         return storageUnits;
     }
-
 }
