@@ -31,13 +31,34 @@
         <p><bean:message key="welcome.message"/></p>
 
         <div style="color:red"><html:errors/></div>
-        <html:button property="login" onclick="window.location='login.jsp';"><bean:message key="main.label.login"/></html:button>
-        <html:button property="create" onclick="window.location='createUser.jsp';"><bean:message key="main.label.create"/></html:button>
-        <html:form action="/loadUnits">
-            <html:submit><bean:message key="main.label.view"/></html:submit>
-        </html:form>
+
+        <table>
+        <logic:iterate name="storageUnits" id="StorageUnit" scope="session">
+            <tr>
+                <td>
+                    <bean:write name="StorageUnit" property="unitId"/>
+                </td>
+                <td>
+                    <bean:write name="StorageUnit" property="unitType"/>
+                </td>
+                <td>
+                    <bean:write name="StorageUnit" property="unitDimensions"/>
+                </td>
+                <td>
+                    <bean:write name="StorageUnit" property="unitAvalibility"/>
+                </td>
+                <td>
+                    <bean:write name="StorageUnit" property="unitDateFrom"/>                  
+                </td> 
+                <td>
+                    <bean:write name="StorageUnit" property="unitDateTo"/>                  
+                </td>
+            </tr>
+            
+            
+        </logic:iterate>
+        </table>
+            
     </body>
 </html:html>
-
-
 

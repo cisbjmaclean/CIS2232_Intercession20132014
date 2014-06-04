@@ -9,6 +9,7 @@
     <form-beans>
     <form-bean type="forms.AddUserForm" name="addUserForm"/>
     <form-bean type="forms.LoginForm" name="loginForm"/>
+    <form-bean type="forms.StorageUnitForm" name="storageUnitForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -16,13 +17,13 @@
     </global-exceptions>
 
     <global-forwards>
-        <forward name="create"  path="/create.do"/>
+        <forward name="main"  path="/main.do"/>
     </global-forwards>
 
     <action-mappings>
-        <action path="/create" forward="/createUser.jsp"/>
+        <action path="/main" forward="/main.jsp"/>
         
-        <action path="/add" 
+        <action path="/addUser" 
                 type="actions.AddUserAction"
                 name="addUserForm"
                 input="/createUser.jsp" 
@@ -37,6 +38,14 @@
                 scope="request">
             <forward name="login"  path="/login.jsp"/>
             <forward name="main"  path="/main.jsp"/>
+        </action>
+        
+        <action path="/loadUnits" 
+                type="actions.LoadStorageUnitsAction"
+                name="storageUnitForm"
+                input="/main.jsp" 
+                scope="request">
+            <forward name="viewAll"  path="/viewAll.jsp"/>
         </action>
     </action-mappings>
     
