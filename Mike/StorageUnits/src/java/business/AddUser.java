@@ -1,7 +1,6 @@
 package business;
 
 import forms.AddUserForm;
-import forms.LoginForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,12 +43,12 @@ public class AddUser {
             // Send the query and get the results back.
             this.rs = this.psAuthenticate.executeQuery();
 
-            String checkUserName = null;
+            String checkUsername = null;
 
             // Iterate over the result set.
             while (this.rs.next()) {
-                checkUserName = this.rs.getString("login_username");
-                if (checkUserName.equals(userForm.getUserName())) {
+                checkUsername = this.rs.getString("login_username");
+                if (checkUsername.equals(userForm.getUsername())) {
                     usernameTaken = true;
                 }
             }
@@ -109,7 +108,7 @@ public class AddUser {
             // Added security for the fields being sent to the database.
             this.psAuthenticate = this.con.prepareStatement(this.sql);
             this.psAuthenticate.setString(1, id);
-            this.psAuthenticate.setString(2, userForm.getUserName());
+            this.psAuthenticate.setString(2, userForm.getUsername());
             this.psAuthenticate.setString(3, userForm.getPassword());
             // Run the query.
             this.psAuthenticate.executeUpdate();
