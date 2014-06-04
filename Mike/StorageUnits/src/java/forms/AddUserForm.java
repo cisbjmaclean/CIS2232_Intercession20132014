@@ -14,6 +14,7 @@ public class AddUserForm extends ValidatorForm {
     private String email;
     private String email2;
     private String firstName;
+    private String middleInitial;
     private String lastName;
     private String street;
     private String city;
@@ -69,6 +70,14 @@ public class AddUserForm extends ValidatorForm {
         this.firstName = firstName;
     }
 
+    public String getMiddleInitial() {
+        return middleInitial;
+    }
+
+    public void setMiddleInitial(String middleInitial) {
+        this.middleInitial = middleInitial;
+    }
+
     public String getLastName() {
         return lastName;
     }
@@ -108,7 +117,7 @@ public class AddUserForm extends ValidatorForm {
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
-    
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -116,4 +125,6 @@ public class AddUserForm extends ValidatorForm {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    
 }

@@ -20,6 +20,7 @@ public class AddUserAction extends Action {
     
     // Flag for user creation.
     private boolean userCreation = false;
+    private boolean usernameTaken = false;
     private AddUserForm userForm;
 
     /**
@@ -38,12 +39,20 @@ public class AddUserAction extends Action {
 
         // Used to define the page to be forwarded to.
          
-        ActionForward findForward = mapping.findForward("login");
+        ActionForward findForward;
         
          userForm = (AddUserForm) form;
-         AddUser addUser = new AddUser();         
-         addUser.addToDatabase(userForm);
-           
+         AddUser addUser = new AddUser();
+         usernameTaken = addUser.checkUsername(userForm);
+         System.out.println(usernameTaken);
+         if (!usernameTaken){
+         userCreation = addUser.addToDatabase(userForm);
+         }        
+         if (userCreation){
+              findForward = mapping.findForward("login");
+        } else {
+            findForward = mapping.findForward("addUser");
+         }     
         return findForward;
     }
 }

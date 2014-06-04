@@ -29,6 +29,7 @@
                 input="/createUser.jsp" 
                 scope="request">
             <forward name="login"  path="/login.jsp"/>
+            <forward name="addUser"  path="/createUser.jsp"/>
         </action>
         
         <action path="/login" 

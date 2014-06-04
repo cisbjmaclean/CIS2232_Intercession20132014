@@ -1,6 +1,7 @@
 package business;
 
 import forms.AddUserForm;
+import forms.LoginForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,9 +24,9 @@ public class AddUser {
     // The connection object.
     private Connection con;
     private ResultSet rs = null;
+    private boolean usernameTaken = false;
 
-    
-    public void addToDatabase(AddUserForm userForm) {
+    public boolean checkUsername(AddUserForm userForm) {
         // Try to connect to the database.  
         try {
             this.con = dbConnection.databaseConnection();
@@ -37,21 +38,59 @@ public class AddUser {
         // Try to generate the query.
         try {
             // The query to send.
-            this.sql = "INSERT INTO `customer`(`cus_first_name`, `cus_last_name`, `cus_street`, `cus_city`, `cus_province`, `cus_postal_code`, `cus_phone`, `cus_email`) "
-                    + "VALUES (?,?,?,?,?,?,?,?)";
+            this.sql = "SELECT `login_username` FROM `login`";
+            // Added security for the fields being sent to the database.
+            this.psAuthenticate = this.con.prepareStatement(this.sql);
+            // Send the query and get the results back.
+            this.rs = this.psAuthenticate.executeQuery();
+
+            String checkUserName = null;
+
+            // Iterate over the result set.
+            while (this.rs.next()) {
+                checkUserName = this.rs.getString("login_username");
+                if (checkUserName.equals(userForm.getUserName())) {
+                    usernameTaken = true;
+                }
+            }
+        } catch (Exception e) {
+            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println("There was an issue with the query.");
+        } finally {
+            // Close psAuthenicate,  and the connection objects.
+            DbUtils.close(this.rs, this.psAuthenticate, this.con);
+        }
+        return usernameTaken;
+    }
+
+    public boolean addToDatabase(AddUserForm userForm) {
+        // Try to connect to the database.  
+        try {
+            this.con = dbConnection.databaseConnection();
+        } catch (Exception e) {
+            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println("The connection to the database failed.");
+        }
+
+        // Try to generate the query.
+        try {
+            // The query to send.
+            this.sql = "INSERT INTO `customer`(`cus_first_name`, `cus_middle_initial`, `cus_last_name`, `cus_street`, `cus_city`, `cus_province`, `cus_postal_code`, `cus_phone`, `cus_email`) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?)";
             // Added security for the fields being sent to the database.
             this.psAuthenticate = this.con.prepareStatement(this.sql);
             this.psAuthenticate.setString(1, userForm.getFirstName());
-            this.psAuthenticate.setString(2, userForm.getLastName());
-            this.psAuthenticate.setString(3, userForm.getStreet());
-            this.psAuthenticate.setString(4, userForm.getCity());
-            this.psAuthenticate.setString(5, userForm.getProvince());
-            this.psAuthenticate.setString(6, userForm.getPostalCode());
-            this.psAuthenticate.setString(7, userForm.getPhoneNumber());
-            this.psAuthenticate.setString(8, userForm.getEmail());
+            this.psAuthenticate.setString(2, userForm.getMiddleInitial());
+            this.psAuthenticate.setString(3, userForm.getLastName());
+            this.psAuthenticate.setString(4, userForm.getStreet());
+            this.psAuthenticate.setString(5, userForm.getCity());
+            this.psAuthenticate.setString(6, userForm.getProvince());
+            this.psAuthenticate.setString(7, userForm.getPostalCode());
+            this.psAuthenticate.setString(8, userForm.getPhoneNumber());
+            this.psAuthenticate.setString(9, userForm.getEmail());
             // Run the query.
             this.psAuthenticate.executeUpdate();
-            
+
             // The query to send.
             this.sql = "SELECT `cus_id` FROM `customer` ORDER BY `cus_id` DESC LIMIT 1";
             this.psAuthenticate = this.con.prepareStatement(this.sql);
@@ -64,9 +103,9 @@ public class AddUser {
             while (this.rs.next()) {
                 id = this.rs.getString("cus_id");
             }
- 
+
             // The query to send.
-            this.sql = "INSERT INTO `login`(`cus_id`, `log_username`, `log_password`) VALUES (?,?,?)";
+            this.sql = "INSERT INTO `login`(`cus_id`, `login_username`, `login_password`) VALUES (?,?,?)";
             // Added security for the fields being sent to the database.
             this.psAuthenticate = this.con.prepareStatement(this.sql);
             this.psAuthenticate.setString(1, id);
@@ -74,7 +113,7 @@ public class AddUser {
             this.psAuthenticate.setString(3, userForm.getPassword());
             // Run the query.
             this.psAuthenticate.executeUpdate();
-            
+
         } catch (Exception e) {
             Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("There was an issue with the query.");
@@ -82,7 +121,6 @@ public class AddUser {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(this.rs, this.psAuthenticate, this.con);
         }
+        return true;
     }
 }
-
-
