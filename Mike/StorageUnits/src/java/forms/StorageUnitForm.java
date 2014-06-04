@@ -9,7 +9,11 @@ import org.apache.struts.action.ActionForm;
 public class StorageUnitForm extends ActionForm {
 
     private int unitId;
-    private String unitType, unitDimensions, UnitAvalibility, UnitDateFrom, UnitDateTo;
+    private String unitType;
+    private String unitDimensions;
+    private String  UnitAvalibility;
+    private String  UnitDateFrom;
+    private String  UnitDateTo;
 
     public StorageUnitForm(){
     }
