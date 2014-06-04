@@ -33,7 +33,7 @@
         <div style="color:red"><html:errors/></div>
 
         <html:form action="/addUser">
-            <label class="alignCenter" for="userName"><bean:message key="create.user.label.user.name"/></label><html:text property="userName"/>
+            <label class="alignCenter" for="username"><bean:message key="create.user.label.user.name"/></label><html:text property="username"/>
             <label class="alignCenter" for="password"><bean:message key="create.user.label.password"/></label><html:text property="password"/>
             <label class="alignCenter" for="password2"><bean:message key="create.user.label.password2"/></label><html:text property="password2"/>
             <label class="alignCenter" for="email"><bean:message key="create.user.label.email"/></label><html:text property="email"/>

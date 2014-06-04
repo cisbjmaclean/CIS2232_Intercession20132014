@@ -48,14 +48,14 @@ public class Login {
             // Send the query and get the results back.
             this.rs = this.psAuthenticate.executeQuery();
 
-            String userName;
+            String username;
             String password;
 
             // Iterate over the result set.
             while (this.rs.next()) {
-                userName = this.rs.getString("login_username");
+                username = this.rs.getString("login_username");
                 password = this.rs.getString("login_password");
-                if (validateLogin.getUserName().equals(userName) && validateLogin.getPassword().equals(password)) {
+                if (validateLogin.getUsername().equals(username) && validateLogin.getPassword().equals(password)) {
                     this.authenicate = true;
                     break;
                 }

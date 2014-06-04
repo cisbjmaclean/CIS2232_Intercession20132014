@@ -33,7 +33,7 @@
         <div style="color:red"><html:errors/></div>
 
         <html:form action="/login">
-            <label class="alignCenter" for="userName"><bean:message key="login.label.user.name"/></label><html:text property="userName"/>
+            <label class="alignCenter" for="username"><bean:message key="login.label.user.name"/></label><html:text property="username"/>
             <label class="alignCenter" for="password"><bean:message key="login.label.password"/></label><html:text property="password"/>
             <html:submit><bean:message key="login.label.submit"/></html:submit>
         </html:form>
