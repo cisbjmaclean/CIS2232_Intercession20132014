@@ -25,7 +25,7 @@
                 <logic:iterate name="AllStudents2" id="TheStudent" scope ="session">
                     <tr>
                         <td>
-                            <bean:write name="TheStudent" property="studentId"/> 
+                            <a href="Menu.do?option=edit&studentId=<bean:write name="TheStudent" property="studentId"/>"><bean:write name="TheStudent" property="studentId"/></a> 
                         </td>
                         <td>
                             <bean:write name="TheStudent" property="firstName"/> 

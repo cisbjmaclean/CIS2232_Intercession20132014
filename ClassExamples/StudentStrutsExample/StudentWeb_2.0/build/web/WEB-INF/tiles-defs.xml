@@ -24,7 +24,12 @@
     <definition name="addStudentTile" extends=".mainLayout">
         <put name="body"   value="/addStudent.jsp" />
     </definition>
-    
+
+    <definition name="chooseEditTile" extends=".mainLayout">
+        <put name="body"   value="/editStudent.jsp" />
+    </definition>
+
+            
     <definition name="viewAllTile" extends=".mainLayout">
         <put name="body"   value="/viewAll.jsp" />
     </definition>

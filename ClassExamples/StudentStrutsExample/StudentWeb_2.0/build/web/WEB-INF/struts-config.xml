@@ -30,6 +30,7 @@
                 name="menuForm"
                 input="/welcomeStruts.jsp"
                 scope="request">
+                <forward name="chooseEdit" path="chooseEditTile"/>
                 <forward name="add" path="addStudentTile"/>
                 <forward name="viewAll" path="viewAllTile"/>                
         </action>
@@ -48,6 +49,13 @@
                 input="addStudentTile" 
                 scope="request"/>
 
+        <action path="/Edit" 
+                type="actions.EditStudent"
+                name="studentForm"
+                input="viewAllTile" 
+                scope="request"/>
+
+        
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

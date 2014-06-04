@@ -122,8 +122,16 @@ public class Student {
         return xmlStudent;
     }
     
-
+    /**
+     * This method will load the details from the database for this student based on 
+     * the studentId of this student.
+     * 
+     * @return void
+     */
     
+    public void loadDetails(){
+        
+    }
     public String fileOutputString() {
         return studentId + "," + firstName + "," + lastName + "," + dob;
     }

@@ -32,7 +32,7 @@
 
 
     <body style="background-color: yellow">
-        <html:form action="/Add">
+        <html:form action="/Edit">
         <center>
 
             <label class="alignCenter" for="studentId"><bean:message key="label.student.id"/></label><html:text property="studentId" /><br>
