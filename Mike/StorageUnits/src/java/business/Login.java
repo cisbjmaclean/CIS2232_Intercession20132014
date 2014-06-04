@@ -43,7 +43,7 @@ public class Login {
         // Try to generate the query.
         try {
             // The query to send.
-            this.sql = "SELECT `log_username`, `log_password` FROM `login`";
+            this.sql = "SELECT `login_username`, `login_password` FROM `login`";
             this.psAuthenticate = this.con.prepareStatement(this.sql);
             // Send the query and get the results back.
             this.rs = this.psAuthenticate.executeQuery();
@@ -53,8 +53,8 @@ public class Login {
 
             // Iterate over the result set.
             while (this.rs.next()) {
-                userName = this.rs.getString("log_username");
-                password = this.rs.getString("log_password");
+                userName = this.rs.getString("login_username");
+                password = this.rs.getString("login_password");
                 if (validateLogin.getUserName().equals(userName) && validateLogin.getPassword().equals(password)) {
                     this.authenicate = true;
                     break;
