@@ -1,0 +1,1 @@
+<%=business.StudentBO.get("321")%>
