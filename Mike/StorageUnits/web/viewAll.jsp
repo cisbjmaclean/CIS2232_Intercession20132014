@@ -53,6 +53,9 @@
                 <td>
                     <bean:write name="StorageUnit" property="unitDateTo"/>                  
                 </td>
+                <td>
+                     <html:submit><bean:message key="main.label.view"/></html:submit>              
+                </td>
             </tr>
             
             
