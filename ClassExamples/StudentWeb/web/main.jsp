@@ -18,7 +18,7 @@
         <html:messages id="msg2" message="true" property="warn"><div class="warnExclaim"  style="color: yellow"><bean:write name="msg2"/></div><br/></html:messages>
         <html:messages id="msg2" message="true" property="error"><div class="errorX"  style="color: red"><bean:write name="msg2"/></div><br/></html:messages>				  		
     </logic:messagesPresent>
-    <%-- the html:errors is populated if the validator is used. --%>    
+    <%-- the html:errors is populated if the validator is used!.     --%>    
     <div style="color:red">
         <html:errors />
     </div>
