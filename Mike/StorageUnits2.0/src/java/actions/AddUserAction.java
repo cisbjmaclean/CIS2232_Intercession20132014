@@ -1,10 +1,9 @@
 package actions;
 
-import com.opensymphony.xwork2.ActionSupport;
 import business.AddUser;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import models.AddUserModel;
+import com.opensymphony.xwork2.ActionSupport;
+import models.LoginModel;
+import models.UserModel;
 
 /**
  *
@@ -16,24 +15,40 @@ import models.AddUserModel;
 public class AddUserAction extends ActionSupport {
 
     private static final long serialVersionUID = 1L;
-    // Flag for user creation.
+    private LoginModel addUserLoginObject;
+    private UserModel addUserDetailsObject;
+    private AddUser addUser;
     private boolean userCreation = false;
     private boolean usernameTaken = false;
     private String created = "error";
-    private AddUserModel userForm;
 
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        userForm = (AddUserModel) request.getAttribute("AddUserForm");
-        AddUser addUser = new AddUser();
-        usernameTaken = addUser.checkUsername(userForm);
-        System.out.println(usernameTaken);
+    public String execute() throws Exception {
+        addUser = new AddUser();
+        usernameTaken = addUser.checkUsername(getAddUserLoginObject());
         if (!usernameTaken) {
-            userCreation = addUser.addToDatabase(userForm);
+            userCreation = addUser.addToDatabase(getAddUserDetailsObject(), getAddUserLoginObject());
         }
         if (userCreation) {
             created = "success";
         }
-        return created;
+       return created;
     }
+
+    public LoginModel getAddUserLoginObject() {
+        return addUserLoginObject;
+    }
+
+    public void setAddUserLoginObject(LoginModel addUserLoginObject) {
+        this.addUserLoginObject = addUserLoginObject;
+    }
+
+    public UserModel getAddUserDetailsObject() {
+        return addUserDetailsObject;
+    }
+
+    public void setAddUserDetailsObject(UserModel addUserDetailsObject) {
+        this.addUserDetailsObject = addUserDetailsObject;
+    }
+
+   
 }

@@ -11,10 +11,10 @@ import java.sql.*;
  */
 public class DatabaseConnection {
 
-    private final String USER_NAME = "db.user";
-    private final String PASSWORD = "db.password";
-    private final String DATABASE = "db.name";
-    private final String HOST ="db.host";
+    private final String USER_NAME = "root";
+    private final String PASSWORD = "";
+    private final String DATABASE = "storage_units_db";
+    private final String HOST ="localhost";
     private String URL = null;
     private final String DRIVER = "com.mysql.jdbc.Driver";
     // The connection object.

@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
 
@@ -32,7 +31,7 @@ public class LoadStorageUnits {
      *
      * @param request
      */
-    public ArrayList loadStorageUnits(HttpServletRequest request) {
+    public ArrayList loadStorageUnits() {
 
         // Try to connect to the database.
         try {

@@ -1,5 +1,7 @@
 package business;
 
+import models.UserModel;
+import models.LoginModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +26,7 @@ public class AddUser {
     private ResultSet rs = null;
     private boolean usernameTaken = false;
 
-    public boolean checkUsername(models.AddUserModel userForm) {
+    public boolean checkUsername(LoginModel addUserLoginObject) {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -47,7 +49,7 @@ public class AddUser {
             // Iterate over the result set.
             while (rs.next()) {
                 checkUsername = rs.getString("login_username");
-                if (checkUsername.equals(userForm.getUsername())) {
+                if (checkUsername.equals(addUserLoginObject.getUsername())) {
                     usernameTaken = true;
                 }
             }
@@ -61,7 +63,7 @@ public class AddUser {
         return usernameTaken;
     }
 
-    public boolean addToDatabase(models.AddUserModel userForm) {
+    public boolean addToDatabase(UserModel addUserDetailsObject, LoginModel addUserLoginObject) {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -75,17 +77,17 @@ public class AddUser {
             // The query to send.
             sql = "INSERT INTO `customer`(`cus_first_name`, `cus_middle_initial`, `cus_last_name`, `cus_street`, `cus_city`, `cus_province`, `cus_postal_code`, `cus_phone`, `cus_email`) "
                     + "VALUES (?,?,?,?,?,?,?,?,?)";
-            // Added security for the fields being sent to the database.
+            // Added security for the fields being sent to the database.  
             psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setString(1, userForm.getFirstName());
-            psAuthenticate.setString(2, userForm.getMiddleInitial());
-            psAuthenticate.setString(3, userForm.getLastName());
-            psAuthenticate.setString(4, userForm.getStreet());
-            psAuthenticate.setString(5, userForm.getCity());
-            psAuthenticate.setString(6, userForm.getProvince());
-            psAuthenticate.setString(7, userForm.getPostalCode());
-            psAuthenticate.setString(8, userForm.getPhoneNumber());
-            psAuthenticate.setString(9, userForm.getEmail());
+            psAuthenticate.setString(1, addUserDetailsObject.getFirstName());
+            psAuthenticate.setString(2, addUserDetailsObject.getMiddleInitial());
+            psAuthenticate.setString(3, addUserDetailsObject.getLastName());
+            psAuthenticate.setString(4, addUserDetailsObject.getStreet());
+            psAuthenticate.setString(5, addUserDetailsObject.getCity());
+            psAuthenticate.setString(6, addUserDetailsObject.getProvince());
+            psAuthenticate.setString(7, addUserDetailsObject.getPostalCode());
+            psAuthenticate.setString(8, addUserDetailsObject.getPhoneNumber());
+            psAuthenticate.setString(9, addUserDetailsObject.getEmail());
             // Run the query.
             psAuthenticate.executeUpdate();
 
@@ -95,22 +97,25 @@ public class AddUser {
             // Send the query and get the results back.
             rs = psAuthenticate.executeQuery();
 
-            String id = null;
+            int id = 0;
 
             // Iterate over the result set.
             while (rs.next()) {
-                id = rs.getString("cus_id");
+                id = rs.getInt("cus_id");
             }
 
             // The query to send.
             sql = "INSERT INTO `login`(`cus_id`, `login_username`, `login_password`) VALUES (?,?,?)";
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setString(1, id);
-            psAuthenticate.setString(2, userForm.getUsername());
-            psAuthenticate.setString(3, userForm.getPassword());
+            psAuthenticate.setInt(1, id);
+            psAuthenticate.setString(2, addUserLoginObject.getUsername());
+            psAuthenticate.setString(3, addUserLoginObject.getPassword());
             // Run the query.
             psAuthenticate.executeUpdate();
+            
+            addUserDetailsObject.setUserID(id);
+            addUserLoginObject.setUserID(id);
 
         } catch (Exception e) {
             Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, e);

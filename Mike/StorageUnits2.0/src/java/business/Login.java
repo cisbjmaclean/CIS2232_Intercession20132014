@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.LoginModel;
 import util.DatabaseConnection;
 import util.DbUtils;
 
@@ -27,9 +28,9 @@ public class Login {
     /**
      * This method retrieves data from the database.
      *
-     * @param validateLogin
+     * @param login
      */
-    public boolean checkLogin(models.LoginModel validateLogin) {
+    public boolean checkLogin(LoginModel login) {
 
         // Try to connect to the database.
         try {
@@ -48,13 +49,13 @@ public class Login {
             rs = psAuthenticate.executeQuery();
 
             String username;
-            String password;
+            String password;          
 
             // Iterate over the result set.
             while (rs.next()) {
                 username = rs.getString("login_username");
                 password = rs.getString("login_password");
-                if (validateLogin.getUsername().equals(username) && validateLogin.getPassword().equals(password)) {
+                if (login.getUsername().equals(username) && login.getPassword().equals(password)) {
                     authenicate = true;
                     break;
                 }

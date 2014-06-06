@@ -1,0 +1,20 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configuration for the default package. -->
+    <package name="default" extends="struts-default">
+        <action name="addUser" class="actions.AddUserAction" method="execute">
+            <result name="success">login.jsp</result>
+            <result name="error">createUser.jsp</result>
+        </action>
+        <action name="loadUnits" class="actions.ViewStorageUnitsAction" method="execute">
+            <result name="success">viewAll.jsp</result>
+        </action>
+        <action name="systemLogin" class="actions.LoginAction" method="execute">
+            <result name="success">main.jsp</result>
+            <result name="error">login.jsp</result>
+        </action>
+    </package>
+</struts>

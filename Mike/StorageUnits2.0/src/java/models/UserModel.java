@@ -6,14 +6,11 @@ import com.opensymphony.xwork2.ActionSupport;
  *
  * @author Michael Fesser
  */
-public class AddUserModel extends ActionSupport {
+public class UserModel extends ActionSupport {
 
     private static final long serialVersionUID = 1L;
-    private String username;
-    private String password;
-    private String password2;
+    private int userID;
     private String email;
-    private String email2;
     private String firstName;
     private String middleInitial;
     private String lastName;
@@ -23,28 +20,12 @@ public class AddUserModel extends ActionSupport {
     private String postalCode;
     private String phoneNumber;
 
-    public String getUsername() {
-        return username;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setUsername(String username) {
-        this.username = username    ;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getEmail() {
@@ -53,14 +34,6 @@ public class AddUserModel extends ActionSupport {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getEmail2() {
-        return email2;
-    }
-
-    public void setEmail2(String email2) {
-        this.email2 = email2;
     }
 
     public String getFirstName() {

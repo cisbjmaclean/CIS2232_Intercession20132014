@@ -23,6 +23,6 @@
     </session-config>
     
     <welcome-file-list>
-        <welcome-file>createUser.jsp</welcome-file>
+        <welcome-file>main.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
