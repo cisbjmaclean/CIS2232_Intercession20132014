@@ -3,13 +3,12 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
-        <action name="addStudent" 
-            class="test.jsr.StudentAction"  method="execute">
-                
-             <result name="success">/index.jsp</result>
-      </action>
+        <action name="test" 
+                class="actions.CustomerAction">
+            <result name="success">SuccessCustomer.jsp</result>
+            <result name="input">Customer.jsp</result>
+        </action>
     </package>
 </struts>

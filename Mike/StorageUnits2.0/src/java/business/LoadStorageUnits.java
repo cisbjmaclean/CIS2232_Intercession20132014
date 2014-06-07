@@ -29,7 +29,7 @@ public class LoadStorageUnits {
     /**
      * This method retrieves data from the database.
      *
-     * @param request
+     * @return 
      */
     public ArrayList loadStorageUnits() {
 

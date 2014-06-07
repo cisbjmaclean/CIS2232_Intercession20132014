@@ -14,20 +14,20 @@
         <title>JSP Page</title>
     </head>
     <body>
-    <s:form action="addUser" method="post">
-        <s:textfield name="addUserLoginObject.username" label="username"/>
-        <s:textfield name="addUserLoginObject.password" label="p"/>
+        <s:form action="addUser" method="post">
+        <s:textfield name="addUserObject.username" label="username"/>
+        <s:textfield name="addUserObject.password" label="p"/>
         <s:textfield name="addUserObject.password2"/>
-        <s:textfield name="addUserDetailsObject.email" label="e"/>
-        <s:textfield name="addUserDetailsObject.email2"/>
-        <s:textfield name="addUserDetailsObject.firstName" label="f"/>
-        <s:textfield name="addUserDetailsObject.middleInitial" label="m"/>
-        <s:textfield name="addUserDetailsObject.lastName" label="l"/>
-        <s:textfield name="addUserDetailsObject.street"/>
-        <s:textfield name="addUserDetailsObject.city"/>
-        <s:textfield name="addUserDetailsObject.province"/>
-        <s:textfield name="addUserDetailsObject.postalCode"/>
-        <s:textfield name="addUserDetailsObject.phoneNumber"/>
+        <s:textfield name="addUserObject.email" label="e"/>
+        <s:textfield name="addUserObject.email2"/>
+        <s:textfield name="addUserObject.firstName" label="f"/>
+        <s:textfield name="addUserObject.middleInitial" label="m"/>
+        <s:textfield name="addUserObject.lastName" label="l"/>
+        <s:textfield name="addUserObject.street"/>
+        <s:textfield name="addUserObject.city"/>
+        <s:textfield name="addUserObject.province"/>
+        <s:textfield name="addUserObject.postalCode"/>
+        <s:textfield name="addUserObject.phoneNumber"/>
         <s:submit name="submit"/>          
         </s:form>
     </body>

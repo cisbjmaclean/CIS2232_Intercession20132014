@@ -1,12 +1,11 @@
 package business;
 
-import models.UserModel;
-import models.LoginModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.AddUserModel;
 import util.DatabaseConnection;
 import util.DbUtils;
 
@@ -26,7 +25,7 @@ public class AddUser {
     private ResultSet rs = null;
     private boolean usernameTaken = false;
 
-    public boolean checkUsername(LoginModel addUserLoginObject) {
+    public boolean checkUsername(AddUserModel addUserObject) {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -49,7 +48,7 @@ public class AddUser {
             // Iterate over the result set.
             while (rs.next()) {
                 checkUsername = rs.getString("login_username");
-                if (checkUsername.equals(addUserLoginObject.getUsername())) {
+                if (checkUsername.equals(addUserObject.getUsername())) {
                     usernameTaken = true;
                 }
             }
@@ -63,7 +62,7 @@ public class AddUser {
         return usernameTaken;
     }
 
-    public boolean addToDatabase(UserModel addUserDetailsObject, LoginModel addUserLoginObject) {
+    public boolean addToDatabase(AddUserModel addUserObject) {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -79,15 +78,15 @@ public class AddUser {
                     + "VALUES (?,?,?,?,?,?,?,?,?)";
             // Added security for the fields being sent to the database.  
             psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setString(1, addUserDetailsObject.getFirstName());
-            psAuthenticate.setString(2, addUserDetailsObject.getMiddleInitial());
-            psAuthenticate.setString(3, addUserDetailsObject.getLastName());
-            psAuthenticate.setString(4, addUserDetailsObject.getStreet());
-            psAuthenticate.setString(5, addUserDetailsObject.getCity());
-            psAuthenticate.setString(6, addUserDetailsObject.getProvince());
-            psAuthenticate.setString(7, addUserDetailsObject.getPostalCode());
-            psAuthenticate.setString(8, addUserDetailsObject.getPhoneNumber());
-            psAuthenticate.setString(9, addUserDetailsObject.getEmail());
+            psAuthenticate.setString(1, addUserObject.getFirstName());
+            psAuthenticate.setString(2, addUserObject.getMiddleInitial());
+            psAuthenticate.setString(3, addUserObject.getLastName());
+            psAuthenticate.setString(4, addUserObject.getStreet());
+            psAuthenticate.setString(5, addUserObject.getCity());
+            psAuthenticate.setString(6, addUserObject.getProvince());
+            psAuthenticate.setString(7, addUserObject.getPostalCode());
+            psAuthenticate.setString(8, addUserObject.getPhoneNumber());
+            psAuthenticate.setString(9, addUserObject.getEmail());
             // Run the query.
             psAuthenticate.executeUpdate();
 
@@ -109,13 +108,10 @@ public class AddUser {
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
             psAuthenticate.setInt(1, id);
-            psAuthenticate.setString(2, addUserLoginObject.getUsername());
-            psAuthenticate.setString(3, addUserLoginObject.getPassword());
+            psAuthenticate.setString(2, addUserObject.getUsername());
+            psAuthenticate.setString(3, addUserObject.getPassword());
             // Run the query.
-            psAuthenticate.executeUpdate();
-            
-            addUserDetailsObject.setUserID(id);
-            addUserLoginObject.setUserID(id);
+            psAuthenticate.executeUpdate();           
 
         } catch (Exception e) {
             Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, e);

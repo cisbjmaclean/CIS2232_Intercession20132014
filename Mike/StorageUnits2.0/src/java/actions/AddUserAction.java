@@ -2,8 +2,7 @@ package actions;
 
 import business.AddUser;
 import com.opensymphony.xwork2.ActionSupport;
-import models.LoginModel;
-import models.UserModel;
+import models.AddUserModel;
 
 /**
  *
@@ -15,8 +14,7 @@ import models.UserModel;
 public class AddUserAction extends ActionSupport {
 
     private static final long serialVersionUID = 1L;
-    private LoginModel addUserLoginObject;
-    private UserModel addUserDetailsObject;
+    private AddUserModel addUserObject;
     private AddUser addUser;
     private boolean userCreation = false;
     private boolean usernameTaken = false;
@@ -24,9 +22,9 @@ public class AddUserAction extends ActionSupport {
 
     public String execute() throws Exception {
         addUser = new AddUser();
-        usernameTaken = addUser.checkUsername(getAddUserLoginObject());
+        usernameTaken = addUser.checkUsername(addUserObject);
         if (!usernameTaken) {
-            userCreation = addUser.addToDatabase(getAddUserDetailsObject(), getAddUserLoginObject());
+            userCreation = addUser.addToDatabase(addUserObject);
         }
         if (userCreation) {
             created = "success";
@@ -34,21 +32,11 @@ public class AddUserAction extends ActionSupport {
        return created;
     }
 
-    public LoginModel getAddUserLoginObject() {
-        return addUserLoginObject;
+    public AddUserModel getAddUserObject() {
+        return addUserObject;
     }
 
-    public void setAddUserLoginObject(LoginModel addUserLoginObject) {
-        this.addUserLoginObject = addUserLoginObject;
-    }
-
-    public UserModel getAddUserDetailsObject() {
-        return addUserDetailsObject;
-    }
-
-    public void setAddUserDetailsObject(UserModel addUserDetailsObject) {
-        this.addUserDetailsObject = addUserDetailsObject;
-    }
-
-   
+    public void setAddUserObject(AddUserModel addUserObject) {
+        this.addUserObject = addUserObject;
+    } 
 }

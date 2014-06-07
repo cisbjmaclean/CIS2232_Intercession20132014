@@ -7,6 +7,7 @@
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/actions/AddUserAction-validation.xml</file>
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/web/createUser.jsp</file>
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/util/DatabaseConnection.java</file>
+            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/models/AddUserModel.java</file>
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/business/LoadStorageUnits.java</file>
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/actions/AddUserAction.java</file>
@@ -18,8 +19,8 @@
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/actions/LoginAction.java</file>
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/web/main.jsp</file>
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/business/Login.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/business/AddUser.java</file>
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/models/LoginModel.java</file>
+            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/business/AddUser.java</file>
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/util/DatabaseResources.properties</file>
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/web/viewAll.jsp</file>
             <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/actions/ViewStorageUnitsAction.java</file>
