@@ -12,6 +12,7 @@ import util.DbUtils;
 /**
  *
  * @author Michael Fesser
+ * @since 5/30/2014
  */
 public class AddUser {
 
@@ -74,14 +75,14 @@ public class AddUser {
         // Try to generate the query.
         try {
             // The query to send.
-            sql = "INSERT INTO `customer`(`cus_first_name`, `cus_middle_initial`, `cus_last_name`, `cus_street`, `cus_city`, `cus_province`, `cus_postal_code`, `cus_phone`, `cus_email`) "
+            sql = "INSERT INTO `customer`(`cus_first_name`, `cus_middle_initial`, `cus_last_name`, `cus_address`, `cus_city`, `cus_province`, `cus_postal_code`, `cus_phone`, `cus_email`) "
                     + "VALUES (?,?,?,?,?,?,?,?,?)";
             // Added security for the fields being sent to the database.  
             psAuthenticate = con.prepareStatement(sql);
             psAuthenticate.setString(1, addUserObject.getFirstName());
             psAuthenticate.setString(2, addUserObject.getMiddleInitial());
             psAuthenticate.setString(3, addUserObject.getLastName());
-            psAuthenticate.setString(4, addUserObject.getStreet());
+            psAuthenticate.setString(4, addUserObject.getAddress());
             psAuthenticate.setString(5, addUserObject.getCity());
             psAuthenticate.setString(6, addUserObject.getProvince());
             psAuthenticate.setString(7, addUserObject.getPostalCode());

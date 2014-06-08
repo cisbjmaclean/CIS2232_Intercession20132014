@@ -41,7 +41,7 @@
             <label class="alignCenter" for="firstName"><bean:message key="create.user.label.first.name"/></label><html:text property="firstName"/>
             <label class="alignCenter" for="middleInitial"><bean:message key="create.user.label.middle.initial"/></label><html:text property="middleInitial"/>
             <label class="alignCenter" for="lastName"><bean:message key="create.user.label.last.name"/></label><html:text property="lastName"/>
-            <label class="alignCenter" for="street"><bean:message key="create.user.label.street"/></label><html:text property="street"/>
+            <label class="alignCenter" for="address"><bean:message key="create.user.label.address"/></label><html:text property="address"/>
             <label class="alignCenter" for="city"><bean:message key="create.user.label.city"/></label><html:text property="city"/>
             <label class="alignCenter" for="province"><bean:message key="create.user.label.province"/></label><html:text property="province"/>
             <label class="alignCenter" for="postalCode"><bean:message key="create.user.label.postal.code"/></label><html:text property="postalCode"/>

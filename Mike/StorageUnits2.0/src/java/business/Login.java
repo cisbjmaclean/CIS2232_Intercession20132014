@@ -12,6 +12,7 @@ import util.DbUtils;
 /**
  *
  * @author Michael Fesser
+ * @since 5/25/2014
  */
 public class Login {
 
@@ -29,6 +30,7 @@ public class Login {
      * This method retrieves data from the database.
      *
      * @param login
+     * @return 
      */
     public boolean checkLogin(LoginModel login) {
 
@@ -43,19 +45,23 @@ public class Login {
         // Try to generate the query.
         try {
             // The query to send.
-            sql = "SELECT `login_username`, `login_password` FROM `login`";
+            sql = "SELECT `login_username`, `login_password`, `cus_id` FROM `login`";
             psAuthenticate = con.prepareStatement(sql);
             // Send the query and get the results back.
             rs = psAuthenticate.executeQuery();
 
             String username;
-            String password;          
+            String password;
+            int customerId;
 
             // Iterate over the result set.
             while (rs.next()) {
                 username = rs.getString("login_username");
                 password = rs.getString("login_password");
+                customerId = rs.getInt("cus_id");
                 if (login.getUsername().equals(username) && login.getPassword().equals(password)) {
+                    login.setCustomerId(customerId);
+                    login.setValidated(true);
                     authenicate = true;
                     break;
                 }

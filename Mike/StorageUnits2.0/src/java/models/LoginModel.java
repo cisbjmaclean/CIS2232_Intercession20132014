@@ -11,16 +11,17 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 public class LoginModel extends ActionSupport {
 
-    private int userID;
+    private int customerId;
     private String username;
     private String password;
+    private boolean validated;
 
-    public int getUserID() {
-        return userID;
+     public int getCustomerId() {
+        return customerId;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getUsername() {
@@ -37,5 +38,13 @@ public class LoginModel extends ActionSupport {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean getValidated() {
+        return validated;
+    }
+
+    public void setValidated(boolean validated) {
+        this.validated = validated;
     }
 }

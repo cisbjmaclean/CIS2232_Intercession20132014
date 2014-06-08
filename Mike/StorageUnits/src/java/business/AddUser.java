@@ -74,14 +74,14 @@ public class AddUser {
         // Try to generate the query.
         try {
             // The query to send.
-            this.sql = "INSERT INTO `customer`(`cus_first_name`, `cus_middle_initial`, `cus_last_name`, `cus_street`, `cus_city`, `cus_province`, `cus_postal_code`, `cus_phone`, `cus_email`) "
+            this.sql = "INSERT INTO `customer`(`cus_first_name`, `cus_middle_initial`, `cus_last_name`, `cus_address`, `cus_city`, `cus_province`, `cus_postal_code`, `cus_phone`, `cus_email`) "
                     + "VALUES (?,?,?,?,?,?,?,?,?)";
             // Added security for the fields being sent to the database.
             this.psAuthenticate = this.con.prepareStatement(this.sql);
             this.psAuthenticate.setString(1, userForm.getFirstName());
             this.psAuthenticate.setString(2, userForm.getMiddleInitial());
             this.psAuthenticate.setString(3, userForm.getLastName());
-            this.psAuthenticate.setString(4, userForm.getStreet());
+            this.psAuthenticate.setString(4, userForm.getAddress());
             this.psAuthenticate.setString(5, userForm.getCity());
             this.psAuthenticate.setString(6, userForm.getProvince());
             this.psAuthenticate.setString(7, userForm.getPostalCode());

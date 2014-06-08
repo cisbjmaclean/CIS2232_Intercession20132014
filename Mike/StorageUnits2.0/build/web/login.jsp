@@ -14,9 +14,9 @@
     </head>
     <body>
         <s:form action="systemLogin" method="post">
-            <s:textfield name ="login.username"/>
-            <s:textfield name ="login.password"/>
-            <s:submit name ="login.submit"/>
+            <s:textfield name ="login.username" key="login.label.username"/>
+            <s:textfield name ="login.password" key="login.label.password"/>
+            <s:submit name ="login.submit" key="login.label.submit"/>
         </s:form>
     </body>
 </html>

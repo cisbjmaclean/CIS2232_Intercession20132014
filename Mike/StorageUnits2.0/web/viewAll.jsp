@@ -35,12 +35,16 @@
                         <td>
                             <s:property value="unitDateTo"/>                  
                         </td>
-                        <td>
-                            test       
+                        <td> 
+                            <s:form action="reserveUnit" method="post">
+                                <s:hidden key="unitId"/>
+                                <s:submit key="viewAll.label.submit"/>
+                            </s:form>
                         </td>
                     </tr>
                 </s:iterator>
             </table>
+        </div>
             <div id =""></div>
     </body>
 </html>

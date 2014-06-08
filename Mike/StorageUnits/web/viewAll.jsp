@@ -33,35 +33,38 @@
         <div style="color:red"><html:errors/></div>
 
         <table>
-        <logic:iterate name="storageUnits" id="StorageUnit" scope="session">
-            <tr>
-                <td>
-                    <bean:write name="StorageUnit" property="unitId"/>
-                </td>
-                <td>
-                    <bean:write name="StorageUnit" property="unitType"/>
-                </td>
-                <td>
-                    <bean:write name="StorageUnit" property="unitDimensions"/>
-                </td>
-                <td>
-                    <bean:write name="StorageUnit" property="unitAvalibility"/>
-                </td>
-                <td>
-                    <bean:write name="StorageUnit" property="unitDateFrom"/>                  
-                </td> 
-                <td>
-                    <bean:write name="StorageUnit" property="unitDateTo"/>                  
-                </td>
-                <td>
-                     <html:submit><bean:message key="main.label.view"/></html:submit>              
-                </td>
-            </tr>
-            
-            
-        </logic:iterate>
+            <logic:iterate name="storageUnits" id="StorageUnit" scope="session">
+                <tr>
+                    <td>
+                        <bean:write name="StorageUnit" property="unitId"/>
+                    </td>
+                    <td>
+                        <bean:write name="StorageUnit" property="unitType"/>
+                    </td>
+                    <td>
+                        <bean:write name="StorageUnit" property="unitDimensions"/>
+                    </td>
+                    <td>
+                        <bean:write name="StorageUnit" property="unitAvalibility"/>
+                    </td>
+                    <td>
+                        <bean:write name="StorageUnit" property="unitDateFrom"/>                  
+                    </td> 
+                    <td>
+                        <bean:write name="StorageUnit" property="unitDateTo"/>                  
+                    </td>
+                    <td>
+                        <html:form action="reserveUnit" method="post">
+                            <html:hidden property="unitId"/>
+                            <html:submit><bean:message key="create.user.label.submit"/></html:submit>
+                        </html:form>             
+                    </td>
+                </tr>
+
+
+            </logic:iterate>
         </table>
-            
+
     </body>
 </html:html>
 

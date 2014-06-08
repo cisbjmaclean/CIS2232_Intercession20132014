@@ -32,9 +32,9 @@ public class Login {
      */
     public boolean checkLogin(LoginForm validateLogin) {
 
-        // Try to connect to the database.
+       // Try to connect to the database.
         try {
-            this.con = dbConnection.databaseConnection();
+            con = dbConnection.databaseConnection();
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("The connection to the database failed.");
@@ -43,20 +43,24 @@ public class Login {
         // Try to generate the query.
         try {
             // The query to send.
-            this.sql = "SELECT `login_username`, `login_password` FROM `login`";
-            this.psAuthenticate = this.con.prepareStatement(this.sql);
+            sql = "SELECT `login_username`, `login_password`, `cus_id` FROM `login`";
+            psAuthenticate = con.prepareStatement(sql);
             // Send the query and get the results back.
-            this.rs = this.psAuthenticate.executeQuery();
+            rs = psAuthenticate.executeQuery();
 
             String username;
             String password;
+            int customerId;
 
             // Iterate over the result set.
-            while (this.rs.next()) {
-                username = this.rs.getString("login_username");
-                password = this.rs.getString("login_password");
+            while (rs.next()) {
+                username = rs.getString("login_username");
+                password = rs.getString("login_password");
+                customerId = rs.getInt("cus_id");
                 if (validateLogin.getUsername().equals(username) && validateLogin.getPassword().equals(password)) {
-                    this.authenicate = true;
+                    validateLogin.setCustomerId(customerId);
+                    validateLogin.setValidated(true);
+                    authenicate = true;
                     break;
                 }
             }
@@ -65,7 +69,7 @@ public class Login {
             System.err.println("There was an issue with the query.");
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
-            DbUtils.close(this.rs, this.psAuthenticate, this.con);
+            DbUtils.close(rs, psAuthenticate, con);
         }
         return authenicate;
     }

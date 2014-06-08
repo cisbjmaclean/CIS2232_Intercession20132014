@@ -5,27 +5,28 @@ import com.opensymphony.xwork2.ActionSupport;
 /**
  *
  * @author Michael Fesser
+ * @since 6/5/2014
  */
 public class UserModel extends ActionSupport {
 
     private static final long serialVersionUID = 1L;
-    private int userID;
+    private int customerId;
     private String email;
     private String firstName;
     private String middleInitial;
     private String lastName;
-    private String street;
+    private String address;
     private String city;
     private String province;
     private String postalCode;
     private String phoneNumber;
 
-    public int getUserID() {
-        return userID;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getEmail() {
@@ -60,12 +61,12 @@ public class UserModel extends ActionSupport {
         this.lastName = lastName;
     }
 
-    public String getStreet() {
-        return street;
+    public String getAddress() {
+        return address;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getCity() {

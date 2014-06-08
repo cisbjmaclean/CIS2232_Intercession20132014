@@ -1,18 +1,17 @@
-package models;
+package forms;
+
+import org.apache.struts.action.ActionForm;
 
 /**
  *
- * @author Michael
- * @since 5/30/2014
+ * @author Michael Fesser
+ * @since 6/5/2014
  */
-public class AddUserModel {
-    
+public class UserForm extends ActionForm {
+
     private static final long serialVersionUID = 1L;
-    private String username;
-    private String password;
-    private String password2;
+    private int customerId;
     private String email;
-    private String email2;
     private String firstName;
     private String middleInitial;
     private String lastName;
@@ -22,28 +21,12 @@ public class AddUserModel {
     private String postalCode;
     private String phoneNumber;
 
-    public String getUsername() {
-        return username;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getEmail() {
@@ -52,14 +35,6 @@ public class AddUserModel {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getEmail2() {
-        return email2;
-    }
-
-    public void setEmail2(String email2) {
-        this.email2 = email2;
     }
 
     public String getFirstName() {
@@ -125,5 +100,4 @@ public class AddUserModel {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
 }

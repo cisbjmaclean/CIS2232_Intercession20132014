@@ -13,6 +13,7 @@ import util.DbUtils;
 /**
  *
  * @author Michael Fesser
+ * @since 5/30/2014
  */
 public class LoadStorageUnits {
 
@@ -29,7 +30,7 @@ public class LoadStorageUnits {
     /**
      * This method retrieves data from the database.
      *
-     * @return 
+     * @return
      */
     public ArrayList loadStorageUnits() {
 
@@ -44,7 +45,9 @@ public class LoadStorageUnits {
         // Try to generate the query.
         try {
             // The query to send.
-            sql = "SELECT * FROM `unit`";
+            sql = "SELECT `unit`.`unit_id`, `unit`.`unit_type`, `unit`.`unit_dimensions`, `unit`.`unit_avalibility`, "
+                    + "`unit`.`unit_date_from`, `unit`.`unit_date_to`, `customer_unit`.`cus_id` FROM `unit` LEFT OUTER JOIN "
+                    + "`customer_unit` ON `unit`.`unit_id` = `customer_unit`.`unit_id`";
             psAuthenticate = con.prepareStatement(sql);
             // Send the query and get the results back.
             rs = psAuthenticate.executeQuery();
@@ -55,6 +58,7 @@ public class LoadStorageUnits {
             String unitAvalibility;
             String unitDateFrom;
             String unitDateTo;
+            int customerId = 0;
             StorageUnitModel unit;
 
             // Iterate over the result set.
@@ -65,8 +69,10 @@ public class LoadStorageUnits {
                 unitAvalibility = rs.getString("unit_avalibility");
                 unitDateFrom = rs.getString("unit_date_from");
                 unitDateTo = rs.getString("unit_date_to");
-                unit = new StorageUnitModel(unitId, unitType, unitDimensions, unitAvalibility, unitDateFrom, unitDateTo);
+                customerId = rs.getInt("cus_id");
+                unit = new StorageUnitModel(unitId, unitType, unitDimensions, unitAvalibility, unitDateFrom, unitDateTo, customerId);
                 storageUnits.add(unit);
+                customerId = 0;
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);

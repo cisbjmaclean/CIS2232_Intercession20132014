@@ -7,7 +7,7 @@ import models.LoginModel;
 /**
  *
  * @author Michael Fesser
- * @since 5/25/2014
+ * @since 6/3/2014
  *
  * The purpose of this class is to allow the function of the login page.
  */

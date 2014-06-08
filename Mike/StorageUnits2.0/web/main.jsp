@@ -13,10 +13,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <input type="button" name="login" onclick="window.location='login.jsp';" />
-        <input type="button" name="create" onclick="window.location='createUser.jsp';"/>
+        <input type="button" name="login" value="Login" onclick="window.location='login.jsp';"/>
+        <input type="button" name="create"  value="Create User" onclick="window.location='createUser.jsp';"/>
         <s:form action="loadUnits">
-            <s:submit name="Submit"/>
+            <s:submit name="Submit" key="main.label.submit"/>
         </s:form>
     </body>
 </html>

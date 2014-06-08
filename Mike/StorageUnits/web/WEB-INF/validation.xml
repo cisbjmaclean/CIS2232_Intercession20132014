@@ -23,12 +23,12 @@
 
     <formset>
         <form name="addUserForm">
-            <field
+<!--            <field
                 property="username"
                 depends="required">
                 <arg key="AddUserForm.username"/>
             </field>
-           <!-- <field
+            <field
                 property="password"
                 depends="required,mask">
                 <arg key="AddUserForm.password"/>
@@ -63,7 +63,7 @@
                     <var-name>mask</var-name>
                     <var-value>^[0-9a-zA-Z]*$</var-value>
                 </var>
-            </field> -->
+            </field> 
             <field
                 property="firstName"
                 depends="required">
@@ -80,9 +80,9 @@
                 <arg key="AddUserForm.lastName"/>
             </field>
             <field
-                property="street"
+                property="address"
                 depends="required">
-                <arg key="AddUserForm.street"/>
+                <arg key="AddUserForm.address"/>
             </field>
             <field
                 property="city"
@@ -94,7 +94,7 @@
                 depends="required">
                 <arg key="AddUserForm.province"/>
             </field>
-           <!-- <field
+            <field
                 property="postalCode"
                 depends="required">
                 <arg key="AddUserForm.postalCode"/>
@@ -102,7 +102,7 @@
                     <var-name>mask</var-name>
                     <var-value>^([A-Z]\d[A-Z]\s\d[A-Z]\d)$</var-value>
                 </var>
-            </field> -->    
+            </field>     
             <field
                 property="phoneNumber"
                 depends="required">
@@ -121,7 +121,7 @@
                     <var-name>test</var-name>
                     <var-value>(email==*this*)</var-value>
                 </var>              
-            </field>         
+            </field>         -->
         </form>
         
         <!-- An example form -->

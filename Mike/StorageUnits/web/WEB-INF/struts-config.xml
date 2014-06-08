@@ -48,6 +48,15 @@
                 scope="request">
             <forward name="viewAll"  path="/viewAll.jsp"/>
         </action>
+        
+        <action path="/reserveUnit" 
+                type="actions.ReserveUnitAction"
+                name="storageUnitForm"
+                input="/viewAll.jsp" 
+                scope="request">
+            <forward name="main"  path="/main.jsp"/>
+        </action>
+        
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

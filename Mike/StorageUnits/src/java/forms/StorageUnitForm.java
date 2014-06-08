@@ -5,6 +5,7 @@ import org.apache.struts.action.ActionForm;
 /**
  *
  * @author Michael Fesser
+ * @since 5/30/2014
  */
 public class StorageUnitForm extends ActionForm {
 
@@ -14,18 +15,20 @@ public class StorageUnitForm extends ActionForm {
     private String  UnitAvalibility;
     private String  UnitDateFrom;
     private String  UnitDateTo;
+    private int customerId;
 
     public StorageUnitForm(){
     }
-            
-    public StorageUnitForm(int unitId, String unitType, String unitDimensions, String unitAvalibility, String unitDateFrom, String unitDateTo) {
+
+    public StorageUnitForm(int unitId, String unitType, String unitDimensions, String UnitAvalibility, String UnitDateFrom, String UnitDateTo, int customerId) {
         this.unitId = unitId;
         this.unitType = unitType;
         this.unitDimensions = unitDimensions;
-        this.UnitAvalibility = unitAvalibility;
-        this.UnitDateFrom = unitDateFrom;
-        this.UnitDateTo = unitDateTo;
-    }
+        this.UnitAvalibility = UnitAvalibility;
+        this.UnitDateFrom = UnitDateFrom;
+        this.UnitDateTo = UnitDateTo;
+        this.customerId = customerId;
+    }            
 
     public int getUnitId() {
         return unitId;
@@ -75,5 +78,11 @@ public class StorageUnitForm extends ActionForm {
         this.UnitDateTo = UnitDateTo;
     }
 
-   
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 }

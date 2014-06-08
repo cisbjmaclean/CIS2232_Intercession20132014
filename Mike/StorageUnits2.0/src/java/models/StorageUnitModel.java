@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.ActionSupport;
 /**
  *
  * @author Michael Fesser
+ * @since 5/30/2014
  */
 public class StorageUnitModel extends ActionSupport {
 
@@ -14,18 +15,20 @@ public class StorageUnitModel extends ActionSupport {
     private String  UnitAvalibility;
     private String  UnitDateFrom;
     private String  UnitDateTo;
+    private int customerId;
 
     public StorageUnitModel(){
     }
-            
-    public StorageUnitModel(int unitId, String unitType, String unitDimensions, String unitAvalibility, String unitDateFrom, String unitDateTo) {
+
+    public StorageUnitModel(int unitId, String unitType, String unitDimensions, String UnitAvalibility, String UnitDateFrom, String UnitDateTo, int customerId) {
         this.unitId = unitId;
         this.unitType = unitType;
         this.unitDimensions = unitDimensions;
-        this.UnitAvalibility = unitAvalibility;
-        this.UnitDateFrom = unitDateFrom;
-        this.UnitDateTo = unitDateTo;
-    }
+        this.UnitAvalibility = UnitAvalibility;
+        this.UnitDateFrom = UnitDateFrom;
+        this.UnitDateTo = UnitDateTo;
+        this.customerId = customerId;
+    }            
 
     public int getUnitId() {
         return unitId;
@@ -75,5 +78,11 @@ public class StorageUnitModel extends ActionSupport {
         this.UnitDateTo = UnitDateTo;
     }
 
-   
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 }

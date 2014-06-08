@@ -13,7 +13,7 @@
 	<s:textfield name="age" key="age" size="20" />
 	<s:textfield name="email" key="email" size="20" />
 	<s:textfield name="telephone" key="telephone" size="20" />
-	<s:submit method="addCustomer" label="label.add.customer" align="center" />
+	<s:submit method="addCustomer" key="label.add.customer" align="center" />
 </s:form>
 </body>
 </html>

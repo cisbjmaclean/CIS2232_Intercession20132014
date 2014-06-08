@@ -3,6 +3,7 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
+    <constant name="struts.custom.i18n.resources" value="applicationResources" />
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
         <action name="addUser" class="actions.AddUserAction" method="execute">
@@ -14,6 +15,10 @@
             <result name="success">viewAll.jsp</result>
         </action>
         <action name="systemLogin" class="actions.LoginAction" method="execute">
+            <result name="success">user.jsp</result>
+            <result name="error">login.jsp</result>
+        </action>
+       <action name="reserveUnit" class="actions.ReserveUnitAction" method="execute">
             <result name="success">main.jsp</result>
             <result name="error">login.jsp</result>
         </action>

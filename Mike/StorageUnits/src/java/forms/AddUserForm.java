@@ -16,7 +16,7 @@ public class AddUserForm extends ValidatorForm {
     private String firstName;
     private String middleInitial;
     private String lastName;
-    private String street;
+    private String address;
     private String city;
     private String province;
     private String postalCode;
@@ -86,12 +86,12 @@ public class AddUserForm extends ValidatorForm {
         this.lastName = lastName;
     }
 
-    public String getStreet() {
-        return street;
+    public String getAddress() {
+        return address;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getCity() {

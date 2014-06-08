@@ -34,9 +34,9 @@ public class LoadStorageUnits {
      */
     public ArrayList loadStorageUnits(HttpServletRequest request) {
 
-        // Try to connect to the database.
+         // Try to connect to the database.
         try {
-            this.con = dbConnection.databaseConnection();
+            con = dbConnection.databaseConnection();
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("The connection to the database failed.");
@@ -45,10 +45,12 @@ public class LoadStorageUnits {
         // Try to generate the query.
         try {
             // The query to send.
-            this.sql = "SELECT * FROM `unit`";
-            this.psAuthenticate = this.con.prepareStatement(this.sql);
+            sql = "SELECT `unit`.`unit_id`, `unit`.`unit_type`, `unit`.`unit_dimensions`, `unit`.`unit_avalibility`, "
+                    + "`unit`.`unit_date_from`, `unit`.`unit_date_to`, `customer_unit`.`cus_id` FROM `unit` LEFT OUTER JOIN "
+                    + "`customer_unit` ON `unit`.`unit_id` = `customer_unit`.`unit_id`";
+            psAuthenticate = con.prepareStatement(sql);
             // Send the query and get the results back.
-            this.rs = this.psAuthenticate.executeQuery();
+            rs = psAuthenticate.executeQuery();
 
             int unitId;
             String unitType;
@@ -56,25 +58,28 @@ public class LoadStorageUnits {
             String unitAvalibility;
             String unitDateFrom;
             String unitDateTo;
+            int customerId = 0;
             StorageUnitForm unit;
 
             // Iterate over the result set.
-            while (this.rs.next()) {
-                unitId = this.rs.getInt("unit_id");
-                unitType = this.rs.getString("unit_type");
-                unitDimensions = this.rs.getString("unit_dimensions");
-                unitAvalibility = this.rs.getString("unit_avalibility");
-                unitDateFrom = this.rs.getString("unit_date_from");
-                unitDateTo = this.rs.getString("unit_date_to");
-                unit = new StorageUnitForm(unitId, unitType, unitDimensions, unitAvalibility, unitDateFrom, unitDateTo);
+            while (rs.next()) {
+                unitId = rs.getInt("unit_id");
+                unitType = rs.getString("unit_type");
+                unitDimensions = rs.getString("unit_dimensions");
+                unitAvalibility = rs.getString("unit_avalibility");
+                unitDateFrom = rs.getString("unit_date_from");
+                unitDateTo = rs.getString("unit_date_to");
+                customerId = rs.getInt("cus_id");
+                unit = new StorageUnitForm(unitId, unitType, unitDimensions, unitAvalibility, unitDateFrom, unitDateTo, customerId);
                 storageUnits.add(unit);
+                customerId = 0;
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("There was an issue with the query.");
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
-            DbUtils.close(this.rs, this.psAuthenticate, this.con);
+            DbUtils.close(rs, psAuthenticate, con);
         }
         return storageUnits;
     }
