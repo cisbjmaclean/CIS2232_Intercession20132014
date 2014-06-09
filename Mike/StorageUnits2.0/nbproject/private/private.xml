@@ -3,31 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/struts.xml</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/web/main.jsp</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/web/viewAll.jsp</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/web/createUser.jsp</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/web/login.jsp</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/actions/AddUserAction.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/util/DatabaseConnection.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/util/DbUtils.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/util/DatabaseResources.properties</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/models/UserModel.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/business/Login.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/models/LoginModel.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/models/StorageUnitModel.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/business/LoadStorageUnits.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/actions/LoginAction.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/actions/ViewStorageUnitsAction.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/business/AddUser.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/models/AddUserModel.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/actions/AddUserAction-validation.xml</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/applicationResources.properties</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/actions/ReserveUnitAction.java</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/web/user.jsp</file>
-            <file>file:/C:/Users/Michael/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/actions/ViewCustomerUnits.java</file>
+            <file>file:/C:/Users/mfesser/Documents/GitHub/CIS2232_Intercession20132014/Mike/StorageUnits2.0/src/java/actions/AddUserAction.java</file>
         </group>
     </open-files>
 </project-private>
