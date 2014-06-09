@@ -30,7 +30,7 @@ public class LoadStorageUnitsAction extends Action {
      public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-
+         
         LoadStorageUnits loadUnits = new LoadStorageUnits();   
         request.getSession().setAttribute("storageUnits", loadUnits.loadStorageUnits(request));
         
