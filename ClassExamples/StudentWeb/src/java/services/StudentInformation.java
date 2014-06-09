@@ -18,6 +18,8 @@ public class StudentInformation {
     @WebMethod(operationName = "get")
     public String get(String txt) {
         Student temp = new Student(Integer.parseInt(txt));        
+        System.out.println("In web service, temp="+temp.toString());
+        System.out.println("In web service, temp="+temp.toStringXML());
         return temp.toStringXML();
     }
 }

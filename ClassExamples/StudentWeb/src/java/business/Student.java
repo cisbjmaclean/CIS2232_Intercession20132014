@@ -77,7 +77,7 @@ public class Student {
             psAuthenticate = conn.prepareStatement(sql);
             psAuthenticate.setInt(1, studentId);
             ResultSet rs = psAuthenticate.executeQuery();
-            Student newStudent = new Student();
+            //Student newStudent = new Student();
 
             if (rs.next()) {
                 // It is possible to get the columns via name
@@ -86,10 +86,10 @@ public class Student {
 
                 // e.g. resultSet.getSTring(2);
 
-                newStudent.setStudentId(rs.getString("student_id"));
-                newStudent.setFirstName(rs.getString("first_name"));
-                newStudent.setLastName(rs.getString("last_name"));
-                newStudent.setDob(rs.getString("dob"));                
+               this.setStudentId(rs.getString("student_id"));
+               this.setFirstName(rs.getString("first_name"));
+               this.setLastName(rs.getString("last_name"));
+               this.setDob(rs.getString("dob"));                
                 
             }
         } catch (Exception e) {
