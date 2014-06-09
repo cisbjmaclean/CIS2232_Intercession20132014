@@ -21,7 +21,9 @@ public class AddUserAction extends Action {
     // Flag for user creation.
     private boolean userCreation = false;
     private boolean usernameTaken = false;
+    private AddUser addUser;
     private AddUserForm userForm;
+    private ActionForward findForward;
 
     /**
      * 
@@ -36,13 +38,9 @@ public class AddUserAction extends Action {
      public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-
-        // Used to define the page to be forwarded to.
          
-        ActionForward findForward;
-        
          userForm = (AddUserForm) form;
-         AddUser addUser = new AddUser();
+         addUser = new AddUser();
          usernameTaken = addUser.checkUsername(userForm);
          System.out.println(usernameTaken);
          if (!usernameTaken){

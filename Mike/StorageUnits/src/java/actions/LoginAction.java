@@ -22,6 +22,7 @@ public class LoginAction extends Action {
     private boolean authenticate = false;
     private LoginForm validateLogin; 
     private Login login;
+    private ActionForward findForward;
 
     /**
      * This method gets the fields from the login page and calls the user class
@@ -40,8 +41,7 @@ public class LoginAction extends Action {
 
         // Create the object that holds the fields from the login page.
         validateLogin = (LoginForm) form;
-        // Used to define the page to be forwarded to.
-        ActionForward findForward;
+        // Used to define the page to be forwarded to.  
         login  = new Login();
         this.authenticate = login.checkLogin(validateLogin);
         // If login credentials are valid continue otherwise return to the login page.
