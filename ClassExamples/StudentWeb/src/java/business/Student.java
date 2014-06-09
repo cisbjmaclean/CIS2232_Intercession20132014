@@ -60,6 +60,57 @@ public class Student {
         System.out.println("Calling default constructor");
     }
 
+    public Student(int studentId){
+        PreparedStatement psAuthenticate = null;
+        String sql = null;
+        Connection conn=null;
+        try {
+            conn = ConnectionUtils.getConnection();
+        } catch (Exception ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ArrayList<Student> courtBookings = new ArrayList();
+
+        try {
+            sql = "SELECT `student_id`, `first_name`, `last_name`, `dob` FROM `student` where student_id = ?";
+
+            psAuthenticate = conn.prepareStatement(sql);
+            psAuthenticate.setInt(1, studentId);
+            ResultSet rs = psAuthenticate.executeQuery();
+            Student newStudent = new Student();
+
+            if (rs.next()) {
+                // It is possible to get the columns via name
+                // also possible to get the columns via the column number
+                // which starts at 1
+
+                // e.g. resultSet.getSTring(2);
+
+                newStudent.setStudentId(rs.getString("student_id"));
+                newStudent.setFirstName(rs.getString("first_name"));
+                newStudent.setLastName(rs.getString("last_name"));
+                newStudent.setDob(rs.getString("dob"));                
+                
+            }
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
+            e.printStackTrace();
+        }
+
+    }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+    
     public Student(String studentId, String lastName, String firstName, String dob) {
         this.studentId = studentId;
         this.lastName = lastName;
@@ -178,7 +229,8 @@ public class Student {
         this.dob = dob;
     }
 
-    public static void loadFromDatabase(HttpServletRequest request) {
+    
+    public static void loadFromDatabase() {
         PreparedStatement psAuthenticate = null;
         String sql = null;
         Connection conn=null;
@@ -250,6 +302,7 @@ public class Student {
     }
 
 
+        
     public static void convertFile(HttpServletRequest request) {
         //debug statement.
         if (Util.debugOn) {

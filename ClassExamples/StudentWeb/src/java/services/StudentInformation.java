@@ -17,7 +17,7 @@ public class StudentInformation {
      */
     @WebMethod(operationName = "get")
     public String get(String txt) {
-        Student temp = new Student(txt, "A","B","C");
+        Student temp = new Student(Integer.parseInt(txt));        
         return temp.toStringXML();
     }
 }
