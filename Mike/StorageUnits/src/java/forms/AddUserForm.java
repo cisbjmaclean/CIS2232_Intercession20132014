@@ -27,7 +27,7 @@ public class AddUserForm extends ValidatorForm {
     }
 
     public void setUsername(String username) {
-        this.username = username    ;
+        this.username = username;
     }
 
     public String getPassword() {
@@ -126,5 +126,4 @@ public class AddUserForm extends ValidatorForm {
         this.phoneNumber = phoneNumber;
     }
 
-    
 }

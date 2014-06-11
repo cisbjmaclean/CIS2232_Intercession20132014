@@ -23,7 +23,7 @@
 
     <formset>
         <form name="addUserForm">
-<!--            <field
+            <!--            <field
                 property="username"
                 depends="required">
                 <arg key="AddUserForm.username"/>

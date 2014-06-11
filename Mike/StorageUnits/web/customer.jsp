@@ -10,9 +10,8 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" import="java.util.*"%>
-
 
 <html:html lang="true">
     <!DOCTYPE html>
@@ -21,9 +20,9 @@
         <title>Customer</title>
     </head>
     <body>
-        <table>
-            <c:forEach var="customer" items="${storage}">           
-                <c:if test="${requestScope.user.customerId == customer.customerId}">
+        <table> 
+            <c:forEach var="customer" items="${storageUnit}">  
+                <c:if test="${sessionScope.user.customerId == customer.customerId}">
                     <tr>
                         <td>
                             ${customer.unitId}
@@ -33,9 +32,6 @@
                         </td> 
                         <td>
                             ${customer.unitDimensions}
-                        </td> 
-                        <td>
-                            ${customer.unitAvalibility}
                         </td> 
                         <td>
                             ${customer.unitDateFrom}

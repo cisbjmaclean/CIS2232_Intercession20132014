@@ -7,8 +7,8 @@ import org.apache.struts.validator.ValidatorForm;
  * @author Michael
  * @since Jun 10, 2014
  */
-public class MenuForm extends ValidatorForm{
-    
+public class MenuForm extends ValidatorForm {
+
     String action;
 
     public String getAction() {

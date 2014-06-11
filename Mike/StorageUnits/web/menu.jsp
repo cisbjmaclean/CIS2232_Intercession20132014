@@ -12,42 +12,42 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 
 <html:html lang="true">
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Menu Page</title>
-    </head>
-    <body>
-        <html:form action="/menu">
-        <table>
-            <tr>
-                <td>
-                    <html:submit property="action"><bean:message key="label.user.viewUnit"/></html:submit>                   
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <html:submit property="action"><bean:message key="label.user.viewAllUnits"/></html:submit>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <html:submit property="action"><bean:message key="label.user.viewCalander"/></html:submit>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                <html:submit property="action"><bean:message key="label.user.profile"/></html:submit>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <html:submit property="action"><bean:message key="label.user.logout"/></html:submit>
-                </td>
-            </tr>
-        </table>
-        </html:form>
-    </body>
-</html>
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>Menu Page</title>
+        </head>
+        <body>
+            <html:form action="/menu">
+                <table>
+                    <tr>
+                        <td>
+                            <html:submit property="action"><bean:message key="label.user.viewUnit"/></html:submit>                   
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            <html:submit property="action"><bean:message key="label.user.viewAllUnits"/></html:submit>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            <html:submit property="action"><bean:message key="label.user.viewCalander"/></html:submit>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            <html:submit property="action"><bean:message key="label.user.profile"/></html:submit>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            <html:submit property="action"><bean:message key="label.user.logout"/></html:submit>
+                            </td>
+                        </tr>
+                    </table>
+            </html:form>
+        </body>
+    </html>
 </html:html>

@@ -6,8 +6,9 @@ import org.apache.struts.action.ActionForm;
  *
  * @author Michael Fesser
  * @since 5/25/2014
- * 
- * The purpose of this class is to hold that values from the form on the login page. 
+ *
+ * The purpose of this class is to hold that values from the form on the login
+ * page.
  */
 public class LoginForm extends ActionForm {
 
@@ -16,7 +17,7 @@ public class LoginForm extends ActionForm {
     private String password;
     private boolean validated;
 
-     public int getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 

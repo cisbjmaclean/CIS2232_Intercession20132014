@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package business;
 
 import forms.UserForm;
@@ -21,7 +20,8 @@ import util.DbUtils;
  * @since Jun 10, 2014
  */
 public class LoadUser {
- // The object used for each new connection.
+
+    // The object used for each new connection.
     private DatabaseConnection dbConnection = new DatabaseConnection();
     // Used to allow for more security when sending data to a database.
     private PreparedStatement psAuthenticate;
@@ -31,20 +31,20 @@ public class LoadUser {
     private ResultSet rs = null;
     private boolean authenicate = false;
     private UserForm user;
-    
+
     public void setUserInformation(int customerID) {
-         try {
+        try {
             con = dbConnection.databaseConnection();
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("The connection to the database failed.");
         }
-         
-        try {     
+
+        try {
             // The query to send.
             sql = "SELECT * FROM `customer` WHERE `cus_id` = ?";
             psAuthenticate = con.prepareStatement(sql);
-                        psAuthenticate.setInt(1, customerID);
+            psAuthenticate.setInt(1, customerID);
             // Send the query and get the results back.
             rs = psAuthenticate.executeQuery();
             user = new UserForm();
@@ -66,7 +66,7 @@ public class LoadUser {
             System.err.println("There was an issue with the query.");
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
-             DbUtils.close(rs, psAuthenticate, con);
+            DbUtils.close(rs, psAuthenticate, con);
         }
     }
 }

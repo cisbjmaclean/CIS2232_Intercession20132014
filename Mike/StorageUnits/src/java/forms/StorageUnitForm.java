@@ -12,12 +12,12 @@ public class StorageUnitForm extends ActionForm {
     private int unitId;
     private String unitType;
     private String unitDimensions;
-    private String  UnitAvalibility;
-    private String  UnitDateFrom;
-    private String  UnitDateTo;
+    private String UnitAvalibility;
+    private String UnitDateFrom;
+    private String UnitDateTo;
     private int customerId;
 
-    public StorageUnitForm(){
+    public StorageUnitForm() {
     }
 
     public int getUnitId() {

@@ -8,6 +8,6 @@ import java.util.ResourceBundle;
  * @author BJ
  */
 public class Util {
-    
+
     public static ResourceBundle resources = null;
 }

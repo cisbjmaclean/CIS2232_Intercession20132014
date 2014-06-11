@@ -11,18 +11,18 @@ where the header, body and footers go.
 
 <html:html>
     <head><link rel="stylesheet" type="text/css" href="http://localhost:8080/RegistrationBoard/styles/styles.css"></head>
-<%--    <head><link rel="stylesheet" type="text/css" href="http://bjmac.hccis.info:8080/RegistrationBoard/styles/styles.css"></head>--%>
- <body>
-  
-    <!-- Header page information -->
-     <tiles:insert attribute="header" />
-  
-     <!-- Main body information -->
-     <tiles:insert attribute="body" />
-   
-     <!-- Footer information -->
-     <tiles:insert attribute="footer" />
-     
- </body>
+        <%--    <head><link rel="stylesheet" type="text/css" href="http://bjmac.hccis.info:8080/RegistrationBoard/styles/styles.css"></head>--%>
+    <body>
+
+        <!-- Header page information -->
+        <tiles:insert attribute="header" />
+
+        <!-- Main body information -->
+        <tiles:insert attribute="body" />
+
+        <!-- Footer information -->
+        <tiles:insert attribute="footer" />
+
+    </body>
 
 </html:html>

@@ -11,7 +11,7 @@ This provides the standard header for each page in the application.
 
 <html>
     <head>
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><bean:message key="welcome.title"/></title>
         <html:base/>

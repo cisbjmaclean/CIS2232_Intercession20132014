@@ -10,6 +10,8 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 import util.Util;
 
 /**
@@ -26,13 +28,13 @@ public class MenuAction extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-//        authenticated = (LoginForm) request.getAttribute("user");
-//        if (authenticated == null || authenticated.getValidated() == false) {
-//            ActionMessages messages = new ActionMessages();
-//            messages.add("error", (new ActionMessage("label.session.expired")));
-//            saveMessages(request, messages);
-//            return mapping.findForward("login");
-//        }
+        authenticated = (LoginForm) request.getAttribute("user");
+        if (authenticated == null || authenticated.getValidated() == false) {
+            ActionMessages messages = new ActionMessages();
+            messages.add("error", (new ActionMessage("label.session.expired")));
+            saveMessages(request, messages);
+            return mapping.findForward("login");
+        }
         Util.resources = ResourceBundle.getBundle("com.myapp.struts.ApplicationResource", Locale.getDefault());
         menuForm = (MenuForm) request.getAttribute("menuForm");
 
