@@ -56,15 +56,12 @@
                     <td>
                         <html:form action="reserveUnit" method="post">
                             <html:hidden property="unitId"/>
-                            <html:submit><bean:message key="create.user.label.submit"/></html:submit>
+                            <html:submit><bean:message key="label.view.all.submit"/></html:submit>
                         </html:form>             
                     </td>
                 </tr>
-
-
             </logic:iterate>
         </table>
-
     </body>
 </html:html>
 

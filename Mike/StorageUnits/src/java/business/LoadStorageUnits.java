@@ -26,6 +26,8 @@ public class LoadStorageUnits {
     // The connection object.
     private Connection con;
     private ResultSet rs = null;
+    private StorageUnitForm unit;
+    private int customerId = 0;
 
     /**
      * This method retrieves data from the database.
@@ -34,7 +36,7 @@ public class LoadStorageUnits {
      */
     public ArrayList loadStorageUnits(HttpServletRequest request) {
 
-         // Try to connect to the database.
+        // Try to connect to the database.
         try {
             con = dbConnection.databaseConnection();
         } catch (Exception e) {
@@ -51,26 +53,16 @@ public class LoadStorageUnits {
             psAuthenticate = con.prepareStatement(sql);
             // Send the query and get the results back.
             rs = psAuthenticate.executeQuery();
-
-            int unitId;
-            String unitType;
-            String unitDimensions;
-            String unitAvalibility;
-            String unitDateFrom;
-            String unitDateTo;
-            int customerId = 0;
-            StorageUnitForm unit;
-
             // Iterate over the result set.
             while (rs.next()) {
-                unitId = rs.getInt("unit_id");
-                unitType = rs.getString("unit_type");
-                unitDimensions = rs.getString("unit_dimensions");
-                unitAvalibility = rs.getString("unit_avalibility");
-                unitDateFrom = rs.getString("unit_date_from");
-                unitDateTo = rs.getString("unit_date_to");
-                customerId = rs.getInt("cus_id");
-                unit = new StorageUnitForm(unitId, unitType, unitDimensions, unitAvalibility, unitDateFrom, unitDateTo, customerId);
+                unit = new StorageUnitForm();
+                unit.setUnitId(rs.getInt("unit_id"));
+                unit.setUnitType(rs.getString("unit_type"));
+                unit.setUnitDimensions(rs.getString("unit_dimensions"));
+                unit.setUnitAvalibility(rs.getString("unit_avalibility"));
+                unit.setUnitDateFrom(rs.getString("unit_date_from"));
+                unit.setUnitDateTo(rs.getString("unit_date_to"));
+                unit.setCustomerId(rs.getInt("cus_id"));
                 storageUnits.add(unit);
                 customerId = 0;
             }

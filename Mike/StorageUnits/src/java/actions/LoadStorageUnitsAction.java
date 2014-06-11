@@ -3,6 +3,7 @@ package actions;
 import business.LoadStorageUnits;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -16,7 +17,7 @@ import org.apache.struts.action.ActionMapping;
  * The purpose of this class is to allow the function of the login page.
  */
 public class LoadStorageUnitsAction extends Action {
-
+    
     /**
      * 
      * 
@@ -32,7 +33,7 @@ public class LoadStorageUnitsAction extends Action {
             throws Exception {
          
         LoadStorageUnits loadUnits = new LoadStorageUnits();   
-        request.getSession().setAttribute("storageUnits", loadUnits.loadStorageUnits(request));
+        request.setAttribute("storageUnits", loadUnits.loadStorageUnits(request));
         
         // Used to define the page to be forwarded to.      
         ActionForward findForward = mapping.findForward("viewAll");  

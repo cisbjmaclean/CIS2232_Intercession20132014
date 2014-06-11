@@ -20,16 +20,6 @@ public class StorageUnitForm extends ActionForm {
     public StorageUnitForm(){
     }
 
-    public StorageUnitForm(int unitId, String unitType, String unitDimensions, String UnitAvalibility, String UnitDateFrom, String UnitDateTo, int customerId) {
-        this.unitId = unitId;
-        this.unitType = unitType;
-        this.unitDimensions = unitDimensions;
-        this.UnitAvalibility = UnitAvalibility;
-        this.UnitDateFrom = UnitDateFrom;
-        this.UnitDateTo = UnitDateTo;
-        this.customerId = customerId;
-    }            
-
     public int getUnitId() {
         return unitId;
     }
