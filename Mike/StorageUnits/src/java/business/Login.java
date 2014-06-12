@@ -1,6 +1,7 @@
 package business;
 
 import forms.LoginForm;
+import forms.UserForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +25,7 @@ public class Login {
     private Connection con;
     private ResultSet rs = null;
     private boolean authenicate = false;
+    private UserForm user;
 
     /**
      * This method retrieves data from the database.
@@ -32,7 +34,7 @@ public class Login {
      */
     public boolean checkLogin(LoginForm validateLogin) {
 
-       // Try to connect to the database.
+        // Try to connect to the database.
         try {
             con = dbConnection.databaseConnection();
         } catch (Exception e) {
@@ -42,27 +44,22 @@ public class Login {
 
         // Try to generate the query.
         try {
-            // The query to send.
-            sql = "SELECT `login_username`, `login_password`, `cus_id` FROM `login`";
+            int customerId;
+
+            // The query to send.         
+            sql = "SELECT `cus_id` FROM `login` WHERE `login_username` = ? AND `login_password` = ?";
             psAuthenticate = con.prepareStatement(sql);
+            psAuthenticate.setString(1, validateLogin.getUsername());
+            psAuthenticate.setString(2, validateLogin.getPassword());
             // Send the query and get the results back.
             rs = psAuthenticate.executeQuery();
 
-            String username;
-            String password;
-            int customerId;
-
             // Iterate over the result set.
             while (rs.next()) {
-                username = rs.getString("login_username");
-                password = rs.getString("login_password");
                 customerId = rs.getInt("cus_id");
-                if (validateLogin.getUsername().equals(username) && validateLogin.getPassword().equals(password)) {
-                    validateLogin.setCustomerId(customerId);
-                    validateLogin.setValidated(true);
-                    authenicate = true;
-                    break;
-                }
+                validateLogin.setCustomerId(customerId);
+                validateLogin.setValidated(true);
+                authenicate = true;
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);

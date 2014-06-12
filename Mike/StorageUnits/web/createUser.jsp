@@ -33,20 +33,20 @@
         <div style="color:red"><html:errors/></div>
 
         <html:form action="/addUser">
-            <label class="alignCenter" for="username"><bean:message key="create.user.label.user.name"/></label><html:text property="username"/>
-            <label class="alignCenter" for="password"><bean:message key="create.user.label.password"/></label><html:text property="password"/>
-            <label class="alignCenter" for="password2"><bean:message key="create.user.label.password2"/></label><html:text property="password2"/>
-            <label class="alignCenter" for="email"><bean:message key="create.user.label.email"/></label><html:text property="email"/>
-            <label class="alignCenter" for="email2"><bean:message key="create.user.label.email2"/></label><html:text property="email2"/>
-            <label class="alignCenter" for="firstName"><bean:message key="create.user.label.first.name"/></label><html:text property="firstName"/>
-            <label class="alignCenter" for="middleInitial"><bean:message key="create.user.label.middle.initial"/></label><html:text property="middleInitial"/>
-            <label class="alignCenter" for="lastName"><bean:message key="create.user.label.last.name"/></label><html:text property="lastName"/>
-            <label class="alignCenter" for="address"><bean:message key="create.user.label.address"/></label><html:text property="address"/>
-            <label class="alignCenter" for="city"><bean:message key="create.user.label.city"/></label><html:text property="city"/>
-            <label class="alignCenter" for="province"><bean:message key="create.user.label.province"/></label><html:text property="province"/>
-            <label class="alignCenter" for="postalCode"><bean:message key="create.user.label.postal.code"/></label><html:text property="postalCode"/>
-            <label class="alignCenter" for="phoneNumber"><bean:message key="create.user.label.phone.number"/></label><html:text property="phoneNumber"/>
-            <html:submit><bean:message key="create.user.label.submit"/></html:submit>
+            <label class="alignCenter" for="username"><bean:message key="label.create.user.user.name"/></label><html:text property="username"/>
+            <label class="alignCenter" for="password"><bean:message key="label.create.user.password"/></label><html:text property="password"/>
+            <label class="alignCenter" for="password2"><bean:message key="label.create.user.password2"/></label><html:text property="password2"/>
+            <label class="alignCenter" for="email"><bean:message key="label.create.user.email"/></label><html:text property="email"/>
+            <label class="alignCenter" for="email2"><bean:message key="label.create.user.email2"/></label><html:text property="email2"/>
+            <label class="alignCenter" for="firstName"><bean:message key="label.create.user.first.name"/></label><html:text property="firstName"/>
+            <label class="alignCenter" for="middleInitial"><bean:message key="label.create.user.middle.initial"/></label><html:text property="middleInitial"/>
+            <label class="alignCenter" for="lastName"><bean:message key="label.create.user.last.name"/></label><html:text property="lastName"/>
+            <label class="alignCenter" for="address"><bean:message key="label.create.user.address"/></label><html:text property="address"/>
+            <label class="alignCenter" for="city"><bean:message key="label.create.user.city"/></label><html:text property="city"/>
+            <label class="alignCenter" for="province"><bean:message key="label.create.user.province"/></label><html:text property="province"/>
+            <label class="alignCenter" for="postalCode"><bean:message key="label.create.user.postal.code"/></label><html:text property="postalCode"/>
+            <label class="alignCenter" for="phoneNumber"><bean:message key="label.create.user.phone.number"/></label><html:text property="phoneNumber"/>
+            <html:submit><bean:message key="label.create.user.submit"/></html:submit>
         </html:form>
     </body>
 </html:html>

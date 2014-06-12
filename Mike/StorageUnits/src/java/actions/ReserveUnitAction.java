@@ -12,12 +12,11 @@ import org.apache.struts.action.ActionMapping;
  * @author Michael
  * @since 6/7/2014
  */
-public class ReserveUnitAction extends Action{
-   
-   
-   public ActionForward execute(ActionMapping mapping, ActionForm form,
+public class ReserveUnitAction extends Action {
+
+    public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-     return null;    
-   }
+        return null;
+    }
 }

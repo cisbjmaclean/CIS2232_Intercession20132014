@@ -10,6 +10,8 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" import="java.util.*"%>
 
 <html:html lang="true">
     <!DOCTYPE html>
@@ -33,38 +35,29 @@
         <div style="color:red"><html:errors/></div>
 
         <table>
-            <logic:iterate name="storageUnits" id="StorageUnit" scope="session">
+            <c:forEach var="customer" items="${storageUnit}">               
                 <tr>
                     <td>
-                        <bean:write name="StorageUnit" property="unitId"/>
-                    </td>
-                    <td>
-                        <bean:write name="StorageUnit" property="unitType"/>
-                    </td>
-                    <td>
-                        <bean:write name="StorageUnit" property="unitDimensions"/>
-                    </td>
-                    <td>
-                        <bean:write name="StorageUnit" property="unitAvalibility"/>
-                    </td>
-                    <td>
-                        <bean:write name="StorageUnit" property="unitDateFrom"/>                  
+                        ${customer.unitId}
                     </td> 
                     <td>
-                        <bean:write name="StorageUnit" property="unitDateTo"/>                  
-                    </td>
+                        ${customer.unitType}
+                    </td> 
                     <td>
-                        <html:form action="reserveUnit" method="post">
-                            <html:hidden property="unitId"/>
-                            <html:submit><bean:message key="create.user.label.submit"/></html:submit>
-                        </html:form>             
-                    </td>
-                </tr>
-
-
-            </logic:iterate>
+                        ${customer.unitDimensions}
+                    </td> 
+                    <td>
+                        ${customer.unitAvalibility}
+                    </td> 
+                    <td>
+                        ${customer.unitDateFrom}
+                    </td> 
+                    <td>
+                        ${customer.unitDateTo}
+                    </td> 
+                </tr>              
+            </c:forEach>
         </table>
-
     </body>
 </html:html>
 

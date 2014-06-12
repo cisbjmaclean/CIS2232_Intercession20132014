@@ -30,13 +30,21 @@
         <h3><bean:message key="welcome.heading"/></h3>
         <p><bean:message key="welcome.message"/></p>
 
-        <div style="color:red"><html:errors/></div>
+        <logic:messagesPresent message="true">
+            <html:messages id="msg2" message="true" property="message1"><div class="infoMessageCheck" style="color: green"><bean:write name="msg2"/></div><br/></html:messages>				  		
+            <html:messages id="msg2" message="true" property="warn"><div class="warnExclaim"  style="color: yellow"><bean:write name="msg2"/></div><br/></html:messages>
+            <html:messages id="msg2" message="true" property="error"><div class="errorX"  style="color: red"><bean:write name="msg2"/></div><br/></html:messages>				  		
+        </logic:messagesPresent>
+        <%-- the html:errors is populated if the validator is used. --%>    
+        <div style="color:red">
+            <html:errors />
+        </div>
 
         <html:form action="/login">
-            <label class="alignCenter" for="username"><bean:message key="login.label.user.name"/></label><html:text property="username"/>
-            <label class="alignCenter" for="password"><bean:message key="login.label.password"/></label><html:text property="password"/>
-            <html:submit><bean:message key="login.label.submit"/></html:submit>
-        </html:form>
+            <label class="alignCenter" for="username"><bean:message key="label.login.user.name"/></label><html:text property="username"/>
+            <label class="alignCenter" for="password"><bean:message key="label.login.password"/></label><html:text property="password"/>
+            <html:submit><bean:message key="label.login.submit"/></html:submit>
+        </html:form>         
     </body>
 </html:html>
 

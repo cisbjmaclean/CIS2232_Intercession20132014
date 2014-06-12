@@ -3,6 +3,7 @@ package actions;
 import business.LoadStorageUnits;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -12,30 +13,32 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Michael Fesser
  * @since 6/3/2014
- * 
+ *
  * The purpose of this class is to allow the function of the login page.
  */
 public class LoadStorageUnitsAction extends Action {
 
+    private HttpSession loadUnitSession;
+
     /**
-     * 
-     * 
+     *
+     *
      * @param mapping
      * @param form
      * @param request
      * @param response
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
-     public ActionForward execute(ActionMapping mapping, ActionForm form,
+    public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-         
-        LoadStorageUnits loadUnits = new LoadStorageUnits();   
-        request.getSession().setAttribute("storageUnits", loadUnits.loadStorageUnits(request));
-        
+        loadUnitSession = request.getSession();
+        LoadStorageUnits loadUnits = new LoadStorageUnits();
+        loadUnitSession.setAttribute("storageUnit", loadUnits.loadStorageUnits(request));
+
         // Used to define the page to be forwarded to.      
-        ActionForward findForward = mapping.findForward("viewAll");  
+        ActionForward findForward = mapping.findForward("viewAll");
         return findForward;
     }
 }

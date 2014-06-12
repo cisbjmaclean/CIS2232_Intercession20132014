@@ -7,12 +7,12 @@ import org.apache.struts.util.MessageResources;
  *
  * @author Michael Fesser
  * @since 5/30/2014
- * 
+ *
  * This class establishes the connection to the database.
  */
 public class DatabaseConnection {
 
-    private MessageResources messages = MessageResources.getMessageResources("util.DatabaseResources");  
+    private MessageResources messages = MessageResources.getMessageResources("util.DatabaseResources");
     // Fields store the database information.
     private final String USER_NAME = messages.getMessage("db.user");
     private final String PASSWORD = messages.getMessage("db.password");
@@ -25,7 +25,8 @@ public class DatabaseConnection {
 
     /**
      * This method established the connection to the database.
-     * @return 
+     *
+     * @return
      */
     public Connection databaseConnection() {
         try {
