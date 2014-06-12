@@ -31,6 +31,7 @@ public class LoginAction extends Action {
     private LoadUser loadUser;
     private ActionForward forwardTo;
     private HttpSession loginSession;
+    private ActionMessages messages = new ActionMessages();
 
     /**
      * This method gets the fields from the login page and calls the user class
@@ -52,9 +53,7 @@ public class LoginAction extends Action {
         // Used to define the page to be forwarded to.  
         login = new Login();
         authenticate = login.checkLogin(validateLogin);
-
-        ActionMessages messages = new ActionMessages();
-
+        
         // If login credentials are valid continue otherwise return to the login page.
         if (authenticate) {
             loginSession = request.getSession();

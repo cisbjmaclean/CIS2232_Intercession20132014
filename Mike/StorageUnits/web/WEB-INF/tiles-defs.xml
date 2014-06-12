@@ -26,5 +26,25 @@
     <definition name="mainTile" extends=".mainLayout">
         <put name="body"   value="/main.jsp" />
     </definition>
+    
+    <definition name="createUserTile" extends=".mainLayout">
+        <put name="body"   value="/createUser.jsp" />
+    </definition>
+    
+    <definition name="viewAllTile" extends=".mainLayout">
+        <put name="body"   value="/viewAll.jsp" />
+    </definition>
+    
+    
+    <definition name="menuTile" extends=".mainClassicLayout">
+        <put name="body"   value="/menu.jsp" />
+    </definition>
+    
+      <definition name="customerTile" extends=".mainClassicLayout">
+        <put name="body"   value="/customer.jsp" />
+    </definition>
+
+
+    
 
 </tiles-definitions>

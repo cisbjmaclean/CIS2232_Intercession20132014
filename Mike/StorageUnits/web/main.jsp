@@ -30,11 +30,13 @@
         <h3><bean:message key="welcome.heading"/></h3>
         <p><bean:message key="welcome.message"/></p>
 
-        <div style="color:red"><html:errors/></div>
-        <html:button property="login" onclick="window.location='login.jsp';"><bean:message key="main.label.login"/></html:button>
-        <html:button property="create" onclick="window.location='createUser.jsp';"><bean:message key="main.label.create"/></html:button>
+        <div style="color:red"><html:errors/></div>       
+        <html:form action="/mainMenu">           
+            <html:submit property="action"><bean:message key="label.main.login"/></html:submit>
+            <html:submit property="action"><bean:message key="label.main.create"/></html:submit>
+        </html:form>
         <html:form action="/loadUnits">
-            <html:submit><bean:message key="main.label.view"/></html:submit>
+            <html:submit property="Submit"><bean:message key="label.main.view"/></html:submit>
         </html:form>
     </body>
 </html:html>

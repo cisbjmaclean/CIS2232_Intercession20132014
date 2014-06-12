@@ -23,15 +23,15 @@
     </global-forwards>
 
     <action-mappings>
-        <action path="/main" forward="/main.jsp"/>
+        <action path="/main" forward="mainTile"/>
         
         <action path="/addUser" 
                 type="actions.AddUserAction"
                 name="addUserForm"
                 input="/createUser.jsp" 
                 scope="request">
-            <forward name="login"  path="/login.jsp"/>
-            <forward name="addUser"  path="/createUser.jsp"/>
+            <forward name="login"  path="loginTile"/>
+            <forward name="addUser"  path="createUserTile"/>
         </action>
         
         <action path="/login" 
@@ -39,8 +39,8 @@
                 name="loginForm"
                 input="/login.jsp" 
                 scope="request">
-            <forward name="login"  path="/login.jsp"/>
-            <forward name="customer"  path="/customer.jsp"/>
+            <forward name="login"  path="loginTile"/>
+            <forward name="customer"  path="customerTile"/>
         </action>
         
         <action path="/loadUnits" 
@@ -48,7 +48,7 @@
                 name="storageUnitForm"
                 input="/main.jsp" 
                 scope="request">
-            <forward name="viewAll"  path="/viewAll.jsp"/>
+            <forward name="viewAll"  path="viewAllTile"/>
         </action>
         
         <action path="/reserveUnit" 
@@ -56,7 +56,7 @@
                 name="storageUnitForm"
                 input="/viewAll.jsp" 
                 scope="request">
-            <forward name="main"  path="/main.jsp"/>
+            <forward name="main"  path="mainTile"/>
         </action>
         
         <action path="/menu" 
@@ -64,9 +64,21 @@
                 name="menuForm"
                 input="/menu.jsp" 
                 scope="request">
-            <forward name="main"  path="/main.jsp"/>
-            <forward name="login"  path="/login.jsp"/>
+            <forward name="main"  path="mainTile"/>
+            <forward name="login"  path="loginTile"/>
         </action>
+        
+        <action path="/mainMenu" 
+                type="actions.MainMenuAction"
+                name="menuForm"
+                input="/main.jsp" 
+                scope="request">
+            <forward name="login"  path="loginTile"/>
+            <forward name="addUser"  path="createUserTile"/>
+            <forward name="viewAll"  path="viewAllTile"/>
+        </action>
+        
+       
         
     </action-mappings>
     

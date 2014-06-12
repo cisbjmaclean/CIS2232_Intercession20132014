@@ -20,6 +20,21 @@
         <title>Customer</title>
     </head>
     <body>
+
+        <table><tr><td >Welcome to the application...</td></tr>
+            <tr ><td>
+                    <logic:messagesPresent message="true">
+                        <html:messages id="msg2" message="true" property="message"><div class="infoMessageCheck" style="color: green"><bean:write name="msg2"/></div><br/></html:messages>				  		
+                        <html:messages id="msg2" message="true" property="warn"><div class="warnExclaim"  style="color: yellow"><bean:write name="msg2"/></div><br/></html:messages>
+                        <html:messages id="msg2" message="true" property="error"><div class="errorX"  style="color: red"><bean:write name="msg2"/></div><br/></html:messages>				  		
+                    </logic:messagesPresent>
+                    <%-- the html:errors is populated if the validator is used. --%>    
+                    <div style="color:red">
+                        <html:errors />
+                    </div>
+                </td></tr>
+
+        </table>
         <table> 
             <c:forEach var="customer" items="${storageUnit}">  
                 <c:if test="${sessionScope.user.customerId == customer.customerId}">
@@ -39,6 +54,12 @@
                         <td>
                             ${customer.unitDateTo}
                         </td> 
+                        <td>
+                            <html:form action="/extendRelease">
+                                <html:submit property="action"><bean:message key="label.user.extendUnit"/></html:submit>
+                                <html:submit property="action"><bean:message key="label.user.releaseUnit"/></html:submit>
+                            </html:form>
+                        </td>
                     </tr>
                 </c:if>       
             </c:forEach>
