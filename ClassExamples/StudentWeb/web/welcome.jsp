@@ -17,16 +17,10 @@
 </script>
 
 <html:form action="/Initialize">
-    <body onload="formFocus()" 
-          <%--
-          
-          This form displays the text fields to get the username and password.  This form will submit to the
-          authenticate action.
-          
-          --%>
-
-          <div style="height: 100px; text-align: center; background-color: #efefef; padding: 10px; -webkit-border-radius: 12px; -moz-border-radius: 12px; margin-right: 10px">
-            <table align="center" >
+    <head><link rel="stylesheet" type="text/css" href="http://bjmac.hccis.info:8080/styles/styles.css"></head>
+ 
+    <body>
+            <table>
                 <tr>
                     <td>
                         <%--  These messages can be used to display either messages, warnings, or errors from your
@@ -57,7 +51,6 @@
                     </td>
                 </tr>
             </table>
-        </div>        
 
     </body>
 </html:form>

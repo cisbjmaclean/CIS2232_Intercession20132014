@@ -11,6 +11,7 @@
         <title><bean:message key="welcome.title"/></title>
         <html:base/>
     </head>
+    <body>
 
     <center>
     <logic:messagesPresent message="true">
@@ -25,7 +26,6 @@
     </center>
 
 
-    <body style="background-color: yellowgreen">
         <html:form action="/Menu">
         <center>      
             <input type="radio" name="option" value="add"><bean:message key="menu.add"/><br>

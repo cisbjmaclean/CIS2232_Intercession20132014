@@ -10,8 +10,8 @@ This provides the standard header for each page in the application.
 --%>
 
 <html>
-    <body  style="background-color: beige">
-        <hr />
+    <body>
+
     </body>
 
 </html>
