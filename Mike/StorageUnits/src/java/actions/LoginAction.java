@@ -30,8 +30,6 @@ public class LoginAction extends Action {
     private Login login;
     private LoadUser loadUser;
     private ActionForward forwardTo;
-    private HttpSession loginSession;
-    private ActionMessages messages = new ActionMessages();
 
     /**
      * This method gets the fields from the login page and calls the user class
@@ -53,16 +51,15 @@ public class LoginAction extends Action {
         // Used to define the page to be forwarded to.  
         login = new Login();
         authenticate = login.checkLogin(validateLogin);
-        
+        ActionMessages messages = new ActionMessages();
         // If login credentials are valid continue otherwise return to the login page.
         if (authenticate) {
-            loginSession = request.getSession();
             loadUser = new LoadUser();
-            loginSession.setAttribute("user", validateLogin);
+            request.getSession().setAttribute("user", validateLogin);
             loadUser.setUserInformation(validateLogin.getCustomerId());
-            loginSession.setAttribute("userDetails", user);
+            request.getSession().setAttribute("userDetails", user);
             messages.add("success", (new ActionMessage("label.login.success")));
-            forwardTo = mapping.findForward("customer");
+            forwardTo = mapping.findForward("customerUnitView");
         } else {
             messages.add("error", (new ActionMessage("label.login.fail")));
             forwardTo = mapping.findForward("login");

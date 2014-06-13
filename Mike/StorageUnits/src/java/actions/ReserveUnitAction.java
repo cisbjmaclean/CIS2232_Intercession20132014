@@ -1,11 +1,16 @@
 package actions;
 
+import business.ReserveUnit;
+import forms.LoginForm;
+import forms.ReserveUnitForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 /**
  *
@@ -14,9 +19,27 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ReserveUnitAction extends Action {
 
+    private ActionForward forwardTo;
+    private LoginForm authenticated;
+    private ReserveUnitForm reserve;
+    private ReserveUnit reserveUnit;
+
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        return null;
+        ActionMessages messages = new ActionMessages();
+        authenticated = (LoginForm) request.getSession().getAttribute("user");
+        if (authenticated == null || authenticated.getValidated() == false) {
+            messages.add("error", (new ActionMessage("label.session.expired")));
+            saveMessages(request, messages);
+            return mapping.findForward("login");
+        }
+        reserve = (ReserveUnitForm) request.getAttribute("reserveUnitForm");
+        reserveUnit = new ReserveUnit();
+        reserveUnit.releaseUnit(reserve, request);
+        messages.add("reserved", (new ActionMessage("label.customer.view.all.reserve.unit.success")));
+        saveMessages(request, messages);
+        forwardTo = mapping.findForward("customerUnitView");
+        return forwardTo;
     }
 }

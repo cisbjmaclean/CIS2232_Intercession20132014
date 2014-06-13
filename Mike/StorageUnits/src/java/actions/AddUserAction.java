@@ -39,7 +39,7 @@ public class AddUserAction extends Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        userForm = (AddUserForm) form;
+        userForm = (AddUserForm) request.getAttribute("addUserForm");
         addUser = new AddUser();
         usernameTaken = addUser.checkUsername(userForm);
         System.out.println(usernameTaken);

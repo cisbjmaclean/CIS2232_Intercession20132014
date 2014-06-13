@@ -1,7 +1,7 @@
 package actions;
 
 import forms.LoginForm;
-import forms.MenuForm;
+import forms.MultipleActionForm;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
@@ -23,30 +23,30 @@ public class MenuAction extends Action {
 
     private ActionForward forwardTo;
     private LoginForm authenticated;
-    private MenuForm menuForm;
+    private MultipleActionForm menu;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        authenticated = (LoginForm) request.getAttribute("user");
+        ActionMessages messages = new ActionMessages();
+        authenticated = (LoginForm) request.getSession().getAttribute("user");
         if (authenticated == null || authenticated.getValidated() == false) {
-            ActionMessages messages = new ActionMessages();
             messages.add("error", (new ActionMessage("label.session.expired")));
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
         Util.resources = ResourceBundle.getBundle("com.myapp.struts.ApplicationResource", Locale.getDefault());
-        menuForm = (MenuForm) request.getAttribute("menuForm");
+        menu = (MultipleActionForm) request.getAttribute("multipleActionForm");
 
-        if (menuForm.getAction().equals(Util.resources.getString("label.user.logout"))) {
+        if (menu.getAction().equals(Util.resources.getString("label.menu.logout"))) {
             forwardTo = mapping.findForward("login");
-        } else if (menuForm.getAction().equals(Util.resources.getString("label.user.viewUnit"))) {
+        } else if (menu.getAction().equals(Util.resources.getString("label.menu.view.my.units"))) {
+            forwardTo = mapping.findForward("customerUnitView");
+        } else if (menu.getAction().equals(Util.resources.getString("label.menu.view.all.units"))) {
+            forwardTo = mapping.findForward("customerViewAll");
+        } else if (menu.getAction().equals(Util.resources.getString("label.menu.calander"))) {
             forwardTo = mapping.findForward("main");
-        } else if (menuForm.getAction().equals(Util.resources.getString("label.user.viewAllUnits"))) {
-            forwardTo = mapping.findForward("main");
-        } else if (menuForm.getAction().equals(Util.resources.getString("label.user.calander"))) {
-            forwardTo = mapping.findForward("main");
-        } else if (menuForm.getAction().equals(Util.resources.getString("label.user.profile"))) {
+        } else if (menu.getAction().equals(Util.resources.getString("label.menu.profile"))) {
             forwardTo = mapping.findForward("main");
         }
         return forwardTo;

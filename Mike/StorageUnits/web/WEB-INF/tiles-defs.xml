@@ -40,11 +40,13 @@
         <put name="body"   value="/menu.jsp" />
     </definition>
     
-      <definition name="customerTile" extends=".mainClassicLayout">
-        <put name="body"   value="/customer.jsp" />
+    <definition name="customerUnitViewTile" extends=".mainClassicLayout">
+        <put name="body"   value="/customerUnitView.jsp" />
     </definition>
 
-
+    <definition name="customerViewAllTile" extends=".mainClassicLayout">
+        <put name="body"   value="/customerViewAllUnits.jsp" />
+    </definition>
     
 
 </tiles-definitions>

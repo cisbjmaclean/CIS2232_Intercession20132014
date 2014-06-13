@@ -11,7 +11,9 @@
     <form-bean type="forms.LoginForm" name="loginForm"/>
     <form-bean type="forms.StorageUnitForm" name="storageUnitForm"/>
     <form-bean type="forms.UserForm" name="userForm"/>
-    <form-bean type="forms.MenuForm" name="menuForm"/>
+    <form-bean type="forms.MultipleActionForm" name="multipleActionForm"/>
+    <form-bean type="forms.ReleaseUnitForm" name="releaseUnitForm"/>
+    <form-bean type="forms.ReserveUnitForm" name="reserveUnitForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -40,7 +42,7 @@
                 input="/login.jsp" 
                 scope="request">
             <forward name="login"  path="loginTile"/>
-            <forward name="customer"  path="customerTile"/>
+            <forward name="customerUnitView"  path="customerUnitViewTile"/>
         </action>
         
         <action path="/loadUnits" 
@@ -61,16 +63,17 @@
         
         <action path="/menu" 
                 type="actions.MenuAction"
-                name="menuForm"
+                name="multipleActionForm"
                 input="/menu.jsp" 
                 scope="request">
-            <forward name="main"  path="mainTile"/>
+            <forward name="customerUnitView"  path="customerUnitViewTile"/>
+            <forward name="customerViewAll"  path="customerViewAllTile"/>
             <forward name="login"  path="loginTile"/>
         </action>
         
         <action path="/mainMenu" 
                 type="actions.MainMenuAction"
-                name="menuForm"
+                name="multipleActionForm"
                 input="/main.jsp" 
                 scope="request">
             <forward name="login"  path="loginTile"/>
@@ -78,7 +81,23 @@
             <forward name="viewAll"  path="viewAllTile"/>
         </action>
         
+        <action path="/releaseUnit" 
+                type="actions.ReleaseUnitAction"
+                name="releaseUnitForm"
+                input="/customerUnitView.jsp" 
+                scope="request">
+            <forward name="login"  path="loginTile"/>
+            <forward name="customerUnitView"  path="customerUnitViewTile"/>
+        </action>
        
+       <action path="/reserveUnit" 
+                type="actions.ReserveUnitAction"
+                name="reserveUnitForm"
+                input="/customerViewAllUnits.jsp" 
+                scope="request">
+            <forward name="login"  path="loginTile"/>
+            <forward name="customerUnitView"  path="customerUnitViewTile"/>
+        </action>
         
     </action-mappings>
     

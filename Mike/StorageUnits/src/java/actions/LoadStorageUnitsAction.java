@@ -18,7 +18,6 @@ import org.apache.struts.action.ActionMapping;
  */
 public class LoadStorageUnitsAction extends Action {
 
-    private HttpSession loadUnitSession;
     private LoadStorageUnits loadUnits;
 
     /**
@@ -34,9 +33,8 @@ public class LoadStorageUnitsAction extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        loadUnitSession = request.getSession();
         loadUnits = new LoadStorageUnits();
-        loadUnitSession.setAttribute("storageUnit", loadUnits.loadStorageUnits(request));
+        request.getSession().setAttribute("storageUnit", loadUnits.loadStorageUnits(request));
 
         // Used to define the page to be forwarded to.      
         ActionForward findForward = mapping.findForward("viewAll");

@@ -35,25 +35,25 @@
         <div style="color:red"><html:errors/></div>
 
         <table>
-            <c:forEach var="customer" items="${storageUnit}">               
+            <c:forEach var="unit" items="${storageUnit}">               
                 <tr>
                     <td>
-                        ${customer.unitId}
+                        ${unit.unitId}
                     </td> 
                     <td>
-                        ${customer.unitType}
+                        ${unit.unitType}
                     </td> 
                     <td>
-                        ${customer.unitDimensions}
+                        ${unit.unitDimensions}
                     </td> 
                     <td>
-                        ${customer.unitAvalibility}
+                        ${unit.unitAvalibility}
                     </td> 
                     <td>
-                        ${customer.unitDateFrom}
+                        ${unit.unitDateFrom}
                     </td> 
                     <td>
-                        ${customer.unitDateTo}
+                        ${unit.unitDateTo}
                     </td> 
                 </tr>              
             </c:forEach>

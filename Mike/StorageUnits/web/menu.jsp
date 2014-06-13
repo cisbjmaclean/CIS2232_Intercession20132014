@@ -23,27 +23,27 @@
                 <table>
                     <tr>
                         <td>
-                            <html:submit property="action"><bean:message key="label.user.viewUnit"/></html:submit>                   
+                            <html:submit property="action"><bean:message key="label.menu.view.my.units"/></html:submit>                   
                             </td>
                         </tr>
                         <tr>
                             <td>
-                            <html:submit property="action"><bean:message key="label.user.viewAllUnits"/></html:submit>
+                            <html:submit property="action"><bean:message key="label.menu.view.all.units"/></html:submit>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                            <html:submit property="action"><bean:message key="label.user.viewCalander"/></html:submit>
+                            <html:submit property="action"><bean:message key="label.menu.view.calander"/></html:submit>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                            <html:submit property="action"><bean:message key="label.user.profile"/></html:submit>
+                            <html:submit property="action"><bean:message key="label.menu.profile"/></html:submit>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                            <html:submit property="action"><bean:message key="label.user.logout"/></html:submit>
+                            <html:submit property="action"><bean:message key="label.menu.logout"/></html:submit>
                             </td>
                         </tr>
                     </table>
