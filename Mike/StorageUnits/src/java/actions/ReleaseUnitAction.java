@@ -2,7 +2,6 @@ package actions;
 
 import business.ReleaseUnit;
 import forms.LoginForm;
-import forms.ReleaseUnitForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -21,7 +20,6 @@ public class ReleaseUnitAction extends Action {
 
     private ActionForward forwardTo;
     private LoginForm authenticated;
-    private ReleaseUnitForm release;
     private ReleaseUnit releaseUnit;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -33,10 +31,9 @@ public class ReleaseUnitAction extends Action {
             messages.add("error", (new ActionMessage("label.session.expired")));
             saveMessages(request, messages);
             return mapping.findForward("login");
-        }
-        release = (ReleaseUnitForm) request.getAttribute("releaseUnitForm");
+        }        
         releaseUnit = new ReleaseUnit();
-        releaseUnit.releaseUnit(release, request);
+        releaseUnit.releaseUnit(request);
         messages.add("reserved", (new ActionMessage("label.customer.unit.view.release.unit.success")));
         saveMessages(request, messages);
         forwardTo = mapping.findForward("customerUnitView");

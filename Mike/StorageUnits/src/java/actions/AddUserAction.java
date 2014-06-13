@@ -42,7 +42,6 @@ public class AddUserAction extends Action {
         userForm = (AddUserForm) request.getAttribute("addUserForm");
         addUser = new AddUser();
         usernameTaken = addUser.checkUsername(userForm);
-        System.out.println(usernameTaken);
         if (!usernameTaken) {
             userCreation = addUser.addToDatabase(userForm);
         }

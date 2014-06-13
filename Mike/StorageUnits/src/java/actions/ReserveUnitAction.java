@@ -2,7 +2,6 @@ package actions;
 
 import business.ReserveUnit;
 import forms.LoginForm;
-import forms.ReserveUnitForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -21,7 +20,6 @@ public class ReserveUnitAction extends Action {
 
     private ActionForward forwardTo;
     private LoginForm authenticated;
-    private ReserveUnitForm reserve;
     private ReserveUnit reserveUnit;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -34,9 +32,8 @@ public class ReserveUnitAction extends Action {
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
-        reserve = (ReserveUnitForm) request.getAttribute("reserveUnitForm");
         reserveUnit = new ReserveUnit();
-        reserveUnit.releaseUnit(reserve, request);
+        reserveUnit.reserveUnit(request);
         messages.add("reserved", (new ActionMessage("label.customer.view.all.reserve.unit.success")));
         saveMessages(request, messages);
         forwardTo = mapping.findForward("customerUnitView");

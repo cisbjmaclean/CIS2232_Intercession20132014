@@ -1,5 +1,6 @@
 package business;
 
+import forms.LoginForm;
 import forms.ReleaseUnitForm;
 import forms.StorageUnitForm;
 import forms.UserForm;
@@ -27,9 +28,10 @@ public class ReleaseUnit {
     // The connection object.
     private Connection con;
     private ArrayList<StorageUnitForm> units;
-    private UserForm user;
+    private LoginForm user;
+     private ReleaseUnitForm releaseUnit;
 
-    public void releaseUnit(ReleaseUnitForm release, HttpServletRequest request) {
+    public void releaseUnit(HttpServletRequest request) {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -41,13 +43,13 @@ public class ReleaseUnit {
         // Try to generate the query.
         try {
             units = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnit");
-            user = (UserForm) request.getSession().getAttribute("user");
-
+            user = (LoginForm) request.getSession().getAttribute("user");
+            releaseUnit = (ReleaseUnitForm) request.getAttribute("releaseUnitForm");
             // The query to send.
             sql = "DELETE FROM `customer_unit` WHERE `unit_id` = ? AND `cus_id` = ?";
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setInt(1, release.getUnitId());
+            psAuthenticate.setInt(1, releaseUnit.getUnitId());
             psAuthenticate.setInt(2, user.getCustomerId());
             // Run the query.
             psAuthenticate.executeUpdate();
@@ -59,7 +61,7 @@ public class ReleaseUnit {
             DbUtils.close(psAuthenticate, con);
         }
         for (StorageUnitForm unit : units) {
-            if (unit.getUnitId() == release.getUnitId()) {
+            if (unit.getUnitId() == releaseUnit.getUnitId()) {
                 unit.setCustomerId(0);
             }
         }

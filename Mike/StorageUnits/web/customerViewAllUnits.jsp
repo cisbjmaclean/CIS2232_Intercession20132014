@@ -59,6 +59,7 @@
                         <td>
                             <html:form action="/reserveUnit">
                                 <html:hidden property="unitId" value="${unit.unitId}"/>
+                                <label><bean:message key="label.customer.view.all.months"/></label><html:text property="months" value="0" size="2"/>
                                 <html:submit property="Submit"><bean:message key="label.customer.view.all.reserve.unit"/></html:submit>
                             </html:form>
                         </td>

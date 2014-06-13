@@ -10,6 +10,7 @@ import org.apache.struts.validator.ValidatorForm;
 public class ReserveUnitForm extends ValidatorForm {
 
     private int unitId;
+    private int months;
 
     public int getUnitId() {
         return unitId;
@@ -17,5 +18,13 @@ public class ReserveUnitForm extends ValidatorForm {
 
     public void setUnitId(int unitId) {
         this.unitId = unitId;
+    }
+
+    public int getMonths() {
+        return months;
+    }
+
+    public void setMonths(int months) {
+        this.months = months;
     }
 }

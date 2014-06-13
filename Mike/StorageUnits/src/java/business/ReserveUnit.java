@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package business;
 
 import forms.LoginForm;
@@ -37,10 +32,13 @@ public class ReserveUnit {
     private Connection con;
     private ArrayList<StorageUnitForm> units;
     private LoginForm user;
-    private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    private Calendar calander = Calendar.getInstance();
+    private ReserveUnitForm reserveUnit;
+    private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+    private Calendar calendar = Calendar.getInstance();
+    private String dateFrom;
+    private String dateTo;
 
-    public void releaseUnit(ReserveUnitForm reserve, HttpServletRequest request) {
+    public void reserveUnit(HttpServletRequest request) {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -53,11 +51,12 @@ public class ReserveUnit {
         try {
             units = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnit");
             user = (LoginForm) request.getSession().getAttribute("user");
+            reserveUnit = (ReserveUnitForm) request.getAttribute("reserveUnitForm");
             // The query to send.
-            sql = "INSERT INTO `customer_unit`(`unit_id`, `cus_id`) VALUES ?,?";
+            sql = "INSERT INTO `customer_unit`(`unit_id`, `cus_id`) VALUES (?,?)";
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setInt(1, reserve.getUnitId());
+            psAuthenticate.setInt(1, reserveUnit.getUnitId());         
             psAuthenticate.setInt(2, user.getCustomerId());
             // Run the query.
             psAuthenticate.executeUpdate();
@@ -68,21 +67,22 @@ public class ReserveUnit {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
         }
-        String unitToDate = getUnitFromToDate();
+        setUnitDate();
 
         for (StorageUnitForm unit : units) {
-            if (unit.getUnitId() == reserve.getUnitId()) {
+            if (unit.getUnitId() == reserveUnit.getUnitId()) {
                 unit.setCustomerId(user.getCustomerId());
-                unit.setUnitDateFrom(dateFormat.format(calander.getTime()));
+                unit.setUnitDateFrom(dateFrom);
+                unit.setUnitDateTo(dateTo);
+
             }
         }
     }
 
-    public String getUnitFromToDate() {      
-        int month = Integer.parseInt(JOptionPane.showInputDialog("Please enter the month you would like to book the unit to."
-                + "\n Please enter digits ie. 11 for"));
-        int day = Integer.parseInt(JOptionPane.showInputDialog(this));
-        int year = Integer.parseInt(JOptionPane.showInputDialog(this));
-        return null;
+    public void setUnitDate() {
+        dateFrom = dateFormat.format(calendar.getTime());
+        calendar.add(Calendar.MONTH, reserveUnit.getMonths());
+        calendar.add(Calendar.DATE, -1);
+        dateTo = dateFormat.format(calendar.getTime());
     }
 }
