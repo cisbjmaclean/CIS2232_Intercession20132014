@@ -3,15 +3,14 @@ package business;
 import forms.LoginForm;
 import forms.ReleaseUnitForm;
 import forms.StorageUnitForm;
-import forms.UserForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
+import util.SortUnits;
 
 /**
  *
@@ -27,7 +26,7 @@ public class ReleaseUnit {
     private String sql;
     // The connection object.
     private Connection con;
-    private ArrayList<StorageUnitForm> units;
+    //private ArrayList<StorageUnitForm> storageUnits;
     private LoginForm user;
      private ReleaseUnitForm releaseUnit;
 
@@ -41,8 +40,7 @@ public class ReleaseUnit {
         }
 
         // Try to generate the query.
-        try {
-            units = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnit");
+        try {        
             user = (LoginForm) request.getSession().getAttribute("user");
             releaseUnit = (ReleaseUnitForm) request.getAttribute("releaseUnitForm");
             // The query to send.
@@ -53,6 +51,18 @@ public class ReleaseUnit {
             psAuthenticate.setInt(2, user.getCustomerId());
             // Run the query.
             psAuthenticate.executeUpdate();
+            
+            // The query to send.
+            sql = "UPDATE `unit` SET `unit_avalibility`= ?,`unit_date_from`= ?,`unit_date_to`= ? WHERE `unit_id` = ?";
+            // Added security for the fields being sent to the database.
+            psAuthenticate = con.prepareStatement(sql);
+            psAuthenticate.setInt(1, 1);
+            psAuthenticate.setString(2, "");
+            psAuthenticate.setString(3, "");
+            psAuthenticate.setInt(4, releaseUnit.getUnitId());
+            // Run the query.
+            psAuthenticate.executeUpdate();
+            
         } catch (Exception e) {
             Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("There was an issue with the query.");
@@ -60,10 +70,14 @@ public class ReleaseUnit {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
         }
-        for (StorageUnitForm unit : units) {
+        for (StorageUnitForm unit : LoadStorageUnits.getStorageUnits()) {
             if (unit.getUnitId() == releaseUnit.getUnitId()) {
                 unit.setCustomerId(0);
+                unit.setUnitAvalibility("1");
+                unit.setUnitDateTo("");
+                unit.setUnitDateFrom("");
             }
         }
+        SortUnits.compare(LoadStorageUnits.getStorageUnits());
     }
 }

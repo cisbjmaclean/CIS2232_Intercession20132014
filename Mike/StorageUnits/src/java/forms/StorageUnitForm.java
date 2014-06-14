@@ -15,7 +15,7 @@ public class StorageUnitForm extends ActionForm {
     private String UnitAvalibility;
     private String UnitDateFrom;
     private String UnitDateTo;
-    private int customerId;
+    public int customerId;
 
     public StorageUnitForm() {
     }

@@ -7,14 +7,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.JOptionPane;
 import util.DatabaseConnection;
 import util.DbUtils;
+import util.SortUnits;
 
 /**
  *
@@ -30,7 +29,6 @@ public class ReserveUnit {
     private String sql;
     // The connection object.
     private Connection con;
-    private ArrayList<StorageUnitForm> units;
     private LoginForm user;
     private ReserveUnitForm reserveUnit;
     private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -49,17 +47,31 @@ public class ReserveUnit {
 
         // Try to generate the query.
         try {
-            units = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnit");
             user = (LoginForm) request.getSession().getAttribute("user");
             reserveUnit = (ReserveUnitForm) request.getAttribute("reserveUnitForm");
+            dateFrom = dateFormat.format(calendar.getTime());
+            dateTo = reserveUnit.getDateTo();
+
             // The query to send.
             sql = "INSERT INTO `customer_unit`(`unit_id`, `cus_id`) VALUES (?,?)";
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setInt(1, reserveUnit.getUnitId());         
+            psAuthenticate.setInt(1, reserveUnit.getUnitId());
             psAuthenticate.setInt(2, user.getCustomerId());
             // Run the query.
             psAuthenticate.executeUpdate();
+            
+            // The query to send.
+            sql = "UPDATE `unit` SET `unit_avalibility`= ?,`unit_date_from`= ?,`unit_date_to`= ? WHERE `unit_id` = ?";
+            // Added security for the fields being sent to the database.
+            psAuthenticate = con.prepareStatement(sql);
+            psAuthenticate.setInt(1, 0);
+            psAuthenticate.setString(2, dateFrom);
+            psAuthenticate.setString(3, dateTo);
+            psAuthenticate.setInt(4, reserveUnit.getUnitId());
+            // Run the query.
+            psAuthenticate.executeUpdate();
+    
         } catch (Exception e) {
             Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("There was an issue with the query.");
@@ -68,21 +80,16 @@ public class ReserveUnit {
             DbUtils.close(psAuthenticate, con);
         }
         setUnitDate();
+        SortUnits.compare(LoadStorageUnits.getStorageUnits());
+    }
 
-        for (StorageUnitForm unit : units) {
+    public void setUnitDate() {
+        for (StorageUnitForm unit : LoadStorageUnits.getStorageUnits()) {
             if (unit.getUnitId() == reserveUnit.getUnitId()) {
                 unit.setCustomerId(user.getCustomerId());
                 unit.setUnitDateFrom(dateFrom);
                 unit.setUnitDateTo(dateTo);
-
             }
         }
-    }
-
-    public void setUnitDate() {
-        dateFrom = dateFormat.format(calendar.getTime());
-        calendar.add(Calendar.MONTH, reserveUnit.getMonths());
-        calendar.add(Calendar.DATE, -1);
-        dateTo = dateFormat.format(calendar.getTime());
     }
 }

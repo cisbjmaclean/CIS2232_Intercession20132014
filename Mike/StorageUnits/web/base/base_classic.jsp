@@ -10,7 +10,7 @@
 --%>
 
 <HTML>
-    <head><link rel="stylesheet" type="text/css" href="http://localhost:8080/RegistrationBoard/styles/styles.css"></head>
+      <head><link rel="stylesheet" type="text/css" href="http://localhost:8080/StorageUnits/styles/styles.css"></head>
 
     <body> 
         <table>

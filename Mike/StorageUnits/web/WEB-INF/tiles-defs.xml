@@ -34,8 +34,7 @@
     <definition name="viewAllTile" extends=".mainLayout">
         <put name="body"   value="/viewAll.jsp" />
     </definition>
-    
-    
+       
     <definition name="menuTile" extends=".mainClassicLayout">
         <put name="body"   value="/menu.jsp" />
     </definition>
@@ -46,6 +45,10 @@
 
     <definition name="customerViewAllTile" extends=".mainClassicLayout">
         <put name="body"   value="/customerViewAllUnits.jsp" />
+    </definition>
+    
+    <definition name="customerCalendarTile" extends=".mainClassicLayout">
+        <put name="body"   value="/customerCalendar.jsp" />
     </definition>
     
 

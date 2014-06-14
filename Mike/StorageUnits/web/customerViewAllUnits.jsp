@@ -17,8 +17,20 @@
     <!DOCTYPE html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/styles/styles.css">
+        <script>
+            $(function() {
+                $(".datepicker").datepicker({
+                    minDate: 0,
+                    maxDate: "+36M"
+                });
+            });
+        </script>
         <title><bean:message key="welcome.title"/></title>
-        <html:base/>
+
     </head>
     <body style="background-color: white">
 
@@ -33,7 +45,8 @@
         <p><bean:message key="welcome.message"/></p>
 
         <div style="color:red"><html:errors/></div>
-
+        <!-- used for the calendar -->
+        <div style="padding-bottom: 300px">
         <table>
             <c:forEach var="unit" items="${storageUnit}">               
                 <tr>
@@ -58,8 +71,9 @@
                     <c:if test="${unit.customerId == 0}">
                         <td>
                             <html:form action="/reserveUnit">
+
                                 <html:hidden property="unitId" value="${unit.unitId}"/>
-                                <label><bean:message key="label.customer.view.all.months"/></label><html:text property="months" value="0" size="2"/>
+                                <label><bean:message key="label.customer.view.all.months"/></label><input type="text" name="dateTo" class="datepicker" value="Click Here" size="9">
                                 <html:submit property="Submit"><bean:message key="label.customer.view.all.reserve.unit"/></html:submit>
                             </html:form>
                         </td>
@@ -67,5 +81,6 @@
                 </tr>              
             </c:forEach>
         </table>
+        </div>
     </body>
 </html:html>

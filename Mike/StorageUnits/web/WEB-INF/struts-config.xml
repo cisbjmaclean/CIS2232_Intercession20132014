@@ -68,6 +68,7 @@
                 scope="request">
             <forward name="customerUnitView"  path="customerUnitViewTile"/>
             <forward name="customerViewAll"  path="customerViewAllTile"/>
+            <forward name="customerCalendar"  path="customerCalendarTile"/>
             <forward name="login"  path="loginTile"/>
         </action>
         

@@ -23,12 +23,12 @@
 
     <formset>
         <form name="addUserForm">
-            <!--            <field
+                       <field
                 property="username"
                 depends="required">
                 <arg key="AddUserForm.username"/>
             </field>
-            <field
+           <!--<field
                 property="password"
                 depends="required,mask">
                 <arg key="AddUserForm.password"/>
@@ -46,7 +46,7 @@
                     <var-value>^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$</var-value>
                 </var>
             </field>
-           <field
+         <field
                 property="email"
                 depends="required,mask">
                 <arg key="AddUserForm.email"/>
@@ -142,8 +142,16 @@
             </field>
         </form>
 
-<!--        <form name="ReserveUnitForm"> 
-        <field property="months" depends="required, integer, intRange">
+
+      <form name="reserveUnitForm"> 
+<field property="dateTo" depends="required,date">
+    <arg0 key="ReserveUnitForm.dateTo"/>
+    <var>
+     <var-name>datePatternStrict</var-name>
+     <var-value>mm/dd/yyyy</var-value>
+    </var>
+   </field>
+<!--        <field property="months" depends="required, integer, intRange">
 			<arg0 key="label.customer.view.all.months" />
 			<arg1 key="${var:min}" resource="false"/>
 			<arg2 key="${var:max}" resource="false"/>
@@ -155,8 +163,8 @@
 				<var-name>max</var-name>
 				<var-value>36</var-value>
 			</var>
-		</field>
-        </form>-->
+		</field>-->
+        </form>
     </formset>
 
     <!-- An example formset for another locale -->

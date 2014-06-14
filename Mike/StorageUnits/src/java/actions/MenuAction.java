@@ -44,8 +44,8 @@ public class MenuAction extends Action {
             forwardTo = mapping.findForward("customerUnitView");
         } else if (menu.getAction().equals(Util.resources.getString("label.menu.view.all.units"))) {
             forwardTo = mapping.findForward("customerViewAll");
-        } else if (menu.getAction().equals(Util.resources.getString("label.menu.calander"))) {
-            forwardTo = mapping.findForward("main");
+        } else if (menu.getAction().equals(Util.resources.getString("label.menu.view.calendar"))) {
+            forwardTo = mapping.findForward("customerCalendar");
         } else if (menu.getAction().equals(Util.resources.getString("label.menu.profile"))) {
             forwardTo = mapping.findForward("main");
         }

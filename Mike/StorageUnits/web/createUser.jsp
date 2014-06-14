@@ -33,21 +33,79 @@
         <div style="color:red"><html:errors/></div>
 
         <html:form action="/addUser">
-            <label><bean:message key="label.create.user.user.name"/></label><html:text property="username"/>
-            <label><bean:message key="label.create.user.password"/></label><html:text property="password"/>
-            <label><bean:message key="label.create.user.password2"/></label><html:text property="password2"/>
-            <label><bean:message key="label.create.user.email"/></label><html:text property="email"/>
-            <labe><bean:message key="label.create.user.email2"/></label><html:text property="email2"/>
-            <label><bean:message key="label.create.user.first.name"/></label><html:text property="firstName"/>
-            <label><bean:message key="label.create.user.middle.initial"/></label><html:text property="middleInitial"/>
-            <label><bean:message key="label.create.user.last.name"/></label><html:text property="lastName"/>
-            <label><bean:message key="label.create.user.address"/></label><html:text property="address"/>
-            <label><bean:message key="label.create.user.city"/></label><html:text property="city"/>
-            <label><bean:message key="label.create.user.province"/></label><html:text property="province"/>
-            <label><bean:message key="label.create.user.postal.code"/></label><html:text property="postalCode"/>
-            <label><bean:message key="label.create.user.phone.number"/></label><html:text property="phoneNumber"/>
-            <html:submit><bean:message key="label.create.user.submit"/></html:submit>
+            <table>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.user.name"/></label><html:text property="username"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.password"/></label><html:text property="password"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.password2"/></label><html:text property="password2"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.email"/></label><html:text property="email"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.email2"/></label><html:text property="email2"/>
+                    </td
+                    ></tr>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.first.name"/></label><html:text property="firstName"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.middle.initial"/></label><html:text property="middleInitial"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.last.name"/></label><html:text property="lastName"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.address"/></label><html:text property="address"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.city"/></label><html:text property="city"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.province"/></label><html:text property="province"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.postal.code"/></label><html:text property="postalCode"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><bean:message key="label.create.user.phone.number"/></label><html:text property="phoneNumber"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <html:submit><bean:message key="label.create.user.submit"/></html:submit>
+                    </td>
+                </tr>
+            </table>
         </html:form>
-        </body>
-    </html:html>
+    </body>
+</html:html>
 
