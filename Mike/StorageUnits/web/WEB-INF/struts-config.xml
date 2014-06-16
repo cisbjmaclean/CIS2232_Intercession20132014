@@ -100,6 +100,11 @@
             <forward name="customerUnitView"  path="customerUnitViewTile"/>
         </action>
         
+        <action path="/initialize"
+ type="actions.InitializeAction">
+      <forward name="main" path="mainTile"/>
+    </action>
+        
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

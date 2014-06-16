@@ -21,7 +21,7 @@ public class LoadStorageUnits {
     // The object used for each new connection.
     private DatabaseConnection dbConnection = new DatabaseConnection();
     // Used to allow for more security when sending data to a database.
-    private static ArrayList<StorageUnitForm> storageUnits = new ArrayList();
+    private static ArrayList<StorageUnitForm> storageUnits;
     private PreparedStatement psAuthenticate;
     private String sql;
     // The connection object.
@@ -47,6 +47,7 @@ public class LoadStorageUnits {
 
         // Try to generate the query.
         try {
+            storageUnits = new ArrayList();
             // The query to send.
             sql = "SELECT `unit`.`unit_id`, `unit`.`unit_type`, `unit`.`unit_dimensions`, `unit`.`unit_avalibility`, "
                     + "`unit`.`unit_date_from`, `unit`.`unit_date_to`, `customer_unit`.`cus_id` FROM `unit` LEFT OUTER JOIN "

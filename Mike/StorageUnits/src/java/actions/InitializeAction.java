@@ -10,15 +10,13 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author Michael Fesser
- * @since 6/3/2014
- *
- * The purpose of this class is to allow the function of the login page.
+ * @author Michael
+ * @since Jun 15, 2014
  */
-public class LoadStorageUnitsAction extends Action {
+public class InitializeAction extends Action{
 
     private LoadStorageUnits loadUnits;
-
+    
     /**
      *
      *
@@ -34,9 +32,9 @@ public class LoadStorageUnitsAction extends Action {
             throws Exception {
         loadUnits = new LoadStorageUnits();
         request.getSession().setAttribute("storageUnit", loadUnits.loadStorageUnits(request));
-
+        
         // Used to define the page to be forwarded to.      
-        ActionForward findForward = mapping.findForward("viewAll");
+        ActionForward findForward = mapping.findForward("main");
         return findForward;
     }
 }
