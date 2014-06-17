@@ -1,8 +1,8 @@
 package business;
 
+import forms.StorageUnitForm;
 import forms.LoginForm;
 import forms.ReserveUnitForm;
-import forms.StorageUnitForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.text.DateFormat;
@@ -51,7 +51,6 @@ public class ReserveUnit {
             reserveUnit = (ReserveUnitForm) request.getAttribute("reserveUnitForm");
             dateFrom = dateFormat.format(calendar.getTime());
             dateTo = reserveUnit.getDateTo();
-
             // The query to send.
             sql = "INSERT INTO `customer_unit`(`unit_id`, `cus_id`) VALUES (?,?)";
             // Added security for the fields being sent to the database.

@@ -18,6 +18,13 @@
         <put name="body"   value="" />
         <put name="footer" value="/footer.jsp" />
     </definition>
+    
+    <definition name=".mainClassicLayoutAdmin" path="/base/base_classic.jsp">
+        <put name="header" value="/header.jsp" />
+        <put name="menu" value = "/adminMenu.jsp" />
+        <put name="body"   value="" />
+        <put name="footer" value="/footer.jsp" />
+    </definition>
 
     <definition name="loginTile" extends=".mainLayout">
         <put name="body"   value="/login.jsp" />
@@ -36,7 +43,7 @@
     </definition>
        
     <definition name="menuTile" extends=".mainClassicLayout">
-        <put name="body"   value="/menu.jsp" />
+        <put name="menu"   value="/menu.jsp" />
     </definition>
     
     <definition name="customerUnitViewTile" extends=".mainClassicLayout">
@@ -52,4 +59,19 @@
     </definition>
     
 
+    <definition name="adminMenuTile" extends=".mainClassicLayoutAdmin">
+        <put name="menu"   value="/adminMenu.jsp" />
+    </definition>
+    
+    <definition name="adminMainTile" extends=".mainClassicLayoutAdmin">
+        <put name="body"   value="/adminMain.jsp" />
+    </definition> 
+    
+    <definition name="adminAddUserTile" extends=".mainClassicLayoutAdmin">
+        <put name="body"   value="/adminAddUser.jsp" />
+    </definition>
+    
+    <definition name="adminAddUnitTile" extends=".mainClassicLayoutAdmin">
+        <put name="body"   value="/adminAddUnit.jsp" />
+    </definition>  
 </tiles-definitions>

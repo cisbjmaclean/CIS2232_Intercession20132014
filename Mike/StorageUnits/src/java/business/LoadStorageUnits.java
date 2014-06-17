@@ -19,9 +19,9 @@ import util.SortUnits;
 public class LoadStorageUnits {
 
     // The object used for each new connection.
-    private DatabaseConnection dbConnection = new DatabaseConnection();
-    // Used to allow for more security when sending data to a database.
+    private DatabaseConnection dbConnection = new DatabaseConnection();   
     private static ArrayList<StorageUnitForm> storageUnits;
+    // Used to allow for more security when sending data to a database.
     private PreparedStatement psAuthenticate;
     private String sql;
     // The connection object.
@@ -34,6 +34,7 @@ public class LoadStorageUnits {
      * This method retrieves data from the database.
      *
      * @param request
+     * @return 
      */
     public ArrayList loadStorageUnits(HttpServletRequest request) {
 

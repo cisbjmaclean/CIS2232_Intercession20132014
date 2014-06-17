@@ -29,7 +29,6 @@ public class LoadUser {
     // The connection object.
     private Connection con;
     private ResultSet rs = null;
-    private boolean authenicate = false;
     private UserForm user;
 
     public void setUserInformation(int customerID) {

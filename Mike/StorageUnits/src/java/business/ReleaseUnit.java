@@ -1,8 +1,8 @@
 package business;
 
+import forms.StorageUnitForm;
 import forms.LoginForm;
 import forms.ReleaseUnitForm;
-import forms.StorageUnitForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
@@ -70,7 +70,7 @@ public class ReleaseUnit {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
         }
-        for (StorageUnitForm unit : LoadStorageUnits.getStorageUnits()) {
+            for (StorageUnitForm unit : LoadStorageUnits.getStorageUnits()) {
             if (unit.getUnitId() == releaseUnit.getUnitId()) {
                 unit.setCustomerId(0);
                 unit.setUnitAvalibility("1");

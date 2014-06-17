@@ -15,7 +15,12 @@ public class LoginForm extends ActionForm {
     private int customerId;
     private String username;
     private String password;
+    private int adminCode;
     private boolean validated;
+
+    public LoginForm() {
+        this.adminCode = 0;
+    }
 
     public int getCustomerId() {
         return customerId;
@@ -41,7 +46,15 @@ public class LoginForm extends ActionForm {
         this.password = password;
     }
 
-    public boolean getValidated() {
+    public int getAdminCode() {
+        return adminCode;
+    }
+
+    public void setAdminCode(int adminCode) {
+        this.adminCode = adminCode;
+    }
+
+    public boolean isValidated() {
         return validated;
     }
 

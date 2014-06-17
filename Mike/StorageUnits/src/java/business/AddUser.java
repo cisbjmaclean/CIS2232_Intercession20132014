@@ -104,7 +104,7 @@ public class AddUser {
             }
 
             // The query to send.
-            sql = "INSERT INTO `login`(`cus_id`, `login_username`, `login_password`) VALUES (?,?,?)";
+            sql = "INSERT INTO `customer_login`(`cus_id`, `cus_login_username`, `cus_login_password`) VALUES (?,?,?)";
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
             psAuthenticate.setString(1, id);

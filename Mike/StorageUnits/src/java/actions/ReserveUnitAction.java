@@ -27,7 +27,7 @@ public class ReserveUnitAction extends Action {
             throws Exception {
         ActionMessages messages = new ActionMessages();
         authenticated = (LoginForm) request.getSession().getAttribute("user");
-        if (authenticated == null || authenticated.getValidated() == false) {
+        if (authenticated == null || authenticated.isValidated() == false) {
             messages.add("error", (new ActionMessage("label.session.expired")));
             saveMessages(request, messages);
             return mapping.findForward("login");

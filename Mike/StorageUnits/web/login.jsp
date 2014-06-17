@@ -41,8 +41,8 @@
         </div>
 
         <html:form action="/login">
-            <label class="alignCenter" for="username"><bean:message key="label.login.user.name"/></label><html:text property="username"/>
-            <label class="alignCenter" for="password"><bean:message key="label.login.password"/></label><html:text property="password"/>
+            <label><bean:message key="label.login.user.name"/></label><html:text property="username"/>
+            <label><bean:message key="label.login.password"/></label><html:text property="password"/>
             <html:submit><bean:message key="label.login.submit"/></html:submit>
         </html:form>         
     </body>

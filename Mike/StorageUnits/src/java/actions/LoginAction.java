@@ -23,7 +23,8 @@ import org.apache.struts.action.ActionMessages;
 public class LoginAction extends Action {
 
     // Flag for login access.
-    private boolean authenticate = false;
+    private InitializeAction initialize ;
+    private String authenticate = "none";
     private LoginForm validateLogin;
     private UserForm user;
     private Login login;
@@ -49,21 +50,37 @@ public class LoginAction extends Action {
         validateLogin = (LoginForm) request.getAttribute("loginForm");
         // Used to define the page to be forwarded to.  
         login = new Login();
-        authenticate = login.checkLogin(validateLogin);
+                  
+        if (validateLogin.getUsername().startsWith("admin.")) {
+            authenticate = login.checkAdminLogin(authenticate, validateLogin);
+        } else {
+            authenticate = login.checkLogin(authenticate, validateLogin);
+        }
         ActionMessages messages = new ActionMessages();
         // If login credentials are valid continue otherwise return to the login page.
-        if (authenticate) {
-            loadUser = new LoadUser();
-            request.getSession().setAttribute("user", validateLogin);
-            loadUser.setUserInformation(validateLogin.getCustomerId());
-            request.getSession().setAttribute("userDetails", user);
-            messages.add("success", (new ActionMessage("label.login.success")));
-            forwardTo = mapping.findForward("customerUnitView");
-        } else {
-            messages.add("error", (new ActionMessage("label.login.fail")));
-            forwardTo = mapping.findForward("login");
+        switch (authenticate) {
+            case "admin":
+                loadUser = new LoadUser();
+                request.getSession().setAttribute("admin", validateLogin);               
+                messages.add("success", (new ActionMessage("label.login.success")));
+                forwardTo = mapping.findForward("adminInitialize");
+                break;
+            case "user":
+                loadUser = new LoadUser();
+                request.getSession().setAttribute("user", validateLogin);
+                loadUser.setUserInformation(validateLogin.getCustomerId());
+                request.getSession().setAttribute("userDetails", user);
+                messages.add("success", (new ActionMessage("label.login.success")));
+                forwardTo = mapping.findForward("customerUnitView");
+                break;
+            default:
+                messages.add("error", (new ActionMessage("label.login.fail")));
+                forwardTo = mapping.findForward("login");
+                break;
         }
         saveMessages(request, messages);
+        // Used to deal with some odd behaviour with session timeouts, the back button and logging in again.    
+        initialize = new InitializeAction();
         return forwardTo;
     }
 }
