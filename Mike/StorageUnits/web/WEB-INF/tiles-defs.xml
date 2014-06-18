@@ -34,8 +34,8 @@
         <put name="body"   value="/main.jsp" />
     </definition>
     
-    <definition name="createCustomerTile" extends=".mainLayout">
-        <put name="body"   value="/createCustomer.jsp" />
+    <definition name="addCustomerTile" extends=".mainLayout">
+        <put name="body"   value="/addCustomer.jsp" />
     </definition>
     
     <definition name="viewAllTile" extends=".mainLayout">
@@ -83,7 +83,7 @@
     </definition> 
     
     <definition name="adminAddCustomerTile" extends=".mainClassicLayoutAdmin">
-        <put name="body"   value="/adminAddCustomer.jsp" />
+        <put name="body"   value="/addCustomer.jsp" />
     </definition> 
     
     

@@ -39,9 +39,10 @@
         <action path="/addCustomer" 
                 type="actions.AddCustomerAction"
                 name="addUpdateCustomerForm"
-                input="/createUser.jsp" 
+                input="/addCustomer.jsp" 
                 scope="request">
-            <forward name="addCustomer"  path="createCustomerTile"/>
+            <forward name="addCustomer"  path="addCustomerTile"/>
+            <forward name="adminAddCustomer"  path="adminAddCustomerTile"/>
         </action>
         
         <action path="/login" 
@@ -82,7 +83,7 @@
                 name="multipleActionForm"
                 input="/main.jsp" 
                 scope="request">
-            <forward name="addCustomer"  path="createCustomerTile"/>
+            <forward name="addCustomer"  path="addCustomerTile"/>
             <forward name="viewAll"  path="viewAllTile"/>        
         </action>
         
@@ -140,14 +141,7 @@
                 scope="request">           
          </action>   
             
-         <action path="/adminAddCustomer" 
-                type="actions.AdminAddCustomerAction"
-                name="addUpdateCustomerForm"
-                input="/adminAddCustomer.jsp" 
-                scope="request">
-            <forward name="adminAddCustomer"  path="adminAddCustomerTile"/>
-        </action>
-          
+               
     
     </action-mappings>
     

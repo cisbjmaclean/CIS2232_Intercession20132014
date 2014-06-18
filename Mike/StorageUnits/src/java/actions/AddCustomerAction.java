@@ -1,6 +1,7 @@
 package actions;
 
 import business.AddCustomer;
+import forms.LoginForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -22,6 +23,7 @@ public class AddCustomerAction extends Action {
     private boolean usernameTaken = false;
     private AddCustomer addCustomer;
     private ActionForward findForward;
+    private LoginForm authenticated;
 
     /**
      *
@@ -36,18 +38,20 @@ public class AddCustomerAction extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-
+        authenticated = (LoginForm) request.getSession().getAttribute("admin");
         addCustomer = new AddCustomer(request);
         usernameTaken = addCustomer.checkUsername();
         if (!usernameTaken) {
             customerCreation = addCustomer.addCustomer();
         }
         if (customerCreation) {
-            if (1 == 1) {
-                findForward = mapping.findForward("adminAddCustomer");
+            if (authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
+                findForward = mapping.findForward("adminMain");
             } else {
                 findForward = mapping.findForward("login");
             }
+        } else if (authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
+            findForward = mapping.findForward("adminAddCustomer");
         } else {
             findForward = mapping.findForward("addCustomer");
         }
