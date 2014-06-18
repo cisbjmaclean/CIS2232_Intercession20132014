@@ -102,4 +102,20 @@ public class LoadCustomers {
         }
         return loadLogins;
     }
+
+    public static ArrayList<CustomerForm> getLoadCustomers() {
+        return loadCustomers;
+    }
+
+    public static void setLoadCustomers(ArrayList<CustomerForm> loadCustomers) {
+        LoadCustomers.loadCustomers = loadCustomers;
+    }
+
+    public static ArrayList<LoginForm> getLoadLogins() {
+        return loadLogins;
+    }
+
+    public static void setLoadLogins(ArrayList<LoginForm> loadLogins) {
+        LoadCustomers.loadLogins = loadLogins;
+    }
 }

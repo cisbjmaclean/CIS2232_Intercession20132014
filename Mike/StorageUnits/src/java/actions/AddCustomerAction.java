@@ -43,10 +43,15 @@ public class AddCustomerAction extends Action {
             customerCreation = addCustomer.addCustomer();
         }
         if (customerCreation) {
-            findForward = mapping.findForward("login");
+            if (1 == 1) {
+                findForward = mapping.findForward("adminAddCustomer");
+            } else {
+                findForward = mapping.findForward("login");
+            }
         } else {
             findForward = mapping.findForward("addCustomer");
         }
+
         return findForward;
     }
 }

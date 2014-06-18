@@ -50,7 +50,8 @@ public class AdminModifyCustomerAction extends Action {
             forwardTo = mapping.findForward("adminUpdateCustomer");
         }else if (menu.getAction().equals(Util.resources.getString("label.admin.customer.search.delete"))) {
             deleteCustomer = new DeleteCustomer();
-            deleteCustomer.deleteCustomer(customerId);
+            deleteCustomer.deleteCustomer(customerId, request);
+            forwardTo = mapping.findForward("adminMain");
         }
         return forwardTo;
     }

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SetCustomerUpdateInfo {
 
-     private ArrayList<CustomerForm> allCustomers;
+    private ArrayList<CustomerForm> allCustomers;
     private ArrayList<LoginForm> allLogins;
     
     public void setCustomer(AdminModifyCustomerForm customerId, HttpServletRequest request) {

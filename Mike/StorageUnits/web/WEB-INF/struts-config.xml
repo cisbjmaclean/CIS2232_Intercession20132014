@@ -25,6 +25,7 @@
     <global-forwards>
         <forward name="main"  path="/main.do"/>
          <forward name="login"  path="loginTile"/>
+         <forward name="adminMain"  path="adminMainTile"/>
     </global-forwards>
 
     <action-mappings>
@@ -103,8 +104,7 @@
         </action>                     
         
         <action path="/adminInitialize"
-                type="actions.AdminInitializeAction">
-            <forward name="adminMain" path="adminMainTile"/>
+                type="actions.AdminInitializeAction">           
         </action>
                 
         <action path="/adminMenu" 
@@ -122,7 +122,7 @@
                 name="adminCustomerSearchForm"
                 input="/adminMain.jsp" 
                 scope="request">
-            <forward name="adminSearchResults"  path="adminSearchResultsTile"/>
+            <forward name="adminSearchResults"  path="adminSearchResultsTile"/>            
         </action>
         
         <action path="/adminModifyCustomer" 
@@ -137,8 +137,7 @@
                 type="actions.AdminUpdateCustomerAction"
                 name="addUpdateCustomerForm"
                 input="/adminSearchResults.jsp" 
-                scope="request">
-            <forward name="adminMain"  path="adminMainTile"/>
+                scope="request">           
          </action>   
             
          <action path="/adminAddCustomer" 
@@ -146,7 +145,6 @@
                 name="addUpdateCustomerForm"
                 input="/adminAddCustomer.jsp" 
                 scope="request">
-            <forward name="adminMain"  path="adminMainTile"/>
             <forward name="adminAddCustomer"  path="adminAddCustomerTile"/>
         </action>
           
