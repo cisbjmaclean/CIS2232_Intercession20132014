@@ -57,7 +57,7 @@
         <action path="/loadUnits" 
                 type="actions.LoadStorageUnitsAction"
                 name="storageUnitForm">
-            <forward name="viewAll"  path="viewAllTile"/>
+            <forward name="viewAll"  path="viewAllUnitsTile"/>
         </action>
                
         <action path="/reserveUnit" 
@@ -74,7 +74,7 @@
                 input="/menu.jsp" 
                 scope="request">
             <forward name="customerUnitView"  path="customerUnitViewTile"/>
-            <forward name="customerViewAll"  path="customerViewAllTile"/>
+            <forward name="customerViewAllUnits"  path="customerViewAllUnitsTile"/>
             <forward name="customerCalendar"  path="customerCalendarTile"/>
         </action>
         
@@ -84,7 +84,7 @@
                 input="/main.jsp" 
                 scope="request">
             <forward name="addCustomer"  path="addCustomerTile"/>
-            <forward name="viewAll"  path="viewAllTile"/>        
+            <forward name="viewAllUnits"  path="viewAllUnitsTile"/>        
         </action>
         
         <action path="/releaseUnit" 

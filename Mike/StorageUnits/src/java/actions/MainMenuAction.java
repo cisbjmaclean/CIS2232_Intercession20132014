@@ -28,10 +28,14 @@ public class MainMenuAction extends Action {
         Util.resources = ResourceBundle.getBundle("com.myapp.struts.ApplicationResource", Locale.getDefault());
         mainMenu = (MultipleActionForm) request.getAttribute("multipleActionForm");
 
+        System.out.println(mainMenu.getAction());
+        System.out.println(Util.resources.getString("label.main.view.all.units"));
         if (mainMenu.getAction().equals(Util.resources.getString("label.main.login"))) {
             forwardTo = mapping.findForward("login");
         } else if (mainMenu.getAction().equals(Util.resources.getString("label.main.create"))) {
             forwardTo = mapping.findForward("addCustomer");
+        } else if (mainMenu.getAction().equals(Util.resources.getString("label.main.view.all.units"))) {
+            forwardTo = mapping.findForward("viewAllUnits");
         }
         return forwardTo;
     }

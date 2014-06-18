@@ -22,11 +22,11 @@ public class SearchCustomers {
         allCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
         searchCustomers = new ArrayList();
         for (CustomerForm allCustomers : allCustomers) {
-            if (allCustomers.getEmail().equals(searchForm.getCustomerEmail())) {
+            if (allCustomers.getEmail().equalsIgnoreCase(searchForm.getCustomerEmail())) {
                 searchCustomers.add(allCustomers);
             }
         }
-        request.getSession().setAttribute("customerList", searchCustomers);
+        request.setAttribute("customerList", searchCustomers);
     }
 
     public void seachByUsername(AdminCustomerSearchForm searchForm, HttpServletRequest request) {
@@ -34,7 +34,7 @@ public class SearchCustomers {
         allCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
         searchCustomers = new ArrayList();
         for (LoginForm allLogins : allLogins) {
-            if (allLogins.getUsername().equals(searchForm.getCustomerUsername())) {
+            if (allLogins.getUsername().equalsIgnoreCase(searchForm.getCustomerUsername())) {
                 for (CustomerForm allCustomers : allCustomers) {
                     if (allLogins.getCustomerId() == allCustomers.getCustomerId()) {
                         searchCustomers.add(allCustomers);
@@ -42,17 +42,17 @@ public class SearchCustomers {
                 }
             }
         }
-        request.getSession().setAttribute("customerList", searchCustomers);
+        request.setAttribute("customerList", searchCustomers);
     }
 
     public void seachByLastName(AdminCustomerSearchForm searchForm, HttpServletRequest request) {
         allCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
         searchCustomers = new ArrayList();
         for (CustomerForm allCustomers : allCustomers) {
-            if (allCustomers.getLastName().equals(searchForm.getCustomerLastName())) {
+            if (allCustomers.getLastName().equalsIgnoreCase(searchForm.getCustomerLastName())) {
                 searchCustomers.add(allCustomers);
             }
         }
-        request.getSession().setAttribute("customerList", searchCustomers);
+        request.setAttribute("customerList", searchCustomers);
     }
 }

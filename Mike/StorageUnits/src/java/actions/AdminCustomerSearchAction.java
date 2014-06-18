@@ -36,7 +36,7 @@ public class AdminCustomerSearchAction extends Action {
         searchCustomer = new SearchCustomers();
         searchForm = (AdminCustomerSearchForm) request.getAttribute("adminCustomerSearchForm");
         if (searchForm.getCustomerLastName().equals("") && searchForm.getCustomerUsername().equals("") && searchForm.getCustomerLastName().equals("")){
-        request.getSession().setAttribute("customerList", request.getSession().getAttribute("allCustomers"));
+        request.setAttribute("customerList", request.getSession().getAttribute("allCustomers"));
         }else if (searchForm.getCustomerEmail().length() > 0) {
             searchCustomer.seachByEmail(searchForm, request);
         } else if (searchForm.getCustomerUsername().length() > 0) {

@@ -34,9 +34,7 @@
         <html:form action="/mainMenu">           
             <html:submit property="action"><bean:message key="label.main.login"/></html:submit>
             <html:submit property="action"><bean:message key="label.main.create"/></html:submit>
-        </html:form>
-        <html:form action="/loadUnits">
-            <html:submit property="Submit"><bean:message key="label.main.view"/></html:submit>
+            <html:submit property="action"><bean:message key="label.main.view.all.units"/></html:submit>
         </html:form>
     </body>
 </html:html>
