@@ -8,31 +8,31 @@
 /*
  * This function makes sure the admin cannot select more then one seach field.
  */
-function adminOptionUnitId() {  
-    var unitId = document.getElementById('unitId').value;
+function adminOptionCustomerEmail() {
+    var customerEmail = document.getElementById('customerEmail').value;
     var customerUsername = document.getElementById('customerUsername').value;
     var customerLastName = document.getElementById('customerLastName').value;
     /*
      * This clears the other two options.
      */
-  
-    if (unitId.length > 0 && customerLastName.length > 0) {
+
+    if (customerEmail.length > 0 && customerLastName.length > 0) {
         document.getElementById('customerLastName').value = "";
-    } else if (unitId.length > 0 && customerUsername.length > 0) {
+    } else if (customerEmail.length > 0 && customerUsername.length > 0) {
         document.getElementById('customerUsername').value = "";
     }
 }
 
 function adminOptionCustomerUsername() {
-    var unitId = document.getElementById('unitId').value;
+    var customerEmail = document.getElementById('customerEmail').value;
     var customerUsername = document.getElementById('customerUsername').value;
     var customerLastName = document.getElementById('customerLastName').value;
 
     /*
      * This clears the other two options.
      */
-    if (customerUsername.length > 0 && unitId.length > 0) {
-        document.getElementById('unitId').value = "";
+    if (customerUsername.length > 0 && customerEmail.length > 0) {
+        document.getElementById('customerEmail').value = "";
     } else if (customerUsername.length > 0 && customerLastName.length > 0) {
         document.getElementById('customerLastName').value = "";
     }
@@ -40,22 +40,16 @@ function adminOptionCustomerUsername() {
 }
 
 function adminOptionCustomerLastName() {
-    var unitId = document.getElementById('unitId').value;
+    var customerEmail = document.getElementById('customerEmail').value;
     var customerUsername = document.getElementById('customerUsername').value;
     var customerLastName = document.getElementById('customerLastName').value;
 
     /*
      * This clears the other two options.
      */
-    if (customerLastName.length > 0 && unitId.length > 0) {
-        document.getElementById('unitId').value = "";
+    if (customerLastName.length > 0 && customerEmail.length > 0) {
+        document.getElementById('customerEmail').value = "";
     } else if (customerLastName.length > 0 && customerUsername.length > 0) {
         document.getElementById('customerUsername').value = "";
     }
-} 
-
-function setIdZero(){
-    document.getElementById('unitId').value = 0;
-    document.getElementById('customerUsername').value = "";
-      document.getElementById('customerLastName').value = "";
 }

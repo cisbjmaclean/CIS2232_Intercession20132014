@@ -76,7 +76,7 @@ public class LoadStorageUnits {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
         }
-        SortUnits.compare(storageUnits);
+        SortUnits.sort(storageUnits);
         return storageUnits;
     }
 

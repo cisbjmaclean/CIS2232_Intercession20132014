@@ -12,7 +12,7 @@ import java.util.Comparator;
  */
 public class SortUnits {
 
-    public static void compare(ArrayList<StorageUnitForm> storageUnits) {
+    public static void sort(ArrayList<StorageUnitForm> storageUnits) {
         Collections.sort(storageUnits, new Comparator<StorageUnitForm>() {
             public int compare(StorageUnitForm form1, StorageUnitForm form2) {
                 return String.valueOf(form1.getUnitId()).compareTo(String.valueOf(form2.getUnitId()));

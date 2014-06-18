@@ -38,19 +38,22 @@ public class AdminMenuAction extends Action {
         Util.resources = ResourceBundle.getBundle("com.myapp.struts.ApplicationResource", Locale.getDefault());
         menu = (MultipleActionForm) request.getAttribute("multipleActionForm");
 
-//        if (menu.getAction().equals(Util.resources.getString("label.admin.menu.logout"))) {
-//            forwardTo = mapping.findForward("login");
-//        } else if (menu.getAction().equals(Util.resources.getString("label.admin.main"))) {
-//            forwardTo = mapping.findForward("adminMain");
-//        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.add.user"))) {
-//            forwardTo = mapping.findForward("adminAddUser");
-//    } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.add.unit"))) {
-//            forwardTo = mapping.findForward("adminAddUnit");
-//        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.view.all.units"))) {
-//            forwardTo = mapping.findForward("a");
-//        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.view.calendar"))) {
-//            forwardTo = mapping.findForward("customerCalendar");
-//        } 
+        if (menu.getAction().equals(Util.resources.getString("label.admin.menu.logout"))) {
+            forwardTo = mapping.findForward("login");
+        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.search"))) {
+            forwardTo = mapping.findForward("adminSearch");
+        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.view.all.customers"))) {
+            request.getSession().setAttribute("customerList", request.getSession().getAttribute("allCustomers"));
+            forwardTo = mapping.findForward("adminSearchResults");
+        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.add.customer"))) {
+            forwardTo = mapping.findForward("adminAddCustomer");
+        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.view.all.units"))) {
+            forwardTo = mapping.findForward("main");
+        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.add.unit"))) {
+            forwardTo = mapping.findForward("main");
+        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.view.calendar"))) {
+            forwardTo = mapping.findForward("main");
+        }
         return forwardTo;
     }
 

@@ -29,7 +29,7 @@ public class MenuAction extends Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         ActionMessages messages = new ActionMessages();
-        authenticated = (LoginForm) request.getSession().getAttribute("user");
+        authenticated = (LoginForm) request.getSession().getAttribute("customer");
         if (authenticated == null || authenticated.isValidated() == false) {
             messages.add("error", (new ActionMessage("label.session.expired")));
             saveMessages(request, messages);

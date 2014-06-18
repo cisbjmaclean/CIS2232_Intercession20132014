@@ -36,13 +36,11 @@
         <p><bean:message key="welcome.message"/></p>
 
         <div style="color:red"><html:errors/></div>  
-
-        <html:form action="/adminSearch">           
-            <label><bean:message key="label.admin.main.unit.id"/></label><input type="text" id ="unitId" onblur="adminOptionUnitId();"/>
-            <label><bean:message key="label.admin.main.customer.username"/></label><input type="text" id ="customerUsername"  onblur="adminOptionCustomerUsername();"/>
-            <label><bean:message key="label.admin.customer.last.name"/></label><input type="text" id ="customerLastName"  onblur="adminOptionCustomerLastName();"/>
+        <html:form action="/adminCustomerSearch">           
+            <label><bean:message key="label.admin.main.customer.email"/></label><input type="text" name="customerEmail" id ="customerEmail" onblur="adminOptionCustomerEmail();"/>
+            <label><bean:message key="label.admin.main.customer.username"/></label><input type="text" name="customerUsername" id ="customerUsername"  onblur="adminOptionCustomerUsername();"/>
+            <label><bean:message key="label.admin.customer.last.name"/></label><input type="text" name="customerLastName" id ="customerLastName"  onblur="adminOptionCustomerLastName();"/>
             <html:submit><bean:message key="label.admin.submit"/></html:submit>
-            <html:submit onclick="setIdZero"><bean:message key="label.admin.list.all"/></html:submit>
         </html:form>
     </body>
 </html:html>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : user
-    Created on : Jun 10, 2014, 5:18:47 PM
+    Document   : newjsp
+    Created on : Jun 17, 2014, 3:15:22 PM
     Author     : Michael
 --%>
 
@@ -36,33 +36,29 @@
                 </td></tr>
 
         </table>
-        <table>         
-            <c:forEach var="unit" items="${storageUnit}">  
-                <c:if test="${customer.customerId == unit.customerId}">
+        <table> 
+            <c:forEach var="customer" items="${customerList}">               
                     <tr>
                         <td>
-                            ${unit.unitId}
+                            ${customer.customerId}
                         </td> 
                         <td>
-                            ${unit.unitType}
+                            ${customer.lastName}
                         </td> 
                         <td>
-                            ${unit.unitDimensions}
+                            ${customer.firstName}
                         </td> 
+                         <td>
+                            ${customer.email}
+                         </td>
                         <td>
-                            ${unit.unitDateFrom}
+                            <html:form action="/adminModifyCustomer">
+                                <html:hidden property="customerId" value="${customer.customerId}"/>
+                                <html:submit property="action"><bean:message key="label.admin.customer.search.update"/></html:submit>
+                                <html:submit property="action"><bean:message key="label.admin.customer.search.delete"/></html:submit>
+                            </html:form>                                                             
                         </td> 
-                        <td>
-                            ${unit.unitDateTo}
-                        </td> 
-                        <td>
-                            <html:form action="/releaseUnit">
-                                <html:hidden property="unitId" value="${unit.unitId}"/>
-                                <html:submit property="Submit"><bean:message key="label.customer.unit.view.release.unit"/></html:submit>
-                            </html:form>
-                        </td>
-                    </tr>
-                </c:if>       
+                    </tr>               
             </c:forEach>
     </body>
 </html:html>

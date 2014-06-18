@@ -1,7 +1,7 @@
 package business;
 
 import forms.LoginForm;
-import forms.UserForm;
+import forms.CustomerForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +24,6 @@ public class Login {
     // The connection object.
     private Connection con;
     private ResultSet rs = null;
-    private UserForm user;
 
     /**
      * This method retrieves data from the database.
@@ -60,7 +59,7 @@ public class Login {
                 customerId = rs.getInt("cus_id");
                 validateLogin.setCustomerId(customerId);
                 validateLogin.setValidated(true);
-                authenticate = "user";
+                authenticate = "customer";
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);

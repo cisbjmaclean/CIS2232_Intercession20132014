@@ -27,12 +27,12 @@
                         </tr>
                         <tr>
                             <td>
-                            <html:submit property="action"><bean:message key="label.admin.menu.add.user"/></html:submit>
+                            <html:submit property="action"><bean:message key="label.admin.menu.view.all.customers"/></html:submit>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                            <html:submit property="action"><bean:message key="label.admin.menu.add.unit"/></html:submit>                   
+                            <html:submit property="action"><bean:message key="label.admin.menu.add.customer"/></html:submit>
                             </td>
                         </tr>
                         <tr>
@@ -40,6 +40,11 @@
                             <html:submit property="action"><bean:message key="label.admin.menu.view.all.units"/></html:submit>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                            <html:submit property="action"><bean:message key="label.admin.menu.add.unit"/></html:submit>                   
+                            </td>
+                        </tr>                     
                         <tr>
                             <td>
                             <html:submit property="action"><bean:message key="label.admin.menu.view.calendar"/></html:submit>

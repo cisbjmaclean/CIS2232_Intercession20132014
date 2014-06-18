@@ -34,8 +34,8 @@
         <put name="body"   value="/main.jsp" />
     </definition>
     
-    <definition name="createUserTile" extends=".mainLayout">
-        <put name="body"   value="/createUser.jsp" />
+    <definition name="createCustomerTile" extends=".mainLayout">
+        <put name="body"   value="/createCustomer.jsp" />
     </definition>
     
     <definition name="viewAllTile" extends=".mainLayout">
@@ -58,7 +58,6 @@
         <put name="body"   value="/customerCalendar.jsp" />
     </definition>
     
-
     <definition name="adminMenuTile" extends=".mainClassicLayoutAdmin">
         <put name="menu"   value="/adminMenu.jsp" />
     </definition>
@@ -67,11 +66,25 @@
         <put name="body"   value="/adminMain.jsp" />
     </definition> 
     
-    <definition name="adminAddUserTile" extends=".mainClassicLayoutAdmin">
-        <put name="body"   value="/adminAddUser.jsp" />
+    <definition name="adminAddCustomerTile" extends=".mainClassicLayoutAdmin">
+        <put name="body"   value="/adminAddCustomer.jsp" />
     </definition>
     
     <definition name="adminAddUnitTile" extends=".mainClassicLayoutAdmin">
         <put name="body"   value="/adminAddUnit.jsp" />
     </definition>  
+    
+    <definition name="adminSearchResultsTile" extends=".mainClassicLayoutAdmin">
+        <put name="body"   value="/adminSearchResults.jsp" />
+    </definition> 
+    
+    <definition name="adminUpdateCustomerTile" extends=".mainClassicLayoutAdmin">
+        <put name="body"   value="/adminUpdateCustomer.jsp" />
+    </definition> 
+    
+    <definition name="adminAddCustomerTile" extends=".mainClassicLayoutAdmin">
+        <put name="body"   value="/adminAddCustomer.jsp" />
+    </definition> 
+    
+    
 </tiles-definitions>

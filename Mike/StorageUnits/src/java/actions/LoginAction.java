@@ -1,9 +1,9 @@
 package actions;
 
-import business.LoadUser;
+import business.LoadCustomer;
 import business.Login;
 import forms.LoginForm;
-import forms.UserForm;
+import forms.CustomerForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -26,9 +26,9 @@ public class LoginAction extends Action {
     private InitializeAction initialize ;
     private String authenticate = "none";
     private LoginForm validateLogin;
-    private UserForm user;
+    private CustomerForm customer;
     private Login login;
-    private LoadUser loadUser;
+    private LoadCustomer loadCustomer;
     private ActionForward forwardTo;
 
     /**
@@ -60,16 +60,15 @@ public class LoginAction extends Action {
         // If login credentials are valid continue otherwise return to the login page.
         switch (authenticate) {
             case "admin":
-                loadUser = new LoadUser();
                 request.getSession().setAttribute("admin", validateLogin);               
                 messages.add("success", (new ActionMessage("label.login.success")));
                 forwardTo = mapping.findForward("adminInitialize");
                 break;
-            case "user":
-                loadUser = new LoadUser();
-                request.getSession().setAttribute("user", validateLogin);
-                loadUser.setUserInformation(validateLogin.getCustomerId());
-                request.getSession().setAttribute("userDetails", user);
+            case "customer":
+                loadCustomer = new LoadCustomer();
+                request.getSession().setAttribute("customer", validateLogin);
+                loadCustomer.setCustomerInformation(validateLogin.getCustomerId());
+                request.getSession().setAttribute("customerDetails", customer);
                 messages.add("success", (new ActionMessage("label.login.success")));
                 forwardTo = mapping.findForward("customerUnitView");
                 break;

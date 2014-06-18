@@ -31,7 +31,7 @@ public class MainMenuAction extends Action {
         if (mainMenu.getAction().equals(Util.resources.getString("label.main.login"))) {
             forwardTo = mapping.findForward("login");
         } else if (mainMenu.getAction().equals(Util.resources.getString("label.main.create"))) {
-            forwardTo = mapping.findForward("addUser");
+            forwardTo = mapping.findForward("addCustomer");
         }
         return forwardTo;
     }

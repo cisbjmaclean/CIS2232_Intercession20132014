@@ -41,14 +41,14 @@ public class ReserveUnit {
         try {
             con = dbConnection.databaseConnection();
         } catch (Exception e) {
-            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("The connection to the database failed.");
         }
 
         // Try to generate the query.
         try {
-            user = (LoginForm) request.getSession().getAttribute("user");
-            reserveUnit = (ReserveUnitForm) request.getAttribute("reserveUnitForm");
+            user = (LoginForm) request.getSession().getAttribute("customer");
+            reserveUnit = (ReserveUnitForm) request.getAttribute("reserveUnitForm");     
             dateFrom = dateFormat.format(calendar.getTime());
             dateTo = reserveUnit.getDateTo();
             // The query to send.
@@ -72,17 +72,17 @@ public class ReserveUnit {
             psAuthenticate.executeUpdate();
     
         } catch (Exception e) {
-            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("There was an issue with the query.");
         } finally {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
         }
-        setUnitDate();
-        SortUnits.compare(LoadStorageUnits.getStorageUnits());
+        setUnit();
+        SortUnits.sort(LoadStorageUnits.getStorageUnits());
     }
 
-    public void setUnitDate() {
+    public void setUnit() {      
         for (StorageUnitForm unit : LoadStorageUnits.getStorageUnits()) {
             if (unit.getUnitId() == reserveUnit.getUnitId()) {
                 unit.setCustomerId(user.getCustomerId());

@@ -1,6 +1,7 @@
 package actions;
 
-import business.LoadCustomers;
+import business.SearchCustomers;
+import forms.AdminCustomerSearchForm;
 import forms.LoginForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,22 +17,12 @@ import org.apache.struts.action.ActionMessages;
  * @author Michael
  * @since Jun 16, 2014
  */
-public class AdminInitializeAction extends Action {
+public class AdminCustomerSearchAction extends Action {
 
+    private AdminCustomerSearchForm searchForm;
     private LoginForm authenticated;
-    private LoadCustomers loadCustomer;
-    private LoadCustomers loadLogin;
+    private SearchCustomers searchCustomer;
 
-    /**
-     *
-     *
-     * @param mapping
-     * @param form
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -42,13 +33,17 @@ public class AdminInitializeAction extends Action {
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
-        loadCustomer = new LoadCustomers();
-        request.getSession().setAttribute("allCustomers", loadCustomer.loadCustomers(request));
-        loadLogin = new LoadCustomers();
-        request.getSession().setAttribute("allLogins", loadLogin.loadLogins(request));
-
-        // Used to define the page to be forwarded to.      
-        ActionForward findForward = mapping.findForward("adminMain");
-        return findForward;
+        searchCustomer = new SearchCustomers();
+        searchForm = (AdminCustomerSearchForm) request.getAttribute("adminCustomerSearchForm");
+        if (searchForm.getCustomerLastName().equals("") && searchForm.getCustomerUsername().equals("") && searchForm.getCustomerLastName().equals("")){
+        request.getSession().setAttribute("customerList", request.getSession().getAttribute("allCustomers"));
+        }else if (searchForm.getCustomerEmail().length() > 0) {
+            searchCustomer.seachByEmail(searchForm, request);
+        } else if (searchForm.getCustomerUsername().length() > 0) {
+            searchCustomer.seachByUsername(searchForm, request);
+        } else if (searchForm.getCustomerLastName().length() > 0) {
+            searchCustomer.seachByLastName(searchForm, request);
+        }
+        return mapping.findForward("adminSearchResults");
     }
 }

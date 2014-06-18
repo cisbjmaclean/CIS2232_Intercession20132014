@@ -1,6 +1,6 @@
 package actions;
 
-import business.ReleaseUnit;
+import business.UpdateCustomer;
 import forms.LoginForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,29 +14,29 @@ import org.apache.struts.action.ActionMessages;
 /**
  *
  * @author Michael
- * @since Jun 12, 2014
+ * @since Jun 17, 2014
  */
-public class ReleaseUnitAction extends Action {
+public class AdminUpdateCustomerAction extends Action {
 
-    private ActionForward forwardTo;
     private LoginForm authenticated;
-    private ReleaseUnit releaseUnit;
+    private boolean customerCreation = false;
+    private UpdateCustomer updateCustomer;
+    private ActionForward findForward;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         ActionMessages messages = new ActionMessages();
-        authenticated = (LoginForm) request.getSession().getAttribute("customer");
-        if (authenticated == null || authenticated.isValidated() == false) {
-            messages.add("error", (new ActionMessage("label.session.expired")));
+        authenticated = (LoginForm) request.getSession().getAttribute("admin");
+        if (authenticated == null || authenticated.isValidated() == false || authenticated.getAdminCode() != 378) {
+            messages.add("error", (new ActionMessage("label.session.invalid")));
             saveMessages(request, messages);
             return mapping.findForward("login");
-        }        
-        releaseUnit = new ReleaseUnit();
-        releaseUnit.releaseUnit(request);
-        messages.add("reserved", (new ActionMessage("label.customer.unit.view.release.unit.success")));
-        saveMessages(request, messages);
-        forwardTo = mapping.findForward("customerUnitView");
-        return forwardTo;
+        }
+        
+        updateCustomer = new UpdateCustomer(request);
+        customerCreation = updateCustomer.updateCustomer();
+      
+        return findForward;
     }
 }
