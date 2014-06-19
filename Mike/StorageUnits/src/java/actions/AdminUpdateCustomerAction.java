@@ -34,6 +34,8 @@ public class AdminUpdateCustomerAction extends Action {
             return mapping.findForward("login");
         }
         
+        // finish this up
+        
         updateCustomer = new UpdateCustomer(request);
         customerCreation = updateCustomer.updateCustomer();
       

@@ -163,12 +163,12 @@ CREATE TABLE IF NOT EXISTS `unit` (
 --
 
 INSERT INTO `unit` (`unit_id`, `unit_type`, `unit_dimensions`, `unit_avalibility`, `unit_date_from`, `unit_date_to`) VALUES
-(1, 'small', '10x10', 0, '', ''),
-(2, 'large', '20x20', 0, '', ''),
-(3, 'large', '20x20', 0, '', ''),
-(4, 'small', '10x10', 0, '', ''),
-(5, 'medium', '15x15', 0, '', ''),
-(6, 'medium', '15x15', 0, '', '');
+(1, 'small', '10x10', 1, '', ''),
+(2, 'large', '20x20', 1, '', ''),
+(3, 'large', '20x20', 1, '', ''),
+(4, 'small', '10x10', 1, '', ''),
+(5, 'medium', '15x15', 1, '', ''),
+(6, 'medium', '15x15', 1, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -99,8 +99,7 @@
                 type="actions.ReserveUnitAction"
                 name="reserveUnitForm"
                 input="/customerViewAllUnits.jsp" 
-                scope="request">
-           
+                scope="request">        
             <forward name="customerUnitView"  path="customerUnitViewTile"/>
         </action>                     
         
@@ -116,6 +115,7 @@
             <forward name="adminSearch"  path="adminMainTile"/>
             <forward name="adminSearchResults"  path="adminSearchResultsTile"/>
             <forward name="adminAddCustomer"  path="adminAddCustomerTile"/>
+            <forward name="adminViewAllUnits"  path="adminViewAllUnitsTile"/>
         </action>
         
         <action path="/adminCustomerSearch" 

@@ -86,5 +86,9 @@
         <put name="body"   value="/addCustomer.jsp" />
     </definition> 
     
+    <definition name="adminViewAllUnitsTile" extends=".mainClassicLayoutAdmin">
+        <put name="body"   value="/viewAllUnits.jsp" />
+    </definition> 
+    
     
 </tiles-definitions>

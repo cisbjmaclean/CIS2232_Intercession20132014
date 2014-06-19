@@ -21,8 +21,8 @@ public class LoadCustomers {
 
     // The object used for each new connection.
     private DatabaseConnection dbConnection = new DatabaseConnection();
-    private static ArrayList<CustomerForm> loadCustomers;
-    private static ArrayList<LoginForm> loadLogins;
+    private ArrayList<CustomerForm> loadCustomers;
+    private ArrayList<LoginForm> loadLogins;
     // Used to allow for more security when sending data to a database.
     private PreparedStatement psAuthenticate;
     private String sql;
@@ -103,19 +103,19 @@ public class LoadCustomers {
         return loadLogins;
     }
 
-    public static ArrayList<CustomerForm> getLoadCustomers() {
+    public ArrayList<CustomerForm> getLoadCustomers() {
         return loadCustomers;
     }
 
-    public static void setLoadCustomers(ArrayList<CustomerForm> loadCustomers) {
-        LoadCustomers.loadCustomers = loadCustomers;
+    public void setLoadCustomers(ArrayList<CustomerForm> loadCustomers) {
+        this.loadCustomers = loadCustomers;
     }
 
-    public static ArrayList<LoginForm> getLoadLogins() {
+    public ArrayList<LoginForm> getLoadLogins() {
         return loadLogins;
     }
 
-    public static void setLoadLogins(ArrayList<LoginForm> loadLogins) {
-        LoadCustomers.loadLogins = loadLogins;
+    public void setLoadLogins(ArrayList<LoginForm> loadLogins) {
+        this.loadLogins = loadLogins;
     }
 }

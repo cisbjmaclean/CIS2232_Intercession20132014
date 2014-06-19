@@ -20,6 +20,7 @@ public class ReleaseUnitAction extends Action {
 
     private ActionForward forwardTo;
     private LoginForm authenticated;
+    private LoginForm adminAuthenticated;
     private ReleaseUnit releaseUnit;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -27,11 +28,16 @@ public class ReleaseUnitAction extends Action {
             throws Exception {
         ActionMessages messages = new ActionMessages();
         authenticated = (LoginForm) request.getSession().getAttribute("customer");
-        if (authenticated == null || authenticated.isValidated() == false) {
-            messages.add("error", (new ActionMessage("label.session.expired")));
-            saveMessages(request, messages);
-            return mapping.findForward("login");
-        }        
+        adminAuthenticated = (LoginForm) request.getSession().getAttribute("admin");
+
+        if (adminAuthenticated == null || adminAuthenticated.getAdminCode() != 378) {
+            if (authenticated == null || authenticated.isValidated() == false) {
+                messages.add("error", (new ActionMessage("label.session.expired")));
+                saveMessages(request, messages);
+                return mapping.findForward("login");
+            }
+        }
+        
         releaseUnit = new ReleaseUnit();
         releaseUnit.releaseUnit(request);
         messages.add("reserved", (new ActionMessage("label.customer.unit.view.release.unit.success")));

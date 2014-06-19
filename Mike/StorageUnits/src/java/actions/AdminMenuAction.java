@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import util.Logout;
 import util.Util;
 
 /**
@@ -24,6 +25,7 @@ public class AdminMenuAction extends Action {
     private ActionForward forwardTo;
     private LoginForm authenticated;
     private MultipleActionForm menu;
+    private Logout logout;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
@@ -39,6 +41,8 @@ public class AdminMenuAction extends Action {
         menu = (MultipleActionForm) request.getAttribute("multipleActionForm");
 
         if (menu.getAction().equals(Util.resources.getString("label.admin.menu.logout"))) {
+            logout = new Logout();
+            logout.logout(request, response);
             forwardTo = mapping.findForward("login");
         } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.search"))) {
             forwardTo = mapping.findForward("adminSearch");
@@ -48,7 +52,7 @@ public class AdminMenuAction extends Action {
         } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.add.customer"))) {
             forwardTo = mapping.findForward("adminAddCustomer");
         } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.view.all.units"))) {
-            forwardTo = mapping.findForward("main");
+            forwardTo = mapping.findForward("adminViewAllUnits");
         } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.add.unit"))) {
             forwardTo = mapping.findForward("main");
         } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.view.calendar"))) {

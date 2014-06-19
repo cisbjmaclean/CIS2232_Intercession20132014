@@ -26,7 +26,6 @@ public class ReleaseUnit {
     private String sql;
     // The connection object.
     private Connection con;
-    //private ArrayList<StorageUnitForm> storageUnits;
     private LoginForm user;
     private ReleaseUnitForm releaseUnit;
 

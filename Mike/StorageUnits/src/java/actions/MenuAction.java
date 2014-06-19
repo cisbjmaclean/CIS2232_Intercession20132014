@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import util.Logout;
 import util.Util;
 
 /**
@@ -24,6 +25,7 @@ public class MenuAction extends Action {
     private ActionForward forwardTo;
     private LoginForm authenticated;
     private MultipleActionForm menu;
+    private Logout logout;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
@@ -40,6 +42,8 @@ public class MenuAction extends Action {
         menu = (MultipleActionForm) request.getAttribute("multipleActionForm");
 
         if (menu.getAction().equals(Util.resources.getString("label.menu.logout"))) {
+            logout = new Logout();
+            logout.logout(request, response);
             forwardTo = mapping.findForward("login");
         } else if (menu.getAction().equals(Util.resources.getString("label.menu.view.my.units"))) {
             forwardTo = mapping.findForward("customerUnitView");

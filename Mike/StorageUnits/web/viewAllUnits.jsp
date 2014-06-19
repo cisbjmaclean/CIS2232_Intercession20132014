@@ -67,18 +67,30 @@
                         </td> 
                         <td>
                             ${unit.unitDateTo}
-                        </td>                      
-                        <c:if test="${customer.validated == true}">
-                            <c:if test="${unit.customerId == 0}">
-                                <td>
-                                    <html:form action="/reserveUnit">
-                                        <html:hidden property="unitId" value="${unit.unitId}"/>
-                                        <label><bean:message key="label.customer.view.all.months"/></label><input type="text" name="dateTo" class="datepicker" value="Click Here" size="9">
-                                        <html:submit property="Submit"><bean:message key="label.customer.view.all.reserve.unit"/></html:submit>
-                                    </html:form>
-                                </td>
+                        </td>   
+                        <c:if test="${customer.validated != null}"> 
+                            <c:if test="${unit.customerId == 0}"> 
+                                <c:if test="${admin.adminCode != 378}">
+                                    <td>
+                                        <html:form action="/reserveUnit">
+                                            <html:hidden property="unitId" value="${unit.unitId}"/>
+                                            <label><bean:message key="label.customer.view.all.months"/></label><input type="text" name="dateTo" class="datepicker" value="Click Here" size="9">
+                                            <html:submit property="Submit"><bean:message key="label.customer.view.all.reserve.unit"/></html:submit>                                 
+                                        </html:form>
+                                    </td>
+                                </c:if>
                             </c:if>
-                        </c:if>
+                        </c:if> 
+                        <c:if test="${unit.customerId == 1}">
+                            <c:if test="${admin.adminCode == 378}">
+                                <td>
+                                    <html:form action="/releaseUnit">
+                                        <html:hidden property="unitId" value="${unit.unitId}"/>
+                                        <html:submit property="Submit"><bean:message key="label.customer.unit.view.release.unit"/></html:submit>
+                                    </html:form>  
+                                </td>
+                            </c:if> 
+                        </c:if>                     
                     </tr>              
                 </c:forEach>
             </table>
