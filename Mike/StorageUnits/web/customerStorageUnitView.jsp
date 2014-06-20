@@ -58,7 +58,7 @@
                         <td>
                             <html:form action="/releaseStorageUnit">
                                 <html:hidden property="unitId" value="${unit.unitId}"/>
-                                <html:submit property="Submit"><bean:message key="label.customer.storage.unit.view.release.unit"/></html:submit>
+                                <html:submit property="Submit"><bean:message key="label.customer.storage.unit.view.release.storage.unit"/></html:submit>
                             </html:form>    
                         </td>
                     </tr>
