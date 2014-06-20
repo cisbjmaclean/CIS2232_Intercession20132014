@@ -21,13 +21,13 @@ public class SetCustomerUpdateInfo {
         allCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
         for (CustomerForm allCustomers : allCustomers) {
             if (allCustomers.getCustomerId() == customerId.getCustomerId()){
-                request.getSession().setAttribute("customerInfo", allCustomers);
+                request.getSession().setAttribute("customerDetails", allCustomers);
             }     
         }
         allLogins = (ArrayList<LoginForm>) request.getSession().getAttribute("allLogins");
         for (LoginForm allLogins : allLogins) {
             if (allLogins.getCustomerId() == customerId.getCustomerId()){
-                request.getSession().setAttribute("customerLogin", allLogins);
+                request.getSession().setAttribute("customer", allLogins);
             }     
         }
     }

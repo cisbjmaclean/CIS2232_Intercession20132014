@@ -16,6 +16,7 @@ import org.apache.struts.action.ActionMapping;
 public class InitializeAction extends Action{
 
     private LoadStorageUnits loadUnits;
+    private ActionForward forwardTo;
     
     /**
      *
@@ -34,7 +35,7 @@ public class InitializeAction extends Action{
         request.getSession().setAttribute("storageUnit", loadUnits.loadStorageUnits(request));
         
         // Used to define the page to be forwarded to.      
-        ActionForward findForward = mapping.findForward("main");
-        return findForward;
+        forwardTo = mapping.findForward("mainMenu");
+        return forwardTo;
     }
 }

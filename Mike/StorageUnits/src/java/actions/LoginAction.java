@@ -26,7 +26,6 @@ public class LoginAction extends Action {
     private InitializeAction initialize ;
     private String authenticate = "none";
     private LoginForm validateLogin;
-    private CustomerForm customer;
     private Login login;
     private LoadCustomer loadCustomer;
     private ActionForward forwardTo;
@@ -67,10 +66,9 @@ public class LoginAction extends Action {
             case "customer":
                 loadCustomer = new LoadCustomer();
                 request.getSession().setAttribute("customer", validateLogin);
-                loadCustomer.setCustomerInformation(validateLogin.getCustomerId());
-                request.getSession().setAttribute("customerDetails", customer);
+                request.getSession().setAttribute("customerDetails", loadCustomer.setCustomerInformation(validateLogin.getCustomerId()));
                 messages.add("success", (new ActionMessage("label.login.success")));
-                forwardTo = mapping.findForward("customerUnitView");
+                forwardTo = mapping.findForward("customerStorageUnitView");
                 break;
             default:
                 messages.add("error", (new ActionMessage("label.login.fail")));

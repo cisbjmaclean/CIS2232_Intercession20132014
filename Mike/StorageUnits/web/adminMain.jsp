@@ -21,7 +21,7 @@
         "You don't have Javascript turned on! In order for this page to function properly you must turn on Javascript."
         </noscript>
         <html:base/>
-        
+
     </head>
     <body>
 
@@ -36,10 +36,18 @@
         <p><bean:message key="welcome.message"/></p>
 
         <div style="color:red"><html:errors/></div>  
+        <p>Customer search</p>
         <html:form action="/adminCustomerSearch">           
             <label><bean:message key="label.admin.main.customer.email"/></label><input type="text" name="customerEmail" id ="customerEmail" onblur="adminOptionCustomerEmail();"/>
             <label><bean:message key="label.admin.main.customer.username"/></label><input type="text" name="customerUsername" id ="customerUsername"  onblur="adminOptionCustomerUsername();"/>
-            <label><bean:message key="label.admin.customer.last.name"/></label><input type="text" name="customerLastName" id ="customerLastName"  onblur="adminOptionCustomerLastName();"/>
+            <label><bean:message key="label.admin.main.customer.last.name"/></label><input type="text" name="customerLastName" id ="customerLastName"  onblur="adminOptionCustomerLastName();"/>
+            <html:submit><bean:message key="label.admin.submit"/></html:submit>
+        </html:form>
+        <p>Storage Unit Search</p>
+        <html:form action="/adminStorageUnitSearch">           
+            <label><bean:message key="label.admin.main.storage.unit.id"/></label><input type="text" name="unitId" id ="unitId" onblur="adminOptionUnitId();"/>
+            <label><bean:message key="label.admin.main.storage.unit.customer.id"/></label><input type="text" name="unitCustomerId" id ="unitCustomerId" onblur="adminOptionUnitCustomerId();" />
+            <label><bean:message key="label.admin.main.storage.unit.customer.last.name"/></label><input type="text" name="unitCustomerLastName" id ="unitCustomerLastName" onblur="adminOptionUnitCustomerLastName();"/>
             <html:submit><bean:message key="label.admin.submit"/></html:submit>
         </html:form>
     </body>

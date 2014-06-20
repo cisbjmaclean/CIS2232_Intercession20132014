@@ -53,3 +53,50 @@ function adminOptionCustomerLastName() {
         document.getElementById('customerUsername').value = "";
     }
 }
+
+function adminOptionUnitId() {   
+    var unitId = document.getElementById('unitId').value;
+    var unitCustomerId = document.getElementById('unitCustomerId').value;
+    var unitCustomerLastName = document.getElementById('unitCustomerLastName').value;
+    /*
+     * This clears the other two options.
+     */
+
+    if (unitId > 0 && unitCustomerId > 0) {
+        document.getElementById('unitCustomerId').value = "";
+    } else if (unitId > 0 && unitCustomerLastName.length > 0) {
+        document.getElementById('unitCustomerLastName').value = "";
+    }
+}
+
+function adminOptionUnitCustomerId() {
+    var unitId = document.getElementById('unitId').value;
+    var unitCustomerId = document.getElementById('unitCustomerId').value;
+    var unitCustomerLastName = document.getElementById('unitCustomerLastName').value;
+
+    /*
+     * This clears the other two options.
+     */
+    if (unitCustomerId  > 0 && unitCustomerLastName.length > 0) {
+        document.getElementById('unitCustomerLastName').value = "";
+    } else if (unitCustomerId  > 0 && unitId  > 0) {
+        document.getElementById('unitId').value = "";
+    }
+
+}
+
+function adminOptionUnitCustomerLastName() {  
+    var unitId = document.getElementById('unitId').value;  
+    var unitCustomerId = document.getElementById('unitCustomerId').value;
+    var unitCustomerLastName = document.getElementById('unitCustomerLastName').value;
+
+    /*
+     * This clears the other two options.
+     */
+    if (unitCustomerLastName.length > 0 && unitId > 0) {
+        document.getElementById('unitId').value = "";
+    } else if (unitCustomerLastName.length > 0 && unitCustomerId > 0) {
+        document.getElementById('unitCustomerId').value = "";
+    }
+}
+

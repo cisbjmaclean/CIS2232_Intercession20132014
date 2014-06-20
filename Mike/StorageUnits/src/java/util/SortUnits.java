@@ -1,8 +1,6 @@
 package util;
 
 import forms.StorageUnitForm;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -10,13 +8,12 @@ import java.util.Comparator;
  * @author Michael
  * @since Jun 14, 2014
  */
-public class SortUnits {
+public class SortUnits implements Comparator<StorageUnitForm> {
 
-    public static void sort(ArrayList<StorageUnitForm> storageUnits) {
-        Collections.sort(storageUnits, new Comparator<StorageUnitForm>() {
-            public int compare(StorageUnitForm form1, StorageUnitForm form2) {
-                return String.valueOf(form1.getUnitId()).compareTo(String.valueOf(form2.getUnitId()));
-            }
-        });
+    @Override
+    public int compare(StorageUnitForm t, StorageUnitForm t1) {
+        int unitId1 = t.getCustomerId();
+        int unitId2 = t1.getCustomerId();
+        return unitId1 - unitId2;
     }
 }

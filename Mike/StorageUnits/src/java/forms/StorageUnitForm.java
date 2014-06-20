@@ -12,7 +12,7 @@ public class StorageUnitForm extends ActionForm {
     private int unitId;
     private String unitType;
     private String unitDimensions;
-    private String UnitAvalibility;
+    private int UnitAvailability;
     private String UnitDateFrom;
     private String UnitDateTo;
     public int customerId;
@@ -44,12 +44,12 @@ public class StorageUnitForm extends ActionForm {
         this.unitDimensions = unitDimensions;
     }
 
-    public String getUnitAvalibility() {
-        return UnitAvalibility;
+    public int getUnitAvailability() {
+        return UnitAvailability;
     }
 
-    public void setUnitAvalibility(String UnitAvalibility) {
-        this.UnitAvalibility = UnitAvalibility;
+    public void setUnitAvailability(int UnitAvailability) {
+        this.UnitAvailability = UnitAvailability;
     }
 
     public String getUnitDateFrom() {

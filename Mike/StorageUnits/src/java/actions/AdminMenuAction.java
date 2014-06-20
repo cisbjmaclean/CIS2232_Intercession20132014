@@ -43,18 +43,18 @@ public class AdminMenuAction extends Action {
         if (menu.getAction().equals(Util.resources.getString("label.admin.menu.logout"))) {
             logout = new Logout();
             logout.logout(request, response);
-            forwardTo = mapping.findForward("login");
+            forwardTo = mapping.findForward("index");
         } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.search"))) {
             forwardTo = mapping.findForward("adminSearch");
         } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.view.all.customers"))) {
             request.getSession().setAttribute("customerList", request.getSession().getAttribute("allCustomers"));
-            forwardTo = mapping.findForward("adminSearchResults");
+            forwardTo = mapping.findForward("adminCustomerSearchResults");
         } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.add.customer"))) {
             forwardTo = mapping.findForward("adminAddCustomer");
-        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.view.all.units"))) {
-            forwardTo = mapping.findForward("adminViewAllUnits");
-        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.add.unit"))) {
-            forwardTo = mapping.findForward("main");
+        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.view.all.storage.units"))) {
+            forwardTo = mapping.findForward("adminViewAllStorageUnits");
+        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.add.storage.unit"))) {
+            forwardTo = mapping.findForward("adminAddStorageUnit");
         } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.view.calendar"))) {
             forwardTo = mapping.findForward("main");
         }

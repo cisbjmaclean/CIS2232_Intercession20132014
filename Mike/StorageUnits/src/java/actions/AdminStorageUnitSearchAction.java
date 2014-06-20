@@ -1,7 +1,8 @@
 package actions;
 
-import business.SearchCustomers;
-import forms.AdminCustomerSearchForm;
+
+import business.SearchStroageUnits;
+import forms.AdminStorageUnitSearchForm;
 import forms.LoginForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,13 +16,14 @@ import org.apache.struts.action.ActionMessages;
 /**
  *
  * @author Michael
- * @since Jun 16, 2014
+ * @since Jun 19, 2014
  */
-public class AdminCustomerSearchAction extends Action {
+public class AdminStorageUnitSearchAction extends Action {
 
-    private AdminCustomerSearchForm searchForm;
+    private ActionForward forwardTo;
     private LoginForm authenticated;
-    private SearchCustomers searchCustomer;
+    private AdminStorageUnitSearchForm searchForm;
+    private SearchStroageUnits searchUnit;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
@@ -33,17 +35,17 @@ public class AdminCustomerSearchAction extends Action {
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
-        searchCustomer = new SearchCustomers();
-        searchForm = (AdminCustomerSearchForm) request.getAttribute("adminCustomerSearchForm");
-        if (searchForm.getCustomerLastName().equals("") && searchForm.getCustomerUsername().equals("") && searchForm.getCustomerLastName().equals("")){
+        searchUnit = new SearchStroageUnits();
+        searchForm = (AdminStorageUnitSearchForm) request.getAttribute("adminStorageUnitSearchForm");
+        if (searchForm.getUnitId() == 0 && searchForm.getUnitCustomerId()== 0 && searchForm.getUnitCustomerLastName().equals("")){
         request.setAttribute("customerList", request.getSession().getAttribute("allCustomers"));
-        }else if (searchForm.getCustomerEmail().length() > 0) {
-            searchCustomer.seachByEmail(searchForm, request);
-        } else if (searchForm.getCustomerUsername().length() > 0) {
-            searchCustomer.seachByUsername(searchForm, request);
-        } else if (searchForm.getCustomerLastName().length() > 0) {
-            searchCustomer.seachByLastName(searchForm, request);
+        }else if (searchForm.getUnitId() > 0) {
+            searchUnit.seachByUnitId(searchForm, request);
+        } else if (searchForm.getUnitCustomerId()> 0) {
+            searchUnit.seachByCustomerId(searchForm, request);
+        } else if (searchForm.getUnitCustomerLastName().length() > 0) {
+            searchUnit.seachByLastName(searchForm, request);
         }
-        return mapping.findForward("adminCustomerSearchResults");
+        return mapping.findForward("adminStroageUnitSearchResults");
     }
 }

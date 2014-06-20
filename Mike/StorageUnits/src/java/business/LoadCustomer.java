@@ -31,7 +31,7 @@ public class LoadCustomer {
     private ResultSet rs = null;
     private CustomerForm customer;
 
-    public void setCustomerInformation(int customerID) {
+    public CustomerForm setCustomerInformation(int customerID) {
         try {
             con = dbConnection.databaseConnection();
         } catch (Exception e) {
@@ -67,5 +67,6 @@ public class LoadCustomer {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
         }
+        return customer;
     }
 }

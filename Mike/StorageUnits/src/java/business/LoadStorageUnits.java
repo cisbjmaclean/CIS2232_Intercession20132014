@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ import util.SortUnits;
 public class LoadStorageUnits {
 
     // The object used for each new connection.
-    private DatabaseConnection dbConnection = new DatabaseConnection();   
+    private DatabaseConnection dbConnection = new DatabaseConnection();
     private static ArrayList<StorageUnitForm> storageUnits;
     // Used to allow for more security when sending data to a database.
     private PreparedStatement psAuthenticate;
@@ -34,7 +35,7 @@ public class LoadStorageUnits {
      * This method retrieves data from the database.
      *
      * @param request
-     * @return 
+     * @return
      */
     public ArrayList loadStorageUnits(HttpServletRequest request) {
 
@@ -50,21 +51,22 @@ public class LoadStorageUnits {
         try {
             storageUnits = new ArrayList();
             // The query to send.
-            sql = "SELECT `unit`.`unit_id`, `unit`.`unit_type`, `unit`.`unit_dimensions`, `unit`.`unit_avalibility`, "
-                    + "`unit`.`unit_date_from`, `unit`.`unit_date_to`, `customer_unit`.`cus_id` FROM `unit` LEFT OUTER JOIN "
-                    + "`customer_unit` ON `unit`.`unit_id` = `customer_unit`.`unit_id`";
+            sql = "SELECT `storage_unit`.`storage_unit_id`, `storage_unit`.`storage_unit_type`, `storage_unit`.`storage_unit_dimensions`, "
+                    + "`storage_unit`.`storage_unit_availability`, `storage_unit`.`storage_unit_date_from`, `storage_unit`.`storage_unit_date_to`,"
+                    + " `customer_storage_unit`.`cus_id` FROM `storage_unit` LEFT OUTER JOIN `customer_storage_unit` "
+                    + "ON `storage_unit`.`storage_unit_id` = `customer_storage_unit`.`storage_unit_id`";
             psAuthenticate = con.prepareStatement(sql);
             // Send the query and get the results back.
             rs = psAuthenticate.executeQuery();
             // Iterate over the result set.
             while (rs.next()) {
                 unit = new StorageUnitForm();
-                unit.setUnitId(rs.getInt("unit_id"));
-                unit.setUnitType(rs.getString("unit_type"));
-                unit.setUnitDimensions(rs.getString("unit_dimensions"));
-                unit.setUnitAvalibility(rs.getString("unit_avalibility"));
-                unit.setUnitDateFrom(rs.getString("unit_date_from"));
-                unit.setUnitDateTo(rs.getString("unit_date_to"));
+                unit.setUnitId(rs.getInt("storage_unit_id"));
+                unit.setUnitType(rs.getString("storage_unit_type"));
+                unit.setUnitDimensions(rs.getString("storage_unit_dimensions"));
+                unit.setUnitAvailability(rs.getInt("storage_unit_availability"));
+                unit.setUnitDateFrom(rs.getString("storage_unit_date_from"));
+                unit.setUnitDateTo(rs.getString("storage_unit_date_to"));
                 unit.setCustomerId(rs.getInt("cus_id"));
                 storageUnits.add(unit);
                 customerId = 0;
@@ -76,7 +78,7 @@ public class LoadStorageUnits {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
         }
-        SortUnits.sort(storageUnits);
+        Collections.sort(storageUnits, new SortUnits());
         return storageUnits;
     }
 

@@ -29,13 +29,10 @@ USE `storage_units_db`;
 -- Table structure for table `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
-  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+`admin_id` int(11) NOT NULL,
   `admin_first_name` varchar(20) NOT NULL,
-  `admin_last_name` varchar(20) NOT NULL,
-  PRIMARY KEY (`admin_id`),
-  UNIQUE KEY `admin_id` (`admin_id`)
+  `admin_last_name` varchar(20) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
@@ -51,13 +48,11 @@ INSERT INTO `admin` (`admin_id`, `admin_first_name`, `admin_last_name`) VALUES
 -- Table structure for table `admin_login`
 --
 
-DROP TABLE IF EXISTS `admin_login`;
 CREATE TABLE IF NOT EXISTS `admin_login` (
-  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+`admin_id` int(11) NOT NULL,
   `admin_login_code` int(11) NOT NULL,
   `admin_login_username` varchar(20) NOT NULL,
-  `admin_login_password` varchar(20) NOT NULL,
-  PRIMARY KEY (`admin_id`)
+  `admin_login_password` varchar(20) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
@@ -73,9 +68,8 @@ INSERT INTO `admin_login` (`admin_id`, `admin_login_code`, `admin_login_username
 -- Table structure for table `customer`
 --
 
-DROP TABLE IF EXISTS `customer`;
 CREATE TABLE IF NOT EXISTS `customer` (
-  `cus_id` int(11) NOT NULL AUTO_INCREMENT,
+`cus_id` int(11) NOT NULL,
   `cus_first_name` varchar(20) NOT NULL,
   `cus_middle_initial` varchar(1) DEFAULT NULL,
   `cus_last_name` varchar(20) NOT NULL,
@@ -84,12 +78,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `cus_province` varchar(20) NOT NULL,
   `cus_postal_code` varchar(20) NOT NULL,
   `cus_phone` varchar(20) NOT NULL,
-  `cus_email` varchar(20) NOT NULL,
-  PRIMARY KEY (`cus_id`),
-  UNIQUE KEY `cus_id` (`cus_id`),
-  UNIQUE KEY `cus_id_2` (`cus_id`),
-  UNIQUE KEY `cus_id_3` (`cus_id`),
-  UNIQUE KEY `cus_id_4` (`cus_id`)
+  `cus_email` varchar(20) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
@@ -108,12 +97,10 @@ INSERT INTO `customer` (`cus_id`, `cus_first_name`, `cus_middle_initial`, `cus_l
 -- Table structure for table `customer_login`
 --
 
-DROP TABLE IF EXISTS `customer_login`;
 CREATE TABLE IF NOT EXISTS `customer_login` (
   `cus_id` int(11) NOT NULL,
   `cus_login_username` varchar(20) NOT NULL,
-  `cus_login_password` varchar(20) NOT NULL,
-  PRIMARY KEY (`cus_id`)
+  `cus_login_password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -129,40 +116,34 @@ INSERT INTO `customer_login` (`cus_id`, `cus_login_username`, `cus_login_passwor
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer_unit`
+-- Table structure for table `customer_storage_unit`
 --
 
-DROP TABLE IF EXISTS `customer_unit`;
-CREATE TABLE IF NOT EXISTS `customer_unit` (
-  `unit_id` int(11) NOT NULL,
-  `cus_id` int(11) NOT NULL,
-  PRIMARY KEY (`unit_id`),
-  UNIQUE KEY `unit_id` (`unit_id`)
+CREATE TABLE IF NOT EXISTS `customer_storage_unit` (
+  `storage_unit_id` int(11) NOT NULL,
+  `cus_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `unit`
+-- Table structure for table `storage_unit`
 --
 
-DROP TABLE IF EXISTS `unit`;
-CREATE TABLE IF NOT EXISTS `unit` (
-  `unit_id` int(11) NOT NULL AUTO_INCREMENT,
-  `unit_type` varchar(20) NOT NULL,
-  `unit_dimensions` varchar(20) NOT NULL,
-  `unit_avalibility` tinyint(1) NOT NULL,
-  `unit_date_from` varchar(20) NOT NULL,
-  `unit_date_to` varchar(20) NOT NULL,
-  PRIMARY KEY (`unit_id`),
-  UNIQUE KEY `unit_id` (`unit_id`)
+CREATE TABLE IF NOT EXISTS `storage_unit` (
+`storage_unit_id` int(11) NOT NULL,
+  `storage_unit_type` varchar(20) NOT NULL,
+  `storage_unit_dimensions` varchar(20) NOT NULL,
+  `storage_unit_availability` tinyint(1) NOT NULL,
+  `storage_unit_date_from` varchar(20) NOT NULL,
+  `storage_unit_date_to` varchar(20) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `unit`
+-- Dumping data for table `storage_unit`
 --
 
-INSERT INTO `unit` (`unit_id`, `unit_type`, `unit_dimensions`, `unit_avalibility`, `unit_date_from`, `unit_date_to`) VALUES
+INSERT INTO `storage_unit` (`storage_unit_id`, `storage_unit_type`, `storage_unit_dimensions`, `storage_unit_availability`, `storage_unit_date_from`, `storage_unit_date_to`) VALUES
 (1, 'small', '10x10', 1, '', ''),
 (2, 'large', '20x20', 1, '', ''),
 (3, 'large', '20x20', 1, '', ''),
@@ -170,6 +151,70 @@ INSERT INTO `unit` (`unit_id`, `unit_type`, `unit_dimensions`, `unit_avalibility
 (5, 'medium', '15x15', 1, '', ''),
 (6, 'medium', '15x15', 1, '', '');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+ ADD PRIMARY KEY (`admin_id`), ADD UNIQUE KEY `admin_id` (`admin_id`);
+
+--
+-- Indexes for table `admin_login`
+--
+ALTER TABLE `admin_login`
+ ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+ ADD PRIMARY KEY (`cus_id`), ADD UNIQUE KEY `cus_id` (`cus_id`), ADD UNIQUE KEY `cus_id_2` (`cus_id`), ADD UNIQUE KEY `cus_id_3` (`cus_id`), ADD UNIQUE KEY `cus_id_4` (`cus_id`);
+
+--
+-- Indexes for table `customer_login`
+--
+ALTER TABLE `customer_login`
+ ADD PRIMARY KEY (`cus_id`);
+
+--
+-- Indexes for table `customer_storage_unit`
+--
+ALTER TABLE `customer_storage_unit`
+ ADD PRIMARY KEY (`storage_unit_id`), ADD UNIQUE KEY `unit_id` (`storage_unit_id`);
+
+--
+-- Indexes for table `storage_unit`
+--
+ALTER TABLE `storage_unit`
+ ADD PRIMARY KEY (`storage_unit_id`), ADD UNIQUE KEY `unit_id` (`storage_unit_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `admin_login`
+--
+ALTER TABLE `admin_login`
+MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+MODIFY `cus_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `storage_unit`
+--
+ALTER TABLE `storage_unit`
+MODIFY `storage_unit_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

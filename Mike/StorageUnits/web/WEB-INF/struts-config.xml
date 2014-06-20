@@ -12,9 +12,10 @@
     <form-bean type="forms.StorageUnitForm" name="storageUnitForm"/>
     <form-bean type="forms.CustomerForm" name="customerForm"/>
     <form-bean type="forms.MultipleActionForm" name="multipleActionForm"/>
-    <form-bean type="forms.ReleaseUnitForm" name="releaseUnitForm"/>
-    <form-bean type="forms.ReserveUnitForm" name="reserveUnitForm"/>
+    <form-bean type="forms.ReleaseStorageUnitForm" name="releaseStorageUnitForm"/>
+    <form-bean type="forms.ReserveStorageUnitForm" name="reserveStorageUnitForm"/>
     <form-bean type="forms.AdminCustomerSearchForm" name="adminCustomerSearchForm"/>
+    <form-bean type="forms.AdminStorageUnitSearchForm" name="adminStorageUnitSearchForm"/>
     <form-bean type="forms.AdminModifyCustomerForm" name="adminModifyCustomerForm"/>
     </form-beans>
     
@@ -24,58 +25,69 @@
 
     <global-forwards>
         <forward name="main"  path="/main.do"/>
-         <forward name="login"  path="loginTile"/>
+         <forward name="index"  path="/index.jsp"/>
+         <forward name="login"  path="loginTile"/>  
          <forward name="adminMain"  path="adminMainTile"/>
     </global-forwards>
 
     <action-mappings>
-        <action path="/main" forward="mainTile"/>
+        <action path="/mainMenu" forward="mainMenuTile"/>
         
         <action path="/initialize"
                 type="actions.InitializeAction">
-            <forward name="main" path="mainTile"/>
+            <forward name="mainMenu" path="mainMenuTile"/>
         </action>
+        
+        <!-- changes input .jsp to tiles for validation -->
         
         <action path="/addCustomer" 
                 type="actions.AddCustomerAction"
                 name="addUpdateCustomerForm"
-                input="/addCustomer.jsp" 
+                input="addCustomerTile" 
                 scope="request">
             <forward name="addCustomer"  path="addCustomerTile"/>
             <forward name="adminAddCustomer"  path="adminAddCustomerTile"/>
         </action>
+        
+         <action path="/updateCustomer" 
+                type="actions.UpdateCustomerAction"
+                name="addUpdateCustomerForm"
+                input="/updateCustomer.jsp" 
+                scope="request">           
+         </action>  
         
         <action path="/login" 
                 type="actions.LoginAction"
                 name="loginForm"
                 input="/login.jsp" 
                 scope="request">
-            <forward name="customerUnitView"  path="customerUnitViewTile"/>
+            <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
             <forward name="adminInitialize"  path="/adminInitialize.jsp"/>
         </action>             
         
         <action path="/loadUnits" 
                 type="actions.LoadStorageUnitsAction"
                 name="storageUnitForm">
-            <forward name="viewAll"  path="viewAllUnitsTile"/>
+            <forward name="viewAllStorageUnits"  path="viewAllStorageUnitsTile"/>
         </action>
                
-        <action path="/reserveUnit" 
-                type="actions.ReserveUnitAction"
+        <action path="/reserveStorageUnit" 
+                type="actions.ReserveStorageUnitAction"
                 name="storageUnitForm"
-                input="/viewAll.jsp" 
+                input="/viewAllStorageUnits.jsp" 
                 scope="request">
             <forward name="main"  path="mainTile"/>
         </action>
         
-        <action path="/menu" 
-                type="actions.MenuAction"
+        <action path="/customerMenu" 
+                type="actions.CustomerMenuAction"
                 name="multipleActionForm"
-                input="/menu.jsp" 
+                input="/customerMenu.jsp" 
                 scope="request">
-            <forward name="customerUnitView"  path="customerUnitViewTile"/>
-            <forward name="customerViewAllUnits"  path="customerViewAllUnitsTile"/>
+            <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
+            <forward name="customerViewAllStorageUnits"  path="customerViewAllStorageUnitsTile"/>
             <forward name="customerCalendar"  path="customerCalendarTile"/>
+            <forward name="customerUpdate"  path="customerUpdateTile"/>
         </action>
         
         <action path="/mainMenu" 
@@ -84,23 +96,24 @@
                 input="/main.jsp" 
                 scope="request">
             <forward name="addCustomer"  path="addCustomerTile"/>
-            <forward name="viewAllUnits"  path="viewAllUnitsTile"/>        
+            <forward name="viewAllStorageUnits"  path="viewAllStorageUnitsTile"/>      
         </action>
         
-        <action path="/releaseUnit" 
-                type="actions.ReleaseUnitAction"
-                name="releaseUnitForm"
-                input="/customerUnitView.jsp" 
+        <action path="/releaseStorageUnit" 
+                type="actions.ReleaseStorageUnitAction"
+                name="releaseStorageUnitForm"
+                input="/customerStorageUnitView.jsp" 
                 scope="request">
-            <forward name="customerUnitView"  path="customerUnitViewTile"/>
+            <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
+            <forward name="adminStorageUnitView"  path="adminStorageUnitViewTile"/>
         </action>
        
-        <action path="/reserveUnit" 
-                type="actions.ReserveUnitAction"
-                name="reserveUnitForm"
-                input="/customerViewAllUnits.jsp" 
+        <action path="/reserveStorageUnit" 
+                type="actions.ReserveStorageUnitAction"
+                name="reserveStorageUnitForm"
+                input="/customerViewAllStorageUnits.jsp" 
                 scope="request">        
-            <forward name="customerUnitView"  path="customerUnitViewTile"/>
+            <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
         </action>                     
         
         <action path="/adminInitialize"
@@ -113,9 +126,10 @@
                 input="/adminMenu.jsp" 
                 scope="request">
             <forward name="adminSearch"  path="adminMainTile"/>
-            <forward name="adminSearchResults"  path="adminSearchResultsTile"/>
+            <forward name="adminCustomerSearchResults"  path="adminCustomerSearchResultsTile"/>
             <forward name="adminAddCustomer"  path="adminAddCustomerTile"/>
-            <forward name="adminViewAllUnits"  path="adminViewAllUnitsTile"/>
+            <forward name="adminViewAllStorageUnits"  path="adminViewAllStorageUnitsTile"/>
+            <forward name="adminAddStorageUnit"  path="adminAddStorageUnitTile"/>
         </action>
         
         <action path="/adminCustomerSearch" 
@@ -123,8 +137,16 @@
                 name="adminCustomerSearchForm"
                 input="/adminMain.jsp" 
                 scope="request">
-            <forward name="adminSearchResults"  path="adminSearchResultsTile"/>            
+            <forward name="adminCustomerSearchResults"  path="adminCustomerSearchResultsTile"/>            
         </action>
+        
+        <action path="/adminStorageUnitSearch" 
+                type="actions.AdminStorageUnitSearchAction"
+                name="adminStorageUnitSearchForm"
+                input="/adminMain.jsp" 
+                scope="request">
+            <forward name="adminStroageUnitSearchResults"  path="adminStorageUnitSearchResultsTile"/>            
+        </action>          
         
         <action path="/adminModifyCustomer" 
                 type="actions.AdminModifyCustomerAction"
@@ -133,16 +155,15 @@
                 scope="request">
             <forward name="adminUpdateCustomer"  path="adminUpdateCustomerTile"/>
         </action>
-             
-        <action path="/adminUpdateCustomer" 
-                type="actions.AdminUpdateCustomerAction"
-                name="addUpdateCustomerForm"
-                input="/adminSearchResults.jsp" 
-                scope="request">           
-         </action>   
-            
-               
-    
+        
+        <action path="/adminAddStorageUnit" 
+                type="actions.AdminAddStorageUnitAction"
+                name="storageUnitForm"
+                input="adminAddStorageUnitTile" 
+                scope="request">
+            <forward name="adminMain"  path="adminMainTile"/>
+        </action>
+  
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
