@@ -5,13 +5,12 @@ import forms.StorageUnitForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
-import util.SortUnits;
+import util.SortStorageUnits;
 
 /**
  *
@@ -28,6 +27,7 @@ public class ReleaseStorageUnit {
     // The connection object.
     private Connection con;
     private ReleaseStorageUnitForm releaseUnit;
+    private ArrayList<StorageUnitForm> storageUnits;
 
     public void releaseUnit(HttpServletRequest request) {
         // Try to connect to the database.  
@@ -67,18 +67,18 @@ public class ReleaseStorageUnit {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
         }
-        setUnit();
-        Collections.sort(LoadStorageUnits.getStorageUnits(), new SortUnits());
+        storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
+        setUnit(storageUnits);
+        SortStorageUnits.sortDefault(request, storageUnits);  
     }
 
-    public void setUnit() {
-                
-        for (StorageUnitForm unit : LoadStorageUnits.getStorageUnits()) {
-            if (unit.getUnitId() == releaseUnit.getUnitId()) {
-                unit.setCustomerId(0);
-                unit.setUnitAvailability(1);
-                unit.setUnitDateTo("");
-                unit.setUnitDateFrom("");
+    public void setUnit(ArrayList<StorageUnitForm> storageUnits) {              
+        for (StorageUnitForm storageUnit : storageUnits)  {
+            if (storageUnit.getUnitId() == releaseUnit.getUnitId()) {
+                storageUnit.setCustomerId(0);
+                storageUnit.setUnitAvailability(1);
+                storageUnit.setUnitDateTo("");
+                storageUnit.setUnitDateFrom("");
             }
         }
     }

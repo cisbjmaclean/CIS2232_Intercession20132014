@@ -12,9 +12,9 @@ public class StorageUnitForm extends ActionForm {
     private int unitId;
     private String unitType;
     private String unitDimensions;
-    private int UnitAvailability;
-    private String UnitDateFrom;
-    private String UnitDateTo;
+    private int unitAvailability;
+    private String unitDateFrom;
+    private String unitDateTo;
     public int customerId;
 
     public StorageUnitForm() {
@@ -45,27 +45,27 @@ public class StorageUnitForm extends ActionForm {
     }
 
     public int getUnitAvailability() {
-        return UnitAvailability;
+        return unitAvailability;
     }
 
-    public void setUnitAvailability(int UnitAvailability) {
-        this.UnitAvailability = UnitAvailability;
+    public void setUnitAvailability(int unitAvailability) {
+        this.unitAvailability = unitAvailability;
     }
 
     public String getUnitDateFrom() {
-        return UnitDateFrom;
+        return unitDateFrom;
     }
 
-    public void setUnitDateFrom(String UnitDateFrom) {
-        this.UnitDateFrom = UnitDateFrom;
+    public void setUnitDateFrom(String unitDateFrom) {
+        this.unitDateFrom = unitDateFrom;
     }
 
     public String getUnitDateTo() {
-        return UnitDateTo;
+        return unitDateTo;
     }
 
-    public void setUnitDateTo(String UnitDateTo) {
-        this.UnitDateTo = UnitDateTo;
+    public void setUnitDateTo(String unitDateTo) {
+        this.unitDateTo = unitDateTo;
     }
 
     public int getCustomerId() {
@@ -75,4 +75,6 @@ public class StorageUnitForm extends ActionForm {
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
+
+   
 }

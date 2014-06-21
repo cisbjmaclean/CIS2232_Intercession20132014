@@ -33,7 +33,7 @@
                         </tr>
                         <tr>
                             <td>
-                            <html:submit property="action"><bean:message key="label.customer.menu.view.calendar"/></html:submit>
+                            <html:submit property="action"><bean:message key="label.customer.menu.view.search.units"/></html:submit>
                             </td>
                         </tr>
                         <tr>

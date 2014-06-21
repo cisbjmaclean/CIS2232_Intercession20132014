@@ -44,12 +44,7 @@
                             <td>
                             <html:submit property="action"><bean:message key="label.admin.menu.add.storage.unit"/></html:submit>                   
                             </td>
-                        </tr>                     
-                        <tr>
-                            <td>
-                            <html:submit property="action"><bean:message key="label.admin.menu.view.calendar"/></html:submit>
-                            </td>
-                        </tr>                       
+                        </tr>                                          
                         <tr>
                             <td>
                             <html:submit property="action"><bean:message key="label.admin.menu.logout"/></html:submit>

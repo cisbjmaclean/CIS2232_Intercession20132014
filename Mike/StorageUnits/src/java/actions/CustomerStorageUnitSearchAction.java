@@ -1,6 +1,6 @@
 package actions;
 
-import business.ReserveStorageUnit;
+import business.CustomerSearchStorageUnits;
 import forms.LoginForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,13 +14,13 @@ import org.apache.struts.action.ActionMessages;
 /**
  *
  * @author Michael
- * @since 6/7/2014
+ * @since Jun 20, 2014
  */
-public class ReserveStorageUnitAction extends Action {
+public class CustomerStorageUnitSearchAction extends Action {
 
     private ActionForward forwardTo;
     private LoginForm authenticated;
-    private ReserveStorageUnit reserveUnit;
+    private CustomerSearchStorageUnits searchUnits;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
@@ -32,11 +32,9 @@ public class ReserveStorageUnitAction extends Action {
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
-        reserveUnit = new ReserveStorageUnit();
-        reserveUnit.reserveUnit(request);
-        messages.add("success", (new ActionMessage("label.customer.view.all.reserve.storage.unit.success")));
-        saveMessages(request, messages);
-        forwardTo = mapping.findForward("customerStorageUnitView");
+        searchUnits = new CustomerSearchStorageUnits();   
+        searchUnits.unitSeach(request);     
+        forwardTo = mapping.findForward("customerStorageUnitSearchResults");
         return forwardTo;
     }
 }

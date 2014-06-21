@@ -2,6 +2,8 @@ package actions;
 
 import business.LoadCustomers;
 import forms.LoginForm;
+import forms.StorageUnitForm;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -10,6 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import util.SortStorageUnits;
 
 /**
  *
@@ -21,6 +24,7 @@ public class AdminInitializeAction extends Action {
     private LoginForm authenticated;
     private LoadCustomers loadCustomer;
     private LoadCustomers loadLogin;
+    private ArrayList<StorageUnitForm> storageUnits;
 
     /**
      *
@@ -46,6 +50,8 @@ public class AdminInitializeAction extends Action {
         request.getSession().setAttribute("allCustomers", loadCustomer.loadCustomers(request));
         loadLogin = new LoadCustomers();
         request.getSession().setAttribute("allLogins", loadLogin.loadLogins(request));
+        storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
+        SortStorageUnits.sortAdmin(request, storageUnits);
 
         // Used to define the page to be forwarded to.      
         ActionForward findForward = mapping.findForward("adminMain");

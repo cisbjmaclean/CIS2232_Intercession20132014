@@ -55,8 +55,6 @@ public class AdminMenuAction extends Action {
             forwardTo = mapping.findForward("adminViewAllStorageUnits");
         } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.add.storage.unit"))) {
             forwardTo = mapping.findForward("adminAddStorageUnit");
-        } else if (menu.getAction().equals(Util.resources.getString("label.admin.menu.view.calendar"))) {
-            forwardTo = mapping.findForward("main");
         }
         return forwardTo;
     }

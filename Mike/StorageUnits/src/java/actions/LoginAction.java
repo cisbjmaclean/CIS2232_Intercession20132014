@@ -3,7 +3,6 @@ package actions;
 import business.LoadCustomer;
 import business.Login;
 import forms.LoginForm;
-import forms.CustomerForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;

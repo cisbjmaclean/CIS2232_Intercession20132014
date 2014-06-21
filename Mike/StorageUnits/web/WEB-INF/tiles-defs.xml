@@ -51,6 +51,14 @@
         <put name="body"   value="/customerStorageUnitView.jsp" />
     </definition>
 
+    <definition name="customerStorageUnitSearchTile" extends=".mainClassicLayoutCustomer">
+        <put name="body"   value="/customerStorageUnitSearch.jsp" />
+    </definition>
+    
+    <definition name="customerStorageUnitSearchResultsTile" extends=".mainClassicLayoutCustomer">
+        <put name="body"   value="/customerStorageUnitSearchResults.jsp" />
+    </definition>
+
     <definition name="customerViewAllStorageUnitsTile" extends=".mainClassicLayoutCustomer">
         <put name="body"   value="/viewAllStorageUnits.jsp" />
     </definition>
@@ -102,9 +110,5 @@
     <definition name="adminAddStorageUnitTile" extends=".mainClassicLayoutAdmin">
         <put name="body"   value="/adminAddStorageUnit.jsp" />
     </definition> 
-    
-    
-    
-    
     
 </tiles-definitions>

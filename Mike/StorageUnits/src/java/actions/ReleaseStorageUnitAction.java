@@ -40,7 +40,7 @@ public class ReleaseStorageUnitAction extends Action {
 
         releaseUnit = new ReleaseStorageUnit();
         releaseUnit.releaseUnit(request);
-        messages.add("reserved", (new ActionMessage("label.customer.storage.unit.view.release.storage.unit.success")));
+        messages.add("success", (new ActionMessage("label.customer.storage.unit.view.release.storage.unit.success")));
         saveMessages(request, messages);
         if (adminAuthenticated != null && adminAuthenticated.getAdminCode() == 378) {
             forwardTo = mapping.findForward("adminStorageUnitView");

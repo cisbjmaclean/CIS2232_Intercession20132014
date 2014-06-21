@@ -1,6 +1,6 @@
 <%-- 
-    Document   : adminStorageUnitSearchResults
-    Created on : Jun 19, 2014, 9:49:55 PM
+    Document   : customerStorageUnitSearchResults
+    Created on : Jun 20, 2014, 6:59:53 PM
     Author     : Michael
 --%>
 
@@ -17,19 +17,23 @@
     <!DOCTYPE html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui-1.10.4.css">
-        <script src="/StorageUnits/scripts/jquery-1.11.1.min.js"></script>
-        <script src="/StorageUnits/scripts/jquery-ui-1.10.4.min.js"></script>
-        <link rel="stylesheet" href="/styles/styles.css">
+        <link rel="stylesheet" href="/StorageUnits/styles/styles.css">
+        <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui.min.css">
+        <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui.theme.css">
+        <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui.structure.css">
+        <script src="/StorageUnits/scripts/jquery.js"></script>
+        <script src="/StorageUnits/scripts/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="/StorageUnits/styles/storageUnitTheme.css">
         <script>
             $(function() {
                 $(".datepicker").datepicker({
-                    minDate: 0,
+                    minDate: +1,
                     maxDate: "+36M"
                 });
             });
         </script>
         <title><bean:message key="welcome.title"/></title>
+
     </head>
     <body>
 
@@ -45,9 +49,9 @@
 
         <div style="color:red"><html:errors/></div>
         <!-- used for the calendar -->
-        <div style="padding-bottom: 300px">
+        <div class="picker">
             <table>
-                <c:forEach var="unit" items="${UnitList}">                       
+                <c:forEach var="unit" items="${customerSearchResults}">               
                     <tr>
                         <td>
                             ${unit.unitId}
@@ -67,16 +71,15 @@
                         <td>
                             ${unit.unitDateTo}
                         </td>   
-                        <c:if test="${unit.customerId == 1}">
-                            <c:if test="${admin.adminCode == 378}">
-                                <td>
-                                    <html:form action="/releaseStorageUnit">
-                                        <html:hidden property="unitId" value="${unit.unitId}"/>
-                                        <html:submit property="Submit"><bean:message key="label.customer.storage.unit.view.release.storage.unit"/></html:submit>
-                                    </html:form>  
-                                </td>
-                            </c:if> 
-                        </c:if>                     
+                        <c:if test="${unit.customerId == 0}"> 
+                            <td>
+                                <html:form action="/reserveStorageUnit">
+                                    <html:hidden property="unitId" value="${unit.unitId}"/>
+                                    <label><bean:message key="label.customer.view.all.months"/></label><input type="text" name="dateTo" class="datepicker" value="Click Here" size="9">
+                                    <html:submit property="Submit"><bean:message key="label.customer.view.all.reserve.storage.unit"/></html:submit>                                 
+                                </html:form>
+                            </td>
+                        </c:if>                                         
                     </tr>              
                 </c:forEach>
             </table>

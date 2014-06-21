@@ -3,14 +3,11 @@ package business;
 import forms.StorageUnitForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
-import util.SortUnits;
 
 /**
  *
@@ -61,6 +58,6 @@ public class AddStorageUnit {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
         }
-         Collections.sort(LoadStorageUnits.getStorageUnits(), new SortUnits());
+        
     }
 }

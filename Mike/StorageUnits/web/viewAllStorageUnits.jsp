@@ -16,15 +16,18 @@
 <html:html lang="true">
     <!DOCTYPE html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui-1.10.4.css">
-        <script src="/StorageUnits/scripts/jquery-1.11.1.min.js"></script>
-        <script src="/StorageUnits/scripts/jquery-ui-1.10.4.min.js"></script>
-        <link rel="stylesheet" href="/styles/styles.css">
+       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="/StorageUnits/styles/styles.css">
+        <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui.min.css">
+        <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui.theme.css">
+        <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui.structure.css">
+        <script src="/StorageUnits/scripts/jquery.js"></script>
+        <script src="/StorageUnits/scripts/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="/StorageUnits/styles/storageUnitTheme.css">
         <script>
             $(function() {
                 $(".datepicker").datepicker({
-                    minDate: 0,
+                    minDate: +1,
                     maxDate: "+36M"
                 });
             });
@@ -46,9 +49,9 @@
 
         <div style="color:red"><html:errors/></div>
         <!-- used for the calendar -->
-        <div style="padding-bottom: 300px">
+        <div class="picker">
             <table>
-                <c:forEach var="unit" items="${storageUnit}">               
+                <c:forEach var="unit" items="${storageUnits}">               
                     <tr>
                         <td>
                             ${unit.unitId}

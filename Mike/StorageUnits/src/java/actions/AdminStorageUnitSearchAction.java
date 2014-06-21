@@ -1,7 +1,7 @@
 package actions;
 
 
-import business.SearchStroageUnits;
+import business.AdminSearchStorageUnits;
 import forms.AdminStorageUnitSearchForm;
 import forms.LoginForm;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ public class AdminStorageUnitSearchAction extends Action {
     private ActionForward forwardTo;
     private LoginForm authenticated;
     private AdminStorageUnitSearchForm searchForm;
-    private SearchStroageUnits searchUnit;
+    private AdminSearchStorageUnits searchUnit;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
@@ -35,7 +35,7 @@ public class AdminStorageUnitSearchAction extends Action {
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
-        searchUnit = new SearchStroageUnits();
+        searchUnit = new AdminSearchStorageUnits();
         searchForm = (AdminStorageUnitSearchForm) request.getAttribute("adminStorageUnitSearchForm");
         if (searchForm.getUnitId() == 0 && searchForm.getUnitCustomerId()== 0 && searchForm.getUnitCustomerLastName().equals("")){
         request.setAttribute("customerList", request.getSession().getAttribute("allCustomers"));
@@ -46,6 +46,6 @@ public class AdminStorageUnitSearchAction extends Action {
         } else if (searchForm.getUnitCustomerLastName().length() > 0) {
             searchUnit.seachByLastName(searchForm, request);
         }
-        return mapping.findForward("adminStroageUnitSearchResults");
+        return mapping.findForward("adminStorageUnitSearchResults");
     }
 }

@@ -17,6 +17,7 @@
     <form-bean type="forms.AdminCustomerSearchForm" name="adminCustomerSearchForm"/>
     <form-bean type="forms.AdminStorageUnitSearchForm" name="adminStorageUnitSearchForm"/>
     <form-bean type="forms.AdminModifyCustomerForm" name="adminModifyCustomerForm"/>
+    <form-bean type="forms.CustomerStorageUnitSearchForm" name="customerStorageUnitSearchForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -69,15 +70,8 @@
                 type="actions.LoadStorageUnitsAction"
                 name="storageUnitForm">
             <forward name="viewAllStorageUnits"  path="viewAllStorageUnitsTile"/>
-        </action>
-               
-        <action path="/reserveStorageUnit" 
-                type="actions.ReserveStorageUnitAction"
-                name="storageUnitForm"
-                input="/viewAllStorageUnits.jsp" 
-                scope="request">
-            <forward name="main"  path="mainTile"/>
-        </action>
+        </action>            
+        
         
         <action path="/customerMenu" 
                 type="actions.CustomerMenuAction"
@@ -86,7 +80,7 @@
                 scope="request">
             <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
             <forward name="customerViewAllStorageUnits"  path="customerViewAllStorageUnitsTile"/>
-            <forward name="customerCalendar"  path="customerCalendarTile"/>
+            <forward name="customerStorageUnitSearch"  path="customerStorageUnitSearchTile"/>
             <forward name="customerUpdate"  path="customerUpdateTile"/>
         </action>
         
@@ -99,6 +93,14 @@
             <forward name="viewAllStorageUnits"  path="viewAllStorageUnitsTile"/>      
         </action>
         
+        <action path="/customerStorageUnitSearch" 
+                type="actions.CustomerStorageUnitSearchAction"
+                name="customerStorageUnitSearchForm"
+                input="/customerStorageUnitSearch.jsp" 
+                scope="request">
+            <forward name="customerStorageUnitSearchResults"  path="customerStorageUnitSearchResultsTile"/>            
+        </action>
+              
         <action path="/releaseStorageUnit" 
                 type="actions.ReleaseStorageUnitAction"
                 name="releaseStorageUnitForm"
@@ -114,7 +116,15 @@
                 input="/customerViewAllStorageUnits.jsp" 
                 scope="request">        
             <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
-        </action>                     
+        </action>    
+        
+     <action path="/extendStorageUnit" 
+                type="actions.ExtendStorageUnitAction"
+                name="reserveStorageUnitForm"
+                input="/viewAllStorageUnits.jsp" 
+                scope="request">
+            <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
+        </action>                 
         
         <action path="/adminInitialize"
                 type="actions.AdminInitializeAction">           
@@ -145,7 +155,7 @@
                 name="adminStorageUnitSearchForm"
                 input="/adminMain.jsp" 
                 scope="request">
-            <forward name="adminStroageUnitSearchResults"  path="adminStorageUnitSearchResultsTile"/>            
+            <forward name="adminStorageUnitSearchResults"  path="adminStorageUnitSearchResultsTile"/>            
         </action>          
         
         <action path="/adminModifyCustomer" 

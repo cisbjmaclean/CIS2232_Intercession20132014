@@ -32,7 +32,7 @@ public class InitializeAction extends Action{
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         loadUnits = new LoadStorageUnits();
-        request.getSession().setAttribute("storageUnit", loadUnits.loadStorageUnits(request));
+        request.getSession().setAttribute("storageUnits", loadUnits.loadStorageUnits(request));
         
         // Used to define the page to be forwarded to.      
         forwardTo = mapping.findForward("mainMenu");

@@ -49,8 +49,8 @@ public class CustomerMenuAction extends Action {
             forwardTo = mapping.findForward("customerStorageUnitView");
         } else if (menu.getAction().equals(Util.resources.getString("label.customer.menu.view.all.storage.units"))) {
             forwardTo = mapping.findForward("customerViewAllStorageUnits");
-        } else if (menu.getAction().equals(Util.resources.getString("label.customer.menu.view.calendar"))) {
-            forwardTo = mapping.findForward("customerCalendar");
+        } else if (menu.getAction().equals(Util.resources.getString("label.customer.menu.view.search.units"))) {
+            forwardTo = mapping.findForward("customerStorageUnitSearch");
         } else if (menu.getAction().equals(Util.resources.getString("label.customer.menu.profile"))) {
             forwardTo = mapping.findForward("customerUpdate");
         }

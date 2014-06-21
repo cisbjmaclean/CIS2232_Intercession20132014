@@ -5,13 +5,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
-import util.SortUnits;
+import util.SortStorageUnits;
+
 
 /**
  *
@@ -21,7 +21,7 @@ public class LoadStorageUnits {
 
     // The object used for each new connection.
     private DatabaseConnection dbConnection = new DatabaseConnection();
-    private static ArrayList<StorageUnitForm> storageUnits;
+    private ArrayList<StorageUnitForm> storageUnits;
     // Used to allow for more security when sending data to a database.
     private PreparedStatement psAuthenticate;
     private String sql;
@@ -78,15 +78,7 @@ public class LoadStorageUnits {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
         }
-        Collections.sort(storageUnits, new SortUnits());
+        SortStorageUnits.sortDefault(request, storageUnits);
         return storageUnits;
-    }
-
-    public static ArrayList<StorageUnitForm> getStorageUnits() {
-        return storageUnits;
-    }
-
-    public static void setStorageUnits(ArrayList<StorageUnitForm> storageUnits) {
-        LoadStorageUnits.storageUnits = storageUnits;
     }
 }
