@@ -53,7 +53,7 @@ public class LoadStorageUnits {
             // The query to send.
             sql = "SELECT `storage_unit`.`storage_unit_id`, `storage_unit`.`storage_unit_type`, `storage_unit`.`storage_unit_dimensions`, "
                     + "`storage_unit`.`storage_unit_availability`, `storage_unit`.`storage_unit_date_from`, `storage_unit`.`storage_unit_date_to`,"
-                    + " `customer_storage_unit`.`cus_id` FROM `storage_unit` LEFT OUTER JOIN `customer_storage_unit` "
+                    + " `storage_unit`.`storage_unit_in_use`, `customer_storage_unit`.`cus_id` FROM `storage_unit` LEFT OUTER JOIN `customer_storage_unit` "
                     + "ON `storage_unit`.`storage_unit_id` = `customer_storage_unit`.`storage_unit_id`";
             psAuthenticate = con.prepareStatement(sql);
             // Send the query and get the results back.
@@ -67,6 +67,7 @@ public class LoadStorageUnits {
                 unit.setUnitAvailability(rs.getInt("storage_unit_availability"));
                 unit.setUnitDateFrom(rs.getString("storage_unit_date_from"));
                 unit.setUnitDateTo(rs.getString("storage_unit_date_to"));
+                unit.setUnitDateTo(rs.getString("storage_unit_in_use"));
                 unit.setCustomerId(rs.getInt("cus_id"));
                 storageUnits.add(unit);
                 customerId = 0;

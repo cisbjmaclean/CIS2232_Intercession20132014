@@ -1,8 +1,9 @@
 package business;
 
-import forms.StorageUnitForm;
 import forms.LoginForm;
 import forms.ReserveStorageUnitForm;
+import forms.StorageUnitForm;
+import forms.StorageUnitInUseToggleForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.text.DateFormat;
@@ -19,9 +20,9 @@ import util.SortStorageUnits;
 /**
  *
  * @author Michael
- * @since Jun 13, 2014
+ * @since Jun 21, 2014
  */
-public class ReserveStorageUnit {
+public class UpdateStorageUnit {
 
     // The object used for each new connection.
     private DatabaseConnection dbConnection = new DatabaseConnection();
@@ -31,14 +32,16 @@ public class ReserveStorageUnit {
     // The connection object.
     private Connection con;
     private LoginForm user;
-    private ReserveStorageUnitForm reserveUnit;
+    private ReserveStorageUnitForm extendUnit;
+    private StorageUnitInUseToggleForm storageUnitToggle;
     private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     private Calendar calendar = Calendar.getInstance();
     private String dateFrom;
     private String dateTo;
+    private int storageUnitToggleValue;
     private ArrayList<StorageUnitForm> storageUnits;
-    
-    public void reserveUnit(HttpServletRequest request) {
+
+    public void extendUnit(HttpServletRequest request) {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -50,30 +53,19 @@ public class ReserveStorageUnit {
         // Try to generate the query.
         try {
             user = (LoginForm) request.getSession().getAttribute("customer");
-            reserveUnit = (ReserveStorageUnitForm) request.getAttribute("reserveStorageUnitForm");
+            extendUnit = (ReserveStorageUnitForm) request.getAttribute("reserveStorageUnitForm");
             dateFrom = dateFormat.format(calendar.getTime());
-            dateTo = reserveUnit.getDateTo();
+            dateTo = extendUnit.getDateTo();
+
             // The query to send.
-            sql = "INSERT INTO `customer_storage_unit`(`storage_unit_id`, `cus_id`) VALUES (?,?)";
+            sql = "UPDATE `storage_unit` SET `storage_unit_date_to`= ? WHERE `storage_unit_id` = ?";
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setInt(1, reserveUnit.getUnitId());
-            psAuthenticate.setInt(2, user.getCustomerId());
+            psAuthenticate.setString(1, dateTo);
+            psAuthenticate.setInt(2, extendUnit.getUnitId());
             // Run the query.
             psAuthenticate.executeUpdate();
 
-            // The query to send.
-            sql = "UPDATE `storage_unit` SET `storage_unit_availability`= ?,`storage_unit_date_from`= ?,`storage_unit_date_to`= ?,`storage_unit_in_use`= ? WHERE `storage_unit_id` = ?";
-            // Added security for the fields being sent to the database.
-            psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setInt(1, 0);
-            psAuthenticate.setString(2, dateFrom);
-            psAuthenticate.setString(3, dateTo);
-            psAuthenticate.setInt(4, reserveUnit.getUnitId());
-            psAuthenticate.setInt(5, 0);
-            // Run the query.
-            psAuthenticate.executeUpdate();
-            
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("There was an issue with the query.");
@@ -82,17 +74,65 @@ public class ReserveStorageUnit {
             DbUtils.close(psAuthenticate, con);
         }
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
-        setUnit();
+        setUnitExtend();
         SortStorageUnits.sortDefault(request, storageUnits);
     }
-    
-    public void setUnit() {
+
+    public void setStorageUnitInUse(HttpServletRequest request) {
+        // Try to connect to the database.  
+        try {
+            con = dbConnection.databaseConnection();
+        } catch (Exception e) {
+            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println("The connection to the database failed.");
+        }
+
+        // Try to generate the query.
+        try {
+            user = (LoginForm) request.getSession().getAttribute("customer");
+            storageUnitToggle = (StorageUnitInUseToggleForm) request.getAttribute("storageUnitInUseToggleForm");
+            
+            if (storageUnitToggle.getStorageUnitToggle() == 0) {
+                storageUnitToggleValue = 1;
+            } else {
+                storageUnitToggleValue = 0;
+            }
+
+            // The query to send.
+            sql = "UPDATE `storage_unit` SET `storage_unit_in_use`= ? WHERE `storage_unit_id` = ?";
+            // Added security for the fields being sent to the database.
+            psAuthenticate = con.prepareStatement(sql);
+            psAuthenticate.setInt(1, storageUnitToggleValue);
+            psAuthenticate.setInt(2, storageUnitToggle.getUnitId());
+            // Run the query.
+            psAuthenticate.executeUpdate();
+
+        } catch (Exception e) {
+            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println("There was an issue with the query.");
+        } finally {
+            // Close psAuthenicate,  and the connection objects.
+            DbUtils.close(psAuthenticate, con);
+        }
+        storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
+        setUnitUseToggle();
+        SortStorageUnits.sortDefault(request, storageUnits);
+    }
+
+    public void setUnitExtend() {
         for (StorageUnitForm storageUnit : storageUnits) {
-            if (storageUnit.getUnitId() == reserveUnit.getUnitId()) {
+            if (storageUnit.getUnitId() == extendUnit.getUnitId()) {
                 storageUnit.setCustomerId(user.getCustomerId());
                 storageUnit.setUnitDateFrom(dateFrom);
                 storageUnit.setUnitDateTo(dateTo);
-                storageUnit.setUnitInUse(0);
+            }
+        }
+    }
+    
+    public void setUnitUseToggle() {
+        for (StorageUnitForm storageUnit : storageUnits) {
+            if (storageUnit.getUnitId() == storageUnitToggle.getUnitId()) {
+                 storageUnit.setUnitInUse(storageUnitToggleValue);
             }
         }
     }

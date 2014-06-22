@@ -50,13 +50,14 @@ public class ReleaseStorageUnit {
             psAuthenticate.executeUpdate();
 
             // The query to send.
-            sql = "UPDATE `storage_unit` SET `storage_unit_availability`= ?,`storage_unit_date_from`= ?,`storage_unit_date_to`= ? WHERE `storage_unit_id` = ?";
+            sql = "UPDATE `storage_unit` SET `storage_unit_availability`= ?,`storage_unit_date_from`= ?,`storage_unit_date_to`= ?,`storage_unit_in_use`= ? WHERE `storage_unit_id` = ?";
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
             psAuthenticate.setInt(1, 1);
             psAuthenticate.setString(2, "");
             psAuthenticate.setString(3, "");
             psAuthenticate.setInt(4, releaseUnit.getUnitId());
+            psAuthenticate.setInt(5, 0);
             // Run the query.
             psAuthenticate.executeUpdate();
 
@@ -68,17 +69,18 @@ public class ReleaseStorageUnit {
             DbUtils.close(psAuthenticate, con);
         }
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
-        setUnit(storageUnits);
+        setUnit();
         SortStorageUnits.sortDefault(request, storageUnits);  
     }
 
-    public void setUnit(ArrayList<StorageUnitForm> storageUnits) {              
+    public void setUnit() {              
         for (StorageUnitForm storageUnit : storageUnits)  {
             if (storageUnit.getUnitId() == releaseUnit.getUnitId()) {
                 storageUnit.setCustomerId(0);
                 storageUnit.setUnitAvailability(1);
                 storageUnit.setUnitDateTo("");
                 storageUnit.setUnitDateFrom("");
+                storageUnit.setUnitInUse(0);
             }
         }
     }

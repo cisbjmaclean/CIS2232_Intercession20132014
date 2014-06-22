@@ -15,6 +15,7 @@ public class StorageUnitForm extends ActionForm {
     private int unitAvailability;
     private String unitDateFrom;
     private String unitDateTo;
+    private int unitInUse;
     public int customerId;
 
     public StorageUnitForm() {
@@ -68,6 +69,14 @@ public class StorageUnitForm extends ActionForm {
         this.unitDateTo = unitDateTo;
     }
 
+    public int getUnitInUse() {
+        return unitInUse;
+    }
+
+    public void setUnitInUse(int unitInUse) {
+        this.unitInUse = unitInUse;
+    }
+
     public int getCustomerId() {
         return customerId;
     }
@@ -75,6 +84,4 @@ public class StorageUnitForm extends ActionForm {
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
-
-   
 }

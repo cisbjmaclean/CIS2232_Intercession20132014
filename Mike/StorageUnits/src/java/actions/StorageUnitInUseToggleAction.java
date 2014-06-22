@@ -14,9 +14,9 @@ import org.apache.struts.action.ActionMessages;
 /**
  *
  * @author Michael
- * @since Jun 20, 2014
+ * @since Jun 21, 2014
  */
-public class ExtendStorageUnitAction extends Action {
+public class StorageUnitInUseToggleAction extends Action{
 
     private ActionForward forwardTo;
     private LoginForm authenticated;
@@ -33,8 +33,8 @@ public class ExtendStorageUnitAction extends Action {
             return mapping.findForward("login");
         }
         extendUnit = new UpdateStorageUnit();
-        extendUnit.extendUnit(request);
-        messages.add("success", (new ActionMessage("label.customer.storage.unit.view.extend.storage.unit.success")));
+        extendUnit.setStorageUnitInUse(request);
+        messages.add("success", (new ActionMessage("label.customer.storage.unit.view.storage.unit.toggle.in.use.success")));
         saveMessages(request, messages);
         forwardTo = mapping.findForward("customerStorageUnitView");
         return forwardTo;

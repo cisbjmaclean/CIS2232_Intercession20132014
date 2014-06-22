@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.DatabaseConnection;
 import util.DbUtils;
+import webServices.business.UnitsInUseCheck;
 
 /**
  *
@@ -23,6 +24,9 @@ public class Login {
     // The connection object.
     private Connection con;
     private ResultSet rs = null;
+    private int customerId;
+    private UnitsInUseCheck checkUnitsInUse;
+    private String unitsInUse;
 
     /**
      * This method retrieves data from the database.
@@ -43,7 +47,6 @@ public class Login {
 
         // Try to generate the query.
         try {
-            int customerId;
 
             // The query to send.         
             sql = "SELECT `cus_id` FROM `customer_login` WHERE `cus_login_username` = ? AND `cus_login_password` = ?";
@@ -106,5 +109,44 @@ public class Login {
             DbUtils.close(rs, psAuthenticate, con);
         }
         return authenticate;
+    }
+    
+    public String webServiceCheckUnitsInUse(String username, String password) {
+
+        // Try to connect to the database.
+        try {
+            con = dbConnection.databaseConnection();
+        } catch (Exception e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println("The connection to the database failed.");
+        }
+
+        // Try to generate the query.
+        try {
+           checkUnitsInUse = new UnitsInUseCheck();
+
+            // The query to send.         
+            sql = "SELECT `cus_id` FROM `customer_login` WHERE `cus_login_username` = ? AND `cus_login_password` = ?";
+            psAuthenticate = con.prepareStatement(sql);
+            psAuthenticate.setString(1, username);
+            psAuthenticate.setString(2, password);
+            // Send the query and get the results back.
+            rs = psAuthenticate.executeQuery();
+
+            // Iterate over the result set.
+            while (rs.next()) {
+                customerId = rs.getInt("cus_id");
+                           }
+        } catch (Exception e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println("There was an issue with the query.");
+        } finally {
+            // Close the result set, psAuthenicate,  and the connection objects.
+            DbUtils.close(rs, psAuthenticate, con);
+        }
+        
+        unitsInUse = checkUnitsInUse.getUnitsInUse(customerId);
+        
+        return unitsInUse;
     }
 }

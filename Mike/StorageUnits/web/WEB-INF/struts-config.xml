@@ -18,6 +18,7 @@
     <form-bean type="forms.AdminStorageUnitSearchForm" name="adminStorageUnitSearchForm"/>
     <form-bean type="forms.AdminModifyCustomerForm" name="adminModifyCustomerForm"/>
     <form-bean type="forms.CustomerStorageUnitSearchForm" name="customerStorageUnitSearchForm"/>
+    <form-bean type="forms.StorageUnitInUseToggleForm" name="storageUnitInUseToggleForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -118,7 +119,15 @@
             <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
         </action>    
         
-     <action path="/extendStorageUnit" 
+        <action path="/storageUnitInUseToggle" 
+                type="actions.StorageUnitInUseToggleAction"
+                name="storageUnitInUseToggleForm"
+                input="/customerViewAllStorageUnits.jsp" 
+                scope="request">        
+            <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
+        </action>
+        
+        <action path="/extendStorageUnit" 
                 type="actions.ExtendStorageUnitAction"
                 name="reserveStorageUnitForm"
                 input="/viewAllStorageUnits.jsp" 

@@ -49,10 +49,10 @@
                 </td></tr>
 
         </table>
-        <div class="picker">
-            <table>         
-                <c:forEach var="unit" items="${storageUnits}">  
-                    <c:if test="${customer.customerId == unit.customerId}">
+        <div class="picker">                  
+            <c:forEach var="unit" items="${storageUnits}">  
+                <c:if test="${customer.customerId == unit.customerId}">
+                    <table>
                         <tr>
                             <td>
                                 ${unit.unitId}
@@ -70,6 +70,20 @@
                                 ${unit.unitDateTo}
                             </td> 
                             <td>
+                                <c:choose> 
+                                    <c:when test="${unit.unitInUse == 0}">
+                                        <bean:message key="label.customer.storage.unit.view.storage.unit.in.use.no"/>
+                                    </c:when> 
+                                    <c:when test="${unit.unitInUse == 1}">
+                                        <bean:message key="label.customer.storage.unit.view.storage.unit.in.use.yes"/>
+                                    </c:when>  
+                                </c:choose>
+                            </td>                           
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>                                               
+                            <td>
                                 <html:form action="/extendStorageUnit">
                                     <html:hidden property="unitId" value="${unit.unitId}"/>
                                     <label><bean:message key="label.customer.view.all.months"/></label><input type="text" name="dateTo" class="datepicker" value="Click Here" size="9">
@@ -78,14 +92,22 @@
                             </td>
                             <td>
                                 <html:form action="/releaseStorageUnit">
-                                    <html:hidden property="unitId" value="${unit.unitId}"/>                              
+                                    <html:hidden property="unitId" value="${unit.unitId}"/> 
                                     <html:submit property="Submit"><bean:message key="label.customer.storage.unit.view.release.storage.unit"/></html:submit>
                                 </html:form>    
-                            </td>
+                            </td> 
+                            <td>
+                                <html:form action="/storageUnitInUseToggle">
+                                    <html:hidden property="unitId" value="${unit.unitId}"/>
+                                    <html:hidden property="storageUnitToggle" value="${unit.unitInUse}"/>  
+                                    <html:submit property="Submit"><bean:message key="label.customer.storage.unit.view.storage.unit.toggle.in.use"/></html:submit>
+                                </html:form>    
+                            </td> 
                         </tr>
-                    </c:if>       
-                </c:forEach>
-            </table>
+                    </table>
+                </c:if>       
+            </c:forEach>
+
         </div>
     </body>
 </html:html>
