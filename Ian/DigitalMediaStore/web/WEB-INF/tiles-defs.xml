@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+
+<!--
+     This is a blank Tiles definition file with a commented example.
+-->
+
+<tiles-definitions>
+    
+    <definition name=".mainLayout" path="/base.jsp">
+        <put name="header" value="header.jsp" />
+        <put name="body"   value="" />
+        <put name="footer" value="footer.jsp" />
+    </definition>
+
+    <definition name="mainTile" extends=".mainLayout">
+        <put name="body"   value="/welcomeStruts.jsp" />
+    </definition>
+
+<definition name="loginTile" extends=".mainLayout">
+        <put name="body"   value="/login.jsp" />
+    </definition>
+
+    <definition name="createNewAccountTile" extends=".mainLayout">
+        <put name="body" value="/createNewAccount.jsp" />
+    </definition>
+    
+    <definition name="createNewOrderTile" extends=".mainLayout">
+        <put name="body"   value="/createNewOrder.jsp" />
+    </definition>
+
+    <definition name="finalizeOrderTile" extends=".mainLayout">
+        <put name="body"   value="/finalizeOrder.jsp" />
+    </definition>
+    
+
+
+    
+    <definition name="bookSupportSessionTile" extends=".mainLayout">
+        <put name="body"   value="/bookSupportSession.jsp" />
+    </definition>
+    
+    <definition name="customerHomePageTile" extends=".mainLayout">
+        <put name="body"   value="/customerHomePage.jsp" />
+    </definition>
+    
+    
+    
+    <definition name="modifyAccountPasswordTile" extends=".mainLayout">
+        <put name="body"   value="/modifyAccountPassword.jsp" />
+    </definition>
+    
+    <definition name="viewAccountDetailsTile" extends=".mainLayout">
+        <put name="body"   value="/viewAccountDetails.jsp" />
+    </definition>
+   
+    <definition name="viewOrdersTile" extends=".mainLayout">
+        <put name="body"   value="/viewOrders.jsp" />
+    </definition>
+
+    <definition name="viewOrderDetailsTile" extends=".mainLayout">
+        <put name="body"   value="/viewOrderDetails.jsp" />
+    </definition>
+
+    <definition name="viewSupportSessionsTile" extends=".mainLayout">
+        <put name="body"   value="/viewSupportSessions.jsp" />
+    </definition>
+
+    <definition name="viewSupportSessionDetailsTile" extends=".mainLayout">
+        <put name="body"   value="/viewSupportSessionDetails.jsp" />
+    </definition>
+    
+    
+    
+
+    <!-- sample tiles definitions
+    <definition name=".mainLayout" path="/common/layouts/classicLayout.jsp">
+        <put name="title"  value="Sample Page Title" />
+        <put name="header" value="/common/header.jsp" />
+        <put name="menu"   value=".mainMenu" />
+        <put name="footer" value="/common/footer.jsp" />
+        <put name="body"   value=".portal.body" />
+    </definition>
+
+    <definition name=".mainMenu" path="/common/layouts/vboxLayout.jsp" >
+        <putList name="list" >
+            <add value=".menu.links" />
+            <add value=".menu.taglib.references" />
+            <add value=".menu.printer.friendly" />
+            <add value=".menu.old.documents" />
+      </putList>
+    </definition>
+
+    <definition name="aPage" extends=".mainLayout">
+        <put name="title"  value="Another Title" />
+        <put name="body"   value=".aPage.body" />
+    </definition>
+
+    end samples -->
+
+    <definition name="${YOUR_DEFINITION_HERE}">
+    </definition>
+
+</tiles-definitions>
