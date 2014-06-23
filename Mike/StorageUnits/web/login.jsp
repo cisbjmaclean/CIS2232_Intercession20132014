@@ -42,7 +42,7 @@
 
         <html:form action="/login">
             <label><bean:message key="label.login.user.name"/></label><html:text property="username"/>
-            <label><bean:message key="label.login.password"/></label><html:text property="password"/>
+            <label><bean:message key="label.login.password"/></label><html:password property="password"/>
             <html:submit><bean:message key="label.login.submit"/></html:submit>
         </html:form>         
     </body>

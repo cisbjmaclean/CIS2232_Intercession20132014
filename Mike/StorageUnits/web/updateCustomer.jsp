@@ -57,12 +57,12 @@
                 </tr>
                 <tr>
                     <td>
-                        <label><bean:message key="label.update.customer.password2"/></label><html:text property="password" value="${customer.password}"/>
+                        <label><bean:message key="label.update.customer.password2"/></label><html:text property="password2" value="${customer.password}"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label><bean:message key="label.update.customer.email"/></label><html:text property="email" value="${customerDetails.email}"/>
+                        <label><bean:message key="label.update.customer.email"/></label><html:text property="email2" value="${customerDetails.email}"/>
                     </td>
                 </tr>    
                 <tr>

@@ -45,12 +45,12 @@ public class AddCustomerAction extends Action {
             customerCreation = addCustomer.addCustomer();
         }
         if (customerCreation) {
-            if (authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
+            if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
                 findForward = mapping.findForward("adminMain");
             } else {
                 findForward = mapping.findForward("login");
             }
-        } else if (authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
+        } else if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
             findForward = mapping.findForward("adminAddCustomer");
         } else {
             findForward = mapping.findForward("addCustomer");

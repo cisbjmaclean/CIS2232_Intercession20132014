@@ -61,7 +61,7 @@
         <action path="/login" 
                 type="actions.LoginAction"
                 name="loginForm"
-                input="/login.jsp" 
+                input="loginTile" 
                 scope="request">
             <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
             <forward name="adminInitialize"  path="/adminInitialize.jsp"/>
