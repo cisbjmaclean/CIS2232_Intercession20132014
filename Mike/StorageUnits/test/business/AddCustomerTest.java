@@ -6,6 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 import util.DatabaseConnection;
 import util.DbUtils;
 
@@ -13,7 +19,7 @@ import util.DbUtils;
  *
  * @author Michael Fesser
  */
-public class AddCustomer {
+public class AddCustomerTest {
 
     // The object used for each new connection.
     private DatabaseConnection dbConnection = new DatabaseConnection();
@@ -24,7 +30,110 @@ public class AddCustomer {
     private Connection con;
     private ResultSet rs = null;
     private boolean usernameTaken = false;
-    
+    private AddUpdateCustomerForm customerForm;
+    private AddCustomer instance;
+    private int deleteCustomerById;
+
+    public AddCustomerTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+        customerForm = new AddUpdateCustomerForm();
+        customerForm.setUsername("Siegmund");
+        customerForm.setPassword("password");
+        customerForm.setPassword2("password");
+        customerForm.setEmail("test@test.com");
+        customerForm.setEmail2("test@test.com");
+        customerForm.setFirstName("Mike");
+        customerForm.setMiddleInitial("A");
+        customerForm.setLastName("Fesser");
+        customerForm.setAddress("2338 Dufferin Ave");
+        customerForm.setCity("Saskatoon");
+        customerForm.setProvince("SK");
+        customerForm.setPostalCode("S7J1C2");
+        customerForm.setPhoneNumber("3063430907");
+        instance = new AddCustomer();
+    }
+
+    @After
+    public void tearDown() {
+        try {
+            con = dbConnection.databaseConnection();
+        } catch (Exception e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println("The connection to the database failed.");
+        }
+
+        // Try to generate the query.
+        try {
+            sql = "SELECT `cus_id` FROM `customer_login` WHERE `cus_login_username` = ?";
+            // Added security for the fields being sent to the database.
+            psAuthenticate = con.prepareStatement(sql);
+            psAuthenticate.setString(1, customerForm.getUsername());
+            // Send the query and get the results back.
+            rs = psAuthenticate.executeQuery();
+            // The query to send.    
+            // Iterate over the result set.
+            while (rs.next()) {
+                deleteCustomerById = rs.getInt("cus_id");
+            }
+
+            sql = "DELETE FROM `customer` WHERE `cus_id` = ? LIMIT 1";
+            psAuthenticate = con.prepareStatement(sql);
+            psAuthenticate.setInt(1, deleteCustomerById);
+            // Send the query and get the results back.
+            psAuthenticate.executeUpdate();
+
+            sql = "DELETE FROM `customer_login` WHERE `cus_id` = ? LIMIT 1";
+            psAuthenticate = con.prepareStatement(sql);
+            psAuthenticate.setInt(1, deleteCustomerById);
+            // Send the query and get the results back.
+            psAuthenticate.executeUpdate();
+
+        } catch (Exception e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println("There was an issue with the query.");
+        } finally {
+            // Close the result set, psAuthenicate,  and the connection objects.
+            DbUtils.close(rs, psAuthenticate, con);
+        }
+
+    }
+
+    /**
+     * Test of checkUsername method, of class AddCustomer.
+     */
+    @Test
+    public void testCheckUsername() {
+        setUp();
+        System.out.println("checkUsername");
+        boolean expResult = false;
+        boolean result = instance.checkUsername(customerForm);
+        System.out.println(result);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of addCustomer method, of class AddCustomer.
+     */
+    @Test
+    public void testAddCustomer() {
+        System.out.println("addCustomer");
+        boolean expResult = true;
+        boolean result = instance.addCustomer(customerForm);
+        assertEquals(expResult, result);
+        tearDown();
+    }
+
     public boolean checkUsername(AddUpdateCustomerForm customerForm) {
         // Try to connect to the database.  
         try {
@@ -33,7 +142,6 @@ public class AddCustomer {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("The connection to the database failed.");
         }
-
         // Try to generate the query.
         try {
             // The query to send.
@@ -42,8 +150,7 @@ public class AddCustomer {
             psAuthenticate = con.prepareStatement(sql);
             // Send the query and get the results back.
             rs = psAuthenticate.executeQuery();
-
-            String checkUsername = null;
+            String checkUsername;
 
             // Iterate over the result set.
             while (rs.next()) {
@@ -62,7 +169,7 @@ public class AddCustomer {
         return usernameTaken;
     }
 
-    public boolean addCustomer (AddUpdateCustomerForm customerForm) {
+    public boolean addCustomer(AddUpdateCustomerForm customerForm) {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -72,7 +179,7 @@ public class AddCustomer {
         }
 
         // Try to generate the query.
-        try {          
+        try {
             // The query to send.
             sql = "INSERT INTO `customer`(`cus_first_name`, `cus_middle_initial`, `cus_last_name`, `cus_address`, `cus_city`, `cus_province`, `cus_postal_code`, `cus_phone`, `cus_email`) "
                     + "VALUES (?,?,?,?,?,?,?,?,?)";

@@ -1,6 +1,8 @@
 package actions;
 
+import business.AddStorageUnit;
 import forms.LoginForm;
+import forms.StorageUnitForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -19,6 +21,8 @@ public class AdminAddStorageUnitAction extends Action {
 
     private ActionForward forwardTo;
     private LoginForm authenticated;
+    private AddStorageUnit addStorageUnit;
+    private StorageUnitForm unit;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
@@ -30,9 +34,10 @@ public class AdminAddStorageUnitAction extends Action {
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
-
         
-
+        unit = (StorageUnitForm) request.getAttribute("storageUnitForm");
+        addStorageUnit = new AddStorageUnit();
+        addStorageUnit.addStorageUnit(unit);
         forwardTo = mapping.findForward("adminMain");
         return forwardTo;
     }

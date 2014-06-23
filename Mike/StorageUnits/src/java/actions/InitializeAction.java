@@ -1,12 +1,15 @@
 package actions;
 
 import business.LoadStorageUnits;
+import forms.StorageUnitForm;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import util.SortStorageUnits;
 
 /**
  *
@@ -17,6 +20,7 @@ public class InitializeAction extends Action{
 
     private LoadStorageUnits loadUnits;
     private ActionForward forwardTo;
+    private ArrayList<StorageUnitForm> storageUnits;
     
     /**
      *
@@ -32,7 +36,9 @@ public class InitializeAction extends Action{
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         loadUnits = new LoadStorageUnits();
-        request.getSession().setAttribute("storageUnits", loadUnits.loadStorageUnits(request));
+        storageUnits = new ArrayList();
+        storageUnits = loadUnits.loadStorageUnits();
+        request.getSession().setAttribute("storageUnits", SortStorageUnits.sortDefault(storageUnits));
         
         // Used to define the page to be forwarded to.      
         forwardTo = mapping.findForward("mainMenu");

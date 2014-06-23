@@ -4,7 +4,6 @@ import forms.StorageUnitForm;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.collections4.comparators.ComparatorChain;
 
 /**
@@ -15,19 +14,25 @@ import org.apache.commons.collections4.comparators.ComparatorChain;
  *
  */
 public class SortStorageUnits {
+    
+    private static ArrayList<StorageUnitForm> storageUnitsSorted;
 
-    public static void sortDefault(HttpServletRequest request, ArrayList<StorageUnitForm> storageUnits) {
+    public static ArrayList<StorageUnitForm> sortDefault(ArrayList<StorageUnitForm> storageUnits) {
+        storageUnitsSorted = new ArrayList();
         ComparatorChain chain = new ComparatorChain();
         chain.addComparator(comparatorAvailability);
         chain.addComparator(comparatorDimensions);
         chain.addComparator(comparatorDateTo);
-        sort(request, storageUnits, chain);
+        storageUnitsSorted = sort(storageUnits, chain);
+        return storageUnitsSorted;
     }
     
-     public static void sortAdmin(HttpServletRequest request, ArrayList<StorageUnitForm> storageUnits) {
+     public static ArrayList<StorageUnitForm> sortAdmin(ArrayList<StorageUnitForm> storageUnits) {
+        storageUnitsSorted = new ArrayList();
         ComparatorChain chain = new ComparatorChain();
         chain.addComparator(comparatorUnitId);
-        sort(request, storageUnits, chain);
+        storageUnitsSorted = sort(storageUnits, chain);
+        return storageUnitsSorted;
     }
 
       public static Comparator<StorageUnitForm> comparatorUnitId = new Comparator<StorageUnitForm>() {
@@ -58,8 +63,8 @@ public class SortStorageUnits {
         }
     };
 
-public static void sort(HttpServletRequest request, ArrayList<StorageUnitForm> storageUnits, ComparatorChain chain) {
+public static ArrayList<StorageUnitForm> sort(ArrayList<StorageUnitForm> storageUnits, ComparatorChain chain) {
         Collections.sort(storageUnits, chain);
-        request.getSession().setAttribute("storageUnits", storageUnits);
+        return storageUnits;
     }
 }

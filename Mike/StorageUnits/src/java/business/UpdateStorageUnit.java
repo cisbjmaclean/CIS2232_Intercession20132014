@@ -75,7 +75,7 @@ public class UpdateStorageUnit {
         }
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
         setUnitExtend();
-        SortStorageUnits.sortDefault(request, storageUnits);
+       // SortStorageUnits.sortDefault(request, storageUnits);
     }
 
     public void setStorageUnitInUse(HttpServletRequest request) {
@@ -116,7 +116,7 @@ public class UpdateStorageUnit {
         }
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
         setUnitUseToggle();
-        SortStorageUnits.sortDefault(request, storageUnits);
+       // SortStorageUnits.sortDefault(request, storageUnits);
     }
 
     public void setUnitExtend() {

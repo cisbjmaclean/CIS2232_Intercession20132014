@@ -1,5 +1,6 @@
 package actions;
 
+import forms.LoginForm;
 import forms.MultipleActionForm;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -9,6 +10,9 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
+import util.Logout;
 import util.Util;
 
 /**
@@ -19,11 +23,14 @@ import util.Util;
 public class MainMenuAction extends Action {
 
     private ActionForward forwardTo;
+    private LoginForm authenticated;
     private MultipleActionForm mainMenu;
+    private Logout logout;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        ActionMessages messages = new ActionMessages();
 
         Util.resources = ResourceBundle.getBundle("com.myapp.struts.ApplicationResource", Locale.getDefault());
         mainMenu = (MultipleActionForm) request.getAttribute("multipleActionForm");
@@ -34,7 +41,31 @@ public class MainMenuAction extends Action {
             forwardTo = mapping.findForward("addCustomer");
         } else if (mainMenu.getAction().equals(Util.resources.getString("label.main.menu.view.all.storage.units"))) {
             forwardTo = mapping.findForward("viewAllStorageUnits");
+        } else if (mainMenu.getAction().equals(Util.resources.getString("label.customer.menu.view.my.storage.units"))) {
+            forwardTo = mapping.findForward("customerStorageUnitView");
+        } else if (mainMenu.getAction().equals(Util.resources.getString("label.customer.menu.view.all.storage.units"))) {
+            forwardTo = mapping.findForward("customerViewAllStorageUnits");
+        } else if (mainMenu.getAction().equals(Util.resources.getString("label.customer.menu.view.search.units"))) {
+            forwardTo = mapping.findForward("customerStorageUnitSearch");
+        } else if (mainMenu.getAction().equals(Util.resources.getString("label.customer.menu.profile"))) {
+            forwardTo = mapping.findForward("customerUpdate");
+        } else if (mainMenu.getAction().equals(Util.resources.getString("label.admin.menu.search"))) {
+            forwardTo = mapping.findForward("adminSearch");
+        } else if (mainMenu.getAction().equals(Util.resources.getString("label.admin.menu.view.all.customers"))) {
+            request.getSession().setAttribute("customerList", request.getSession().getAttribute("allCustomers"));
+            forwardTo = mapping.findForward("adminCustomerSearchResults");
+        } else if (mainMenu.getAction().equals(Util.resources.getString("label.admin.menu.add.customer"))) {
+            forwardTo = mapping.findForward("adminAddCustomer");
+        } else if (mainMenu.getAction().equals(Util.resources.getString("label.admin.menu.view.all.storage.units"))) {
+            forwardTo = mapping.findForward("adminViewAllStorageUnits");
+        } else if (mainMenu.getAction().equals(Util.resources.getString("label.admin.menu.add.storage.unit"))) {
+            forwardTo = mapping.findForward("adminAddStorageUnit");
+        } else if (mainMenu.getAction().equals(Util.resources.getString("label.menu.logout"))) {
+            logout = new Logout();
+            logout.logout(request, response);
+            forwardTo = mapping.findForward("index");
         }
+
         return forwardTo;
     }
 }

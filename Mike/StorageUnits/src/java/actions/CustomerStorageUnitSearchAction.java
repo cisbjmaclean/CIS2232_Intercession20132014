@@ -1,7 +1,10 @@
 package actions;
 
 import business.CustomerSearchStorageUnits;
+import forms.CustomerStorageUnitSearchForm;
 import forms.LoginForm;
+import forms.StorageUnitForm;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -21,6 +24,9 @@ public class CustomerStorageUnitSearchAction extends Action {
     private ActionForward forwardTo;
     private LoginForm authenticated;
     private CustomerSearchStorageUnits searchUnits;
+    private CustomerStorageUnitSearchForm searchCriteria;
+    private ArrayList<StorageUnitForm> storageUnits;
+    private ArrayList<StorageUnitForm> searchResults;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
@@ -32,8 +38,13 @@ public class CustomerStorageUnitSearchAction extends Action {
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
-        searchUnits = new CustomerSearchStorageUnits();   
-        searchUnits.unitSeach(request);     
+        searchCriteria = (CustomerStorageUnitSearchForm) request.getAttribute("customerStorageUnitSearchForm");
+        storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
+        searchResults = new ArrayList<>();
+        searchUnits = new CustomerSearchStorageUnits();
+        searchUnits.unitSeach(searchCriteria, storageUnits, searchResults);
+        request.setAttribute("customerSearchResults", searchResults);
+        
         forwardTo = mapping.findForward("customerStorageUnitSearchResults");
         return forwardTo;
     }
