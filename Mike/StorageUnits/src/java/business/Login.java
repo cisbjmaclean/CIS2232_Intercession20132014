@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.DatabaseConnection;
 import util.DbUtils;
-import webServices.CheckStorageUnitsInUse;
 import webServices.business.UnitsInUseCheck;
 
 /**

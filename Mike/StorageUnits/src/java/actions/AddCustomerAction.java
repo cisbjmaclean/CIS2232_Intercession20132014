@@ -22,7 +22,7 @@ public class AddCustomerAction extends Action {
     private boolean customerCreation = false;
     private boolean usernameTaken = false;
     private AddCustomer addCustomer;
-    private ActionForward findForward;
+    private ActionForward forwardTo;
     private LoginForm authenticated;
 
     /**
@@ -46,16 +46,16 @@ public class AddCustomerAction extends Action {
         }
         if (customerCreation) {
             if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
-                findForward = mapping.findForward("adminMain");
+                forwardTo = mapping.findForward("adminMain");
             } else {
-                findForward = mapping.findForward("login");
+                forwardTo = mapping.findForward("login");
             }
         } else if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
-            findForward = mapping.findForward("adminAddCustomer");
+            forwardTo = mapping.findForward("adminAddCustomer");
         } else {
-            findForward = mapping.findForward("addCustomer");
+            forwardTo = mapping.findForward("addCustomer");
         }
 
-        return findForward;
+        return forwardTo;
     }
 }

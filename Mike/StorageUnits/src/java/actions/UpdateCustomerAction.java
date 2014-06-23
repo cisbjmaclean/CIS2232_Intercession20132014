@@ -20,7 +20,7 @@ public class UpdateCustomerAction extends Action {
 
     private LoginForm authenticated;
     private LoginForm adminAuthenticated;
-    private boolean customerCreation = false;
+    private boolean customerUpdate = false;
     private UpdateCustomer updateCustomer;
     private ActionForward forwardTo;
 
@@ -38,11 +38,23 @@ public class UpdateCustomerAction extends Action {
                 return mapping.findForward("login");
             }
         }
-
         // finish this up
         updateCustomer = new UpdateCustomer(request);
-        customerCreation = updateCustomer.updateCustomer();
+        customerUpdate = updateCustomer.updateCustomer();
 
+        if (customerUpdate) {
+            if (adminAuthenticated != null && adminAuthenticated.isValidated() == true && adminAuthenticated.getAdminCode() == 378) {
+                System.out.println("hi");
+                forwardTo = mapping.findForward("adminMain");
+            } else {
+                System.err.println("by");                
+                forwardTo = mapping.findForward("customerStorageUnitView");
+            }
+        } else if (authenticated != null && authenticated.isValidated() == true) {
+            forwardTo = mapping.findForward("customerStorageUnitView");
+        } else {
+            forwardTo = mapping.findForward("customerUpdate");
+        }
         return forwardTo;
     }
 }
