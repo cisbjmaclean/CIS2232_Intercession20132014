@@ -11,7 +11,6 @@ import util.DbUtils;
 import webServices.CheckStorageUnitsInUse;
 import webServices.business.UnitsInUseCheck;
 
-
 /**
  *
  * @author Michael Fesser
@@ -35,7 +34,7 @@ public class Login {
      *
      * @param authenticate
      * @param validateLogin
-     * @return 
+     * @return
      */
     public String checkLogin(String authenticate, LoginForm validateLogin) {
 
@@ -74,9 +73,9 @@ public class Login {
         }
         return authenticate;
     }
-    
-    public String checkAdminLogin(String authenticate, LoginForm validateLogin){
-     // Try to connect to the database.
+
+    public String checkAdminLogin(String authenticate, LoginForm validateLogin) {
+        // Try to connect to the database.
         try {
             con = dbConnection.databaseConnection();
         } catch (Exception e) {
@@ -112,7 +111,7 @@ public class Login {
         }
         return authenticate;
     }
-    
+
     public String webServiceCheckStorageUnitsInUse(String username, String password) {
 
         // Try to connect to the database.
@@ -125,8 +124,7 @@ public class Login {
 
         // Try to generate the query.
         try {
-           checkUnitsInUse = new UnitsInUseCheck();
-
+            checkUnitsInUse = new UnitsInUseCheck();
             // The query to send.         
             sql = "SELECT `cus_id` FROM `customer_login` WHERE `cus_login_username` = ? AND `cus_login_password` = ?";
             psAuthenticate = con.prepareStatement(sql);
@@ -138,7 +136,7 @@ public class Login {
             // Iterate over the result set.
             while (rs.next()) {
                 customerId = rs.getInt("cus_id");
-                           }
+            }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("There was an issue with the query.");
@@ -146,9 +144,11 @@ public class Login {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
         }
-        
-        unitsInUse = checkUnitsInUse.getUnitsInUse(customerId);
-        
+        if (customerId != 0) {
+            unitsInUse = checkUnitsInUse.getUnitsInUse(customerId);
+        } else {
+            unitsInUse = "There was an error with the login.";
+        }
         return unitsInUse;
     }
 }
