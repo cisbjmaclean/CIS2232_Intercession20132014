@@ -1,6 +1,6 @@
 package forms;
 
-import org.apache.struts.action.ActionForm;
+import org.apache.struts.validator.ValidatorForm;
 
 /**
  *
@@ -10,7 +10,7 @@ import org.apache.struts.action.ActionForm;
  * The purpose of this class is to hold that values from the form on the login
  * page.
  */
-public class LoginForm extends ActionForm {
+public class LoginForm extends ValidatorForm {
 
     private int customerId;
     private String username;

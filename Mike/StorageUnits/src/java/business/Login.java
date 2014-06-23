@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.DatabaseConnection;
 import util.DbUtils;
-import webServices.business.UnitsInUseCheck;
+import webServices.business.StorageUnitsInUseCheck;
 
 /**
  *
@@ -25,7 +25,7 @@ public class Login {
     private Connection con;
     private ResultSet rs = null;
     private int customerId;
-    private UnitsInUseCheck checkUnitsInUse;
+    private StorageUnitsInUseCheck checkUnitsInUse;
     private String unitsInUse;
 
     /**
@@ -123,7 +123,7 @@ public class Login {
 
         // Try to generate the query.
         try {
-           checkUnitsInUse = new UnitsInUseCheck();
+           checkUnitsInUse = new StorageUnitsInUseCheck();
 
             // The query to send.         
             sql = "SELECT `cus_id` FROM `customer_login` WHERE `cus_login_username` = ? AND `cus_login_password` = ?";

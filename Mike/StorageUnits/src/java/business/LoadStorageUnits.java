@@ -12,7 +12,6 @@ import util.DatabaseConnection;
 import util.DbUtils;
 import util.SortStorageUnits;
 
-
 /**
  *
  * @author Michael Fesser
@@ -67,7 +66,7 @@ public class LoadStorageUnits {
                 unit.setUnitAvailability(rs.getInt("storage_unit_availability"));
                 unit.setUnitDateFrom(rs.getString("storage_unit_date_from"));
                 unit.setUnitDateTo(rs.getString("storage_unit_date_to"));
-                unit.setUnitDateTo(rs.getString("storage_unit_in_use"));
+                unit.setUnitInUse(rs.getInt("storage_unit_in_use"));
                 unit.setCustomerId(rs.getInt("cus_id"));
                 storageUnits.add(unit);
                 customerId = 0;
@@ -79,7 +78,9 @@ public class LoadStorageUnits {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
         }
-        SortStorageUnits.sortDefault(request, storageUnits);
+        if (request != null) {
+            SortStorageUnits.sortDefault(request, storageUnits);
+        }
         return storageUnits;
     }
 }
