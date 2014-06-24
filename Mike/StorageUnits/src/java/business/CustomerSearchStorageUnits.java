@@ -3,7 +3,6 @@ package business;
 import forms.CustomerStorageUnitSearchForm;
 import forms.StorageUnitForm;
 import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -16,10 +15,8 @@ public class CustomerSearchStorageUnits {
     private String unitDimensions = "-1";
     private String dateTo = "-1";
     private int numberSearchCriteria;
-   
 
     public void unitSeach(CustomerStorageUnitSearchForm searchCriteria, ArrayList<StorageUnitForm> storageUnits, ArrayList<StorageUnitForm> searchResults) {
-        
 
         if (searchCriteria.getUnitAvailability() != -1) {
             unitAvailability = searchCriteria.getUnitAvailability();
@@ -40,6 +37,14 @@ public class CustomerSearchStorageUnits {
             searchTwoCriteria(storageUnits, searchResults);
         } else if (numberSearchCriteria == 3) {
             searchThreeCriteria(storageUnits, searchResults);
+        } else {
+            getAll(storageUnits, searchResults);
+        }
+    }
+
+    public void getAll(ArrayList<StorageUnitForm> storageUnits, ArrayList<StorageUnitForm> searchResults) {
+        for (StorageUnitForm storageUnit : storageUnits) {
+            searchResults.add(storageUnit);
         }
     }
 

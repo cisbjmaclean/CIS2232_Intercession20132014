@@ -51,7 +51,7 @@ public class AdminInitializeAction extends Action {
         loadLogin = new LoadCustomers();
         request.getSession().setAttribute("allLogins", loadLogin.loadLogins(request));
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
-        //SortStorageUnits.sortAdmin(request, storageUnits);
+        request.setAttribute("storageUnits", SortStorageUnits.sortAdmin(storageUnits));
 
         // Used to define the page to be forwarded to.      
         ActionForward findForward = mapping.findForward("adminMain");

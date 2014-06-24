@@ -27,7 +27,7 @@ public class Login {
     private int customerId;
     private UnitsInUseCheck checkUnitsInUse;
     private String unitsInUse;
-    private String authenticate;
+    private String authenticate = "none";
 
     /**
      * This method retrieves data from the database.

@@ -4,7 +4,7 @@ import forms.AdminStorageUnitSearchForm;
 import forms.CustomerForm;
 import forms.StorageUnitForm;
 import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
+
 
 /**
  *
@@ -13,37 +13,33 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AdminSearchStorageUnits {
 
-    private ArrayList<CustomerForm> allCustomers;
     private ArrayList<StorageUnitForm> searchUnits;
-    private ArrayList<StorageUnitForm> storageUnits;
 
-    public void seachByUnitId(AdminStorageUnitSearchForm searchForm, HttpServletRequest request) {
-        storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
+    public ArrayList seachByUnitId(AdminStorageUnitSearchForm searchForm, ArrayList<StorageUnitForm> storageUnits) {
+        searchUnits = new ArrayList();
         for (StorageUnitForm storageUnit : storageUnits) {
             if (storageUnit.getUnitId() == searchForm.getUnitId()) {
-                request.setAttribute("UnitList", storageUnit);
+                searchUnits.add(storageUnit);
             }
         }
+        return searchUnits;
     }
 
-    public void seachByCustomerId(AdminStorageUnitSearchForm searchForm, HttpServletRequest request) {
+    public ArrayList seachByCustomerId(AdminStorageUnitSearchForm searchForm, ArrayList<CustomerForm> allCustomers, ArrayList<StorageUnitForm> storageUnits) {
         searchUnits = new ArrayList();
-        storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
         for (StorageUnitForm storageUnit : storageUnits) {
             if (storageUnit.getCustomerId() == searchForm.getUnitCustomerId()) {
                 searchUnits.add(storageUnit);
             }
         }
-        request.setAttribute("UnitList", searchUnits);
+        return searchUnits;
     }
 
-    public void seachByLastName(AdminStorageUnitSearchForm searchForm, HttpServletRequest request) {
+    public ArrayList seachByLastName(AdminStorageUnitSearchForm searchForm, ArrayList<CustomerForm> allCustomers, ArrayList<StorageUnitForm> storageUnits) {
         int customerId = 0;
-        allCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
-        storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
-        for (CustomerForm allCustomers : allCustomers) {
-            if (allCustomers.getLastName().equalsIgnoreCase(searchForm.getUnitCustomerLastName())) {
-                customerId = allCustomers.getCustomerId();
+        for (CustomerForm customer : allCustomers) {
+            if (customer.getLastName().equalsIgnoreCase(searchForm.getUnitCustomerLastName())) {
+                customerId = customer.getCustomerId();
             }
         }
         searchUnits = new ArrayList();
@@ -52,6 +48,6 @@ public class AdminSearchStorageUnits {
                 searchUnits.add(storageUnit);
             }
         }
-        request.setAttribute("UnitList", searchUnits);
+        return searchUnits;
     }
 }

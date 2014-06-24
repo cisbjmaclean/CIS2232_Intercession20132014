@@ -38,16 +38,14 @@ public class UpdateCustomerAction extends Action {
                 return mapping.findForward("login");
             }
         }
-        // finish this up
+
         updateCustomer = new UpdateCustomer(request);
         customerUpdate = updateCustomer.updateCustomer();
 
         if (customerUpdate) {
             if (adminAuthenticated != null && adminAuthenticated.isValidated() == true && adminAuthenticated.getAdminCode() == 378) {
-                System.out.println("hi");
                 forwardTo = mapping.findForward("adminMain");
-            } else {
-                System.err.println("by");                
+            } else {              
                 forwardTo = mapping.findForward("customerStorageUnitView");
             }
         } else if (authenticated != null && authenticated.isValidated() == true) {

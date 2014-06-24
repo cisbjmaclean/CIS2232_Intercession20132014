@@ -45,14 +45,14 @@ public class AdminCustomerSearchAction extends Action {
         searchCustomers = new ArrayList();
 
         if (searchForm.getCustomerLastName().equals("") && searchForm.getCustomerUsername().equals("") && searchForm.getCustomerLastName().equals("")) {
-            request.setAttribute("customerList", request.getSession().getAttribute("allCustomers"));
+            searchCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
         } else if (searchForm.getCustomerEmail().length() > 0) {
             searchCustomers = searchCustomer.seachByEmail(searchForm, allCustomers);
         } else if (searchForm.getCustomerUsername().length() > 0) {
             searchCustomers = searchCustomer.seachByUsername(searchForm, allLogins, allCustomers);
         } else if (searchForm.getCustomerLastName().length() > 0) {
             searchCustomers = searchCustomer.seachByLastName(searchForm, allCustomers);
-        }
+        }   
         request.setAttribute("customerList", searchCustomers);
         return mapping.findForward("adminCustomerSearchResults");
     }

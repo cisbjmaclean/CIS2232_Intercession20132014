@@ -47,7 +47,7 @@
         <!-- used for the calendar -->
         <div style="padding-bottom: 300px">
             <table>
-                <c:forEach var="unit" items="${UnitList}">                       
+                <c:forEach var="unit" items="${unitList}">                       
                     <tr>
                         <td>
                             ${unit.unitId}

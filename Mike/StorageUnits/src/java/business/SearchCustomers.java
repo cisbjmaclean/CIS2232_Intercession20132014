@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class SearchCustomers {
 
     private ArrayList<CustomerForm> searchCustomers;
-    private ArrayList<LoginForm> searchLogins;
 
     public ArrayList<CustomerForm> seachByEmail(AdminCustomerSearchForm searchForm, ArrayList<CustomerForm> allCustomers) {       
         searchCustomers = new ArrayList();
@@ -40,7 +39,7 @@ public class SearchCustomers {
        return searchCustomers;
     }
 
-    public ArrayList<CustomerForm>  seachByLastName(AdminCustomerSearchForm searchForm, ArrayList<CustomerForm> allCustomers) {
+    public ArrayList<CustomerForm>seachByLastName(AdminCustomerSearchForm searchForm, ArrayList<CustomerForm> allCustomers) {
         searchCustomers = new ArrayList();
         for (CustomerForm customer : allCustomers) {
             if (customer.getLastName().equalsIgnoreCase(searchForm.getCustomerLastName())) {

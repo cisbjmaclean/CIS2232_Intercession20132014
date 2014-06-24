@@ -41,13 +41,13 @@
             <table> 
                 <tr>
                     <td>
-                        <label><bean:message key="label.update.customer.id"/></label><html:text property="customerId" disabled="true" value="${customer.customerId}"/>
+                        <label><bean:message key="label.update.customer.id"/></label><html:text property="customerId" readonly="true" value="${customer.customerId}"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <c:if test="${admin.adminCode != 378}" var="disabled" />
-                        <label><bean:message key="label.update.customer.user.name"/></label><html:text property="username"  disabled="${disabled}" value="${customer.username}"/>
+                        <label><bean:message key="label.update.customer.user.name"/></label><html:text property="username"  readonly="${disabled}" value="${customer.username}"/>
                     </td>
                 </tr>
                 <tr>

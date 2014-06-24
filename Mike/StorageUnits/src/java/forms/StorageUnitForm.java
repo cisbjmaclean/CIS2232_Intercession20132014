@@ -1,5 +1,6 @@
 package forms;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.struts.action.ActionForm;
 
 /**
@@ -7,6 +8,7 @@ import org.apache.struts.action.ActionForm;
  * @author Michael Fesser
  * @since 5/30/2014
  */
+
 public class StorageUnitForm extends ActionForm {
 
     private int unitId;

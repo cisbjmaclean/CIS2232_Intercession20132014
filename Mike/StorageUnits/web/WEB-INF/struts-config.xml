@@ -30,6 +30,7 @@
          <forward name="index"  path="/index.jsp"/>
          <forward name="login"  path="loginTile"/>  
          <forward name="adminMain"  path="adminMainTile"/>
+         <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
     </global-forwards>
 
     <action-mappings>
@@ -54,8 +55,8 @@
          <action path="/updateCustomer" 
                 type="actions.UpdateCustomerAction"
                 name="addUpdateCustomerForm"
-                input="/updateCustomer.jsp" 
-                scope="request">           
+                input="updateCustomerTile" 
+                scope="request">          
          </action>  
         
         <action path="/login" 
