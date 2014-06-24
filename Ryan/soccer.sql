@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.6
+-- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2014 at 03:47 PM
--- Server version: 5.6.16
--- PHP Version: 5.5.9
+-- Generation Time: Jun 24, 2014 at 10:27 PM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.7
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -54,7 +54,23 @@ INSERT INTO `booked_field` (`FIELD_NUM`, `USER_ID`, `DATE`, `TIME_NUM`) VALUES
 (3, 1, '2014-06-25', 1),
 (5, 1, '2014-06-27', 5),
 (4, 2, '2014-06-27', 3),
-(3, 2, '2014-06-28', 9);
+(3, 2, '2014-06-28', 9),
+(3, 3, '2014-06-23', 4),
+(1, 1, '2014-06-28', 1),
+(4, 1, '2014-06-23', 1),
+(1, 1, '2014-06-23', 3),
+(3, 1, '2014-06-27', 7),
+(1, 1, '2014-06-24', 1),
+(4, 1, '2014-06-24', 1),
+(3, 6, '2014-06-24', 1),
+(1, 1, '2014-06-25', 1),
+(4, 3, '2014-06-27', 6),
+(1, 3, '2014-06-28', 2),
+(5, 10, '2014-06-24', 1),
+(4, 1, '2014-06-26', 8),
+(5, 1, '2014-06-30', 9),
+(2, 1, '2014-06-25', 1),
+(3, 1, '2014-06-27', 6);
 
 -- --------------------------------------------------------
 
@@ -117,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `NAME` varchar(30) NOT NULL,
   `PASSWORD` varchar(20) NOT NULL,
   PRIMARY KEY (`USER_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `user`
@@ -126,7 +142,14 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`USER_ID`, `NAME`, `PASSWORD`) VALUES
 (1, 'Ryan', '1234'),
 (2, 'Test', '1234'),
-(3, 'Foot', '1234');
+(3, 'Foot', '1234'),
+(4, 'ralph', '1234'),
+(5, 'Roger', '1234'),
+(6, 'George', '1234'),
+(7, 'Bill', '1'),
+(10, 'Ron', '1'),
+(11, 'asdfasd', 'sdf'),
+(12, 'Frank', '1');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
