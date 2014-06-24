@@ -31,27 +31,32 @@
             <table>
                 <tr>
                     <td>            
-                        <a target="_blank"   href="http://bjmac.hccis.info:8080/RegistrationBoard">Andrew's Pool Bookings</a>
+                        9:00-9:30 &nbsp;Setup and coffee/snacks
                     </td>
                 </tr>
                 <tr>
                     <td>            
-                        <a target="_blank" href="http://bjmac.hccis.info:8080/DigitalMediaStore/">Ian's Digital Media Sales</a>
+                        9:20 &nbsp;<a target="_blank" href="http://bjmac.hccis.info:8080/DigitalMediaStore/">Ian's Digital Media Sales</a>
                     </td>
                 </tr>
                 <tr>
                     <td>            
-                        <a  target="_blank"  href="http://bjmac.hccis.info:8080/RegistrationBoard">Mike's Storage Unit Bookings</a>
+                        9:40 &nbsp;Andrew's Pool Bookings
                     </td>
                 </tr>
                 <tr>
                     <td>            
-                        <a target="_blank"  href="http://bjmac.hccis.info:8080/RegistrationBoard">Roger's Professional Development</a>
+                        10:00 &nbsp;<a  target="_blank"  href="http://bjmac.hccis.info:8080/Soccer">Ryan's Soccer Field/Bag Bookings</a>
                     </td>
                 </tr>
                 <tr>
                     <td>            
-                        <a  target="_blank"  href="http://bjmac.hccis.info:8080/Soccer">Ryan's Soccer Field/Bag Bookings</a>
+                        10:20 &nbsp;Mike's Storage Unit Bookings
+                    </td>
+                </tr>
+                <tr>
+                    <td>            
+                        10:40 &nbsp;<a target="_blank"  href="http://bjmac.hccis.info:8080/RegistrationBoard">Roger's Professional Development</a>
                     </td>
                 </tr>
 
