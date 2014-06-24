@@ -54,6 +54,7 @@ public class ReserveStorageUnitAction extends Action {
              Logger.getLogger(ReserveStorageUnit.class.getName()).log(Level.SEVERE, null, e);
                 messages.add("error", (new ActionMessage("label.error.database")));
         }  
+        
         saveMessages(request, messages);
         forwardTo = mapping.findForward("customerStorageUnitView");
         return forwardTo;

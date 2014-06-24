@@ -1,6 +1,5 @@
 package forms;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.struts.action.ActionForm;
 
 /**

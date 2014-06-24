@@ -56,6 +56,7 @@ public class ReleaseStorageUnitAction extends Action {
              Logger.getLogger(ReleaseStorageUnit.class.getName()).log(Level.SEVERE, null, e);
                 messages.add("error", (new ActionMessage("label.error.database")));
         }
+        
         messages.add("success", (new ActionMessage("label.customer.storage.unit.view.release.storage.unit.success")));
               
         if (adminAuthenticated != null && adminAuthenticated.getAdminCode() == 378) {

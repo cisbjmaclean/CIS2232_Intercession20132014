@@ -1,6 +1,5 @@
 package actions;
 
-import business.AddCustomer;
 import business.LoadStorageUnits;
 import forms.StorageUnitForm;
 import java.util.ArrayList;
@@ -50,7 +49,7 @@ public class InitializeAction extends Action {
             storageUnits = loadUnits.loadStorageUnits();
             request.getSession().setAttribute("storageUnits", SortStorageUnits.sortDefault(storageUnits));
         } catch (Exception e) {
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(LoadStorageUnits.class.getName()).log(Level.SEVERE, null, e);
             messages.add("error", (new ActionMessage("label.error.database")));
         }
         saveMessages(request, messages);

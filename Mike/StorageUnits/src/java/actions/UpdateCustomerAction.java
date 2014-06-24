@@ -1,6 +1,5 @@
 package actions;
 
-import business.AddCustomer;
 import business.UpdateCustomer;
 import forms.LoginForm;
 import java.util.logging.Level;
@@ -41,28 +40,29 @@ public class UpdateCustomerAction extends Action {
                 return mapping.findForward("login");
             }
         }
-
-        updateCustomer = new UpdateCustomer(request);
         try {
+            updateCustomer = new UpdateCustomer(request);
             customerUpdate = updateCustomer.updateCustomer();
-
-            if (customerUpdate) {
-                if (adminAuthenticated != null && adminAuthenticated.isValidated() == true && adminAuthenticated.getAdminCode() == 378) {
-                    forwardTo = mapping.findForward("adminMain");
-                } else {
-                    forwardTo = mapping.findForward("customerStorageUnitView");
-                }
-            } else if (authenticated != null && authenticated.isValidated() == true) {
-                forwardTo = mapping.findForward("customerStorageUnitView");
-            } else {
-                forwardTo = mapping.findForward("customerUpdate");
-            }
-
         } catch (Exception e) {
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, e);
             messages.add("error", (new ActionMessage("label.error.database")));
             //label.error.database = There was an issue with the database, please contact customer support
         }
+
+        if (customerUpdate) {
+            messages.add("success", (new ActionMessage("customer.update.success")));
+            if (adminAuthenticated != null && adminAuthenticated.isValidated() == true && adminAuthenticated.getAdminCode() == 378) {
+                forwardTo = mapping.findForward("adminMain");
+            } else {
+                forwardTo = mapping.findForward("customerStorageUnitView");
+            }
+        } else if (authenticated != null && authenticated.isValidated() == true) {
+            forwardTo = mapping.findForward("customerStorageUnitView");
+        } else {
+             messages.add("success", (new ActionMessage("customer.update.failed")));
+            forwardTo = mapping.findForward("customerUpdate");
+        }
+        
         saveMessages(request, messages);
         return forwardTo;
     }

@@ -1,7 +1,8 @@
 package actions;
 
-import business.AddStorageUnit;
+import business.LoadCustomer;
 import business.LoadCustomers;
+import business.LoadStorageUnits;
 import forms.LoginForm;
 import forms.StorageUnitForm;
 import java.util.ArrayList;
@@ -58,7 +59,9 @@ public class AdminInitializeAction extends Action {
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
         request.setAttribute("storageUnits", SortStorageUnits.sortAdmin(storageUnits));
         } catch (Exception e) {
-             Logger.getLogger(AddStorageUnit.class.getName()).log(Level.SEVERE, null, e);
+             Logger.getLogger(LoadCustomer.class.getName()).log(Level.SEVERE, null, e);
+             Logger.getLogger(LoadStorageUnits.class.getName()).log(Level.SEVERE, null, e);
+             Logger.getLogger(LoadCustomer.class.getName()).log(Level.SEVERE, null, e);
             messages.add("error", (new ActionMessage("label.error.database")));
         }
         

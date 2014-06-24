@@ -1,6 +1,5 @@
 package actions;
 
-import business.AddCustomer;
 import business.UpdateStorageUnit;
 import forms.LoginForm;
 import java.util.logging.Level;
@@ -42,7 +41,7 @@ public class ExtendStorageUnitAction extends Action {
             extendUnit.extendUnit(request);
             messages.add("success", (new ActionMessage("label.customer.storage.unit.view.extend.storage.unit.success")));
         } catch (Exception e) {
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UpdateStorageUnit.class.getName()).log(Level.SEVERE, null, e);
             messages.add("error", (new ActionMessage("label.error.database")));
         }
         saveMessages(request, messages);

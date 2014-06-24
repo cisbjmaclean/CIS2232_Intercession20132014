@@ -1,6 +1,5 @@
 package actions;
 
-import forms.LoginForm;
 import forms.MultipleActionForm;
 import java.util.Locale;
 import java.util.ResourceBundle;

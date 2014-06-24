@@ -69,8 +69,8 @@ public class AddCustomerAction extends Action {
             } else {
                 forwardTo = mapping.findForward("login");
             }
-            messages.add("success", (new ActionMessage("label.database.add.user")));  
-          //label.database.add.user = User added
+            messages.add("success", (new ActionMessage("label.database.add.customer")));  
+          //label.database.add.user = customer added
         } else if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
             forwardTo = mapping.findForward("adminAddCustomer");
         } else {
