@@ -5,6 +5,7 @@ import forms.AdminModifyCustomerForm;
 import forms.CustomerForm;
 import forms.LoginForm;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -19,13 +20,15 @@ public class SetCustomerUpdateInfo {
     
     public void setCustomer(AdminModifyCustomerForm customerId, HttpServletRequest request) {
         allCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
-        for (CustomerForm allCustomers : allCustomers) {
+        for (Iterator<CustomerForm> it = allCustomers.iterator(); it.hasNext();) {
+            CustomerForm allCustomers = it.next();
             if (allCustomers.getCustomerId() == customerId.getCustomerId()){
                 request.getSession().setAttribute("customerDetails", allCustomers);
             }     
         }
         allLogins = (ArrayList<LoginForm>) request.getSession().getAttribute("allLogins");
-        for (LoginForm allLogins : allLogins) {
+        for (Iterator<LoginForm> it = allLogins.iterator(); it.hasNext();) {
+            LoginForm allLogins = it.next();
             if (allLogins.getCustomerId() == customerId.getCustomerId()){
                 request.getSession().setAttribute("customer", allLogins);
             }     

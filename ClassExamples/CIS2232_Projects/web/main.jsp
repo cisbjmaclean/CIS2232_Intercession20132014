@@ -51,7 +51,7 @@
                 </tr>
                 <tr>
                     <td>            
-                        10:20 &nbsp;Mike's Storage Unit Bookings
+                        10:20 &nbsp;<a  target="_blank"  href="http://bjmac.hccis.info:8080/StorageUnits">Mike's Storage Unit Bookings</a>
                     </td>
                 </tr>
                 <tr>
