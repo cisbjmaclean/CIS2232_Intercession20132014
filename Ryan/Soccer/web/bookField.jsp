@@ -20,7 +20,7 @@
     <html:base/>
     </head>
     <body>
-        
+    <div class="main">  
     <logic:notPresent name="org.apache.struts.action.MESSAGE" scope="application">
             <div  style="color: red">
                 ERROR:  Application resources not loaded -- check servlet container
@@ -31,6 +31,10 @@
         <h3><bean:message key="label.viewFields"/></h3>
         
         <html:form action="/BookingAction.do">
+            <bean:message key="book.coach"/>
+            <bean:write name="loginForm" property="userName" />
+
+            <br>
             <bean:message key="book.field"/>
             <html:select property="fieldNum">
                 <logic:iterate name="fields" id="TheField" scope ="request">
@@ -41,13 +45,7 @@
                 </logic:iterate>
             </html:select>
             <br>
-            <bean:message key="book.coach"/>
-            <html:select property="userID">
-                <option value="<bean:write name="loginForm" property="userID"/>">
-                    <bean:write name="loginForm" property="userName" />
-                </option>
-            </html:select>
-            <br>
+            
             <bean:message key="book.day"/>
             <html:select property="date">
                 <logic:iterate name="dates" id="TheDate" scope ="request">
@@ -69,7 +67,7 @@
             </html:select>
             <html:submit><bean:message key="label.submit"/></html:submit>
         </html:form>
-
+    </div>
     </body>
 </html:html>
 

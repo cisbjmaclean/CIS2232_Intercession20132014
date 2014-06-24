@@ -22,7 +22,8 @@ import util.ConnectionUtils;
 /**
  * @author Ryan
  *
- * ### FINISH THE LOAD METHOD ###
+ * This class is used to populate the drop down boxes of the book a field page.
+ * It access the database to get all the available information needed.
  */
 public class BookFieldAction extends Action {
 

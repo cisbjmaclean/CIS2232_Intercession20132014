@@ -17,6 +17,9 @@
         <a href="ViewBookedFields.do" class="menu"><div class="linkHeader"><bean:message key="main.view"/></div></a>
         <a href="BookField.do" class="menu"><div class="linkHeader"><bean:message key="main.book"/></div></a>
         <a href="ViewProfile.do" class="menu"><div class="linkHeader"><bean:message key="main.profile"/></div></a>
+
+        <a href="Logout.do" class="menu"><div class="rightLink"><bean:message key="main.logout"/></div></a>
+        <a href="AddCoach.do" class="menu"><div class="rightLink"><bean:message key="main.coach"/></div></a>
     </div>
     </div>
 

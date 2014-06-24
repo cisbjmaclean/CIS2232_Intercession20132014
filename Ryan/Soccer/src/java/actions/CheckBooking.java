@@ -30,9 +30,8 @@ import util.DbUtils;
 /**
  * @author Ryan
  *
- * purpose: This class uses the login object and checks to see if it is a match
- * on an external sheet. depending on the result the user is sent to a
- * designated page.
+ * purpose: This class is used to check and see if the field is booked already 
+ * or not. If it isn't already in use it will be saved to the database.
  */
 public class CheckBooking extends Action {
 
@@ -44,7 +43,8 @@ public class CheckBooking extends Action {
             HttpServletRequest request,
             HttpServletResponse response)
             throws Exception {
-
+        
+        LoginForm login = (LoginForm) request.getSession().getAttribute("loginForm");
         //Get the option chosen from the user. IMPORTANT
         BookingForm book = (BookingForm) request.getAttribute("bookingForm");
         
@@ -56,10 +56,10 @@ public class CheckBooking extends Action {
 
         ActionMessages messages = new ActionMessages();
         
-        loadFromDatabase(book);
+        loadFromDatabase();
         if(!checkForMatch(book)){
             System.out.println("The field is not booked at this time... Booking the field..");
-            writeToDatabase(book);
+            writeToDatabase(book, login);
             messages.add("success", (new ActionMessage("label.booking.success")));
         }else{
             System.out.println("The field is already booked for this time");
@@ -72,7 +72,7 @@ public class CheckBooking extends Action {
 
     }
 
-    public static void loadFromDatabase(BookingForm book) {
+    public static void loadFromDatabase() {
 
         PreparedStatement psAuthenticate = null;
         String sql = null;
@@ -124,7 +124,7 @@ public class CheckBooking extends Action {
         return alreadyBooked;
     }
 
-    private void writeToDatabase(BookingForm book) {
+    public void writeToDatabase(BookingForm book, LoginForm login) {
         //This method only writes to the database if the field is not already booked
         //at this time.
         PreparedStatement psAuthenticate = null;
@@ -141,11 +141,12 @@ public class CheckBooking extends Action {
          */
         
         try {
+            
             sql = "INSERT INTO `booked_field`(`FIELD_NUM`, `USER_ID`, `DATE`, `TIME_NUM`) VALUES (?,?,?,?)";
 
             psAuthenticate = conn.prepareStatement(sql);
             psAuthenticate.setInt(1, book.getFieldNum());
-            psAuthenticate.setInt(2, book.getUserID());
+            psAuthenticate.setInt(2, login.getUserID());
             psAuthenticate.setString(3, book.getDate());
             psAuthenticate.setInt(4, book.getTimeNum());
             psAuthenticate.executeUpdate();

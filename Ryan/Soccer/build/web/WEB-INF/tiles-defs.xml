@@ -19,9 +19,7 @@
         <put name="footer" value="footer.jsp" />
     </definition>
 
-    <definition name="welcomeTile" extends=".mainLayout">
-        <put name="body"   value="/welcome.jsp" />
-    </definition>
+
 
     <definition name="mainTile" extends=".mainLayout">
         <put name="body"   value="/main.jsp" />
@@ -34,6 +32,9 @@
     </definition>
     <definition name="viewProfile" extends=".mainLayout">
         <put name="body"   value="/profile.jsp" />
+    </definition>
+    <definition name="addCoachTile" extends=".mainLayout">
+        <put name="body"   value="/addCoach.jsp" />
     </definition>
 
 </tiles-definitions>

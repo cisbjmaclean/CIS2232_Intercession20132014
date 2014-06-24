@@ -66,10 +66,14 @@ public class ViewProfile extends Action {
         }
 
         try {
-
+            Calendar c = Calendar.getInstance();
+            Date dt = c.getTime();
+            String modifiedDate = new SimpleDateFormat("yyyy-MM-dd").format(dt);
+            
             sql = "SELECT * "
                     + "FROM `booked_field`, `time`, `user`, `field` "
-                    + "WHERE booked_field.USER_ID = \"" + user + "\" " 
+                    + "WHERE booked_field.USER_ID = \"" + user + "\" "
+                    + "AND booked_field.DATE >= \"" + modifiedDate + "\"" 
                     + "AND booked_field.TIME_NUM = time.TIME_NUM "
                     + "AND booked_field.USER_ID = user.USER_ID "
                     + "AND booked_field.FIELD_NUM = field.FIELD_NUM"

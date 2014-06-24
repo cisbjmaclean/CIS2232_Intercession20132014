@@ -31,8 +31,12 @@
         <h3><bean:message key="main.hello"/></h3>
 
     <logic:messagesPresent message="true">
-        <html:messages id="msg2" message="true" property="success"><div><bean:write name="msg2"/></div><br/></html:messages>
-        <html:messages id="msg2" message="true" property="fail"><div><bean:write name="msg2"/></div><br/></html:messages>
+        <div class="main">
+        <html:messages id="msg2" message="true" property="success"><div><img src="css/correct.png" class="imageHolder"/><bean:write name="msg2"/></div><br/></html:messages>
+        <html:messages id="msg2" message="true" property="fail"><div><img src="css/wrong.png" class="imageHolder"/><bean:write name="msg2"/></div><br/></html:messages>
+        <html:messages id="msg2" message="true" property="successCoach"><div><img src="css/correct.png" class="imageHolder"/><bean:write name="msg2"/></div><br/></html:messages>
+        <html:messages id="msg2" message="true" property="failCoach"><div><img src="css/wrong.png" class="imageHolder"/><bean:write name="msg2"/></div><br/></html:messages>
+        </div>
     </logic:messagesPresent>
         </div>
 </html:html>

@@ -20,7 +20,7 @@
     <html:base/>
     </head>
     <body>
-        
+        <div class="main">
     <logic:notPresent name="org.apache.struts.action.MESSAGE" scope="application">
             <div  style="color: red">
                 ERROR:  Application resources not loaded -- check servlet container
@@ -31,7 +31,7 @@
         <h3><bean:message key="label.viewFields"/></h3>
         
          <table>
-                    <tr>
+                    <tr class="tdHead">
                         <td><bean:message key="label.field"/></td>
                         <td><bean:message key="label.bookedBy"/></td>
                         <td><bean:message key="label.date"/></td>
@@ -55,7 +55,7 @@
                 </logic:iterate>
             </table>
             <br>
-            
+        </div>
     </body>
 </html:html>
 

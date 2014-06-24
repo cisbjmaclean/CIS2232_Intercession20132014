@@ -36,7 +36,7 @@ import util.ConnectionUtils;
  * external sheet. depending on the result the user is sent to a designated page.
  */
 public class CheckLogin extends Action{
-    private static ArrayList<LoginForm> users = new ArrayList();
+    
     
     public ActionForward execute(
             ActionMapping mapping,
@@ -45,7 +45,7 @@ public class CheckLogin extends Action{
             HttpServletResponse response)
             throws Exception {
 
-        
+        ArrayList<LoginForm> users = new ArrayList();
         //Get the option chosen from the user. IMPORTANT
         LoginForm login = (LoginForm) request.getAttribute("loginForm");
         // for debugging purposes, check to see if it worked.
@@ -53,7 +53,7 @@ public class CheckLogin extends Action{
         System.out.println(login.getUserID());
         System.out.println(login.getPassword());
         
-        loadFromDatabase(login);
+        loadFromDatabase(users);
         
         ActionForward findForward = mapping.findForward("success");
         
@@ -72,7 +72,7 @@ public class CheckLogin extends Action{
 
     }
     
-    public static void loadFromDatabase(LoginForm login) {
+    public static void loadFromDatabase(ArrayList<LoginForm> users) {
         
         PreparedStatement psAuthenticate = null;
         String sql = null;
@@ -84,7 +84,7 @@ public class CheckLogin extends Action{
         }
         
         try {
-            sql = "SELECT * FROM `user` ORDER BY `NAME`";
+            sql = "SELECT * FROM `user` ORDER BY `USER_ID`";
             System.out.println("#############################################RIGHT HERE LOOOOOOOKKKK");
             psAuthenticate = conn.prepareStatement(sql);
 //            psAuthenticate.setString(1, bookingDate);

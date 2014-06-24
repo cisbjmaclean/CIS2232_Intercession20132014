@@ -22,6 +22,7 @@
     <action-mappings>
         <action path="/Welcome" forward="/welcome.jsp"/>
         <action path="/Main" forward="mainTile"/>
+        <action path="/AddCoach" forward="addCoachTile"/>
         
         <action path="/LoginAction" name="success" forward="mainTile"/>
          
@@ -57,6 +58,19 @@
                 type="actions.ViewProfile"
                 scope="request">
              <forward name="viewProfile" path="viewProfile" />
+         </action>
+         <action path="/Logout" 
+                type="actions.Logout"
+                scope="request">
+             <forward name="logout" path="/welcome.jsp" />
+         </action>
+         
+         <action path="/CoachAction" 
+                name="loginForm"
+                type="actions.AddCoach"
+                scope="request">
+             <forward name="addSuccess" path="mainTile" />
+             <forward name="addFail" path="mainTile" />
          </action>
     </action-mappings>
     
