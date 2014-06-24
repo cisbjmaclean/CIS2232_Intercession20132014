@@ -1,7 +1,10 @@
 package actions;
 
+import business.AddCustomer;
 import business.UpdateCustomer;
 import forms.LoginForm;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -40,19 +43,27 @@ public class UpdateCustomerAction extends Action {
         }
 
         updateCustomer = new UpdateCustomer(request);
-        customerUpdate = updateCustomer.updateCustomer();
+        try {
+            customerUpdate = updateCustomer.updateCustomer();
 
-        if (customerUpdate) {
-            if (adminAuthenticated != null && adminAuthenticated.isValidated() == true && adminAuthenticated.getAdminCode() == 378) {
-                forwardTo = mapping.findForward("adminMain");
-            } else {              
+            if (customerUpdate) {
+                if (adminAuthenticated != null && adminAuthenticated.isValidated() == true && adminAuthenticated.getAdminCode() == 378) {
+                    forwardTo = mapping.findForward("adminMain");
+                } else {
+                    forwardTo = mapping.findForward("customerStorageUnitView");
+                }
+            } else if (authenticated != null && authenticated.isValidated() == true) {
                 forwardTo = mapping.findForward("customerStorageUnitView");
+            } else {
+                forwardTo = mapping.findForward("customerUpdate");
             }
-        } else if (authenticated != null && authenticated.isValidated() == true) {
-            forwardTo = mapping.findForward("customerStorageUnitView");
-        } else {
-            forwardTo = mapping.findForward("customerUpdate");
+
+        } catch (Exception e) {
+            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+            messages.add("error", (new ActionMessage("label.error.database")));
+            //label.error.database = There was an issue with the database, please contact customer support
         }
+        saveMessages(request, messages);
         return forwardTo;
     }
 }

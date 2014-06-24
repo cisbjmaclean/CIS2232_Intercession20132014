@@ -22,7 +22,6 @@ import org.apache.struts.action.ActionMessages;
  */
 public class AdminStorageUnitSearchAction extends Action {
 
-    private ActionForward forwardTo;
     private LoginForm authenticated;
     private AdminStorageUnitSearchForm searchForm;
     private AdminSearchStorageUnits searchUnit;

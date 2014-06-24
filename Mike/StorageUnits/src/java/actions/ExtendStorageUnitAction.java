@@ -1,7 +1,10 @@
 package actions;
 
+import business.AddCustomer;
 import business.UpdateStorageUnit;
 import forms.LoginForm;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -26,15 +29,22 @@ public class ExtendStorageUnitAction extends Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         ActionMessages messages = new ActionMessages();
+
         authenticated = (LoginForm) request.getSession().getAttribute("customer");
         if (authenticated == null || authenticated.isValidated() == false) {
             messages.add("error", (new ActionMessage("label.session.expired")));
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
-        extendUnit = new UpdateStorageUnit();
-        extendUnit.extendUnit(request);
-        messages.add("success", (new ActionMessage("label.customer.storage.unit.view.extend.storage.unit.success")));
+
+        try {
+            extendUnit = new UpdateStorageUnit();
+            extendUnit.extendUnit(request);
+            messages.add("success", (new ActionMessage("label.customer.storage.unit.view.extend.storage.unit.success")));
+        } catch (Exception e) {
+            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+            messages.add("error", (new ActionMessage("label.error.database")));
+        }
         saveMessages(request, messages);
         forwardTo = mapping.findForward("customerStorageUnitView");
         return forwardTo;

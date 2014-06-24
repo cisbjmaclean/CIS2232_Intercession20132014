@@ -5,6 +5,8 @@ import forms.LoginForm;
 import forms.ReleaseStorageUnitForm;
 import forms.StorageUnitForm;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -44,20 +46,24 @@ public class ReleaseStorageUnitAction extends Action {
             }
         }
 
+        try {
         releaseUnitForm = (ReleaseStorageUnitForm) request.getAttribute("releaseStorageUnitForm");
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
         releaseUnit = new ReleaseStorageUnit();    
         releaseUnit.releaseUnit(releaseUnitForm, storageUnits);      
         request.getSession().setAttribute("storageUnits", SortStorageUnits.sortDefault(storageUnits));
-        
+        } catch (Exception e){
+             Logger.getLogger(ReleaseStorageUnit.class.getName()).log(Level.SEVERE, null, e);
+                messages.add("error", (new ActionMessage("label.error.database")));
+        }
         messages.add("success", (new ActionMessage("label.customer.storage.unit.view.release.storage.unit.success")));
-        
-        saveMessages(request, messages);
+              
         if (adminAuthenticated != null && adminAuthenticated.getAdminCode() == 378) {
             forwardTo = mapping.findForward("adminStorageUnitView");
         } else {
             forwardTo = mapping.findForward("customerStorageUnitView");
         }
+        saveMessages(request, messages);
         return forwardTo;
     }
 }

@@ -32,6 +32,10 @@
     <definition name="customerStorageUnitViewTile" extends=".mainClassicLayout">
         <put name="body"   value="/customerStorageUnitView.jsp" />
     </definition>
+    
+    <definition name="customerUpdateTile" extends=".mainClassicLayout">
+        <put name="body"   value="/updateCustomer.jsp" />
+    </definition>
 
     <definition name="customerStorageUnitSearchTile" extends=".mainClassicLayout">
         <put name="body"   value="/customerStorageUnitSearch.jsp" />

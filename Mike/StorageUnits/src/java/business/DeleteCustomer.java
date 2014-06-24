@@ -34,7 +34,7 @@ public class DeleteCustomer {
     private ArrayList<CustomerForm> allCustomers;
     private ArrayList<LoginForm> allLogins;
 
-    public void deleteCustomer(AdminModifyCustomerForm customerId, HttpServletRequest request) {
+    public void deleteCustomer(AdminModifyCustomerForm customerId, HttpServletRequest request) throws Exception {
         // Try to connect to the database.
         try {
             con = dbConnection.databaseConnection();
@@ -60,7 +60,7 @@ public class DeleteCustomer {
 
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);

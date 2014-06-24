@@ -1,9 +1,12 @@
 package actions;
 
+import business.AddStorageUnit;
 import business.LoadCustomers;
 import forms.LoginForm;
 import forms.StorageUnitForm;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -46,15 +49,22 @@ public class AdminInitializeAction extends Action {
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
+        
+        try{
         loadCustomer = new LoadCustomers();
         request.getSession().setAttribute("allCustomers", loadCustomer.loadCustomers(request));
         loadLogin = new LoadCustomers();
         request.getSession().setAttribute("allLogins", loadLogin.loadLogins(request));
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
         request.setAttribute("storageUnits", SortStorageUnits.sortAdmin(storageUnits));
-
-        // Used to define the page to be forwarded to.      
-        ActionForward findForward = mapping.findForward("adminMain");
+        } catch (Exception e) {
+             Logger.getLogger(AddStorageUnit.class.getName()).log(Level.SEVERE, null, e);
+            messages.add("error", (new ActionMessage("label.error.database")));
+        }
+        
+        saveMessages(request, messages);
+        // Used to define the page to be forwarded to.          
+        ActionForward findForward = mapping.findForward("adminMain");      
         return findForward;
     }
 }

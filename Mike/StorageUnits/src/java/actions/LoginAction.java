@@ -23,7 +23,7 @@ public class LoginAction extends Action {
 
     // Flag for login access.
     private InitializeAction initialize ;
-    private String authenticate;
+    private String authenticate = "none";
     private LoginForm validateLogin;
     private Login login;
     private LoadCustomer loadCustomer;
@@ -69,7 +69,7 @@ public class LoginAction extends Action {
                 messages.add("success", (new ActionMessage("label.login.success")));
                 forwardTo = mapping.findForward("customerStorageUnitView");
                 break;
-            case "none":
+            default:
                 messages.add("error", (new ActionMessage("label.login.fail")));
                 forwardTo = mapping.findForward("login");
                 break;

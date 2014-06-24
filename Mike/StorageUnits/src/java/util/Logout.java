@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Logout {
 
-     public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    request.getSession().invalidate();       
+    public static void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().invalidate();
     }
 }

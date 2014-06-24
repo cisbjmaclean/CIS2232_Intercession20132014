@@ -35,7 +35,7 @@ public class Login {
      * @param validateLogin
      * @return
      */
-    public String checkLogin(LoginForm validateLogin) {
+    public String checkLogin(LoginForm validateLogin) throws Exception {
 
         // Try to connect to the database.
         try {
@@ -65,7 +65,7 @@ public class Login {
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
@@ -73,7 +73,7 @@ public class Login {
         return authenticate;
     }
 
-    public String checkAdminLogin(LoginForm validateLogin) {
+    public String checkAdminLogin(LoginForm validateLogin) throws Exception {
         // Try to connect to the database.
         try {
             con = dbConnection.databaseConnection();
@@ -103,7 +103,7 @@ public class Login {
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);

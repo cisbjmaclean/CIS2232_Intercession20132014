@@ -62,7 +62,7 @@ public class AddCustomer {
         return usernameTaken;
     }
 
-    public boolean addCustomer (AddUpdateCustomerForm customerForm) {
+    public boolean addCustomer (AddUpdateCustomerForm customerForm) throws Exception {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -115,7 +115,7 @@ public class AddCustomer {
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+             throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);

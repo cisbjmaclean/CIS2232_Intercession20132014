@@ -5,6 +5,8 @@ import forms.LoginForm;
 import forms.ReserveStorageUnitForm;
 import forms.StorageUnitForm;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -39,14 +41,19 @@ public class ReserveStorageUnitAction extends Action {
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
+        
+        try {
         user = (LoginForm) request.getSession().getAttribute("customer");
         reserveUnitForm = (ReserveStorageUnitForm) request.getAttribute("reserveStorageUnitForm");
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
         reserveUnit = new ReserveStorageUnit();
         reserveUnit.reserveUnit(reserveUnitForm, user, storageUnits);
         request.getSession().setAttribute("storageUnits", SortStorageUnits.sortDefault(storageUnits));
-          
-        messages.add("success", (new ActionMessage("label.customer.view.all.reserve.storage.unit.success")));
+               messages.add("success", (new ActionMessage("label.customer.view.all.reserve.storage.unit.success")));
+        } catch (Exception e){
+             Logger.getLogger(ReserveStorageUnit.class.getName()).log(Level.SEVERE, null, e);
+                messages.add("error", (new ActionMessage("label.error.database")));
+        }  
         saveMessages(request, messages);
         forwardTo = mapping.findForward("customerStorageUnitView");
         return forwardTo;

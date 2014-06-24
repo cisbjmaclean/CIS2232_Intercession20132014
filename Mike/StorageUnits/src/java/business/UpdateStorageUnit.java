@@ -41,7 +41,7 @@ public class UpdateStorageUnit {
     private int storageUnitToggleValue;
     private ArrayList<StorageUnitForm> storageUnits;
 
-    public void extendUnit(HttpServletRequest request) {
+    public void extendUnit(HttpServletRequest request) throws Exception {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -68,7 +68,7 @@ public class UpdateStorageUnit {
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
@@ -78,7 +78,7 @@ public class UpdateStorageUnit {
        // SortStorageUnits.sortDefault(request, storageUnits);
     }
 
-    public void setStorageUnitInUse(HttpServletRequest request) {
+    public void setStorageUnitInUse(HttpServletRequest request) throws Exception {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -109,7 +109,7 @@ public class UpdateStorageUnit {
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();        
         } finally {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
