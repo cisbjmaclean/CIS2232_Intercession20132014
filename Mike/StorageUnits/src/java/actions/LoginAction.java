@@ -50,9 +50,9 @@ public class LoginAction extends Action {
         login = new Login();
                   
         if (validateLogin.getUsername().startsWith("admin.")) {
-            authenticate = login.checkAdminLogin(authenticate, validateLogin);
+            authenticate = login.checkAdminLogin(validateLogin);
         } else {
-            authenticate = login.checkLogin(authenticate, validateLogin);
+            authenticate = login.checkLogin(validateLogin);
         }
         ActionMessages messages = new ActionMessages();
         // If login credentials are valid continue otherwise return to the login page.

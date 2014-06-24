@@ -18,7 +18,7 @@ public class UnitsInUseCheck {
     public String getUnitsInUse(int customerId) {
         loadUnits = new LoadStorageUnits();
         units = new ArrayList();
-        units.addAll(loadUnits.loadStorageUnits(null));
+        units.addAll(loadUnits.loadStorageUnits());
 
         if (units.size() > 0) {
             unitsInUseString = "The storageUnits you currenlty have in use are:";

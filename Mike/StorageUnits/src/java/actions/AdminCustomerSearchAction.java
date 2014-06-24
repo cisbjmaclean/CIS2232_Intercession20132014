@@ -2,7 +2,9 @@ package actions;
 
 import business.SearchCustomers;
 import forms.AdminCustomerSearchForm;
+import forms.CustomerForm;
 import forms.LoginForm;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -22,6 +24,9 @@ public class AdminCustomerSearchAction extends Action {
     private AdminCustomerSearchForm searchForm;
     private LoginForm authenticated;
     private SearchCustomers searchCustomer;
+    private ArrayList<CustomerForm> allCustomers;
+    private ArrayList<LoginForm> allLogins;
+    private ArrayList<CustomerForm> searchCustomers;
 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
@@ -35,15 +40,20 @@ public class AdminCustomerSearchAction extends Action {
         }
         searchCustomer = new SearchCustomers();
         searchForm = (AdminCustomerSearchForm) request.getAttribute("adminCustomerSearchForm");
-        if (searchForm.getCustomerLastName().equals("") && searchForm.getCustomerUsername().equals("") && searchForm.getCustomerLastName().equals("")){
-        request.setAttribute("customerList", request.getSession().getAttribute("allCustomers"));
-        }else if (searchForm.getCustomerEmail().length() > 0) {
-            searchCustomer.seachByEmail(searchForm, request);
+        allCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
+        allLogins = (ArrayList<LoginForm>) request.getSession().getAttribute("allLogins");
+        searchCustomers = new ArrayList();
+
+        if (searchForm.getCustomerLastName().equals("") && searchForm.getCustomerUsername().equals("") && searchForm.getCustomerLastName().equals("")) {
+            request.setAttribute("customerList", request.getSession().getAttribute("allCustomers"));
+        } else if (searchForm.getCustomerEmail().length() > 0) {
+            searchCustomers = searchCustomer.seachByEmail(searchForm, allCustomers);
         } else if (searchForm.getCustomerUsername().length() > 0) {
-            searchCustomer.seachByUsername(searchForm, request);
+            searchCustomers = searchCustomer.seachByUsername(searchForm, allLogins, allCustomers);
         } else if (searchForm.getCustomerLastName().length() > 0) {
-            searchCustomer.seachByLastName(searchForm, request);
+            searchCustomers = searchCustomer.seachByLastName(searchForm, allCustomers);
         }
+        request.setAttribute("customerList", searchCustomers);
         return mapping.findForward("adminCustomerSearchResults");
     }
 }

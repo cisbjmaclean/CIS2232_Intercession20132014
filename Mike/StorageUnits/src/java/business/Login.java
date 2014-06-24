@@ -27,15 +27,15 @@ public class Login {
     private int customerId;
     private UnitsInUseCheck checkUnitsInUse;
     private String unitsInUse;
+    private String authenticate;
 
     /**
      * This method retrieves data from the database.
      *
-     * @param authenticate
      * @param validateLogin
      * @return
      */
-    public String checkLogin(String authenticate, LoginForm validateLogin) {
+    public String checkLogin(LoginForm validateLogin) {
 
         // Try to connect to the database.
         try {
@@ -73,7 +73,7 @@ public class Login {
         return authenticate;
     }
 
-    public String checkAdminLogin(String authenticate, LoginForm validateLogin) {
+    public String checkAdminLogin(LoginForm validateLogin) {
         // Try to connect to the database.
         try {
             con = dbConnection.databaseConnection();

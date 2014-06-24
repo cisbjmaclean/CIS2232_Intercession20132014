@@ -1,6 +1,7 @@
 package actions;
 
 import business.AddCustomer;
+import forms.AddUpdateCustomerForm;
 import forms.LoginForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ public class AddCustomerAction extends Action {
     private AddCustomer addCustomer;
     private ActionForward forwardTo;
     private LoginForm authenticated;
+    private AddUpdateCustomerForm customerForm;
 
     /**
      *
@@ -39,11 +41,14 @@ public class AddCustomerAction extends Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         authenticated = (LoginForm) request.getSession().getAttribute("admin");
-        addCustomer = new AddCustomer(request);
-        usernameTaken = addCustomer.checkUsername();
+        customerForm = (AddUpdateCustomerForm) request.getAttribute("addUpdateCustomerForm");  
+        addCustomer = new AddCustomer();
+        usernameTaken = addCustomer.checkUsername(customerForm);
+       
         if (!usernameTaken) {
-            customerCreation = addCustomer.addCustomer();
+            customerCreation = addCustomer.addCustomer(customerForm);
         }
+        
         if (customerCreation) {
             if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
                 forwardTo = mapping.findForward("adminMain");
@@ -55,7 +60,6 @@ public class AddCustomerAction extends Action {
         } else {
             forwardTo = mapping.findForward("addCustomer");
         }
-
         return forwardTo;
     }
 }

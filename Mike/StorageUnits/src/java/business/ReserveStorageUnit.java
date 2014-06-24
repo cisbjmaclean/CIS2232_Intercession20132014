@@ -11,10 +11,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
-import util.SortStorageUnits;
 
 /**
  *
@@ -30,15 +28,12 @@ public class ReserveStorageUnit {
     private String sql;
     // The connection object.
     private Connection con;
-    private LoginForm user;
-    private ReserveStorageUnitForm reserveUnit;
     private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     private Calendar calendar = Calendar.getInstance();
     private String dateFrom;
     private String dateTo;
-    private ArrayList<StorageUnitForm> storageUnits;
-    
-    public void reserveUnit(HttpServletRequest request) {
+
+    public void reserveUnit(ReserveStorageUnitForm reserveUnitForm, LoginForm user, ArrayList<StorageUnitForm> storageUnits) {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -49,15 +44,13 @@ public class ReserveStorageUnit {
 
         // Try to generate the query.
         try {
-            user = (LoginForm) request.getSession().getAttribute("customer");
-            reserveUnit = (ReserveStorageUnitForm) request.getAttribute("reserveStorageUnitForm");
             dateFrom = dateFormat.format(calendar.getTime());
-            dateTo = reserveUnit.getDateTo();
+            dateTo = reserveUnitForm.getDateTo();
             // The query to send.
             sql = "INSERT INTO `customer_storage_unit`(`storage_unit_id`, `cus_id`) VALUES (?,?)";
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setInt(1, reserveUnit.getUnitId());
+            psAuthenticate.setInt(1, reserveUnitForm.getUnitId());
             psAuthenticate.setInt(2, user.getCustomerId());
             // Run the query.
             psAuthenticate.executeUpdate();
@@ -69,11 +62,11 @@ public class ReserveStorageUnit {
             psAuthenticate.setInt(1, 0);
             psAuthenticate.setString(2, dateFrom);
             psAuthenticate.setString(3, dateTo);
-            psAuthenticate.setInt(4, reserveUnit.getUnitId());
-            psAuthenticate.setInt(5, 0);
+            psAuthenticate.setInt(4, 0);
+            psAuthenticate.setInt(5, reserveUnitForm.getUnitId());
             // Run the query.
             psAuthenticate.executeUpdate();
-            
+
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("There was an issue with the query.");
@@ -81,19 +74,19 @@ public class ReserveStorageUnit {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
         }
-        storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
-        setUnit();
-        SortStorageUnits.sortDefault(request, storageUnits);
+        setUnit(user, reserveUnitForm, storageUnits);
+
     }
-    
-    public void setUnit() {
+
+    public void setUnit(LoginForm user, ReserveStorageUnitForm reserveUnitForm, ArrayList<StorageUnitForm> storageUnits) {
         for (StorageUnitForm storageUnit : storageUnits) {
-            if (storageUnit.getUnitId() == reserveUnit.getUnitId()) {
+            if (storageUnit.getUnitId() == reserveUnitForm.getUnitId()) {
                 storageUnit.setCustomerId(user.getCustomerId());
                 storageUnit.setUnitDateFrom(dateFrom);
                 storageUnit.setUnitDateTo(dateTo);
                 storageUnit.setUnitInUse(0);
             }
         }
+
     }
 }

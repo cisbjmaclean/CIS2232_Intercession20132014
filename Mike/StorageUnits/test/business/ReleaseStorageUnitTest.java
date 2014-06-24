@@ -1,5 +1,10 @@
-package business;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
+package business;
 
 import forms.ReleaseStorageUnitForm;
 import forms.StorageUnitForm;
@@ -8,26 +13,74 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 import util.DatabaseConnection;
 import util.DbUtils;
 
-
 /**
  *
- * @author Michael
- * @since Jun 12, 2014
+ * @author Michael Fesser
  */
-public class ReleaseStorageUnit {
-
-    // The object used for each new connection.
+public class ReleaseStorageUnitTest {
+     // The object used for each new connection.
     private DatabaseConnection dbConnection = new DatabaseConnection();
     // Used to allow for more security when sending data to a database.
     private PreparedStatement psAuthenticate;
     private String sql;
     // The connection object.
     private Connection con;
+    private ReleaseStorageUnitForm releaseUnitForm;
+    private ArrayList<StorageUnitForm> storageUnits;
+    private ReleaseStorageUnit instance;
+    
+    public ReleaseStorageUnitTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+        releaseUnitForm = new ReleaseStorageUnitForm();
+        storageUnits = new ArrayList<>();
+        instance = new ReleaseStorageUnit();
+    }
+    
+    @After
+    public void tearDown() {
+    }
 
-    public void releaseUnit(ReleaseStorageUnitForm releaseUnitForm, ArrayList<StorageUnitForm> storageUnits) {
+    /**
+     * Test of releaseUnit method, of class ReleaseStorageUnit.
+     */
+    @Test
+    public void testReleaseUnit() {
+        System.out.println("releaseUnit");     
+        instance = new ReleaseStorageUnit();
+        instance.releaseUnit(releaseUnitForm, storageUnits);
+        
+    }
+
+    /**
+     * Test of setUnit method, of class ReleaseStorageUnit.
+     */
+    @Test
+    public void testSetUnit() {
+        System.out.println("setUnit");       
+        instance.setUnit(releaseUnitForm, storageUnits);
+        
+    }
+       public void releaseUnit(ReleaseStorageUnitForm releaseUnitForm, ArrayList<StorageUnitForm> storageUnits) {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -80,3 +133,4 @@ public class ReleaseStorageUnit {
         }
     }
 }
+
