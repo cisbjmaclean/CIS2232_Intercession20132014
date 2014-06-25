@@ -173,7 +173,7 @@ INSERT INTO `storage_unit` (`storage_unit_id`, `storage_unit_type`, `storage_uni
 --
 -- Database: `test_db_storage_unit`
 --
-DROP DATABASE `test_db_storage_unit`;
+DROP DATABASE IF EXISTS `test_db_storage_unit`;
 CREATE DATABASE IF NOT EXISTS `test_db_storage_unit` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `test_db_storage_unit`;
 

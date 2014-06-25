@@ -63,7 +63,7 @@
             <field
                 property="password2"
                 depends="required,mask,validwhen">
-                <arg key="error.create.customer.password"/>
+                <arg key="error.create.customer.password2"/>
                 <msg name="validwhen" key="errors.password.nomatch" />
                 <var>
                     <var-name>mask</var-name>
@@ -82,7 +82,7 @@
             <field
                 property="email2"
                 depends="required,email,validwhen">
-                <arg key="error.create.customer.email"/>          
+                <arg key="error.create.customer.email2"/>          
                 <msg name="validwhen" key="errors.email.nomatch" />
                 <var>
                     <var-name>test</var-name>
@@ -97,7 +97,7 @@
             <field
                 property="lastName"
                 depends="required">
-                <arg key="error.create.customer.lastName"/>
+                <arg key="error.create.customer.last.name"/>
             </field>
             <field
                 property="address"
@@ -117,7 +117,7 @@
             <field
                 property="postalCode"
                 depends="required">
-                <arg key="error.create.customer.postalCode"/>
+                <arg key="error.create.customer.postal.code"/>
                 <var>
                     <var-name>mask</var-name>
                     <var-value>^([A-Z]\d[A-Z]\s\d[A-Z]\d)$</var-value>
@@ -126,7 +126,7 @@
             <field
                 property="phoneNumber"
                 depends="required">
-                <arg key="error.create.customer.phoneNumber"/>
+                <arg key="error.create.customer.phone.number"/>
             </field>                  
         </form>
         
