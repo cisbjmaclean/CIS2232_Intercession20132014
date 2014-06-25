@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import util.WriteToFile;
 
 /**
  *
@@ -30,6 +31,8 @@ public class LoginAction extends Action {
     private Login login;
     private LoadCustomer loadCustomer;
     private ActionForward forwardTo;
+    private String loginString;
+    
 
     /**
      * This method gets the fields from the login page and calls the user class
@@ -66,6 +69,7 @@ public class LoginAction extends Action {
                     request.getSession().setAttribute("admin", validateLogin);
                     messages.add("success", (new ActionMessage("login.success")));
                     forwardTo = mapping.findForward("adminInitialize");
+                    loginString = "successful login";
                     break;
                 case "customer":
                     loadCustomer = new LoadCustomer();
@@ -73,10 +77,12 @@ public class LoginAction extends Action {
                     request.getSession().setAttribute("customerDetails", loadCustomer.setCustomerInformation(validateLogin.getCustomerId()));
                     messages.add("success", (new ActionMessage("login.success")));
                     forwardTo = mapping.findForward("customerStorageUnitView");
+                    loginString = "successful login";
                     break;
                 default:
                     messages.add("error", (new ActionMessage("login.fail")));
                     forwardTo = mapping.findForward("login");
+                    loginString = "failed login";
                     break;
             }
         } catch (Exception e) {
@@ -87,6 +93,8 @@ public class LoginAction extends Action {
         saveMessages(request, messages);
         // Used to deal with some odd behaviour with session timeouts, the back button and logging in again.    
         initialize = new InitializeAction();
+        
+        WriteToFile.fileWrite(validateLogin.getUsername() + " " + loginString);
         return forwardTo;
     }
 }

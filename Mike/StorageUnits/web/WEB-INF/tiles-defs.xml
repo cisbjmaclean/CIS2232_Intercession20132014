@@ -6,7 +6,7 @@
 
 <tiles-definitions>
 
-    <definition name=".mainClassicLayout" path="/base/base_classic.jsp">
+    <definition name=".mainClassicLayout" path="/Base/base_classic.jsp">
         <put name="header" value="/header.jsp" />
         <put name="menu" value = "/mainMenu.jsp" />
         <put name="body"   value="" />
