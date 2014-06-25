@@ -6,11 +6,27 @@
 
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" import="java.util.*"%>
 
+
+<html:html lang="true">
+    <!DOCTYPE html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title><bean:message key="admin.main.title"/></title>     
+    </head>
+    <body>
+        <logic:notPresent name="org.apache.struts.action.MESSAGE" scope="application">
+            <div style="color: red">
+                ERROR: Application resources not loaded -- check servlet container
+                logs for error messages.
+            </div>
+        </logic:notPresent>
+       
 <html:html lang="true">
     <!DOCTYPE html>
     <html>

@@ -64,24 +64,24 @@ public class LoginAction extends Action {
             switch (authenticate) {
                 case "admin":
                     request.getSession().setAttribute("admin", validateLogin);
-                    messages.add("success", (new ActionMessage("label.login.success")));
+                    messages.add("success", (new ActionMessage("login.success")));
                     forwardTo = mapping.findForward("adminInitialize");
                     break;
                 case "customer":
                     loadCustomer = new LoadCustomer();
                     request.getSession().setAttribute("customer", validateLogin);
                     request.getSession().setAttribute("customerDetails", loadCustomer.setCustomerInformation(validateLogin.getCustomerId()));
-                    messages.add("success", (new ActionMessage("label.login.success")));
+                    messages.add("success", (new ActionMessage("login.success")));
                     forwardTo = mapping.findForward("customerStorageUnitView");
                     break;
                 default:
-                    messages.add("error", (new ActionMessage("label.login.fail")));
+                    messages.add("error", (new ActionMessage("login.fail")));
                     forwardTo = mapping.findForward("login");
                     break;
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-            messages.add("error", (new ActionMessage("label.error.database")));
+            messages.add("error", (new ActionMessage("error.database")));
             forwardTo = mapping.findForward("login");           
         }
         saveMessages(request, messages);

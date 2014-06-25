@@ -1,29 +1,23 @@
 <%-- 
-    Document   : user
+    Document   : customerStorageUnitView
     Created on : Jun 10, 2014, 5:18:47 PM
     Author     : Michael
 --%>
 
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" import="java.util.*"%>
 
+
 <html:html lang="true">
     <!DOCTYPE html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="/StorageUnits/styles/styles.css">
-        <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui.min.css">
-        <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui.theme.css">
-        <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui.structure.css">
-        <script src="/StorageUnits/scripts/jquery.js"></script>
-        <script src="/StorageUnits/scripts/jquery-ui.min.js"></script>
-        <link rel="stylesheet" href="/StorageUnits/styles/storageUnitTheme.css">
+        <title><bean:message key="label.customer.storage.unit.view.title"/></title>  
         <script>
             $(function() {
                 $(".datepicker").datepicker({
@@ -32,11 +26,21 @@
                 });
             });
         </script>
-        <title>Customer</title>
+        <noscript>
+        "You don't have Javascript turned on! In order for this page to function properly you must turn on Javascript."
+        </noscript>
     </head>
     <body>
-        <table><tr><td >Welcome to the application...</td></tr>
-            <tr ><td>
+        <logic:notPresent name="org.apache.struts.action.MESSAGE" scope="application">
+            <div style="color: red">
+                ERROR: Application resources not loaded -- check servlet container
+                logs for error messages.
+            </div>
+        </logic:notPresent>
+        <h3><bean:message key="label.customer.storage.unit.view.message"/></h3>
+        <table>
+            <tr>
+                <td>
                     <logic:messagesPresent message="true">
                         <html:messages id="msg2" message="true" property="success"><div class="infoMessageCheck" style="color: green"><bean:write name="msg2"/></div><br/></html:messages>
                         <html:messages id="msg2" message="true" property="warn"><div class="warnExclaim"  style="color: yellow"><bean:write name="msg2"/></div><br/></html:messages>
@@ -46,7 +50,9 @@
                     <div style="color:red">
                         <html:errors />
                     </div>
-                </td></tr>
+                </td>
+            </tr>
+        </table>
 
         </table>
         <div class="picker">                  

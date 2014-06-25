@@ -50,11 +50,11 @@ public class InitializeAction extends Action {
             request.getSession().setAttribute("storageUnits", SortStorageUnits.sortDefault(storageUnits));
         } catch (Exception e) {
             Logger.getLogger(LoadStorageUnits.class.getName()).log(Level.SEVERE, null, e);
-            messages.add("error", (new ActionMessage("label.error.database")));
+            messages.add("error", (new ActionMessage("error.database")));
         }
         saveMessages(request, messages);
         // Used to define the page to be forwarded to.      
-        forwardTo = mapping.findForward("mainMenu");
+        forwardTo = mapping.findForward("login");
         return forwardTo;
     }
 }

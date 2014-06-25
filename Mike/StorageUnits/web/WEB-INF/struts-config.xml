@@ -26,11 +26,11 @@
     </global-exceptions>
 
     <global-forwards>
-        <forward name="main"  path="/main.do"/>
          <forward name="index"  path="/index.jsp"/>
          <forward name="login"  path="loginTile"/>  
          <forward name="adminMain"  path="adminMainTile"/>
          <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
+         <forward name="mainMenu" path="mainMenuTile"/>
     </global-forwards>
 
     <action-mappings>
@@ -38,10 +38,8 @@
         
         <action path="/initialize"
                 type="actions.InitializeAction">
-            <forward name="mainMenu" path="mainMenuTile"/>
         </action>
         
-        <!-- changes input .jsp to tiles for validation -->
         
         <action path="/addCustomer" 
                 type="actions.AddCustomerAction"

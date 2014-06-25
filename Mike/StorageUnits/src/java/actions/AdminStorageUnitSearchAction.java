@@ -35,7 +35,7 @@ public class AdminStorageUnitSearchAction extends Action {
         ActionMessages messages = new ActionMessages();
         authenticated = (LoginForm) request.getSession().getAttribute("admin");
         if (authenticated == null || authenticated.isValidated() == false || authenticated.getAdminCode() != 378) {
-            messages.add("error", (new ActionMessage("label.session.invalid")));
+            messages.add("error", (new ActionMessage("session.invalid")));
             saveMessages(request, messages);
             return mapping.findForward("login");
         }

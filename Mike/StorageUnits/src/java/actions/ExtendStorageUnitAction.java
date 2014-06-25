@@ -31,7 +31,7 @@ public class ExtendStorageUnitAction extends Action {
 
         authenticated = (LoginForm) request.getSession().getAttribute("customer");
         if (authenticated == null || authenticated.isValidated() == false) {
-            messages.add("error", (new ActionMessage("label.session.expired")));
+            messages.add("error", (new ActionMessage("session.expired")));
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
@@ -39,10 +39,10 @@ public class ExtendStorageUnitAction extends Action {
         try {
             extendUnit = new UpdateStorageUnit();
             extendUnit.extendUnit(request);
-            messages.add("success", (new ActionMessage("label.customer.storage.unit.view.extend.storage.unit.success")));
+            messages.add("success", (new ActionMessage("customer.storage.unit.view.extend.storage.unit.success")));
         } catch (Exception e) {
             Logger.getLogger(UpdateStorageUnit.class.getName()).log(Level.SEVERE, null, e);
-            messages.add("error", (new ActionMessage("label.error.database")));
+            messages.add("error", (new ActionMessage("error.database")));
         }
         saveMessages(request, messages);
         forwardTo = mapping.findForward("customerStorageUnitView");

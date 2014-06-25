@@ -8,10 +8,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import util.DatabaseConnection;
 import util.DbUtils;
 
@@ -114,11 +114,9 @@ public class AddCustomerTest {
      */
     @Test
     public void testCheckUsername() {
-        setUp();
         System.out.println("checkUsername");
         boolean expResult = false;
         boolean result = instance.checkUsername(customerForm);
-        System.out.println(result);
         assertEquals(expResult, result);
     }
 
@@ -129,9 +127,14 @@ public class AddCustomerTest {
     public void testAddCustomer() {
         System.out.println("addCustomer");
         boolean expResult = true;
-        boolean result = instance.addCustomer(customerForm);
+        boolean result = false;
+        
+        try {
+            result = instance.addCustomer(customerForm);
+        } catch (Exception ex) {
+            Logger.getLogger(AddCustomerTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals(expResult, result);
-        tearDown();
     }
 
     public boolean checkUsername(AddUpdateCustomerForm customerForm) {

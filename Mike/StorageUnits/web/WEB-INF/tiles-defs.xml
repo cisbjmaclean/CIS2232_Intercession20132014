@@ -32,10 +32,6 @@
     <definition name="customerStorageUnitViewTile" extends=".mainClassicLayout">
         <put name="body"   value="/customerStorageUnitView.jsp" />
     </definition>
-    
-    <definition name="customerUpdateTile" extends=".mainClassicLayout">
-        <put name="body"   value="/updateCustomer.jsp" />
-    </definition>
 
     <definition name="customerStorageUnitSearchTile" extends=".mainClassicLayout">
         <put name="body"   value="/customerStorageUnitSearch.jsp" />
@@ -48,7 +44,15 @@
     <definition name="customerViewAllStorageUnitsTile" extends=".mainClassicLayout">
         <put name="body"   value="/viewAllStorageUnits.jsp" />
     </definition>
-     
+    
+    <definition name="customerCalendarTile" extends=".mainClassicLayout">
+        <put name="body"   value="/customerCalendar.jsp" />
+    </definition>
+    
+    <definition name="customerUpdateTile" extends=".mainClassicLayout">
+        <put name="body"   value="/updateCustomer.jsp" />
+    </definition>
+    
     <definition name="adminMainTile" extends=".mainClassicLayout">
         <put name="body"   value="/adminMain.jsp" />
     </definition> 
@@ -83,10 +87,6 @@
     
     <definition name="adminAddStorageUnitTile" extends=".mainClassicLayout">
         <put name="body"   value="/adminAddStorageUnit.jsp" />
-    </definition> 
-    
-    <definition name="updateCustomerTile" extends=".mainClassicLayout">
-        <put name="body"   value="/updateCustomer.jsp" />
     </definition> 
     
 </tiles-definitions>

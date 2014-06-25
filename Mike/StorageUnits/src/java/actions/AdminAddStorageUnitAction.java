@@ -35,7 +35,7 @@ public class AdminAddStorageUnitAction extends Action {
         ActionMessages messages = new ActionMessages();
         authenticated = (LoginForm) request.getSession().getAttribute("admin");
         if (authenticated == null || authenticated.isValidated() == false || authenticated.getAdminCode() != 378) {
-            messages.add("error", (new ActionMessage("label.session.invalid")));
+            messages.add("error", (new ActionMessage("session.invalid")));
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
@@ -45,10 +45,10 @@ public class AdminAddStorageUnitAction extends Action {
             addStorageUnit.addStorageUnit(unit);
             storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
             request.getSession().setAttribute("storageUnits", SortStorageUnits.sortAdmin(storageUnits));
-            messages.add("success", (new ActionMessage("label.unit.added")));
+            messages.add("success", (new ActionMessage("unit.added")));
         } catch (Exception e) {
-            Logger.getLogger(AddStorageUnit.class.getName()).log(Level.SEVERE, null, e);
-            messages.add("error", (new ActionMessage("label.error.database")));
+            Logger.getLogger(AddStorageUnit.class.getName()).log(Level.SEVERE, null, e);          
+            messages.add("error", (new ActionMessage("error.database")));
         }     
         forwardTo = mapping.findForward("adminMain");
         saveMessages(request, messages);

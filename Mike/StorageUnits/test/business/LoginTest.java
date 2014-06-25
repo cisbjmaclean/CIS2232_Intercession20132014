@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package business;
 
 import forms.LoginForm;
@@ -14,13 +8,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import util.DatabaseConnection;
 import util.DbUtils;
-import webServices.business.UnitsInUseCheck;
 
 /**
  *
@@ -37,8 +30,6 @@ public class LoginTest {
     private Connection con;
     private ResultSet rs = null;
     private int customerId;
-    private UnitsInUseCheck checkUnitsInUse;
-    private String unitsInUse;
     private String authenticate;
     
     public LoginTest() {
@@ -73,7 +64,13 @@ public class LoginTest {
         validateLogin.setUsername("BJ");
         validateLogin.setPassword("password");
         
-        String result = instance.checkLogin(validateLogin);
+        String result = "none";
+        
+        try {
+            result = instance.checkLogin(validateLogin);
+        } catch (Exception ex) {
+            Logger.getLogger(LoginTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
         assertEquals(expResult, result);      
     }
@@ -90,7 +87,12 @@ public class LoginTest {
         validateLogin.setUsername("admin.pyrolight");
         validateLogin.setPassword("password");
         
-        String result = instance.checkAdminLogin(validateLogin);
+        String result = "none";
+        try {
+            result = instance.checkAdminLogin(validateLogin);
+        } catch (Exception ex) {
+            Logger.getLogger(LoginTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
         assertEquals(expResult, result);      
     }

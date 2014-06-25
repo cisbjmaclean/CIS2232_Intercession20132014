@@ -1,5 +1,5 @@
 <%-- 
-    Document   : createUser
+    Document   : mainMenu
     Created on : Jun 3, 2014, 3:17:42 PM
     Author     : Michael Fesser
 --%>
@@ -17,8 +17,6 @@
     <!DOCTYPE html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><bean:message key="welcome.title"/></title>
-        <html:base/>
     </head>
     <body>
 
@@ -29,10 +27,8 @@
             </div>
         </logic:notPresent>
 
-        <h3><bean:message key="welcome.heading"/></h3>
-        <p><bean:message key="welcome.message"/></p>
 
-        <div> </div>    
+        <div id="paddingTop"> </div>    
         <table>
             <html:form action="/mainMenu">
                 <c:if test="${customer.validated == null}">
@@ -114,7 +110,6 @@
                         </tr>
                 </c:if>
             </html:form>
-
         </table>
     </body>
 </html:html>

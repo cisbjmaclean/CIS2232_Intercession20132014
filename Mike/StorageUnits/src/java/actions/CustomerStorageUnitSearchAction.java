@@ -34,7 +34,7 @@ public class CustomerStorageUnitSearchAction extends Action {
         ActionMessages messages = new ActionMessages();
         authenticated = (LoginForm) request.getSession().getAttribute("customer");
         if (authenticated == null || authenticated.isValidated() == false) {
-            messages.add("error", (new ActionMessage("label.session.expired")));
+            messages.add("error", (new ActionMessage("session.expired")));
             saveMessages(request, messages);
             return mapping.findForward("login");
         }

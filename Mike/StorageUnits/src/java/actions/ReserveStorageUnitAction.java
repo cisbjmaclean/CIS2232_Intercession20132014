@@ -37,7 +37,7 @@ public class ReserveStorageUnitAction extends Action {
         ActionMessages messages = new ActionMessages();
         authenticated = (LoginForm) request.getSession().getAttribute("customer");
         if (authenticated == null || authenticated.isValidated() == false) {
-            messages.add("error", (new ActionMessage("label.session.expired")));
+            messages.add("error", (new ActionMessage("session.expired")));
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
@@ -49,10 +49,10 @@ public class ReserveStorageUnitAction extends Action {
         reserveUnit = new ReserveStorageUnit();
         reserveUnit.reserveUnit(reserveUnitForm, user, storageUnits);
         request.getSession().setAttribute("storageUnits", SortStorageUnits.sortDefault(storageUnits));
-               messages.add("success", (new ActionMessage("label.customer.view.all.reserve.storage.unit.success")));
+               messages.add("success", (new ActionMessage("customer.view.all.reserve.storage.unit.success")));
         } catch (Exception e){
              Logger.getLogger(ReserveStorageUnit.class.getName()).log(Level.SEVERE, null, e);
-                messages.add("error", (new ActionMessage("label.error.database")));
+                messages.add("error", (new ActionMessage("error.database")));
         }  
         
         saveMessages(request, messages);

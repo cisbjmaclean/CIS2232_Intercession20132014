@@ -42,7 +42,7 @@ public class AdminModifyCustomerAction extends Action {
         ActionMessages messages = new ActionMessages();
         authenticated = (LoginForm) request.getSession().getAttribute("admin");
         if (authenticated == null || authenticated.isValidated() == false || authenticated.getAdminCode() != 378) {
-            messages.add("error", (new ActionMessage("label.session.invalid")));
+            messages.add("error", (new ActionMessage("session.invalid")));
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
@@ -64,9 +64,9 @@ public class AdminModifyCustomerAction extends Action {
                 request.getSession().setAttribute("allLogins", allLogins);
             } catch (Exception e) {
                 Logger.getLogger(DeleteCustomer.class.getName()).log(Level.SEVERE, null, e);
-                messages.add("error", (new ActionMessage("label.error.database")));
+                messages.add("error", (new ActionMessage("error.database")));
             }
-            messages.add("success", (new ActionMessage("label.customer.deleted")));
+            messages.add("success", (new ActionMessage("customer.deleted")));
             forwardTo = mapping.findForward("adminMain");
         }
         return forwardTo;

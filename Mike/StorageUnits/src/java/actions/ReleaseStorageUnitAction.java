@@ -40,7 +40,7 @@ public class ReleaseStorageUnitAction extends Action {
 
         if (adminAuthenticated == null || adminAuthenticated.getAdminCode() != 378) {
             if (authenticated == null || authenticated.isValidated() == false) {
-                messages.add("error", (new ActionMessage("label.session.expired")));
+                messages.add("error", (new ActionMessage("session.expired")));
                 saveMessages(request, messages);
                 return mapping.findForward("login");
             }
@@ -54,10 +54,10 @@ public class ReleaseStorageUnitAction extends Action {
         request.getSession().setAttribute("storageUnits", SortStorageUnits.sortDefault(storageUnits));
         } catch (Exception e){
              Logger.getLogger(ReleaseStorageUnit.class.getName()).log(Level.SEVERE, null, e);
-                messages.add("error", (new ActionMessage("label.error.database")));
+                messages.add("error", (new ActionMessage("error.database")));
         }
         
-        messages.add("success", (new ActionMessage("label.customer.storage.unit.view.release.storage.unit.success")));
+        messages.add("success", (new ActionMessage("customer.storage.unit.view.release.storage.unit.success")));
               
         if (adminAuthenticated != null && adminAuthenticated.getAdminCode() == 378) {
             forwardTo = mapping.findForward("adminStorageUnitView");

@@ -45,7 +45,7 @@ public class UpdateCustomerAction extends Action {
             customerUpdate = updateCustomer.updateCustomer();
         } catch (Exception e) {
             Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, e);
-            messages.add("error", (new ActionMessage("label.error.database")));
+            messages.add("error", (new ActionMessage("error.database")));
             //label.error.database = There was an issue with the database, please contact customer support
         }
 

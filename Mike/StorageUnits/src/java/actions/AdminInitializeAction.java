@@ -46,7 +46,7 @@ public class AdminInitializeAction extends Action {
         ActionMessages messages = new ActionMessages();
         authenticated = (LoginForm) request.getSession().getAttribute("admin");
         if (authenticated == null || authenticated.isValidated() == false || authenticated.getAdminCode() != 378) {
-            messages.add("error", (new ActionMessage("label.session.invalid")));
+            messages.add("error", (new ActionMessage("session.invalid")));
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
@@ -62,7 +62,7 @@ public class AdminInitializeAction extends Action {
              Logger.getLogger(LoadCustomer.class.getName()).log(Level.SEVERE, null, e);
              Logger.getLogger(LoadStorageUnits.class.getName()).log(Level.SEVERE, null, e);
              Logger.getLogger(LoadCustomer.class.getName()).log(Level.SEVERE, null, e);
-            messages.add("error", (new ActionMessage("label.error.database")));
+            messages.add("error", (new ActionMessage("error.database")));
         }
         
         saveMessages(request, messages);

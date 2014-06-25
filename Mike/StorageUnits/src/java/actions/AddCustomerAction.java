@@ -55,12 +55,10 @@ public class AddCustomerAction extends Action {
                 customerCreation = addCustomer.addCustomer(customerForm);
             } catch (Exception e) {
                 Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
-                messages.add("error", (new ActionMessage("label.error.database")));
-                //label.error.database = There was an issue with the database, please contact customer support
+                messages.add("error", (new ActionMessage("error.database")));               
             }
         } else {
-          messages.add("error", (new ActionMessage("label.database.username.taken")));  
-          //label.database.username.taken = Username taken
+          messages.add("error", (new ActionMessage("database.username.taken")));            
         }
 
         if (customerCreation) {
@@ -69,7 +67,7 @@ public class AddCustomerAction extends Action {
             } else {
                 forwardTo = mapping.findForward("login");
             }
-            messages.add("success", (new ActionMessage("label.database.add.customer")));  
+            messages.add("success", (new ActionMessage("database.add.customer")));  
           //label.database.add.user = customer added
         } else if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
             forwardTo = mapping.findForward("adminAddCustomer");
