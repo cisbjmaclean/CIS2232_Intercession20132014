@@ -5,11 +5,12 @@
         <group>
             <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/test/AccountTest.java</file>
             <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/test/ViewAccountDetailsTest.java</file>
+            <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/web/bookSupportSession.jsp</file>
             <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/web/WEB-INF/tiles-defs.xml</file>
             <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/web/WEB-INF/validation.xml</file>
-            <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/web/WEB-INF/struts-config.xml</file>
             <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/web/WEB-INF/validator-rules.xml</file>
+            <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/web/WEB-INF/struts-config.xml</file>
+            <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/web/META-INF/context.xml</file>
             <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/web/WEB-INF/struts-bean.tld</file>
             <file>file:/C:/Users/prog/Documents/NetBeansProjects/Java/Assignments/DigitalMediaStore/test/ModifyAccountTest.java</file>
