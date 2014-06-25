@@ -36,7 +36,11 @@ public class UnitsInUseCheck {
     public String getUnitsInUse(int customerId) {
         loadUnits = new LoadStorageUnits();
         units = new ArrayList();
-        units.addAll(loadUnits.loadStorageUnits());
+        try {
+            units.addAll(loadUnits.loadStorageUnits());
+        } catch (Exception ex) {
+            Logger.getLogger(UnitsInUseCheck.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (units.size() > 0) {
             unitsInUseString = "The storageUnits you currenlty have in use are:";
