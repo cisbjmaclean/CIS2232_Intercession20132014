@@ -51,8 +51,8 @@ public class ReleaseStorageUnit {
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
             psAuthenticate.setInt(1, 1);
-            psAuthenticate.setString(2, "");
-            psAuthenticate.setString(3, "");
+            psAuthenticate.setString(2, "--/--/--");
+            psAuthenticate.setString(3, "--/--/--");
             psAuthenticate.setInt(4, releaseUnitForm.getUnitId());
             psAuthenticate.setInt(5, 0);
             // Run the query.
