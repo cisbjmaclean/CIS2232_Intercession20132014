@@ -44,7 +44,7 @@ public class AdminStorageUnitSearchAction extends Action {
         searchForm = (AdminStorageUnitSearchForm) request.getAttribute("adminStorageUnitSearchForm");
         allCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
-
+       
         if (searchForm.getUnitId() == 0 && searchForm.getUnitCustomerId() == 0 && searchForm.getUnitCustomerLastName().equals("")) {
             searchResults = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
         } else if (searchForm.getUnitId() > 0) {
@@ -54,7 +54,7 @@ public class AdminStorageUnitSearchAction extends Action {
         } else if (searchForm.getUnitCustomerLastName().length() > 0) {
             searchResults = searchUnit.seachByLastName(searchForm, allCustomers, storageUnits);
         }
-        request.setAttribute("unitList", searchResults);
+        request.getSession().setAttribute("unitList", searchResults);
 
         return mapping.findForward("adminStorageUnitSearchResults");
     }

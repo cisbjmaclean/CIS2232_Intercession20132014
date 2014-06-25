@@ -46,7 +46,27 @@
         <!-- used for the calendar -->
         <div style="padding-bottom: 300px">
             <table class="searchResults">
-                <c:forEach var="unit" items="${UnitList}">                       
+                <c:forEach var="unit" items="${unitList}">
+                    <tr>
+                    <th>
+                        <bean:message key="label.admin.storage.unit.search.results.id"/>
+                    </th>
+                    <th>
+                        <bean:message key="label.admin.storage.unit.search.results.type"/>
+                    </th>
+                    <th>
+                        <bean:message key="label.admin.storage.unit.search.results.dimensions"/>
+                    </th>
+                    <th>
+                        <bean:message key="label.admin.storage.unit.search.results.availability"/>
+                    </th>
+                    <th>
+                        <bean:message key="label.admin.storage.unit.search.results.date.to"/>
+                    </th>
+                    <th>
+                        <bean:message key="label.admin.storage.unit.search.results.date.from"/>
+                    </th>
+                </tr>
                     <tr>
                         <td>
                             ${unit.unitId}

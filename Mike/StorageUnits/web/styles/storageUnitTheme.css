@@ -42,7 +42,7 @@ div.ui-datepicker {
     width: 30%;   
 }
 
-td{  
+tables.mainTables td{  
     text-align: right;
     margin-right: 1px; 
     padding-top: 5px;
@@ -66,35 +66,24 @@ table.searchResults{
 }
 
 table.searchResults th{
-    text-align: center;
 }
 
 table.searchResults td{
     width: 200px;
-    text-align: center;
     alignment-adjust: middle;
 }
 
 table#customerUnitSearch{
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
-
 }
 
-table#customerUnitSearch td{
-    width: 20%;
+table#customerUnitSearch td:nth-child(4){
+    width: 200px;
 }
 
-table#customerUnitSearch td:nth-child(1){
-    text-align: center;
-}
-table#customerUnitSearch td:nth-child(2){
-    text-align: center;
-}
-
-table#customerUnitSearch td:nth-child(3){
-    text-align: center;
+table#customerUnitSearch td:last-child{
+    width: 200px;
 }
 
 select{
@@ -109,17 +98,14 @@ select{
 
 table#customerSearchResults td{
     border: 1px solid black;
-    text-align: center;
 }
 
 table#customerSearchResults th{
     border: 1px solid black;
-    text-align: center;
 }
 
 table#customerSearchResults{
     border: 1px solid black;
-    text-align: center;
 }
 
 table#customerSearchResults td:last-child{
@@ -128,17 +114,22 @@ table#customerSearchResults td:last-child{
 
 table#viewAll td{
     border: 1px solid black;
-    text-align: center;
+}
+
+#reserve{
+    padding-top: 8px;
+}
+
+.messageHeader{
+ background-color: whitesmoke;   
 }
 
 table#viewAll th{
     border: 1px solid black;
-    text-align: center;
 }
 
 table#viewAll {
     border: 1px solid black;
-    text-align: center;
 }
 
 table#viewAll td:nth-child(7){
@@ -150,3 +141,26 @@ table#viewAll td:nth-child(7){
     margin-right: auto;
     width: 65%;
 }
+
+th{
+    background-color: whitesmoke;
+}
+
+table#customerStorageUnitView{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+table#customerStorageUnitView td:nth-child(2){
+     width: 380px;  
+     background-color: whitesmoke;
+}
+
+table#customerStorageUnitView td:nth-child(4){
+     padding-top: 18px;
+}
+
+table#customerStorageUnitView td:nth-child(5){
+     padding-top: 18px;
+} 
+

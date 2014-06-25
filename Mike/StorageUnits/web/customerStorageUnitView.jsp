@@ -12,7 +12,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" import="java.util.*"%>
 
-
 <html:html lang="true">
     <!DOCTYPE html>
     <head>
@@ -53,12 +52,30 @@
                 </td>
             </tr>
         </table>
-
-        </table>
-        <div class="picker">                  
+        <div class="picker">
             <c:forEach var="unit" items="${storageUnits}">  
                 <c:if test="${customer.customerId == unit.customerId}">
                     <table>
+                        <tr>
+                            <th>
+                                <bean:message key="label.admin.storage.unit.search.results.id"/>
+                            </th>
+                            <th>
+                                <bean:message key="label.admin.storage.unit.search.results.type"/>
+                            </th>
+                            <th>
+                                <bean:message key="label.admin.storage.unit.search.results.dimensions"/>
+                            </th>
+                            <th>
+                                <bean:message key="label.admin.storage.unit.search.results.availability"/>
+                            </th>
+                            <th>
+                                <bean:message key="label.admin.storage.unit.search.results.date.to"/>
+                            </th>
+                            <th>
+                                <bean:message key="label.admin.storage.unit.search.results.date.from"/>
+                            </th>
+                        </tr>      
                         <tr>
                             <td>
                                 ${unit.unitId}
@@ -87,15 +104,18 @@
                             </td>                           
                         </tr>
                     </table>
-                    <table>
-                        <tr>                                               
-                            <td>
+                    <table id="customerStorageUnitView">
+                        <tr>                           
                                 <html:form action="/extendStorageUnit">
+                                <td>
                                     <html:hidden property="unitId" value="${unit.unitId}"/>
-                                    <label><bean:message key="label.customer.view.all.months"/></label><input type="text" name="dateTo" class="datepicker" value="Click Here" size="9">
+                                    <label><bean:message key="label.customer.view.all.months"/></label>
+                                </td>
+                                <td>
+                                    <input type="text" name="dateTo" class="datepicker" value="Click Here">
                                     <html:submit property="Submit"><bean:message key="label.customer.storage.unit.view.extend.storage.unit"/></html:submit>
-                                </html:form>    
-                            </td>
+                                </td>
+                                </html:form>                                
                             <td>
                                 <html:form action="/releaseStorageUnit">
                                     <html:hidden property="unitId" value="${unit.unitId}"/> 
@@ -113,7 +133,6 @@
                     </table>
                 </c:if>       
             </c:forEach>
-
         </div>
     </body>
 </html:html>

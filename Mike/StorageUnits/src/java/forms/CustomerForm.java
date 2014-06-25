@@ -1,13 +1,13 @@
 package forms;
 
-import org.apache.struts.action.ActionForm;
+import org.apache.struts.validator.ValidatorForm;
 
 /**
  *
  * @author Michael Fesser
  * @since 6/5/2014
  */
-public class CustomerForm extends ActionForm {
+public class CustomerForm extends ValidatorForm {
 
     private static final long serialVersionUID = 1L;
     private int customerId;

@@ -49,7 +49,7 @@
                     <td>
                         <label><bean:message key="label.update.customer.id"/></label>
                     </td>
-                    <td><html:text property="customerId" disabled="true" value="${customer.customerId}"/>
+                    <td><html:text property="customerId" readonly="true" value="${customer.customerId}"/>
                     </td>
                 </tr>
                 <tr>
@@ -58,7 +58,7 @@
                         <label><bean:message key="label.update.customer.user.name"/></label>
                     </td>
                     <td>
-                        <html:text property="username"  disabled="${disabled}" value="${customer.username}"/>
+                        <html:text property="username"  readonly="${disabled}" value="${customer.username}"/>
                     </td>
                 </tr>
                 <tr>
@@ -66,7 +66,7 @@
                         <label><bean:message key="label.update.customer.password"/></label>
                     </td>
                     <td>
-                        <html:text property="password" value="${customer.password}"/>
+                        <html:password property="password" value="${customer.password}"/>
                     </td>
                 </tr>
                 <tr>
@@ -74,7 +74,7 @@
                         <label><bean:message key="label.update.customer.password2"/></label>
                     </td>
                     <td>
-                        <html:text property="password2" value="${customer.password}"/>
+                        <html:password property="password2" value="${customer.password}"/>
                     </td>
                 </tr>
                 <tr>

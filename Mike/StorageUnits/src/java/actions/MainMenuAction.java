@@ -9,6 +9,8 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 import util.Logout;
 import util.Util;
 
@@ -26,6 +28,7 @@ public class MainMenuAction extends Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
+        ActionMessages messages = new ActionMessages();
         Util.resources = ResourceBundle.getBundle("com.myapp.struts.ApplicationResource", Locale.getDefault());
         mainMenu = (MultipleActionForm) request.getAttribute("multipleActionForm");
 
@@ -56,9 +59,10 @@ public class MainMenuAction extends Action {
             forwardTo = mapping.findForward("adminAddStorageUnit");
         } else if (mainMenu.getAction().equals(Util.resources.getString("label.menu.logout"))) {
             Logout.logout(request, response);
+            messages.add("success", (new ActionMessage("logout.success")));
             forwardTo = mapping.findForward("index");
         }
-
+        saveMessages(request, messages);
         return forwardTo;
     }
 }

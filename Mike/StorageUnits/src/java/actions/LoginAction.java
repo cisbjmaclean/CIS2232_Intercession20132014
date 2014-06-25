@@ -53,13 +53,13 @@ public class LoginAction extends Action {
         // Used to define the page to be forwarded to.  
         login = new Login();
 
-        if (validateLogin.getUsername().startsWith("admin.")) {
-            authenticate = login.checkAdminLogin(validateLogin);
-        } else {
-            authenticate = login.checkLogin(validateLogin);
-        }
-
         try {
+            if (validateLogin.getUsername().startsWith("admin.")) {
+                authenticate = login.checkAdminLogin(validateLogin);
+            } else {
+                authenticate = login.checkLogin(validateLogin);
+            }
+
             // If login credentials are valid continue otherwise return to the login page.
             switch (authenticate) {
                 case "admin":
@@ -82,7 +82,7 @@ public class LoginAction extends Action {
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
             messages.add("error", (new ActionMessage("error.database")));
-            forwardTo = mapping.findForward("login");           
+            forwardTo = mapping.findForward("login");
         }
         saveMessages(request, messages);
         // Used to deal with some odd behaviour with session timeouts, the back button and logging in again.    

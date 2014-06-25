@@ -59,7 +59,7 @@
                             <label><bean:message key="label.create.customer.password"/></label>
                         </td>
                         <td>
-                            <html:text property="password"/>
+                            <html:password property="password"/>
                         </td>
                     </tr>
                     <tr>
@@ -67,7 +67,7 @@
                             <label><bean:message key="label.create.customer.password2"/></label>
                         </td>
                         <td>
-                            <html:text property="password2"/>
+                            <html:password property="password2"/>
                         </td>
                     </tr>
                     <tr>

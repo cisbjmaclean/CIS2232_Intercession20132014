@@ -54,7 +54,7 @@ public class InitializeAction extends Action {
         }
         saveMessages(request, messages);
         // Used to define the page to be forwarded to.      
-        forwardTo = mapping.findForward("login");
+        forwardTo = mapping.findForward("mainMenu");
         return forwardTo;
     }
 }

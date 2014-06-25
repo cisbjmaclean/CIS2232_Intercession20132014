@@ -1,6 +1,6 @@
 package forms;
 
-import org.apache.struts.action.ActionForm;
+import org.apache.struts.validator.ValidatorForm;
 
 /**
  *
@@ -8,7 +8,7 @@ import org.apache.struts.action.ActionForm;
  * @since 5/30/2014
  */
 
-public class StorageUnitForm extends ActionForm {
+public class StorageUnitForm extends ValidatorForm {
 
     private int unitId;
     private String unitType;

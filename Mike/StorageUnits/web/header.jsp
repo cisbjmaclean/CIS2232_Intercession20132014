@@ -13,13 +13,13 @@ This provides the standard header for each page in the application.
 
 <html>
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="/StorageUnits/styles/styles.css">
         <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui.min.css">
         <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui.theme.css">
         <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui.structure.css">
         <script src="/StorageUnits/scripts/jquery.js"></script>
+        <script src="/StorageUnits/scripts/generalUse.js"></script>
         <script src="/StorageUnits/scripts/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="/StorageUnits/styles/storageUnitTheme.css">
         <title><bean:message key="welcome.title"/></title>

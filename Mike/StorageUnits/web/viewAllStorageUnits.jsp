@@ -77,10 +77,10 @@
                         <th>
                             <bean:message key="label.view.all.units.date.to"/>
                         </th>
-                            <c:if test="${customer.validated != null}"> 
-                                <c:if test="${unit.customerId == 0}"> 
-                                    <c:if test="${admin.adminCode != 378}">
-                                    <td>
+                        <c:if test="${customer.validated != null}"> 
+                            <c:if test="${unit.customerId == 0}"> 
+                                <c:if test="${admin.adminCode != 378}">
+                                    <td class="messageHeader">
                                         <label><bean:message key="label.customer.view.all.months"/>                                      
                                     </td>
                                 </c:if>
@@ -115,10 +115,10 @@
                         <c:if test="${customer.validated != null}"> 
                             <c:if test="${unit.customerId == 0}"> 
                                 <c:if test="${admin.adminCode != 378}">
-                                    <td>
+                                    <td id="reserve">
                                         <html:form action="/reserveStorageUnit">
                                             <html:hidden property="unitId" value="${unit.unitId}"/>
-                                           <input type="text" name="dateTo" class="datepicker" value="Click Here">
+                                            <input type="text" name="dateTo" class="datepicker" value="Click Here">
                                             <html:submit property="Submit"><bean:message key="label.view.all.reserve.storage.unit"/></html:submit>                                 
                                         </html:form>
                                     </td>
@@ -127,7 +127,7 @@
                         </c:if> 
                         <c:if test="${unit.customerId == 1}">
                             <c:if test="${admin.adminCode == 378}">
-                                <td>
+                                <td style="border: none; width: 10%; padding-top: 10px;">
                                     <html:form action="/releaseStorageUnit">
                                         <html:hidden property="unitId" value="${unit.unitId}"/>
                                         <html:submit property="Submit"><bean:message key="label.view.all.release.storage.unit"/></html:submit>

@@ -45,10 +45,6 @@
         <put name="body"   value="/viewAllStorageUnits.jsp" />
     </definition>
     
-    <definition name="customerCalendarTile" extends=".mainClassicLayout">
-        <put name="body"   value="/customerCalendar.jsp" />
-    </definition>
-    
     <definition name="customerUpdateTile" extends=".mainClassicLayout">
         <put name="body"   value="/updateCustomer.jsp" />
     </definition>
