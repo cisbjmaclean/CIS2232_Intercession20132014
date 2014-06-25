@@ -3,6 +3,7 @@ package business;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,17 +13,25 @@ import util.DbUtils;
 
 /**
  *
- * @author prog
+ * @author Ian Mori
+ * @since June 9,2014
+ *
+ * OrderLineView Class, this class holds the information for viewing order
+ * lines.
  */
 public class OrderLineView extends ValidatorForm {
 
+    //Creating initial variables.
     private static ArrayList<OrderLineView> orderLines = new ArrayList();
     private int order_id;
     private int product_id;
     private int quantity_ordered;
     private double sale_price;
+    private String salePriceAsString;
+    private String orderLineTotalAsString;
     private double order_line_total;
     private String productName;
+    DecimalFormat df = new DecimalFormat("#.00");
 
     public static ArrayList<OrderLineView> getOrderLines() {
         return orderLines;
@@ -75,10 +84,32 @@ public class OrderLineView extends ValidatorForm {
     public void setOrder_line_total(double order_line_total) {
         this.order_line_total = order_line_total;
     }
-    
-    
 
+    public String getSalePriceAsString() {
+        return salePriceAsString;
+    }
+
+    public void setSalePriceAsString(double salePrice) {
+        this.salePriceAsString = df.format(salePrice);
+    }
+
+    public String getOrderLineTotalAsString() {
+        return orderLineTotalAsString;
+    }
+
+    public void setOrderLineTotalAsString(double orderLineTotal) {
+        this.orderLineTotalAsString = df.format(orderLineTotal);
+    }
+
+    /**
+     * This method will retrieve the order details from the db and return true
+     * or false depending on the outcome of the method.
+     *
+     * @return
+     */
     public boolean retrieveOrderDetails() {
+
+        //Setting up variables, connection and sql statement.
         boolean wereOrderDetailsRetrievedSuccessfully = false;
         Connection conn = null;
         try {
@@ -89,25 +120,39 @@ public class OrderLineView extends ValidatorForm {
         PreparedStatement psNewOrderRetrieval = null;
         String sqlNewOrderRetrieval = "SELECT product_id, quantity_ordered, sale_price FROM order_line_tb "
                 + "WHERE order_id = " + getOrder_id();
+
         try {
+            //Executing the query and gathering the result set.
             psNewOrderRetrieval = conn.prepareStatement(sqlNewOrderRetrieval);
             ResultSet rs = psNewOrderRetrieval.executeQuery();
             Product product = new Product();
-            orderLines.clear();
             
+            //Clearing the orderLines so there is no incorrect data
+            orderLines.clear();
+
+            //While there are results, loop through and set the results.
             while (rs.next()) {
-                
                 OrderLineView newOrderLine = new OrderLineView();
                 newOrderLine.setProduct_id(rs.getInt(1));
                 newOrderLine.setQuantity_ordered(rs.getInt(2));
-                newOrderLine.setSale_price(rs.getDouble(3));
-                newOrderLine.setOrder_line_total(newOrderLine.getQuantity_ordered() 
-                        * newOrderLine.getSale_price());
-                
+
+                //Using both salePrice variables for actual calculations and proper 2 digit decimal display.
+                double salesPrice = rs.getDouble(3);
+                newOrderLine.setSalePriceAsString(salesPrice);
+                newOrderLine.setSale_price(salesPrice);
+                double orderLineTotal = newOrderLine.getQuantity_ordered() * newOrderLine.getSale_price();
+                newOrderLine.setOrderLineTotalAsString(orderLineTotal);
+                newOrderLine.setOrder_line_total(orderLineTotal);
+
+                //Gathering the product name by using the current product id.
                 String result = product.retrieveProductName(newOrderLine.getProduct_id());
+             
+                //The above method will return a String as "false" or give back the String product name.
                 if (!result.equals("false")) {
                     newOrderLine.setProductName(result);
                 }
+                //If everything has gone through successfully we add it to out orderLines arrayList and loop through
+                //again if there are more results
                 orderLines.add(newOrderLine);
             }
             wereOrderDetailsRetrievedSuccessfully = true;

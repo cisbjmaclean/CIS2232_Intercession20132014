@@ -1,4 +1,4 @@
-CREATE DATABASE `bjmac_digital_media_store_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE `digital_media_store_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `digital_media_store_db`;
  
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";

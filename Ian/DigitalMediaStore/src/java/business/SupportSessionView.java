@@ -11,8 +11,11 @@ import util.ConnectionUtils;
 import util.DbUtils;
 
 /**
+ * @author Ian Mori
+ * @since June 9, 2014
  *
- * @author prog
+ * The SupportSessionView class, this class has functionality for gathering a
+ * user's support sessions.
  */
 public class SupportSessionView extends ValidatorForm {
 
@@ -44,8 +47,12 @@ public class SupportSessionView extends ValidatorForm {
         this.supportSessionDate = supportSessionDate;
     }
 
+    /**
+     * This method will create gather a user's support sessions from the
+     * database or return an error.
+     */
     public boolean retrieveSupportSessions(int userId) {
-
+        //Setting up initial variables, connection, and sql statement.
         boolean wereSupportSessionsRetrievedSuccessfully = false;
         Connection conn = null;
         try {
@@ -59,12 +66,16 @@ public class SupportSessionView extends ValidatorForm {
         try {
             psNewSupportSessionRetrieval = conn.prepareStatement(sqlNewSupportSessionRetrieval);
             ResultSet rs = psNewSupportSessionRetrieval.executeQuery();
+
+            //Clear the arraylist so incorrect information isn't showing.
             supportSessions.clear();
 
             while (rs.next()) {
+                //While there are results, create an onject, set the variables for the object, and add the object
+                //to the arraylist.
                 SupportSessionView supportSession = new SupportSessionView();
-                supportSession.setSupportSessionId(rs.getInt(1)); //this is needed only once
-                supportSession.setSupportSessionDate(rs.getString(2)); //this is needed only once
+                supportSession.setSupportSessionId(rs.getInt(1));
+                supportSession.setSupportSessionDate(rs.getString(2));
                 supportSessions.add(supportSession);
             }
             wereSupportSessionsRetrievedSuccessfully = true;

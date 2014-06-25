@@ -11,13 +11,15 @@ import util.ConnectionUtils;
 import util.DbUtils;
 
 /**
+ * @author Ian Mori
+ * @since June 9, 2014
  *
- * @author prog
+ * SupportSessionDetailsView class, this class contains functionality for
+ * properly gathering support session details from the database.
  */
 public class SupportSessionDetailsView extends ValidatorForm {
 
     private ArrayList<SupportSessionDetailsView> supportSessionDetails = new ArrayList();
-
     private String firstName;
     private String email;
     private int supportSession_Id;
@@ -72,8 +74,11 @@ public class SupportSessionDetailsView extends ValidatorForm {
         this.supportSessionDescription = supportSessionDescription;
     }
 
+    /**
+     * This method will retrieve the support session details or return false if
+     * there is an error.
+     */
     public boolean retrieveSupportSessionDetails() {
-
         boolean wereSupportSessionDetailsRetrievedSuccessfully = false;
         Connection conn = null;
         try {
@@ -90,11 +95,12 @@ public class SupportSessionDetailsView extends ValidatorForm {
             ResultSet rs = psNewSupportSessionRetrieval.executeQuery();
 
             if (rs.next()) {
+                //If there is a result, create a new SupportSessionDetailsView object and set the variables from the database.
                 SupportSessionDetailsView supportSessionDetailsView = new SupportSessionDetailsView();
-                supportSessionDetailsView.setFirstName(rs.getString(1)); //this is needed only once
-                supportSessionDetailsView.setEmail(rs.getString(2)); //this is needed only once
-                supportSessionDetailsView.setSupportSessionDate(rs.getString(3)); //this is needed only once
-                supportSessionDetailsView.setSupportSessionDescription(rs.getString(4)); //this is needed only once
+                supportSessionDetailsView.setFirstName(rs.getString(1));
+                supportSessionDetailsView.setEmail(rs.getString(2)); 
+                supportSessionDetailsView.setSupportSessionDate(rs.getString(3)); 
+                supportSessionDetailsView.setSupportSessionDescription(rs.getString(4));
                 supportSessionDetails.add(supportSessionDetailsView);
                 wereSupportSessionDetailsRetrievedSuccessfully = true;
             }

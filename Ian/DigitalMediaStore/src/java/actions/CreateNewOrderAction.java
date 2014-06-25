@@ -2,6 +2,7 @@ package actions;
 
 import business.OrderLine;
 import forms.OrderForm;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import util.Constants;
 
 /**
  * @author Ian Mori
@@ -28,22 +30,32 @@ public class CreateNewOrderAction extends Action {
      * @throws java.lang.Exception
      * @return
      */
+   
+
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         OrderForm newOrderForm = (OrderForm) request.getAttribute("orderForm");
+
+        //Getting the total amount of orderLines.
         newOrderForm.getTotalOrderLines();
+        //Setting the orderItems from the orderLines that were ordered.
         OrderLine.setOrderedItems(newOrderForm.getOrderLines());
 
+        //Getting the total price from the orderLines.
         ArrayList<OrderLine> orderLines = OrderLine.getOrderedItems();
         double orderTotal = 0.00;
         for (OrderLine theLine : orderLines) {
             orderTotal += theLine.getOrderLineTotal();
         }
-        
+         DecimalFormat df = new DecimalFormat("#.00");
+        String orderTotalAsString = df.format(orderTotal);
+
+        //Setting the orderLines and orderTotal attributes for use with the corresponding JSP.
         request.getSession().setAttribute("AllItems", orderLines);
-        request.getSession().setAttribute("OrderTotal", orderTotal);
-        return mapping.findForward("finalize");
+        request.getSession().setAttribute("OrderTotal", orderTotalAsString);
+        return mapping.findForward(Constants.FINALIZE);
     }
+
 }

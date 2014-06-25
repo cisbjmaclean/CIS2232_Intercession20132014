@@ -57,7 +57,7 @@
                             <bean:write name="TheOrderLine" property="quantity_ordered"/> 
                         </td>
                         <td>
-                            $<bean:write name="TheOrderLine" property="sale_price"/> 
+                            $<bean:write name="TheOrderLine" property="salePriceAsString"/> 
                         </td>
                     </tr>
                 </logic:iterate>

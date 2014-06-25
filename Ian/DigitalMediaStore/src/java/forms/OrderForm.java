@@ -9,8 +9,11 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.validator.ValidatorForm;
 
 /**
+ * @author Ian Mori
+ * @since June 9, 2014
  *
- * @author prog
+ * OrderForm class, the will gather data from the user input from the create
+ * order jsp.
  */
 public class OrderForm extends ValidatorForm {
 
@@ -40,9 +43,6 @@ public class OrderForm extends ValidatorForm {
     private String orderLine4ProductName;
     private String orderLine5ProductName;
 
-    
-    
-    
     public static ArrayList<OrderLine> getOrderLines() {
         return orderLines;
     }
@@ -211,11 +211,16 @@ public class OrderForm extends ValidatorForm {
         this.orderLine5ProductName = orderLine5ProductName;
     }
 
+    /**
+     * This method will get the total number of orderLines, it checks if there
+     * is at least one item ordered for that order line.
+     */
     public void getTotalOrderLines() {
 
+        //Clearing the orderLines so the information isn't duplicated.
         orderLines.clear();
-        
-        //if the order quantity is over 0, create a new product object, and add it to the array list
+
+        //if the order quantity is over 0, create a new product object, and add it to the arraylist.
         if (getOrderLine1Quantity() > 0) {
             OrderLine orderLine1 = new OrderLine(getOrderLine1Id(), getOrderLine1Quantity(),
                     getOrderLine1SalePrice(), getOrderLine1ProductName());

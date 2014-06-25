@@ -1,7 +1,7 @@
 package actions;
 
-import business.OrderLine;
 import business.OrderLineView;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,10 +46,12 @@ public class ViewOrderDetailsAction extends Action {
         for (OrderLineView theLine : orderLines) {
             orderTotal += theLine.getOrder_line_total();
         }
+        DecimalFormat df = new DecimalFormat("#.00");
+        String orderTotalAsString = df.format(orderTotal);
 
         if (wereOrderDetailsRetrievedSuccessfully) {
             request.getSession().setAttribute("AllOrderLines", orderLines);
-            request.getSession().setAttribute("OrderTotalView", orderTotal);
+            request.getSession().setAttribute("OrderTotalView", orderTotalAsString);
             messages.add("message1", (new ActionMessage("label.order.details.retrieved.successfully")));
             forwardMapping = Constants.SUCCESS;
         } else {

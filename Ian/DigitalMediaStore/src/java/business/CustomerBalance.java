@@ -7,13 +7,17 @@ import java.util.logging.Logger;
 import util.ConnectionUtils;
 
 /**
+ * @author Ian Mori
+ * @since June 9, 2014
  *
- * @author prog
+ * This is the CustomerBalance class, the use for this class is updating a 
+ * customer's balance.
  */
 public class CustomerBalance {
 
     public boolean updateCustomerBalance(int customerId, double orderTotal) {
 
+        //Set up initial variables, connection, and sql statement.
         boolean wasCustomerBalanceUpdatedSuccesfully = false;
         Connection conn = null;
         try {
@@ -22,13 +26,13 @@ public class CustomerBalance {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
         PreparedStatement psCustomerBalanceUpdate = null;
-
-        String sqlNewOrderRetrieval = "UPDATE customer_tb "
+        String sqlUpdateBalance = "UPDATE customer_tb "
                 + "SET customer_balance = customer_balance + " + orderTotal
                 + " WHERE customer_id = " + customerId;
         try {
-            psCustomerBalanceUpdate = conn.prepareStatement(sqlNewOrderRetrieval);
+            psCustomerBalanceUpdate = conn.prepareStatement(sqlUpdateBalance);
 
+            //If there is a result, we know that balance was updated successfully.
             int results = psCustomerBalanceUpdate.executeUpdate();
             if (results > 0) {
                 wasCustomerBalanceUpdatedSuccesfully = true;

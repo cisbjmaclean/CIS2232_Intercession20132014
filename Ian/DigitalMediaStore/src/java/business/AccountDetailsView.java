@@ -1,6 +1,5 @@
 package business;
 
-import forms.LoginForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,11 +11,15 @@ import util.ConnectionUtils;
 import util.DbUtils;
 
 /**
+ * @author Ian Mori
+ * @since June 9, 2014
  *
- * @author prog
+ * This is the AccountDetilsView class, it will query the database and try and
+ * return a user's account details.
  */
 public class AccountDetailsView extends ValidatorForm {
 
+    //Initial variables, setters, and getters.
     private ArrayList<AccountDetailsView> accountDetails = new ArrayList();
     private String customerFirstName, customerLastName, customerEmail, customerStreetAddress,
             customerCity, customerProvince, customerPostalCode, customerTelephone;
@@ -102,8 +105,16 @@ public class AccountDetailsView extends ValidatorForm {
         this.customerBalance = customerBalance;
     }
 
+    /**
+     * This method will return true or false depending on if the account details
+     * were retrieved successfully or not from the database.
+     *
+     * @param userId
+     * @return
+     */
     public boolean retrieveAccountDetails(int userId) {
 
+        //Setting up initial variables, connection, and sql statement.
         boolean wereAccountDetailsRetrievedSuccessfully = false;
         Connection conn = null;
         try {
@@ -111,26 +122,27 @@ public class AccountDetailsView extends ValidatorForm {
         } catch (Exception ex) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, ex);
         }
-        PreparedStatement psNewOrderRetrieval = null;
+        PreparedStatement psNewAccountRetrieval = null;
         String sqlNewAccountRetrieval = "SELECT customer_first_name, customer_last_name, customer_email, "
                 + "customer_street_address, customer_city, customer_province, customer_postal_code, "
                 + "customer_telephone, customer_balance "
                 + "FROM customer_tb WHERE customer_id = " + userId;
         try {
-            psNewOrderRetrieval = conn.prepareStatement(sqlNewAccountRetrieval);
-            ResultSet rs = psNewOrderRetrieval.executeQuery();
+            psNewAccountRetrieval = conn.prepareStatement(sqlNewAccountRetrieval);
+            ResultSet rs = psNewAccountRetrieval.executeQuery();
 
+            //We only want on result, so if there is a result, we set the variables gathered from the database.
             if (rs.next()) {
                 AccountDetailsView newAccountView = new AccountDetailsView();
-                newAccountView.setCustomerFirstName(rs.getString(1)); //this is needed only once
-                newAccountView.setCustomerLastName(rs.getString(2)); //this is needed only once
-                newAccountView.setCustomerEmail(rs.getString(3)); //this is needed only once
-                newAccountView.setCustomerStreetAddress(rs.getString(4)); //this is needed only once
-                newAccountView.setCustomerCity(rs.getString(5)); //this is needed only once
-                newAccountView.setCustomerProvince(rs.getString(6)); //this is needed only once
-                newAccountView.setCustomerPostalCode(rs.getString(7)); //this is needed only once
-                newAccountView.setCustomerTelephone(rs.getString(8)); //this is needed only once
-                newAccountView.setCustomerBalance(rs.getDouble(9)); //this is needed only once
+                newAccountView.setCustomerFirstName(rs.getString(1));
+                newAccountView.setCustomerLastName(rs.getString(2));
+                newAccountView.setCustomerEmail(rs.getString(3));
+                newAccountView.setCustomerStreetAddress(rs.getString(4));
+                newAccountView.setCustomerCity(rs.getString(5));
+                newAccountView.setCustomerProvince(rs.getString(6));
+                newAccountView.setCustomerPostalCode(rs.getString(7));
+                newAccountView.setCustomerTelephone(rs.getString(8));
+                newAccountView.setCustomerBalance(rs.getDouble(9));
                 accountDetails.add(newAccountView);
                 wereAccountDetailsRetrievedSuccessfully = true;
             }
@@ -139,7 +151,7 @@ public class AccountDetailsView extends ValidatorForm {
             e.printStackTrace();
             wereAccountDetailsRetrievedSuccessfully = false;
         } finally {
-            DbUtils.close(psNewOrderRetrieval, conn);
+            DbUtils.close(psNewAccountRetrieval, conn);
         }
         return wereAccountDetailsRetrievedSuccessfully;
     }

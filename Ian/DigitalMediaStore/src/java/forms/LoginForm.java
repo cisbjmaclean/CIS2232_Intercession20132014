@@ -8,14 +8,14 @@ import org.apache.struts.validator.ValidatorForm;
 
 /**
  * @author Ian Mori
- * @since May 15,2014
+ * @since June 9,2014
  *
  * Creating LoginForm class, holds the setters and getters for the form.
  */
 public class LoginForm extends ValidatorForm {
 
     private String customerUsernameToValidate;
-    private String customerPasswordToValidate;        
+    private String customerPasswordToValidate;
     private String authenticatedUser;
     private int authenticatedUserId;
 

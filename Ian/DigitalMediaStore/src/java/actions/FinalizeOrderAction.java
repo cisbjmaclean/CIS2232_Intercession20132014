@@ -50,6 +50,7 @@ public class FinalizeOrderAction extends Action {
         if (wasOrderAddedSuccessfully) {
             messages.add("message1", (new ActionMessage("label.order.created.successfully")));
             forwardMapping = Constants.SUCCESS;
+
         } else {
             messages.add("error", (new ActionMessage("label.order.created.error")));
             forwardMapping = Constants.FAILURE;

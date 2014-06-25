@@ -1,6 +1,5 @@
 package business;
 
-import forms.LoginForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
@@ -10,15 +9,22 @@ import util.ConnectionUtils;
 import util.DbUtils;
 
 /**
+ * @author Ian Mori
+ * @since June 9, 2014
  *
- * @author prog
+ * This is the ModifyAccount class, this will query the database and change a
+ * user's password.
  */
 public class ModifyAccountPassword extends ValidatorForm {
 
+    /**
+     * This method will alter a user's password, it will also return true or
+     * false depending on the outcome.
+     */
     public boolean modifyNewAccount(String password, int userId) {
 
+        //Setting up variables, connection, and sql statement.
         boolean wasAccountModifiedSuccessfully = false;
-        LoginForm getId = new LoginForm();
         Connection conn = null;
         try {
             conn = ConnectionUtils.getConnection();
@@ -31,6 +37,7 @@ public class ModifyAccountPassword extends ValidatorForm {
         try {
             psNewAccountModification = conn.prepareStatement(sqlNewAccountModification);
             int results = psNewAccountModification.executeUpdate();
+            //If there is an integer greater than 0, we know the update ran successfully.
             if (results > 0) {
                 wasAccountModifiedSuccessfully = true;
             }

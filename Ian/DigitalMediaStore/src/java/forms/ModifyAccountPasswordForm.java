@@ -7,12 +7,15 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.validator.ValidatorForm;
 
 /**
+ * @author Ian Mori
+ * @since June 9, 2014
  *
- * @author prog
+ * ModifyAccountPasswordForm class, the will gather data from the user input
+ * from the modify account jsp.
  */
-public class ModifyAccountPasswordForm extends ValidatorForm{
-    
-      String newCustomerPassword, confirmNewCustomerPassword;
+public class ModifyAccountPasswordForm extends ValidatorForm {
+
+    String newCustomerPassword, confirmNewCustomerPassword;
 
     public String getNewCustomerPassword() {
         return newCustomerPassword;
@@ -30,10 +33,6 @@ public class ModifyAccountPasswordForm extends ValidatorForm{
         this.confirmNewCustomerPassword = confirmNewCustomerPassword;
     }
 
-   
-    
-    
-    
     @Override
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
@@ -46,6 +45,4 @@ public class ModifyAccountPasswordForm extends ValidatorForm{
         }
         return errors;
     }
-    
-    
 }

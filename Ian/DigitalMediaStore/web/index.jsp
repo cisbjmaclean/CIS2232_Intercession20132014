@@ -2,4 +2,3 @@
 <%@page pageEncoding="UTF-8"%>
 
 <jsp:forward page="Welcome.do"/>
-

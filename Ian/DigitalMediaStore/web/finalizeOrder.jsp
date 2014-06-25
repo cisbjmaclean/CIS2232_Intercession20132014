@@ -51,7 +51,7 @@
                             <bean:write name="TheItem" property="productName"/> 
                         </td>
                         <td>
-                            $<bean:write name="TheItem" property="salePrice"/> 
+                            $<bean:write name="TheItem" property="salePriceAsString"/> 
                         </td>
                     </tr>
                 </logic:iterate>
