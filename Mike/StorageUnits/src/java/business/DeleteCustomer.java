@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
 
@@ -31,10 +30,9 @@ public class DeleteCustomer {
     // The connection object.
     private Connection con;
     private ResultSet rs = null;
-    private ArrayList<CustomerForm> allCustomers;
-    private ArrayList<LoginForm> allLogins;
+    
 
-    public void deleteCustomer(AdminModifyCustomerForm customerId, HttpServletRequest request) {
+    public void deleteCustomer(AdminModifyCustomerForm customerId, ArrayList<CustomerForm> allCustomers,  ArrayList<LoginForm> allLogins) throws Exception {
         // Try to connect to the database.
         try {
             con = dbConnection.databaseConnection();
@@ -60,26 +58,23 @@ public class DeleteCustomer {
 
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
         }
 
-        allCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
+        
         for (int i = 0; i < allCustomers.size(); i++) {
             if (allCustomers.get(i).getCustomerId() == customerId.getCustomerId()) {
                 allCustomers.remove(i);
             }
-        }
-        request.getSession().setAttribute("allCustomers", allCustomers);
-
-        allLogins = (ArrayList<LoginForm>) request.getSession().getAttribute("allLogins");
+        }   
+        
         for (int i = 0; i < allLogins.size(); i++) {
             if (allLogins.get(i).getCustomerId() == customerId.getCustomerId()) {
                 allLogins.remove(i);
             }
         }
-        request.getSession().setAttribute("allLogins", allLogins);
     }
 }

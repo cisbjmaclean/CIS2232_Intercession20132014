@@ -3,6 +3,8 @@ package actions;
 import business.LoadCustomer;
 import business.Login;
 import forms.LoginForm;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -22,7 +24,7 @@ import org.apache.struts.action.ActionMessages;
 public class LoginAction extends Action {
 
     // Flag for login access.
-    private InitializeAction initialize ;
+    private InitializeAction initialize;
     private String authenticate = "none";
     private LoginForm validateLogin;
     private Login login;
@@ -44,35 +46,43 @@ public class LoginAction extends Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
+        ActionMessages messages = new ActionMessages();
+
         // Create the object that holds the fields from the login page.
         validateLogin = (LoginForm) request.getAttribute("loginForm");
         // Used to define the page to be forwarded to.  
         login = new Login();
-                  
-        if (validateLogin.getUsername().startsWith("admin.")) {
-            authenticate = login.checkAdminLogin(authenticate, validateLogin);
-        } else {
-            authenticate = login.checkLogin(authenticate, validateLogin);
-        }
-        ActionMessages messages = new ActionMessages();
-        // If login credentials are valid continue otherwise return to the login page.
-        switch (authenticate) {
-            case "admin":
-                request.getSession().setAttribute("admin", validateLogin);               
-                messages.add("success", (new ActionMessage("label.login.success")));
-                forwardTo = mapping.findForward("adminInitialize");
-                break;
-            case "customer":
-                loadCustomer = new LoadCustomer();
-                request.getSession().setAttribute("customer", validateLogin);
-                request.getSession().setAttribute("customerDetails", loadCustomer.setCustomerInformation(validateLogin.getCustomerId()));
-                messages.add("success", (new ActionMessage("label.login.success")));
-                forwardTo = mapping.findForward("customerStorageUnitView");
-                break;
-            default:
-                messages.add("error", (new ActionMessage("label.login.fail")));
-                forwardTo = mapping.findForward("login");
-                break;
+
+        try {
+            if (validateLogin.getUsername().startsWith("admin.")) {
+                authenticate = login.checkAdminLogin(validateLogin);
+            } else {
+                authenticate = login.checkLogin(validateLogin);
+            }
+
+            // If login credentials are valid continue otherwise return to the login page.
+            switch (authenticate) {
+                case "admin":
+                    request.getSession().setAttribute("admin", validateLogin);
+                    messages.add("success", (new ActionMessage("login.success")));
+                    forwardTo = mapping.findForward("adminInitialize");
+                    break;
+                case "customer":
+                    loadCustomer = new LoadCustomer();
+                    request.getSession().setAttribute("customer", validateLogin);
+                    request.getSession().setAttribute("customerDetails", loadCustomer.setCustomerInformation(validateLogin.getCustomerId()));
+                    messages.add("success", (new ActionMessage("login.success")));
+                    forwardTo = mapping.findForward("customerStorageUnitView");
+                    break;
+                default:
+                    messages.add("error", (new ActionMessage("login.fail")));
+                    forwardTo = mapping.findForward("login");
+                    break;
+            }
+        } catch (Exception e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            messages.add("error", (new ActionMessage("error.database")));
+            forwardTo = mapping.findForward("login");
         }
         saveMessages(request, messages);
         // Used to deal with some odd behaviour with session timeouts, the back button and logging in again.    

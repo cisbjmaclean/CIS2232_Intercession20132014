@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
 
@@ -25,13 +24,8 @@ public class AddCustomer {
     private Connection con;
     private ResultSet rs = null;
     private boolean usernameTaken = false;
-    private AddUpdateCustomerForm customerForm;
-
-    public AddCustomer(HttpServletRequest request) {
-        customerForm = (AddUpdateCustomerForm) request.getAttribute("addUpdateCustomerForm");  
-    }
-
-    public boolean checkUsername() {
+    
+    public boolean checkUsername(AddUpdateCustomerForm customerForm) {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -68,7 +62,7 @@ public class AddCustomer {
         return usernameTaken;
     }
 
-    public boolean addCustomer () {
+    public boolean addCustomer (AddUpdateCustomerForm customerForm) throws Exception {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -121,7 +115,7 @@ public class AddCustomer {
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+             throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);

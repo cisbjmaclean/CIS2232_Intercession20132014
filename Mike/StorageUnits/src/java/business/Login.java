@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.DatabaseConnection;
 import util.DbUtils;
-import webServices.CheckStorageUnitsInUse;
 import webServices.business.UnitsInUseCheck;
 
 /**
@@ -28,15 +27,15 @@ public class Login {
     private int customerId;
     private UnitsInUseCheck checkUnitsInUse;
     private String unitsInUse;
+    private String authenticate = "none";
 
     /**
      * This method retrieves data from the database.
      *
-     * @param authenticate
      * @param validateLogin
      * @return
      */
-    public String checkLogin(String authenticate, LoginForm validateLogin) {
+    public String checkLogin(LoginForm validateLogin) throws Exception {
 
         // Try to connect to the database.
         try {
@@ -66,7 +65,7 @@ public class Login {
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
@@ -74,7 +73,7 @@ public class Login {
         return authenticate;
     }
 
-    public String checkAdminLogin(String authenticate, LoginForm validateLogin) {
+    public String checkAdminLogin(LoginForm validateLogin) throws Exception {
         // Try to connect to the database.
         try {
             con = dbConnection.databaseConnection();
@@ -104,7 +103,7 @@ public class Login {
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);

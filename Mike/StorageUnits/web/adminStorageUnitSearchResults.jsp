@@ -6,48 +6,67 @@
 
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" import="java.util.*"%>
 
+
 <html:html lang="true">
     <!DOCTYPE html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="/StorageUnits/styles/jquery-ui-1.10.4.css">
-        <script src="/StorageUnits/scripts/jquery-1.11.1.min.js"></script>
-        <script src="/StorageUnits/scripts/jquery-ui-1.10.4.min.js"></script>
-        <link rel="stylesheet" href="/styles/styles.css">
-        <script>
-            $(function() {
-                $(".datepicker").datepicker({
-                    minDate: 0,
-                    maxDate: "+36M"
-                });
-            });
-        </script>
-        <title><bean:message key="welcome.title"/></title>
+        <title><bean:message key="admin.storage.unit.search.results.title"/></title>     
     </head>
     <body>
-
         <logic:notPresent name="org.apache.struts.action.MESSAGE" scope="application">
-            <div  style="color: red">
-                ERROR:  Application resources not loaded -- check servlet container
+            <div style="color: red">
+                ERROR: Application resources not loaded -- check servlet container
                 logs for error messages.
             </div>
         </logic:notPresent>
-
-        <h3><bean:message key="welcome.heading"/></h3>
-        <p><bean:message key="welcome.message"/></p>
-
-        <div style="color:red"><html:errors/></div>
+        <h3><bean:message key="admin.storage.unit.search.results.message"/></h3>
+        <table>
+            <tr>
+                <td>
+                    <logic:messagesPresent message="true">
+                        <html:messages id="msg2" message="true" property="success"><div class="infoMessageCheck" style="color: green"><bean:write name="msg2"/></div><br/></html:messages>
+                        <html:messages id="msg2" message="true" property="warn"><div class="warnExclaim"  style="color: yellow"><bean:write name="msg2"/></div><br/></html:messages>
+                        <html:messages id="msg2" message="true" property="error"><div class="errorX"  style="color: red"><bean:write name="msg2"/></div><br/></html:messages>				  		
+                    </logic:messagesPresent>
+                    <%-- the html:errors is populated if the validator is used. --%>    
+                    <div style="color:red">
+                        <html:errors />
+                    </div>
+                </td>
+            </tr>
+        </table>
+                    
         <!-- used for the calendar -->
         <div style="padding-bottom: 300px">
-            <table>
-                <c:forEach var="unit" items="${UnitList}">                       
+            <table class="searchResults">
+                <c:forEach var="unit" items="${unitList}">
+                    <tr>
+                    <th>
+                        <bean:message key="label.admin.storage.unit.search.results.id"/>
+                    </th>
+                    <th>
+                        <bean:message key="label.admin.storage.unit.search.results.type"/>
+                    </th>
+                    <th>
+                        <bean:message key="label.admin.storage.unit.search.results.dimensions"/>
+                    </th>
+                    <th>
+                        <bean:message key="label.admin.storage.unit.search.results.availability"/>
+                    </th>
+                    <th>
+                        <bean:message key="label.admin.storage.unit.search.results.date.to"/>
+                    </th>
+                    <th>
+                        <bean:message key="label.admin.storage.unit.search.results.date.from"/>
+                    </th>
+                </tr>
                     <tr>
                         <td>
                             ${unit.unitId}
@@ -72,7 +91,7 @@
                                 <td>
                                     <html:form action="/releaseStorageUnit">
                                         <html:hidden property="unitId" value="${unit.unitId}"/>
-                                        <html:submit property="Submit"><bean:message key="label.customer.storage.unit.view.release.storage.unit"/></html:submit>
+                                        <html:submit property="Submit"><bean:message key="label.storage.unit.search.results.release.storage.unit"/></html:submit>
                                     </html:form>  
                                 </td>
                             </c:if> 

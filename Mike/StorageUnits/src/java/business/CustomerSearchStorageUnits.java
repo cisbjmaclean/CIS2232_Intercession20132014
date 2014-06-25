@@ -3,7 +3,6 @@ package business;
 import forms.CustomerStorageUnitSearchForm;
 import forms.StorageUnitForm;
 import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -15,15 +14,9 @@ public class CustomerSearchStorageUnits {
     private int unitAvailability = -1;
     private String unitDimensions = "-1";
     private String dateTo = "-1";
-    private CustomerStorageUnitSearchForm searchCriteria;
     private int numberSearchCriteria;
-    private ArrayList<StorageUnitForm> storageUnits;
-    private ArrayList<StorageUnitForm> searchResults;
 
-    public void unitSeach(HttpServletRequest request) {
-        searchCriteria = (CustomerStorageUnitSearchForm) request.getAttribute("customerStorageUnitSearchForm");
-        storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
-        searchResults = new ArrayList<>();
+    public void unitSeach(CustomerStorageUnitSearchForm searchCriteria, ArrayList<StorageUnitForm> storageUnits, ArrayList<StorageUnitForm> searchResults) {
 
         if (searchCriteria.getUnitAvailability() != -1) {
             unitAvailability = searchCriteria.getUnitAvailability();
@@ -39,19 +32,23 @@ public class CustomerSearchStorageUnits {
         }
 
         if (numberSearchCriteria == 1) {
-            searchOneCriteria();
+            searchOneCriteria(storageUnits, searchResults);
         } else if (numberSearchCriteria == 2) {
-            searchTwoCriteria();
+            searchTwoCriteria(storageUnits, searchResults);
         } else if (numberSearchCriteria == 3) {
-            searchThreeCriteria();
+            searchThreeCriteria(storageUnits, searchResults);
         } else {
-            searchResults = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
+            getAll(storageUnits, searchResults);
         }
-        request.setAttribute("customerSearchResults", searchResults);
-
     }
 
-    public void searchOneCriteria() {
+    public void getAll(ArrayList<StorageUnitForm> storageUnits, ArrayList<StorageUnitForm> searchResults) {
+        for (StorageUnitForm storageUnit : storageUnits) {
+            searchResults.add(storageUnit);
+        }
+    }
+
+    public void searchOneCriteria(ArrayList<StorageUnitForm> storageUnits, ArrayList<StorageUnitForm> searchResults) {
         for (StorageUnitForm storageUnit : storageUnits) {
             if (unitAvailability == storageUnit.getUnitAvailability()) {
                 searchResults.add(storageUnit);
@@ -63,7 +60,7 @@ public class CustomerSearchStorageUnits {
         }
     }
 
-    public void searchTwoCriteria() {
+    public void searchTwoCriteria(ArrayList<StorageUnitForm> storageUnits, ArrayList<StorageUnitForm> searchResults) {
         for (StorageUnitForm storageUnit : storageUnits) {
             if (unitAvailability == storageUnit.getUnitAvailability() && unitDimensions.equals(storageUnit.getUnitDimensions())) {
                 searchResults.add(storageUnit);
@@ -75,7 +72,7 @@ public class CustomerSearchStorageUnits {
         }
     }
 
-    public void searchThreeCriteria() {
+    public void searchThreeCriteria(ArrayList<StorageUnitForm> storageUnits, ArrayList<StorageUnitForm> searchResults) {
         for (StorageUnitForm storageUnit : storageUnits) {
             if (unitAvailability == storageUnit.getUnitAvailability() && unitDimensions.equals(storageUnit.getUnitDimensions()) && dateTo.equals(storageUnit.getUnitDateTo())) {
                 searchResults.add(storageUnit);

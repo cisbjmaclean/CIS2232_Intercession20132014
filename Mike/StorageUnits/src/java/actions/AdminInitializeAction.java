@@ -1,9 +1,13 @@
 package actions;
 
+import business.LoadCustomer;
 import business.LoadCustomers;
+import business.LoadStorageUnits;
 import forms.LoginForm;
 import forms.StorageUnitForm;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -42,19 +46,28 @@ public class AdminInitializeAction extends Action {
         ActionMessages messages = new ActionMessages();
         authenticated = (LoginForm) request.getSession().getAttribute("admin");
         if (authenticated == null || authenticated.isValidated() == false || authenticated.getAdminCode() != 378) {
-            messages.add("error", (new ActionMessage("label.session.invalid")));
+            messages.add("error", (new ActionMessage("session.invalid")));
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
+        
+        try{
         loadCustomer = new LoadCustomers();
         request.getSession().setAttribute("allCustomers", loadCustomer.loadCustomers(request));
         loadLogin = new LoadCustomers();
         request.getSession().setAttribute("allLogins", loadLogin.loadLogins(request));
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
-        SortStorageUnits.sortAdmin(request, storageUnits);
-
-        // Used to define the page to be forwarded to.      
-        ActionForward findForward = mapping.findForward("adminMain");
+        request.setAttribute("storageUnits", SortStorageUnits.sortAdmin(storageUnits));
+        } catch (Exception e) {
+             Logger.getLogger(LoadCustomer.class.getName()).log(Level.SEVERE, null, e);
+             Logger.getLogger(LoadStorageUnits.class.getName()).log(Level.SEVERE, null, e);
+             Logger.getLogger(LoadCustomer.class.getName()).log(Level.SEVERE, null, e);
+            messages.add("error", (new ActionMessage("error.database")));
+        }
+        
+        saveMessages(request, messages);
+        // Used to define the page to be forwarded to.          
+        ActionForward findForward = mapping.findForward("adminMain");      
         return findForward;
     }
 }

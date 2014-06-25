@@ -1,7 +1,7 @@
 package business;
 
-import forms.LoginForm;
 import forms.CustomerForm;
+import forms.LoginForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,7 +71,7 @@ public class LoadCustomers {
         return loadCustomers;
     }
 
-    public ArrayList loadLogins(HttpServletRequest request) {
+    public ArrayList loadLogins(HttpServletRequest request) throws Exception {
 
         try {
             con = dbConnection.databaseConnection();
@@ -95,7 +95,7 @@ public class LoadCustomers {
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);

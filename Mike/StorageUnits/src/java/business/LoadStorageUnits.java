@@ -7,10 +7,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
-import util.SortStorageUnits;
 
 /**
  *
@@ -33,10 +31,9 @@ public class LoadStorageUnits {
     /**
      * This method retrieves data from the database.
      *
-     * @param request
      * @return
      */
-    public ArrayList loadStorageUnits(HttpServletRequest request) {
+    public ArrayList loadStorageUnits() throws Exception {
 
         // Try to connect to the database.
         try {
@@ -73,13 +70,10 @@ public class LoadStorageUnits {
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
-        }
-        if (request != null) {
-            SortStorageUnits.sortDefault(request, storageUnits);
         }
         return storageUnits;
     }

@@ -2,6 +2,8 @@ package actions;
 
 import business.UpdateStorageUnit;
 import forms.LoginForm;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -28,13 +30,20 @@ public class StorageUnitInUseToggleAction extends Action{
         ActionMessages messages = new ActionMessages();
         authenticated = (LoginForm) request.getSession().getAttribute("customer");
         if (authenticated == null || authenticated.isValidated() == false) {
-            messages.add("error", (new ActionMessage("label.session.expired")));
+            messages.add("error", (new ActionMessage("session.expired")));
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
+        
+        try {
         extendUnit = new UpdateStorageUnit();
         extendUnit.setStorageUnitInUse(request);
-        messages.add("success", (new ActionMessage("label.customer.storage.unit.view.storage.unit.toggle.in.use.success")));
+        messages.add("success", (new ActionMessage("customer.storage.unit.view.storage.unit.toggle.in.use.success")));
+        } catch (Exception e){
+         Logger.getLogger(UpdateStorageUnit.class.getName()).log(Level.SEVERE, null, e);
+                messages.add("error", (new ActionMessage("error.database")));
+        }
+        
         saveMessages(request, messages);
         forwardTo = mapping.findForward("customerStorageUnitView");
         return forwardTo;

@@ -1,5 +1,6 @@
 package business;
 
+
 import forms.ReleaseStorageUnitForm;
 import forms.StorageUnitForm;
 import java.sql.Connection;
@@ -7,10 +8,9 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
-import util.SortStorageUnits;
+
 
 /**
  *
@@ -26,10 +26,8 @@ public class ReleaseStorageUnit {
     private String sql;
     // The connection object.
     private Connection con;
-    private ReleaseStorageUnitForm releaseUnit;
-    private ArrayList<StorageUnitForm> storageUnits;
 
-    public void releaseUnit(HttpServletRequest request) {
+    public void releaseUnit(ReleaseStorageUnitForm releaseUnitForm, ArrayList<StorageUnitForm> storageUnits) throws Exception {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -39,13 +37,12 @@ public class ReleaseStorageUnit {
         }
 
         // Try to generate the query.
-        try {
-            releaseUnit = (ReleaseStorageUnitForm) request.getAttribute("releaseStorageUnitForm");
+        try {           
             // The query to send.
             sql = "DELETE FROM `customer_storage_unit` WHERE `storage_unit_id` = ?";
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setInt(1, releaseUnit.getUnitId());
+            psAuthenticate.setInt(1, releaseUnitForm.getUnitId());
             // Run the query.
             psAuthenticate.executeUpdate();
 
@@ -56,26 +53,24 @@ public class ReleaseStorageUnit {
             psAuthenticate.setInt(1, 1);
             psAuthenticate.setString(2, "");
             psAuthenticate.setString(3, "");
-            psAuthenticate.setInt(4, releaseUnit.getUnitId());
+            psAuthenticate.setInt(4, releaseUnitForm.getUnitId());
             psAuthenticate.setInt(5, 0);
             // Run the query.
             psAuthenticate.executeUpdate();
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
-        }
-        storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
-        setUnit();
-        SortStorageUnits.sortDefault(request, storageUnits);  
+        }       
+        setUnit(releaseUnitForm, storageUnits);  
     }
 
-    public void setUnit() {              
+    public void setUnit(ReleaseStorageUnitForm releaseUnitForm, ArrayList<StorageUnitForm> storageUnits) {              
         for (StorageUnitForm storageUnit : storageUnits)  {
-            if (storageUnit.getUnitId() == releaseUnit.getUnitId()) {
+            if (storageUnit.getUnitId() == releaseUnitForm.getUnitId()) {
                 storageUnit.setCustomerId(0);
                 storageUnit.setUnitAvailability(1);
                 storageUnit.setUnitDateTo("");

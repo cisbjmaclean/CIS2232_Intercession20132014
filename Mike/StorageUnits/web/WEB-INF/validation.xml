@@ -26,12 +26,12 @@
             <field
                 property="username"
                 depends="required">
-                <arg key="loginForm.username"/>
+                <arg key="error.login.user.name"/>
             </field>
             <field
                 property="password"
                 depends="required,mask">
-                <arg key="loginForm.password"/>
+                <arg key="error.login.user.password"/>
                 <var>
                     <var-name>mask</var-name>
                     <var-value>^[0-9a-zA-Z]*$</var-value>
@@ -43,12 +43,12 @@
             <field
                 property="username"
                 depends="required">
-                <arg key="label.create.customer.user.name"/>
+                <arg key="error.create.customer.user.name"/>
             </field>
             <field
                 property="password"
                 depends="required,mask,minlength">
-                <arg key="label.create.customer.password"/>
+                <arg key="error.create.customer.password"/>
                 <arg position="0" key="customer.name"/>
                 <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
                 <var>
@@ -63,7 +63,7 @@
             <field
                 property="password2"
                 depends="required,mask,validwhen">
-                <arg key="label.create.customer.password"/>
+                <arg key="error.create.customer.password"/>
                 <msg name="validwhen" key="errors.password.nomatch" />
                 <var>
                     <var-name>mask</var-name>
@@ -77,12 +77,12 @@
             <field
                 property="email"
                 depends="required,email">
-                <arg key="label.create.customer.email"/>
+                <arg key="error.create.customer.email"/>
             </field>
             <field
                 property="email2"
                 depends="required,email,validwhen">
-                <arg key="label.create.customer.email"/>          
+                <arg key="error.create.customer.email"/>          
                 <msg name="validwhen" key="errors.email.nomatch" />
                 <var>
                     <var-name>test</var-name>
@@ -92,37 +92,32 @@
             <field
                 property="firstName"
                 depends="required">
-                <arg key="label.create.customer.firstName"/>
-            </field>
-            <field
-                property="middleInitial"
-                depends="required">
-                <arg key="label.create.customer.middleInitial"/>
+                <arg key="error.create.customer.first.name"/>
             </field>
             <field
                 property="lastName"
                 depends="required">
-                <arg key="label.create.customer.lastName"/>
+                <arg key="error.create.customer.lastName"/>
             </field>
             <field
                 property="address"
                 depends="required">
-                <arg key="label.create.customer.address"/>
+                <arg key="error.create.customer.address"/>
             </field>
             <field
                 property="city"
                 depends="required">
-                <arg key="label.create.customer.city"/>
+                <arg key="error.create.customer.city"/>
             </field>
             <field
                 property="province"
                 depends="required">
-                <arg key="label.create.customer.province"/>
+                <arg key="error.create.customer.province"/>
             </field>
             <field
                 property="postalCode"
                 depends="required">
-                <arg key="label.create.customer.postalCode"/>
+                <arg key="error.create.customer.postalCode"/>
                 <var>
                     <var-name>mask</var-name>
                     <var-value>^([A-Z]\d[A-Z]\s\d[A-Z]\d)$</var-value>
@@ -131,32 +126,42 @@
             <field
                 property="phoneNumber"
                 depends="required">
-                <arg key="label.create.customer.phoneNumber"/>
-            </field>    
-             
-                   
+                <arg key="error.create.customer.phoneNumber"/>
+            </field>                  
         </form>
         
-        <!-- An example form -->
-        <form name="logonForm">
-            <field
-                property="username"
-                depends="required">
-                <arg key="logonForm.username"/>
-            </field>
-            <field
-                property="password"
-                depends="required,mask">
-                <arg key="logonForm.password"/>
+        <form name="reserveStorageUnitForm">
+            <field property="dateTo" depends="required,date">
+                <arg position="0" key="errors.date.to"/>
                 <var>
-                    <var-name>mask</var-name>
-                    <var-value>^[0-9a-zA-Z]*$</var-value>
+                    <var-name>datePattern</var-name>
+                    <var-value>MM/dd/yyyy</var-value>
                 </var>
             </field>
         </form>
-
-
         
+        <form name="reserveStorageUnitForm">
+            <field property="dateTo" depends="required,date">
+                <arg position="0" key="errors.date.to"/>
+                <var>
+                    <var-name>datePattern</var-name>
+                    <var-value>MM/dd/yyyy</var-value>
+                </var>
+            </field>
+        </form>
+             
+        <form name="storageUnitForm">
+            <field
+                property="unitType"
+                depends="required">
+                <arg key="error.admin.add.storage.unit.unit.type"/>
+            </field>
+            <field
+                property="unitDimensions"
+                depends="required">
+                <arg key="error.admin.add.storage.unit.unit.dimensions"/>
+            </field>            
+        </form>             
     </formset>
 
     <!-- An example formset for another locale -->

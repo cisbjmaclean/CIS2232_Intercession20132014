@@ -1,13 +1,18 @@
 package actions;
 
 import business.AddCustomer;
+import forms.AddUpdateCustomerForm;
 import forms.LoginForm;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 /**
  *
@@ -22,8 +27,9 @@ public class AddCustomerAction extends Action {
     private boolean customerCreation = false;
     private boolean usernameTaken = false;
     private AddCustomer addCustomer;
-    private ActionForward findForward;
+    private ActionForward forwardTo;
     private LoginForm authenticated;
+    private AddUpdateCustomerForm customerForm;
 
     /**
      *
@@ -38,24 +44,38 @@ public class AddCustomerAction extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        ActionMessages messages = new ActionMessages();
         authenticated = (LoginForm) request.getSession().getAttribute("admin");
-        addCustomer = new AddCustomer(request);
-        usernameTaken = addCustomer.checkUsername();
+        customerForm = (AddUpdateCustomerForm) request.getAttribute("addUpdateCustomerForm");
+        addCustomer = new AddCustomer();
+        usernameTaken = addCustomer.checkUsername(customerForm);
+
         if (!usernameTaken) {
-            customerCreation = addCustomer.addCustomer();
-        }
-        if (customerCreation) {
-            if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
-                findForward = mapping.findForward("adminMain");
-            } else {
-                findForward = mapping.findForward("login");
+            try {
+                customerCreation = addCustomer.addCustomer(customerForm);
+            } catch (Exception e) {
+                Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+                messages.add("error", (new ActionMessage("error.database")));               
             }
-        } else if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
-            findForward = mapping.findForward("adminAddCustomer");
         } else {
-            findForward = mapping.findForward("addCustomer");
+          messages.add("error", (new ActionMessage("database.username.taken")));            
         }
 
-        return findForward;
+        if (customerCreation) {
+            if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
+                forwardTo = mapping.findForward("adminMain");
+            } else {
+                forwardTo = mapping.findForward("login");
+            }
+            messages.add("success", (new ActionMessage("database.add.customer")));  
+          //label.database.add.user = customer added
+        } else if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
+            forwardTo = mapping.findForward("adminAddCustomer");
+        } else {
+            forwardTo = mapping.findForward("addCustomer");
+        }
+        
+        saveMessages(request, messages);
+        return forwardTo;
     }
 }

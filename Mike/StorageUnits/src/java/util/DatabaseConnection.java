@@ -1,6 +1,7 @@
 package util;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import org.apache.struts.util.MessageResources;
 
 /**

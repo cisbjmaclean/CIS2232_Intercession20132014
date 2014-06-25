@@ -3,16 +3,164 @@
     Author     : Michael
 */
 
+input[type=submit] {
+    background: #ccc;
+    background-image: -webkit-linear-gradient(top, #ccc, #989da1);
+    background-image: -moz-linear-gradient(top, #ccc, #989da1);
+    background-image: -ms-linear-gradient(top, #ccc, #989da1);
+    background-image: -o-linear-gradient(top, #ccc, #989da1);
+    background-image: linear-gradient(to bottom, #ccc, #989da1);
+    text-shadow: 1px 1px 3px #fffcff;
+} 
+
+
+input[type=reset] {
+    background: #ccc;
+    background-image: -webkit-linear-gradient(top, #ccc, #989da1);
+    background-image: -moz-linear-gradient(top, #ccc, #989da1);
+    background-image: -ms-linear-gradient(top, #ccc, #989da1);
+    background-image: -o-linear-gradient(top, #ccc, #989da1);
+    background-image: linear-gradient(to bottom, #ccc, #989da1);
+    text-shadow: 1px 1px 3px #fffcff;
+} 
 .datepicker{
     text-align: center;
     height: 30px; 
 }
-
 
 div.ui-datepicker {
     font-size: 75%;  
 }
 
 .picker{
-padding-bottom: 150px;
+    padding-bottom: 150px;
 }
+
+.mainTables{      
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;   
+}
+
+tables.mainTables td{  
+    text-align: right;
+    margin-right: 1px; 
+    padding-top: 5px;
+}
+
+input {
+    border-radius: 5px;
+    width: 200px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#paddingTop {
+    padding-top: 25%;
+}
+
+table.searchResults{
+    width: auto;
+}
+
+table.searchResults th{
+}
+
+table.searchResults td{
+    width: 200px;
+    alignment-adjust: middle;
+}
+
+table#customerUnitSearch{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table#customerUnitSearch td:nth-child(4){
+    width: 200px;
+}
+
+table#customerUnitSearch td:last-child{
+    width: 200px;
+}
+
+select{
+    border-radius: 5px;
+    width: 200px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+}
+
+table#customerSearchResults td{
+    border: 1px solid black;
+}
+
+table#customerSearchResults th{
+    border: 1px solid black;
+}
+
+table#customerSearchResults{
+    border: 1px solid black;
+}
+
+table#customerSearchResults td:last-child{
+    width: 450px;
+}
+
+table#viewAll td{
+    border: 1px solid black;
+}
+
+#reserve{
+    padding-top: 8px;
+}
+
+.messageHeader{
+ background-color: whitesmoke;   
+}
+
+table#viewAll th{
+    border: 1px solid black;
+}
+
+table#viewAll {
+    border: 1px solid black;
+}
+
+table#viewAll td:nth-child(7){
+    width: 450px;
+}
+
+#login{
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+}
+
+th{
+    background-color: whitesmoke;
+}
+
+table#customerStorageUnitView{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+table#customerStorageUnitView td:nth-child(2){
+     width: 380px;  
+     background-color: whitesmoke;
+}
+
+table#customerStorageUnitView td:nth-child(4){
+     padding-top: 18px;
+}
+
+table#customerStorageUnitView td:nth-child(5){
+     padding-top: 18px;
+} 
+

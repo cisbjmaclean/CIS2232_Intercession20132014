@@ -32,7 +32,7 @@ public class UpdateCustomer {
         customerForm = (AddUpdateCustomerForm) request.getAttribute("addUpdateCustomerForm");
     }
 
-    public boolean updateCustomer() {
+    public boolean updateCustomer() throws Exception {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -76,6 +76,7 @@ public class UpdateCustomer {
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("There was an issue with the query.");
+            throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);

@@ -1,10 +1,10 @@
+
 package business;
 
 import forms.AdminCustomerSearchForm;
 import forms.CustomerForm;
 import forms.LoginForm;
 import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -13,46 +13,39 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SearchCustomers {
 
-    private ArrayList<CustomerForm> allCustomers;
-    private ArrayList<LoginForm> allLogins;
     private ArrayList<CustomerForm> searchCustomers;
-    private ArrayList<LoginForm> searchLogins;
 
-    public void seachByEmail(AdminCustomerSearchForm searchForm, HttpServletRequest request) {
-        allCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
+    public ArrayList<CustomerForm> seachByEmail(AdminCustomerSearchForm searchForm, ArrayList<CustomerForm> allCustomers) {       
         searchCustomers = new ArrayList();
-        for (CustomerForm allCustomers : allCustomers) {
-            if (allCustomers.getEmail().equalsIgnoreCase(searchForm.getCustomerEmail())) {
-                searchCustomers.add(allCustomers);
+        for (CustomerForm customer : allCustomers) {
+            if (customer.getEmail().equalsIgnoreCase(searchForm.getCustomerEmail())) {
+                searchCustomers.add(customer);
             }
         }
-        request.setAttribute("customerList", searchCustomers);
+        return searchCustomers;
     }
 
-    public void seachByUsername(AdminCustomerSearchForm searchForm, HttpServletRequest request) {
-        allLogins = (ArrayList<LoginForm>) request.getSession().getAttribute("allLogins");
-        allCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
+    public ArrayList<CustomerForm> seachByUsername(AdminCustomerSearchForm searchForm, ArrayList<LoginForm> allLogins, ArrayList<CustomerForm> allCustomers) {
         searchCustomers = new ArrayList();
-        for (LoginForm allLogins : allLogins) {
-            if (allLogins.getUsername().equalsIgnoreCase(searchForm.getCustomerUsername())) {
-                for (CustomerForm allCustomers : allCustomers) {
-                    if (allLogins.getCustomerId() == allCustomers.getCustomerId()) {
-                        searchCustomers.add(allCustomers);
+        for (LoginForm login : allLogins) {
+            if (login.getUsername().equalsIgnoreCase(searchForm.getCustomerUsername())) {
+                for (CustomerForm customer : allCustomers) {
+                    if (login.getCustomerId() == customer.getCustomerId()) {
+                        searchCustomers.add(customer);
                     }
                 }
             }
         }
-        request.setAttribute("customerList", searchCustomers);
+       return searchCustomers;
     }
 
-    public void seachByLastName(AdminCustomerSearchForm searchForm, HttpServletRequest request) {
-        allCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
+    public ArrayList<CustomerForm>seachByLastName(AdminCustomerSearchForm searchForm, ArrayList<CustomerForm> allCustomers) {
         searchCustomers = new ArrayList();
-        for (CustomerForm allCustomers : allCustomers) {
-            if (allCustomers.getLastName().equalsIgnoreCase(searchForm.getCustomerLastName())) {
-                searchCustomers.add(allCustomers);
+        for (CustomerForm customer : allCustomers) {
+            if (customer.getLastName().equalsIgnoreCase(searchForm.getCustomerLastName())) {
+                searchCustomers.add(customer);
             }
         }
-        request.setAttribute("customerList", searchCustomers);
+        return searchCustomers;      
     }
 }

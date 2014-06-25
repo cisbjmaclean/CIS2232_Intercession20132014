@@ -26,10 +26,11 @@
     </global-exceptions>
 
     <global-forwards>
-        <forward name="main"  path="/main.do"/>
          <forward name="index"  path="/index.jsp"/>
          <forward name="login"  path="loginTile"/>  
          <forward name="adminMain"  path="adminMainTile"/>
+         <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
+         <forward name="mainMenu" path="mainMenuTile"/>
     </global-forwards>
 
     <action-mappings>
@@ -37,11 +38,8 @@
         
         <action path="/initialize"
                 type="actions.InitializeAction">
-            <forward name="mainMenu" path="mainMenuTile"/>
         </action>
-        
-        <!-- changes input .jsp to tiles for validation -->
-        
+               
         <action path="/addCustomer" 
                 type="actions.AddCustomerAction"
                 name="addUpdateCustomerForm"
@@ -54,8 +52,8 @@
          <action path="/updateCustomer" 
                 type="actions.UpdateCustomerAction"
                 name="addUpdateCustomerForm"
-                input="/updateCustomer.jsp" 
-                scope="request">           
+                input="customerUpdateTile" 
+                scope="request">          
          </action>  
         
         <action path="/login" 
@@ -72,32 +70,28 @@
                 name="storageUnitForm">
             <forward name="viewAllStorageUnits"  path="viewAllStorageUnitsTile"/>
         </action>            
-        
-        
-        <action path="/customerMenu" 
-                type="actions.CustomerMenuAction"
-                name="multipleActionForm"
-                input="/customerMenu.jsp" 
-                scope="request">
-            <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
-            <forward name="customerViewAllStorageUnits"  path="customerViewAllStorageUnitsTile"/>
-            <forward name="customerStorageUnitSearch"  path="customerStorageUnitSearchTile"/>
-            <forward name="customerUpdate"  path="customerUpdateTile"/>
-        </action>
+             
         
         <action path="/mainMenu" 
                 type="actions.MainMenuAction"
                 name="multipleActionForm"
-                input="/main.jsp" 
                 scope="request">
             <forward name="addCustomer"  path="addCustomerTile"/>
-            <forward name="viewAllStorageUnits"  path="viewAllStorageUnitsTile"/>      
+            <forward name="viewAllStorageUnits"  path="viewAllStorageUnitsTile"/>  
+            <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
+            <forward name="customerViewAllStorageUnits"  path="customerViewAllStorageUnitsTile"/>
+            <forward name="customerStorageUnitSearch"  path="customerStorageUnitSearchTile"/>
+            <forward name="customerUpdate"  path="customerUpdateTile"/>
+            <forward name="adminSearch"  path="adminMainTile"/>
+            <forward name="adminCustomerSearchResults"  path="adminCustomerSearchResultsTile"/>
+            <forward name="adminAddCustomer"  path="adminAddCustomerTile"/>
+            <forward name="adminViewAllStorageUnits"  path="adminViewAllStorageUnitsTile"/>
+            <forward name="adminAddStorageUnit"  path="adminAddStorageUnitTile"/>    
         </action>
         
         <action path="/customerStorageUnitSearch" 
                 type="actions.CustomerStorageUnitSearchAction"
                 name="customerStorageUnitSearchForm"
-                input="/customerStorageUnitSearch.jsp" 
                 scope="request">
             <forward name="customerStorageUnitSearchResults"  path="customerStorageUnitSearchResultsTile"/>            
         </action>
@@ -105,7 +99,6 @@
         <action path="/releaseStorageUnit" 
                 type="actions.ReleaseStorageUnitAction"
                 name="releaseStorageUnitForm"
-                input="/customerStorageUnitView.jsp" 
                 scope="request">
             <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
             <forward name="adminStorageUnitView"  path="adminStorageUnitViewTile"/>
@@ -114,7 +107,7 @@
         <action path="/reserveStorageUnit" 
                 type="actions.ReserveStorageUnitAction"
                 name="reserveStorageUnitForm"
-                input="/customerViewAllStorageUnits.jsp" 
+                input="viewAllStorageUnitsTile" 
                 scope="request">        
             <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
         </action>    
@@ -122,7 +115,6 @@
         <action path="/storageUnitInUseToggle" 
                 type="actions.StorageUnitInUseToggleAction"
                 name="storageUnitInUseToggleForm"
-                input="/customerViewAllStorageUnits.jsp" 
                 scope="request">        
             <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
         </action>
@@ -130,7 +122,7 @@
         <action path="/extendStorageUnit" 
                 type="actions.ExtendStorageUnitAction"
                 name="reserveStorageUnitForm"
-                input="/viewAllStorageUnits.jsp" 
+                input="viewAllStorageUnitsTile" 
                 scope="request">
             <forward name="customerStorageUnitView"  path="customerStorageUnitViewTile"/>
         </action>                 
@@ -138,23 +130,10 @@
         <action path="/adminInitialize"
                 type="actions.AdminInitializeAction">           
         </action>
-                
-        <action path="/adminMenu" 
-                type="actions.AdminMenuAction"
-                name="multipleActionForm"
-                input="/adminMenu.jsp" 
-                scope="request">
-            <forward name="adminSearch"  path="adminMainTile"/>
-            <forward name="adminCustomerSearchResults"  path="adminCustomerSearchResultsTile"/>
-            <forward name="adminAddCustomer"  path="adminAddCustomerTile"/>
-            <forward name="adminViewAllStorageUnits"  path="adminViewAllStorageUnitsTile"/>
-            <forward name="adminAddStorageUnit"  path="adminAddStorageUnitTile"/>
-        </action>
-        
+                         
         <action path="/adminCustomerSearch" 
                 type="actions.AdminCustomerSearchAction"
                 name="adminCustomerSearchForm"
-                input="/adminMain.jsp" 
                 scope="request">
             <forward name="adminCustomerSearchResults"  path="adminCustomerSearchResultsTile"/>            
         </action>
@@ -162,7 +141,6 @@
         <action path="/adminStorageUnitSearch" 
                 type="actions.AdminStorageUnitSearchAction"
                 name="adminStorageUnitSearchForm"
-                input="/adminMain.jsp" 
                 scope="request">
             <forward name="adminStorageUnitSearchResults"  path="adminStorageUnitSearchResultsTile"/>            
         </action>          
@@ -170,7 +148,6 @@
         <action path="/adminModifyCustomer" 
                 type="actions.AdminModifyCustomerAction"
                 name="adminModifyCustomerForm"
-                input="/adminSearchResults.jsp" 
                 scope="request">
             <forward name="adminUpdateCustomer"  path="adminUpdateCustomerTile"/>
         </action>

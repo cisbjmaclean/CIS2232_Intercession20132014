@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
 
@@ -23,9 +22,8 @@ public class AddStorageUnit {
     private String sql;
     // The connection object.
     private Connection con;
-    private StorageUnitForm unit;
-
-    public void addStorageUnit(HttpServletRequest request) {
+    
+    public void addStorageUnit(StorageUnitForm unit) throws Exception {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -35,8 +33,7 @@ public class AddStorageUnit {
         }
 
         // Try to generate the query.
-        try {
-            unit = (StorageUnitForm) request.getAttribute("storageUnitForm");
+        try {        
             // The query to send.
             sql = "INSERT INTO `storage_unit`(`storage_unit_type`, `storage_unit_dimensions`, `storage_unit_availability`, `storage_unit_date_from`, `storage_unit_date_to`) "
                     + "VALUES (?,?,?,?,?)";
@@ -53,11 +50,10 @@ public class AddStorageUnit {
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+             throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
-        }
-        
+        }      
     }
 }

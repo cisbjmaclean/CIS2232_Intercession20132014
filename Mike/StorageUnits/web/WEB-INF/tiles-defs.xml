@@ -11,21 +11,7 @@
         <put name="menu" value = "/mainMenu.jsp" />
         <put name="body"   value="" />
         <put name="footer" value="/footer.jsp" />
-    </definition>
-
-    <definition name=".mainClassicLayoutCustomer" path="/base/base_classic.jsp">
-        <put name="header" value="/header.jsp" />
-        <put name="menu" value = "/customerMenu.jsp" />
-        <put name="body"   value="" />
-        <put name="footer" value="/footer.jsp" />
-    </definition>
-    
-    <definition name=".mainClassicLayoutAdmin" path="/base/base_classic.jsp">
-        <put name="header" value="/header.jsp" />
-        <put name="menu" value = "/adminMenu.jsp" />
-        <put name="body"   value="" />
-        <put name="footer" value="/footer.jsp" />
-    </definition>
+    </definition> 
     
     <definition name="loginTile" extends=".mainClassicLayout">
         <put name="body"   value="/login.jsp" />
@@ -42,72 +28,60 @@
     <definition name="viewAllStorageUnitsTile" extends=".mainClassicLayout">
         <put name="body"   value="/viewAllStorageUnits.jsp" />
     </definition>
-       
-    <definition name="customerMenuTile" extends=".mainClassicLayoutCustomer">
-        <put name="menu"   value="/customerMenu.jsp" />
-    </definition>
     
-    <definition name="customerStorageUnitViewTile" extends=".mainClassicLayoutCustomer">
+    <definition name="customerStorageUnitViewTile" extends=".mainClassicLayout">
         <put name="body"   value="/customerStorageUnitView.jsp" />
     </definition>
 
-    <definition name="customerStorageUnitSearchTile" extends=".mainClassicLayoutCustomer">
+    <definition name="customerStorageUnitSearchTile" extends=".mainClassicLayout">
         <put name="body"   value="/customerStorageUnitSearch.jsp" />
     </definition>
     
-    <definition name="customerStorageUnitSearchResultsTile" extends=".mainClassicLayoutCustomer">
+    <definition name="customerStorageUnitSearchResultsTile" extends=".mainClassicLayout">
         <put name="body"   value="/customerStorageUnitSearchResults.jsp" />
     </definition>
 
-    <definition name="customerViewAllStorageUnitsTile" extends=".mainClassicLayoutCustomer">
+    <definition name="customerViewAllStorageUnitsTile" extends=".mainClassicLayout">
         <put name="body"   value="/viewAllStorageUnits.jsp" />
     </definition>
     
-    <definition name="customerCalendarTile" extends=".mainClassicLayoutCustomer">
-        <put name="body"   value="/customerCalendar.jsp" />
-    </definition>
-    
-    <definition name="customerUpdateTile" extends=".mainClassicLayoutCustomer">
+    <definition name="customerUpdateTile" extends=".mainClassicLayout">
         <put name="body"   value="/updateCustomer.jsp" />
     </definition>
     
-    <definition name="adminMenuTile" extends=".mainClassicLayoutAdmin">
-        <put name="menu"   value="/adminMenu.jsp" />
-    </definition>
-    
-    <definition name="adminMainTile" extends=".mainClassicLayoutAdmin">
+    <definition name="adminMainTile" extends=".mainClassicLayout">
         <put name="body"   value="/adminMain.jsp" />
     </definition> 
       
-    <definition name="adminAddUnitTile" extends=".mainClassicLayoutAdmin">
+    <definition name="adminAddUnitTile" extends=".mainClassicLayout">
         <put name="body"   value="/adminAddUnit.jsp" />
     </definition>  
     
-    <definition name="adminStorageUnitViewTile" extends=".mainClassicLayoutAdmin">
+    <definition name="adminStorageUnitViewTile" extends=".mainClassicLayout">
         <put name="body"   value="/customerStorageUnitView.jsp" />
     </definition>
     
-    <definition name="adminCustomerSearchResultsTile" extends=".mainClassicLayoutAdmin">
+    <definition name="adminCustomerSearchResultsTile" extends=".mainClassicLayout">
         <put name="body"   value="/adminCustomerSearchResults.jsp" />
     </definition> 
     
-    <definition name="adminStorageUnitSearchResultsTile" extends=".mainClassicLayoutAdmin">
+    <definition name="adminStorageUnitSearchResultsTile" extends=".mainClassicLayout">
         <put name="body"   value="/adminStorageUnitSearchResults.jsp" />
     </definition>
     
-    <definition name="adminUpdateCustomerTile" extends=".mainClassicLayoutAdmin">
+    <definition name="adminUpdateCustomerTile" extends=".mainClassicLayout">
         <put name="body"   value="/updateCustomer.jsp" />
     </definition> 
     
-    <definition name="adminAddCustomerTile" extends=".mainClassicLayoutAdmin">
+    <definition name="adminAddCustomerTile" extends=".mainClassicLayout">
         <put name="body"   value="/addCustomer.jsp" />
     </definition> 
     
-    <definition name="adminViewAllStorageUnitsTile" extends=".mainClassicLayoutAdmin">
+    <definition name="adminViewAllStorageUnitsTile" extends=".mainClassicLayout">
         <put name="body"   value="/viewAllStorageUnits.jsp" />
     </definition> 
     
-    <definition name="adminAddStorageUnitTile" extends=".mainClassicLayoutAdmin">
+    <definition name="adminAddStorageUnitTile" extends=".mainClassicLayout">
         <put name="body"   value="/adminAddStorageUnit.jsp" />
     </definition> 
     

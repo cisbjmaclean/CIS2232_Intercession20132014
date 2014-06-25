@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
-import util.SortStorageUnits;
+
 
 /**
  *
@@ -41,7 +41,7 @@ public class UpdateStorageUnit {
     private int storageUnitToggleValue;
     private ArrayList<StorageUnitForm> storageUnits;
 
-    public void extendUnit(HttpServletRequest request) {
+    public void extendUnit(HttpServletRequest request) throws Exception {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -68,17 +68,17 @@ public class UpdateStorageUnit {
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
         }
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
         setUnitExtend();
-        SortStorageUnits.sortDefault(request, storageUnits);
+       // SortStorageUnits.sortDefault(request, storageUnits);
     }
 
-    public void setStorageUnitInUse(HttpServletRequest request) {
+    public void setStorageUnitInUse(HttpServletRequest request) throws Exception {
         // Try to connect to the database.  
         try {
             con = dbConnection.databaseConnection();
@@ -109,14 +109,14 @@ public class UpdateStorageUnit {
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
-            System.err.println("There was an issue with the query.");
+            throw new Exception();        
         } finally {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
         }
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
         setUnitUseToggle();
-        SortStorageUnits.sortDefault(request, storageUnits);
+       // SortStorageUnits.sortDefault(request, storageUnits);
     }
 
     public void setUnitExtend() {
