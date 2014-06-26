@@ -49,7 +49,7 @@ public class Login {
         try {
 
             // The query to send.         
-            sql = "SELECT `cus_id` FROM `customer_login` WHERE `cus_login_username` = ? AND `cus_login_password` = ?";
+            sql = "SELECT * FROM `customer_login` WHERE `cus_login_username` = ? AND `cus_login_password` = ?";
             psAuthenticate = con.prepareStatement(sql);
             psAuthenticate.setString(1, validateLogin.getUsername());
             psAuthenticate.setString(2, validateLogin.getPassword());
@@ -58,10 +58,12 @@ public class Login {
 
             // Iterate over the result set.
             while (rs.next()) {
-                customerId = rs.getInt("cus_id");
-                validateLogin.setCustomerId(customerId);
-                validateLogin.setValidated(true);
-                authenticate = "customer";
+                if (validateLogin.getPassword().equals(rs.getString("cus_login_password"))) {
+                    customerId = rs.getInt("cus_id");
+                    validateLogin.setCustomerId(customerId);
+                    validateLogin.setValidated(true);
+                    authenticate = "customer";
+                }
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
@@ -87,7 +89,7 @@ public class Login {
             int adminCode;
 
             // The query to send.         
-            sql = "SELECT `admin_login_code` FROM `admin_login` WHERE `admin_login_username` = ? AND `admin_login_password` = ?";
+            sql = "SELECT * FROM `admin_login` WHERE `admin_login_username` = ? AND `admin_login_password` = ?";
             psAuthenticate = con.prepareStatement(sql);
             psAuthenticate.setString(1, validateLogin.getUsername());
             psAuthenticate.setString(2, validateLogin.getPassword());
@@ -96,10 +98,12 @@ public class Login {
 
             // Iterate over the result set.
             while (rs.next()) {
-                adminCode = rs.getInt("admin_login_code");
-                validateLogin.setAdminCode(adminCode);
-                validateLogin.setValidated(true);
-                authenticate = "admin";
+                if (validateLogin.getPassword().equals(rs.getString("admin_login_password"))) {
+                    adminCode = rs.getInt("admin_login_code");
+                    validateLogin.setAdminCode(adminCode);
+                    validateLogin.setValidated(true);
+                    authenticate = "admin";
+                }
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);

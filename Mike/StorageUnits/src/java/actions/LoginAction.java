@@ -3,6 +3,9 @@ package actions;
 import business.LoadCustomer;
 import business.Login;
 import forms.LoginForm;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +35,9 @@ public class LoginAction extends Action {
     private LoadCustomer loadCustomer;
     private ActionForward forwardTo;
     private String loginString;
-    
+    private DateFormat dateFormat;
+    private Calendar calendar;
+    private String onDate;
 
     /**
      * This method gets the fields from the login page and calls the user class
@@ -55,7 +60,10 @@ public class LoginAction extends Action {
         validateLogin = (LoginForm) request.getAttribute("loginForm");
         // Used to define the page to be forwarded to.  
         login = new Login();
-
+        dateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss z");
+        calendar = Calendar.getInstance();
+        onDate = dateFormat.format(calendar.getTime());
+        
         try {
             if (validateLogin.getUsername().startsWith("admin.")) {
                 authenticate = login.checkAdminLogin(validateLogin);
@@ -93,8 +101,8 @@ public class LoginAction extends Action {
         saveMessages(request, messages);
         // Used to deal with some odd behaviour with session timeouts, the back button and logging in again.    
         initialize = new InitializeAction();
-        
-        WriteToFile.fileWrite(validateLogin.getUsername() + " " + loginString);
+
+        WriteToFile.fileWrite(validateLogin.getUsername() + " " + loginString + " on " + onDate);
         return forwardTo;
     }
 }
