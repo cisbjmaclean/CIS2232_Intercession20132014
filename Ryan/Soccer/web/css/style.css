@@ -1,0 +1,170 @@
+/*
+Ryan Forrester
+
+Since: 6/25/2014
+
+This style sheet is used for the Soccer Field Booking final project for CIS2232.
+It helps structure the content as well as wrap it in a soccer themed design.
+
+*/
+
+a{
+    text-decoration: none;
+}
+/* unvisited link */
+a:link {
+color: #248F24;
+}
+/* visited link */
+a:visited {
+color: #248F24;
+}
+/* mouse over link */
+a:hover {
+color: #66FF33;
+}
+/* selected link */
+a:active {
+color: #66FF33;
+}
+/* generic style */
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #00B800;
+    background-image: url("grass.jpg");
+    color: #ffffff;
+}
+
+td{
+    background-color: rgba(0, 0, 0, 0.9);
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+    
+}
+table{
+    margin: 0 auto;
+}
+
+/* specific style */
+.tdHead{
+    color: #009900; 
+    font-size: 20px;
+}
+
+.mainContain{
+    
+    width: 1000px;
+    background-color: rgba(28, 110, 28, 0.9);
+    box-shadow: 0px 5px 20px #000000;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+}
+
+div.container{
+    color: #000000;
+    background-image: url("soccerHeader.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    line-height: 100px;
+    width: 100%;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.menuBlend{
+    width: 100%;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.header{
+    font-size: 30px;
+    font-weight: 600;
+    font-family: sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    margin-left: 125px;
+}
+.menu{
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    width: 750px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0px 0px 15px 15px;
+}
+.linkHeader{
+    float: left;
+    font-size: 20px;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.rightLink{
+    float:right;
+    font-size: 20px;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.linkHeaderHolder{
+    margin: 0 auto;
+}
+
+.main{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color:rgba(0,0,0,0.8);
+    text-align: center;
+    width: 750px;
+    
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 0px 50px black;
+}
+
+.footer{
+    background-image: url("footerNoise.png");
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    height: 45px;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+
+.login{
+    background-color:rgba(0,0,0,0.8);
+    text-align: center;
+    width: 700px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    box-shadow: 0px 0px 50px black;
+}
+
+.correct{
+    background-image: url("correct.png");
+}
+.false{
+    background-image: url("wrong.png");
+    width: 25px;
+    height: 25px;
+}
+.imageHolder{
+    width: 25px;
+    height: 25px;
+}
+
+
