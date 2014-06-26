@@ -2,8 +2,6 @@ package actions;
 
 import business.OrderLine;
 import forms.OrderForm;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +14,10 @@ import util.Constants;
 
 /**
  * @author Ian Mori
- * @since May 15,2014
+ * @since June 9,2014
  *
- * Creating LoginAction class, this will log a user in or return an error.
+ * Creating CreateNewOrderAction class, this will begin the process of creating
+ * a new order or return an error.
  */
 public class CreateNewOrderAction extends Action {
 
@@ -32,8 +31,6 @@ public class CreateNewOrderAction extends Action {
      * @throws java.lang.Exception
      * @return
      */
-   
-
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -51,7 +48,7 @@ public class CreateNewOrderAction extends Action {
         for (OrderLine theLine : orderLines) {
             orderTotal += theLine.getOrderLineTotal();
         }
-         DecimalFormat df = new DecimalFormat("#.00");
+        DecimalFormat df = new DecimalFormat("#.00");
         String orderTotalAsString = df.format(orderTotal);
 
         //Setting the orderLines and orderTotal attributes for use with the corresponding JSP.
@@ -59,5 +56,4 @@ public class CreateNewOrderAction extends Action {
         request.getSession().setAttribute("OrderTotal", orderTotalAsString);
         return mapping.findForward(Constants.FINALIZE);
     }
-
 }

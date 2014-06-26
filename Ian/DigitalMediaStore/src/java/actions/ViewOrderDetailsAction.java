@@ -15,9 +15,10 @@ import util.Constants;
 
 /**
  * @author Ian Mori
- * @since May 15,2014
+ * @since June 9,2014
  *
- * Creating LoginAction class, this will log a user in or return an error.
+ * Creating ViewOrderDetailsAction class, this will try to gather the order
+ * details or return an error.
  */
 public class ViewOrderDetailsAction extends Action {
 
@@ -35,14 +36,18 @@ public class ViewOrderDetailsAction extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+        //Gather the data from the form.
         OrderLineView newOrderLineView = (OrderLineView) request.getAttribute("viewOrderDetailsForm");
         ActionMessages messages = new ActionMessages();
 
+        //Try and retrieve the order details from the database.
         boolean wereOrderDetailsRetrievedSuccessfully = newOrderLineView.retrieveOrderDetails();
         String forwardMapping;
 
+        //We gather the orderLines arraylist that is built in the OrderLineView class.
         ArrayList<OrderLineView> orderLines = OrderLineView.getOrderLines();
         double orderTotal = 0.00;
+        //Just gathering the total cost for the order.
         for (OrderLineView theLine : orderLines) {
             orderTotal += theLine.getOrder_line_total();
         }
@@ -50,6 +55,7 @@ public class ViewOrderDetailsAction extends Action {
         String orderTotalAsString = df.format(orderTotal);
 
         if (wereOrderDetailsRetrievedSuccessfully) {
+            //These variables will be used on their corresponding JSP page to properly view the order details.
             request.getSession().setAttribute("AllOrderLines", orderLines);
             request.getSession().setAttribute("OrderTotalView", orderTotalAsString);
             messages.add("message1", (new ActionMessage("label.order.details.retrieved.successfully")));

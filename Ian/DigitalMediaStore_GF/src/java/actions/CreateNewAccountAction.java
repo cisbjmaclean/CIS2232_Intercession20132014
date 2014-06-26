@@ -15,9 +15,10 @@ import util.Constants;
 
 /**
  * @author Ian Mori
- * @since May 15,2014
+ * @since June 9,2014
  *
- * Creating LoginAction class, this will log a user in or return an error.
+ * Creating CreateNewAccountAction class, this will try to create a new account or
+ * return an error.
  */
 public class CreateNewAccountAction extends Action {
 
@@ -35,6 +36,7 @@ public class CreateNewAccountAction extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+        //Gathering the account form data.
         AccountForm newAccountForm = (AccountForm) request.getAttribute("accountForm");
         ActionMessages messages = new ActionMessages();
         String forwardMapping = Constants.FAILURE;
@@ -42,7 +44,9 @@ public class CreateNewAccountAction extends Action {
         Account saveAccount = new Account();
         boolean wasNewAccountAddedSuccessfully = false;
 
+        //This code might throw an exception if the user account is already created.
         try {
+            //Set boolean variable to the result of trying to update the database.
             wasNewAccountAddedSuccessfully = saveAccount.saveNewAccount(newAccountForm);
             if (wasNewAccountAddedSuccessfully) {
                 messages.add("message1", (new ActionMessage("label.customer.added.successfully")));

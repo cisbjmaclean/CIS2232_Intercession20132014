@@ -1,6 +1,6 @@
 <%-- 
-    Document   : viewAll.jsp
-    Created on : May 28,2014
+    Document   : viewOrders.jsp
+    Created on : June 9,2014
     Author     : Ian Mori
 --%>
 <%@page contentType="text/html"%>

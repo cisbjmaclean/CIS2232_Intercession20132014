@@ -13,9 +13,10 @@ import util.Constants;
 
 /**
  * @author Ian Mori
- * @since May 15,2014
+ * @since June 9,2014
  *
- * Creating LoginAction class, this will log a user in or return an error.
+ * Creating ViewSupportSessionDetailsAction class, this will try to gather the
+ * support session details or return an error.
  */
 public class ViewSupportSessionDetailsAction extends Action {
 
@@ -35,11 +36,13 @@ public class ViewSupportSessionDetailsAction extends Action {
 
         SupportSessionDetailsView newSupportSessionView = (SupportSessionDetailsView) request.getAttribute("viewSupportSessionDetailsForm");
         ActionMessages messages = new ActionMessages();
-
-        boolean wereSupportSessionDetailsRetrievedSuccessfully = newSupportSessionView.retrieveSupportSessionDetails();
         String forwardMapping;
 
+        //Query the database and return true or false if the support session details were retrieved successfully.
+        boolean wereSupportSessionDetailsRetrievedSuccessfully = newSupportSessionView.retrieveSupportSessionDetails();
+
         if (wereSupportSessionDetailsRetrievedSuccessfully) {
+            //Storing the support session details to be viewed on the corresponding JSP.
             request.getSession().setAttribute("AllSupportSessionDetails", newSupportSessionView.getSupportSessionDetails());
             messages.add("message1", (new ActionMessage("label.support.session.details.retrieved.successfully")));
             forwardMapping = Constants.SUCCESS;

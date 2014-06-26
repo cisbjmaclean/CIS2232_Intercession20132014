@@ -16,9 +16,10 @@ import util.Constants;
 
 /**
  * @author Ian Mori
- * @since May 15,2014
+ * @since June 9,2014
  *
- * Creating LoginAction class, this will log a user in or return an error.
+ * Creating FinalizeOrderAction class, this will try to finalize the order or
+ * return an error.
  */
 public class FinalizeOrderAction extends Action {
 
@@ -36,21 +37,24 @@ public class FinalizeOrderAction extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+        //This will gather the order form data.
         OrderForm newOrderForm = (OrderForm) request.getAttribute("orderForm");
         ActionMessages messages = new ActionMessages();
 
+        //Getting the userId, this stores the user Id when a user first logs in.
         HttpSession session = request.getSession();
         LoginForm user = (LoginForm) session.getAttribute(Constants.USER_KEY);
         int userId = user.getAuthenticatedUserId();
 
+        //Trying to save a new order to the database.
         Order saveOrder = new Order();
         boolean wasOrderAddedSuccessfully = saveOrder.saveNewOrder(newOrderForm, userId);
         String forwardMapping;
 
+        //If successful, display success, otherwise an error will be produced.
         if (wasOrderAddedSuccessfully) {
             messages.add("message1", (new ActionMessage("label.order.created.successfully")));
             forwardMapping = Constants.SUCCESS;
-
         } else {
             messages.add("error", (new ActionMessage("label.order.created.error")));
             forwardMapping = Constants.FAILURE;

@@ -46,6 +46,7 @@ public class AccountTest {
     @Test
     public void testCreatingNewAccount() {
 
+        //This test will try and create a new user account.
         accountForm = new AccountForm();
         Account account = new Account();
 
@@ -61,6 +62,7 @@ public class AccountTest {
         accountForm.setCustomerTelephone("9999999999");
 
         try {
+            //This method tries to save the data to a database.
             account.saveNewAccount(accountForm);
         } catch (Exception ex) {
             Logger.getLogger(AccountTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -86,6 +88,8 @@ public class AccountTest {
             String errorMessage = e.getMessage();
             e.printStackTrace();
         }
+        //Since we are testing if a user was added to the database, the count from the customer table
+        //should just be 1, which so far the test works.
         assertEquals(1, queryResult);
     }
 }

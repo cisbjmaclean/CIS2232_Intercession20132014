@@ -1,8 +1,9 @@
 <%-- 
-    Document   : createNewOrder
-    Created on : 10-Jun-2014, 2:25:38 AM
-    Author     : prog
+    Document   : bookSupportSession.jsp
+    Created on : June 9,2014
+    Author     : Ian Mori
 --%>
+
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>

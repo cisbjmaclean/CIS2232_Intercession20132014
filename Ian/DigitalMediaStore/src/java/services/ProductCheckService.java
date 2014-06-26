@@ -6,8 +6,10 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 
 /**
- *
- * @author prog
+ * @author Ian Mori
+ * @since June 9, 2014
+ * 
+ * This web service will query the database and return the data in an XML string.
  */
 @WebService(serviceName = "ProductCheckService")
 public class ProductCheckService {
@@ -16,25 +18,7 @@ public class ProductCheckService {
     public String checkForProduct(@WebParam(name = "productName") String productName) {
 
         Product prod = new Product();
-
-        
-        boolean wasQuerySuccessful = prod.retrieveProductDetails(productName);
-//        String output;
-
-//        if (wasQuerySuccessful) {
-//
-//            
-//            
-//            
-//        }
-//            
-//            output = "Product Name: " + prod.getProduct_name()
-//                    + "*****Description: " + prod.getProduct_description()
-//                    + "*****Quantity In Stock: " + prod.getQuantity_on_hand()
-//                    + "*****Price: $" + prod.getProduct_price();
-//        } else {
-//            output = "Sorry, no items found.";
-//        }
+        prod.retrieveProductDetails(productName);
         return prod.toStringXML();
     }
 }

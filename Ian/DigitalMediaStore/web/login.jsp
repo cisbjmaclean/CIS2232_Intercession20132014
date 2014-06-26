@@ -1,3 +1,9 @@
+<%-- 
+    Document   : login.jsp
+    Created on : June 9,2014
+    Author     : Ian Mori
+--%>
+
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>

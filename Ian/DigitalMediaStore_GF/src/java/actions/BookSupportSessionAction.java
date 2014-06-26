@@ -15,8 +15,11 @@ import org.apache.struts.action.ActionMessages;
 import util.Constants;
 
 /**
+ * @author Ian Mori
+ * @since June 9, 2014
  *
- * @author prog
+ * This is the BookSupportSessionAction class, it will try to submit the
+ * support.
  */
 public class BookSupportSessionAction extends Action {
 
@@ -24,18 +27,22 @@ public class BookSupportSessionAction extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+        //Getting the values from the support session form.         
         SupportSessionForm newSupportSession = (SupportSessionForm) request.getAttribute("supportSessionForm");
 
+        //Setting the session and userId.
         HttpSession session = request.getSession();
         LoginForm user = (LoginForm) session.getAttribute(Constants.USER_KEY);
         int userId = user.getAuthenticatedUserId();
 
+        //Try submitting the values to the database.
         SupportSession supportSession = new SupportSession();
+        boolean wasSupportSessionBookedSuccessfully = supportSession.saveNewSupportSession(newSupportSession, userId);
 
         ActionMessages messages = new ActionMessages();
-        boolean wasSupportSessionBookedSuccessfully = supportSession.saveNewSupportSession(newSupportSession, userId);
         String forwardMapping;
 
+        //If there is success, the support session is booked and should now be viewable.
         if (wasSupportSessionBookedSuccessfully) {
             messages.add("message1", (new ActionMessage("label.support.session.added.successfully")));
             forwardMapping = Constants.SUCCESS;

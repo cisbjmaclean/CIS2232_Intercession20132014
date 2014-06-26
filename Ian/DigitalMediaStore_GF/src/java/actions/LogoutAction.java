@@ -15,7 +15,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Ian Mori
  * @since May 15,2014
  * 
- * Creating logoff action class and returning ActionForward
+ * Creating logout action class and returning ActionForward.
  */
 public class LogoutAction extends Action {
 

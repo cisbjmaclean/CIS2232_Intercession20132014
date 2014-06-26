@@ -15,9 +15,10 @@ import util.Constants;
 
 /**
  * @author Ian Mori
- * @since May 15,2014
+ * @since June 9,2014
  *
- * Creating LoginAction class, this will log a user in or return an error.
+ * Creating ViewAccountDetailsAction class, this will try to gather the account
+ * details or return an error.
  */
 public class ViewAccountDetailsAction extends Action {
 
@@ -38,10 +39,12 @@ public class ViewAccountDetailsAction extends Action {
         AccountDetailsView newAccountView = (AccountDetailsView) request.getAttribute("viewAccountDetailsForm");
         ActionMessages messages = new ActionMessages();
 
+        //Using same user Id that was gathered when logging in.
         HttpSession session = request.getSession();
         LoginForm user = (LoginForm) session.getAttribute(Constants.USER_KEY);
         int userId = user.getAuthenticatedUserId();
 
+        //Return true or false depending on if the query was successful.
         boolean wereAccountDetailsRetrievedSuccessfully = newAccountView.retrieveAccountDetails(userId);
         String forwardMapping;
 

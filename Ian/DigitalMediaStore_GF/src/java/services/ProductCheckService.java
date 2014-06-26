@@ -6,8 +6,10 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 
 /**
- *
- * @author prog
+ * @author Ian Mori
+ * @since June 9, 2014
+ * 
+ * This web service will query the database and return the data in an XML string.
  */
 @WebService(serviceName = "ProductCheckService")
 public class ProductCheckService {

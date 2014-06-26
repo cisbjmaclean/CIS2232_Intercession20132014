@@ -47,11 +47,10 @@ public class ModifyAccountTest {
     @Test
     public void testModifyingAccount() {
 
+        //This test will try and change a user's password in the database.
         modifyAccount = new ModifyAccountPassword();
-
         int userId = 1;
         String password = "modified-test";
-
         modifyAccount.modifyNewAccount(password, userId);
 
         String queryResult = "";
@@ -75,6 +74,8 @@ public class ModifyAccountTest {
             String errorMessage = e.getMessage();
             e.printStackTrace();
         }
+        //The second query will try and use a user Id of 1, which should match the password used
+        //to change the account.
         assertEquals("modified-test", queryResult);
     }
 }

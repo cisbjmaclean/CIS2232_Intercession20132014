@@ -15,9 +15,10 @@ import util.Constants;
 
 /**
  * @author Ian Mori
- * @since May 15,2014
+ * @since June 9,2014
  *
- * Creating LoginAction class, this will log a user in or return an error.
+ * Creating ViewOrdersAction class, this will try to view all the orders or
+ * return an error.
  */
 public class ViewOrdersAction extends Action {
 
@@ -38,13 +39,15 @@ public class ViewOrdersAction extends Action {
         OrderView newOrderView = (OrderView) request.getAttribute("viewOrdersForm");
         ActionMessages messages = new ActionMessages();
         String forwardMapping;
-//
+
+        //Same process, gather the user Id
         HttpSession session = request.getSession();
         LoginForm user = (LoginForm) session.getAttribute(Constants.USER_KEY);
         int userId = user.getAuthenticatedUserId();
 
-        
+        //Here try and query the database and gather the orders.
         boolean wereOrdersRetrievedSuccessfully = newOrderView.retrieveOrders(userId);
+
         if (wereOrdersRetrievedSuccessfully) {
             request.getSession().setAttribute("AllOrders", newOrderView.getOrders());
             messages.add("message1", (new ActionMessage("label.orders.retrieved.successfully")));
