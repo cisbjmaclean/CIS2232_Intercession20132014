@@ -19,11 +19,10 @@ import org.apache.struts.action.ActionMessages;
  * @author Michael Fesser
  * @since 6/3/2014
  *
- * The purpose of this class is to allow the function of the login page.
+ * This class will allow customers to be added to the database
  */
 public class AddCustomerAction extends Action {
 
-    // Flag for user creation.
     private boolean customerCreation = false;
     private boolean usernameTaken = false;
     private AddCustomer addCustomer;
@@ -32,7 +31,7 @@ public class AddCustomerAction extends Action {
     private AddUpdateCustomerForm customerForm;
 
     /**
-     *
+     * This action will pass the AddCustomer form to the addCustomer class
      *
      * @param mapping
      * @param form
@@ -48,33 +47,44 @@ public class AddCustomerAction extends Action {
         authenticated = (LoginForm) request.getSession().getAttribute("admin");
         customerForm = (AddUpdateCustomerForm) request.getAttribute("addUpdateCustomerForm");
         addCustomer = new AddCustomer();
-        usernameTaken = addCustomer.checkUsername(customerForm);
+        // Validate the username
 
+        try {
+            usernameTaken = addCustomer.checkUsername(customerForm);
+        } catch (Exception e) {
+            // Used if there is a critical database error
+            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+            messages.add("error", (new ActionMessage("error.database")));
+        }
+
+        // If username not taken add customer
         if (!usernameTaken) {
             try {
                 customerCreation = addCustomer.addCustomer(customerForm);
             } catch (Exception e) {
+                // Used if there is a critical database error
                 Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
-                messages.add("error", (new ActionMessage("error.database")));               
+                messages.add("error", (new ActionMessage("error.database")));
             }
         } else {
-          messages.add("error", (new ActionMessage("database.username.taken")));            
+            messages.add("error", (new ActionMessage("database.username.taken")));
         }
 
+        // If successful forward to correct jsp
         if (customerCreation) {
+            // Used to validate the session user for the forward or return to the tile this action was called from
             if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
                 forwardTo = mapping.findForward("adminMain");
             } else {
                 forwardTo = mapping.findForward("login");
             }
-            messages.add("success", (new ActionMessage("database.add.customer")));  
-          //label.database.add.user = customer added
+            messages.add("success", (new ActionMessage("database.add.customer")));
         } else if (authenticated != null && authenticated.isValidated() == true && authenticated.getAdminCode() == 378) {
             forwardTo = mapping.findForward("adminAddCustomer");
         } else {
             forwardTo = mapping.findForward("addCustomer");
         }
-        
+
         saveMessages(request, messages);
         return forwardTo;
     }

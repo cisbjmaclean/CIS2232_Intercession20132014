@@ -14,9 +14,16 @@ import org.apache.commons.collections4.comparators.ComparatorChain;
  *
  */
 public class SortStorageUnits {
-    
+
     private static ArrayList<StorageUnitForm> storageUnitsSorted;
 
+    /**
+     * This method calls the methods that create the comparators and then calls
+     * the method to sort the storage units for customers.
+     *
+     * @param storageUnits
+     * @return
+     */
     public static ArrayList<StorageUnitForm> sortDefault(ArrayList<StorageUnitForm> storageUnits) {
         storageUnitsSorted = new ArrayList();
         ComparatorChain chain = new ComparatorChain();
@@ -26,8 +33,15 @@ public class SortStorageUnits {
         storageUnitsSorted = sort(storageUnits, chain);
         return storageUnitsSorted;
     }
-    
-     public static ArrayList<StorageUnitForm> sortAdmin(ArrayList<StorageUnitForm> storageUnits) {
+
+    /**
+     * This method calls the methods that create the comparators and then calls
+     * the method to sort the storage units for admins.
+     *
+     * @param storageUnits
+     * @return
+     */
+    public static ArrayList<StorageUnitForm> sortAdmin(ArrayList<StorageUnitForm> storageUnits) {
         storageUnitsSorted = new ArrayList();
         ComparatorChain chain = new ComparatorChain();
         chain.addComparator(comparatorUnitId);
@@ -35,13 +49,19 @@ public class SortStorageUnits {
         return storageUnitsSorted;
     }
 
-      public static Comparator<StorageUnitForm> comparatorUnitId = new Comparator<StorageUnitForm>() {
+    /**
+     * This comparator sorts by unitID.
+     */
+    public static Comparator<StorageUnitForm> comparatorUnitId = new Comparator<StorageUnitForm>() {
         @Override
         public int compare(StorageUnitForm o1, StorageUnitForm o2) {
-            return o1.getUnitId()- (o2.getUnitId());
+            return o1.getUnitID() - (o2.getUnitID());
         }
     };
-      
+
+    /**
+     * This comparator sorts by availability.
+     */
     public static Comparator<StorageUnitForm> comparatorAvailability = new Comparator<StorageUnitForm>() {
         @Override
         public int compare(StorageUnitForm o1, StorageUnitForm o2) {
@@ -49,6 +69,9 @@ public class SortStorageUnits {
         }
     };
 
+    /**
+     * This comparator sorts by dimensions.
+     */
     public static Comparator<StorageUnitForm> comparatorDimensions = new Comparator<StorageUnitForm>() {
         @Override
         public int compare(StorageUnitForm o1, StorageUnitForm o2) {
@@ -56,6 +79,9 @@ public class SortStorageUnits {
         }
     };
 
+    /**
+     * This comparator sorts by date to.
+     */
     public static Comparator<StorageUnitForm> comparatorDateTo = new Comparator<StorageUnitForm>() {
         @Override
         public int compare(StorageUnitForm o1, StorageUnitForm o2) {
@@ -63,7 +89,14 @@ public class SortStorageUnits {
         }
     };
 
-public static ArrayList<StorageUnitForm> sort(ArrayList<StorageUnitForm> storageUnits, ComparatorChain chain) {
+    /**
+     * This method calls Collection.sort then returns the results.
+     *
+     * @param storageUnits
+     * @param chain
+     * @return
+     */
+    public static ArrayList<StorageUnitForm> sort(ArrayList<StorageUnitForm> storageUnits, ComparatorChain chain) {
         Collections.sort(storageUnits, chain);
         return storageUnits;
     }

@@ -31,6 +31,7 @@
         <div id="paddingTop"> </div>    
         <table>
             <html:form action="/mainMenu">
+                <!-- If no one has logged in show this part of the menu -->
                 <c:if test="${customer.validated == null}">
                     <c:if test="${admin.adminCode == null}">
                         <tr>
@@ -50,6 +51,7 @@
                             </tr>
                     </c:if>
                 </c:if>
+                <!-- If a customer has logged in show this part of the menu -->
                 <c:if test="${customer.validated == true}">
                     <tr>
                         <td>
@@ -77,6 +79,7 @@
                             </td>
                         </tr>
                 </c:if>
+                <!-- If the admin has logged in show this part of the menu -->
                 <c:if test="${admin.adminCode == 378}">
                     <tr>
                         <td>

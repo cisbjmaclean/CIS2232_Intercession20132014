@@ -45,7 +45,7 @@
 
         <h3>Customer search</h3>
         <table>
-
+            <!-- Javascript is called in this table to validate a single search criteria -->
             <html:form action="/adminCustomerSearch"> 
                 <tr>
                     <td>
@@ -74,6 +74,7 @@
 
         </table>
 
+        <!-- Javascript is called in this table to validate a single search criteria -->
         <table>
             <tr>
             <h3>Storage Unit Search</h3>
@@ -83,7 +84,7 @@
                         <label><bean:message key="label.admin.main.storage.unit.id"/></label>
                     </td>
                     <td>
-                        <input type="text" name="unitId" id ="unitId" onblur="adminOptionUnitId();"/>
+                        <input type="text" name="unitID" id ="unitID" onblur="adminOptionUnitId();"/>
                     </td>
                     <td>
                         <label><bean:message key="label.admin.main.storage.unit.customer.id"/></label>

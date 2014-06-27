@@ -18,6 +18,9 @@ import util.DbUtils;
 /**
  *
  * @author Michael Fesser
+ * @since June 25, 2014
+ *
+ * This class will test to see if a customer can be added to the database.
  */
 public class AddCustomerTest {
 
@@ -47,6 +50,7 @@ public class AddCustomerTest {
 
     @Before
     public void setUp() {
+        // Default values to use.
         customerForm = new AddUpdateCustomerForm();
         customerForm.setUsername("Siegmund");
         customerForm.setPassword("password");
@@ -66,6 +70,7 @@ public class AddCustomerTest {
 
     @After
     public void tearDown() {
+        // Delete the new user.
         try {
             con = dbConnection.databaseConnection();
         } catch (Exception e) {
@@ -128,7 +133,7 @@ public class AddCustomerTest {
         System.out.println("addCustomer");
         boolean expResult = true;
         boolean result = false;
-        
+
         try {
             result = instance.addCustomer(customerForm);
         } catch (Exception ex) {
@@ -137,6 +142,13 @@ public class AddCustomerTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * This method checks to see if the username has been taken. If it has the
+     * customer cannot be added.
+     *
+     * @param customerForm
+     * @return
+     */
     public boolean checkUsername(AddUpdateCustomerForm customerForm) {
         // Try to connect to the database.  
         try {
@@ -172,6 +184,13 @@ public class AddCustomerTest {
         return usernameTaken;
     }
 
+    /**
+     * This method tries to add the customer to the database. If it cannot false
+     * is returned.
+     *
+     * @param customerForm
+     * @return
+     */
     public boolean addCustomer(AddUpdateCustomerForm customerForm) {
         // Try to connect to the database.  
         try {

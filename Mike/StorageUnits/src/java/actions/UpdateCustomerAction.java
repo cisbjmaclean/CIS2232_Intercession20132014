@@ -1,6 +1,8 @@
 package actions;
 
+import business.LoadCustomers;
 import business.UpdateCustomer;
+import forms.AddUpdateCustomerForm;
 import forms.LoginForm;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +16,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 /**
+ * This class is used to update customers.
  *
  * @author Michael
  * @since Jun 17, 2014
@@ -25,7 +28,19 @@ public class UpdateCustomerAction extends Action {
     private boolean customerUpdate = false;
     private UpdateCustomer updateCustomer;
     private ActionForward forwardTo;
+    private AddUpdateCustomerForm customerForm;
 
+    /**
+     * This action will pass the AddUpdateCustomerForm to the UpdateCustomer
+     * class.
+     *
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -33,6 +48,7 @@ public class UpdateCustomerAction extends Action {
         authenticated = (LoginForm) request.getSession().getAttribute("customer");
         adminAuthenticated = (LoginForm) request.getSession().getAttribute("admin");
 
+        // Validate session
         if (adminAuthenticated == null || adminAuthenticated.getAdminCode() != 378) {
             if (authenticated == null || authenticated.isValidated() == false) {
                 messages.add("error", (new ActionMessage("label.session.expired")));
@@ -40,15 +56,19 @@ public class UpdateCustomerAction extends Action {
                 return mapping.findForward("login");
             }
         }
+
+        // Pass the AddUpdateCustomerForm to the UpdateCustomer class and return true if successful
         try {
-            updateCustomer = new UpdateCustomer(request);
-            customerUpdate = updateCustomer.updateCustomer();
+            customerForm = (AddUpdateCustomerForm) request.getAttribute("addUpdateCustomerForm");
+            updateCustomer = new UpdateCustomer();
+            customerUpdate = updateCustomer.updateCustomer(customerForm);
         } catch (Exception e) {
+            // Used if there is a critical database error
             Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, e);
             messages.add("error", (new ActionMessage("error.database")));
-            //label.error.database = There was an issue with the database, please contact customer support
         }
 
+        // customer updated forwad to the correct tile based on who is logged in, or return to the tile this action was called from
         if (customerUpdate) {
             messages.add("success", (new ActionMessage("customer.update.success")));
             if (adminAuthenticated != null && adminAuthenticated.isValidated() == true && adminAuthenticated.getAdminCode() == 378) {
@@ -59,10 +79,10 @@ public class UpdateCustomerAction extends Action {
         } else if (authenticated != null && authenticated.isValidated() == true) {
             forwardTo = mapping.findForward("customerStorageUnitView");
         } else {
-             messages.add("success", (new ActionMessage("customer.update.failed")));
+            messages.add("error", (new ActionMessage("customer.update.failed")));
             forwardTo = mapping.findForward("customerUpdate");
         }
-        
+
         saveMessages(request, messages);
         return forwardTo;
     }

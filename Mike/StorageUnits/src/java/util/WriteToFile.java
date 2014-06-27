@@ -16,16 +16,24 @@ import java.util.logging.Logger;
  *
  * @author Michael Fesser
  * @since 6/25/2014
+ *
+ * This class is used to write logins to file.
  */
 public class WriteToFile {
 
-    private static Path filepath = Paths.get("d:\\test\\logs.txt");
+    // Set path
+    private static Path filepath = Paths.get("c:\\test\\logs.txt");
     private static BufferedOutputStream output;
     private static BufferedWriter writer;
     private static boolean writerOpen;
 
+    /**
+     * This method writes the logins to file.
+     *
+     * @param login
+     */
     public static void fileWrite(String login) {
-        try {          
+        try {
             // Initialize the objects to create the file.
             output = new BufferedOutputStream(Files.newOutputStream(filepath, CREATE, APPEND));
             writer = new BufferedWriter(new OutputStreamWriter(output));

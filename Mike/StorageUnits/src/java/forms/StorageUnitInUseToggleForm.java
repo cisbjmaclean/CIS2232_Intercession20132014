@@ -6,18 +6,21 @@ import org.apache.struts.validator.ValidatorForm;
  *
  * @author Michael
  * @since Jun 21, 2014
+ *
+ * This class is the form used to hold the unit id and toggle value to toggle
+ * the in use status of a storage unit.
  */
 public class StorageUnitInUseToggleForm extends ValidatorForm {
 
-    private int unitId;
+    private int unitID;
     private int storageUnitToggle;
 
-    public int getUnitId() {
-        return unitId;
+    public int getUnitID() {
+        return unitID;
     }
 
-    public void setUnitId(int unitId) {
-        this.unitId = unitId;
+    public void setUnitID(int unitID) {
+        this.unitID = unitID;
     }
 
     public int getStorageUnitToggle() {

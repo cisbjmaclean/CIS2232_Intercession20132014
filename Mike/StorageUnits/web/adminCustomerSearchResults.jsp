@@ -44,6 +44,7 @@
             </tr>
         </table>             
         <table class="searchResults"> 
+            <!-- core iterator -->
             <c:forEach var="customer" items="${customerList}">   
                 <tr>
                     <th>
@@ -59,9 +60,10 @@
                         <bean:message key="label.admin.customer.search.heading.email"/>
                     </th>
                 </tr>
-                <tr>                    
+                <tr>  
+                    <!-- JSTL syntax for variables -->
                     <td>
-                        ${customer.customerId}
+                        ${customer.customerID}
                     </td> 
                     <td>
                         ${customer.lastName}
@@ -74,7 +76,8 @@
                     </td>
                     <html:form action="/adminModifyCustomer">
                         <td>
-                            <html:hidden property="customerId" value="${customer.customerId}"/>
+                            <!-- Used to hold ID field -->
+                            <html:hidden property="customerID" value="${customer.customerID}"/>
                             <html:submit property="action"><bean:message key="label.admin.customer.search.update"/></html:submit>
                             </td>
                             <td>

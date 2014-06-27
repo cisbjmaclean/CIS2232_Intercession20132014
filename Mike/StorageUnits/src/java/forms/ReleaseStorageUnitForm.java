@@ -6,16 +6,19 @@ import org.apache.struts.validator.ValidatorForm;
  *
  * @author Michael
  * @since Jun 12, 2014
+ *
+ * This class is the form used to hold the id of the storage unit to be
+ * released.
  */
 public class ReleaseStorageUnitForm extends ValidatorForm {
 
-    private int unitId;
+    private int unitID;
 
-    public int getUnitId() {
-        return unitId;
+    public int getUnitID() {
+        return unitID;
     }
 
-    public void setUnitId(int unitId) {
-        this.unitId = unitId;
+    public void setUnitID(int unitID) {
+        this.unitID = unitID;
     }
 }

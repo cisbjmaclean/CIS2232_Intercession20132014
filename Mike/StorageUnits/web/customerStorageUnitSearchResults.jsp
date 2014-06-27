@@ -17,7 +17,8 @@
     <!DOCTYPE html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><bean:message key="label.customer.storage.unit.search.results.title"/></title>  
+        <title><bean:message key="label.customer.storage.unit.search.results.title"/></title>
+        <!-- JQuery datepicker -->
         <script>
             $(function() {
                 $(".datepicker").datepicker({
@@ -57,35 +58,38 @@
         <!-- used for the calendar -->
         <div class="picker">
             <table id="customerSearchResults">
+                <!-- Core to iterate over the session object -->
                 <c:forEach var="unit" items="${customerSearchResults}">      
                     <tr>
                         <th>
-                           <bean:message key="label.customer.storage.unit.search.results.id"/> 
+                            <bean:message key="label.customer.storage.unit.search.results.id"/> 
                         </th>
-                         <th>
+                        <th>
                             <bean:message key="label.customer.storage.unit.search.results.type"/>
                         </th>
-                         <th>
+                        <th>
                             <bean:message key="label.customer.storage.unit.search.results.dimensions"/>
                         </th>
-                         <th>
+                        <th>
                             <bean:message key="label.customer.storage.unit.search.results.availability"/>
                         </th>
-                         <th>
+                        <th>
                             <bean:message key="label.customer.storage.unit.search.results.date.from"/>
                         </th>
-                         <th>
+                        <th>
                             <bean:message key="label.customer.storage.unit.search.results.date.to"/>
                         </th>
-                        <c:if test="${unit.customerId == 0}"> 
-                        <td>
-                         <label><bean:message key="label.customer.view.all.months"/></label>
-                         </td>
-                          </c:if>  
+                        <!-- Core used to check if the units have no customer attached to them yet -->
+                        <c:if test="${unit.customerID == 0}"> 
+                            <td>
+                                <label><bean:message key="label.customer.view.all.months"/></label>
+                            </td>
+                        </c:if>  
                     </tr>
                     <tr>
+                        <!-- JSTL used to display the variables of the session object -->
                         <td>
-                            ${unit.unitId}
+                            ${unit.unitID}
                         </td> 
                         <td>
                             ${unit.unitType}
@@ -102,11 +106,12 @@
                         <td>
                             ${unit.unitDateTo}
                         </td>   
-                        <c:if test="${unit.customerId == 0}"> 
+                        <!-- Core used to check if the units have no customer attached to them yet -->
+                        <c:if test="${unit.customerID == 0}"> 
                             <td>
-                                <html:form action="/reserveStorageUnit">
-                                    <html:hidden property="unitId" value="${unit.unitId}"/>
-                                   <input type="text" name="dateTo" class="datepicker" value="Click Here" size="9">
+                                <html:form action="/reserveStorageUnit">                                  
+                                    <html:hidden property="unitID" value="${unit.unitID}"/>
+                                    <input type="text" name="dateTo" class="datepicker" value="Click Here" size="9">
                                     <html:submit property="Submit"><bean:message key="label.customer.view.all.reserve.storage.unit"/></html:submit>                                 
                                 </html:form>
                             </td>

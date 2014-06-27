@@ -6,18 +6,20 @@ import org.apache.struts.validator.ValidatorForm;
  *
  * @author Michael
  * @since Jun 17, 2014
+ * 
+ * This class is the form used to modify customers.
  */
 public class AdminModifyCustomerForm extends ValidatorForm{
 
-    private int customerId;
+    private int customerID;
     String action;
 
-    public int getCustomerId() {
-        return customerId;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     } 
 
     public String getAction() {

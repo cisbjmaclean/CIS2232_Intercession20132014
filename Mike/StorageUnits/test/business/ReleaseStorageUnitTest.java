@@ -20,6 +20,10 @@ import util.DbUtils;
 /**
  *
  * @author Michael Fesser
+ * @since June 25, 2014
+ *
+ * This class tests the ability to reserve a storage unit.
+ *
  */
 public class ReleaseStorageUnitTest {
 
@@ -35,7 +39,7 @@ public class ReleaseStorageUnitTest {
     private ArrayList<StorageUnitForm> storageUnits;
     private ReleaseStorageUnit instance;
     private StorageUnitForm unit;
-    private int customerId;
+    private int customerID;
 
     public ReleaseStorageUnitTest() {
     }
@@ -50,6 +54,7 @@ public class ReleaseStorageUnitTest {
 
     @Before
     public void setUp() {
+        // Load the storage units.
         try {
             storageUnits = new ArrayList();
             // Try to connect to the database.
@@ -71,7 +76,7 @@ public class ReleaseStorageUnitTest {
             // Iterate over the result set.
             while (rs.next()) {
                 unit = new StorageUnitForm();
-                unit.setUnitId(rs.getInt("storage_unit_id"));
+                unit.setUnitID(rs.getInt("storage_unit_id"));
                 unit.setUnitType(rs.getString("storage_unit_type"));
                 unit.setUnitDimensions(rs.getString("storage_unit_dimensions"));
                 unit.setUnitAvailability(rs.getInt("storage_unit_availability"));
@@ -89,11 +94,12 @@ public class ReleaseStorageUnitTest {
             DbUtils.close(rs, psAuthenticate, con);
         }
         releaseUnitForm = new ReleaseStorageUnitForm();
-        releaseUnitForm.setUnitId(1);
+        releaseUnitForm.setUnitID(1);
     }
 
     @After
     public void tearDown() {
+        // Delete the added unit.
 
         // Try to connect to the database.
         try {
@@ -152,21 +158,29 @@ public class ReleaseStorageUnitTest {
         int result = 0;
         int expResult = 1;
 
-        System.out.println(storageUnits.size());
+        // Test the method.
         try {
             instance.releaseUnit(releaseUnitForm, storageUnits);
         } catch (Exception ex) {
             Logger.getLogger(ReleaseStorageUnitTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        // Check to see that the value for reservation status was changed.
         for (StorageUnitForm storageUnit : storageUnits) {
-            if (storageUnit.getUnitId() == releaseUnitForm.getUnitId()) {
+            if (storageUnit.getUnitID() == releaseUnitForm.getUnitID()) {
                 result = storageUnit.getUnitAvailability();
             }
         }
         assertEquals(expResult, result);
     }
 
+    /**
+     * This method accepts parameters then uses them to release ownership of a
+     * specific storage unit.
+     *
+     * @param releaseUnitForm
+     * @param storageUnits
+     */
     public void releaseUnit(ReleaseStorageUnitForm releaseUnitForm, ArrayList<StorageUnitForm> storageUnits) {
         // Try to connect to the database.  
         try {
@@ -182,7 +196,7 @@ public class ReleaseStorageUnitTest {
             sql = "DELETE FROM `customer_storage_unit` WHERE `storage_unit_id` = ?";
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setInt(1, releaseUnitForm.getUnitId());
+            psAuthenticate.setInt(1, releaseUnitForm.getUnitID());
             // Run the query.
             psAuthenticate.executeUpdate();
 
@@ -194,7 +208,7 @@ public class ReleaseStorageUnitTest {
             psAuthenticate.setString(2, "");
             psAuthenticate.setString(3, "");
             psAuthenticate.setInt(4, 0);
-            psAuthenticate.setInt(5, releaseUnitForm.getUnitId());
+            psAuthenticate.setInt(5, releaseUnitForm.getUnitID());
             // Run the query.
             psAuthenticate.executeUpdate();
 
@@ -210,7 +224,7 @@ public class ReleaseStorageUnitTest {
 
     public void setUnit(ReleaseStorageUnitForm releaseUnitForm, ArrayList<StorageUnitForm> storageUnits) {
         for (StorageUnitForm storageUnit : storageUnits) {
-            if (storageUnit.getUnitId() == releaseUnitForm.getUnitId()) {
+            if (storageUnit.getUnitID() == releaseUnitForm.getUnitID()) {
                 storageUnit.setCustomerId(0);
                 storageUnit.setUnitAvailability(1);
                 storageUnit.setUnitDateTo("");

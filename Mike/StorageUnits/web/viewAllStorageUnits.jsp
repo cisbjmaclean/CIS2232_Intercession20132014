@@ -18,6 +18,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><bean:message key="label.view.all.units.title"/></title>  
+        <!-- JQuery date picker -->
         <script>
             $(function() {
                 $(".datepicker").datepicker({
@@ -54,7 +55,7 @@
             </tr>
         </table>
 
-        <!-- used for the calendar -->
+        <!-- Used for the calendar -->
         <div class="picker">
             <table id="viewAll">
                 <c:forEach var="unit" items="${storageUnits}">                                  
@@ -77,8 +78,9 @@
                         <th>
                             <bean:message key="label.view.all.units.date.to"/>
                         </th>
+                        <!-- Show this to customers if the unit is not booked.  This is a label-->
                         <c:if test="${customer.validated != null}"> 
-                            <c:if test="${unit.customerId == 0}"> 
+                            <c:if test="${unit.customerID == 0}"> 
                                 <c:if test="${admin.adminCode != 378}">
                                     <td class="messageHeader">
                                         <label><bean:message key="label.customer.view.all.months"/>                                      
@@ -86,7 +88,8 @@
                                 </c:if>
                             </c:if>
                         </c:if> 
-                        <c:if test="${unit.customerId == 1}">
+                        <!-- Spacing -->          
+                        <c:if test="${unit.customerID == 1}">
                             <c:if test="${admin.adminCode == 378}">
                                 <td>
                                 </td>
@@ -95,7 +98,7 @@
                     </tr>
                     <tr>
                         <td>
-                            ${unit.unitId}
+                            ${unit.unitID}
                         </td> 
                         <td>
                             ${unit.unitType}
@@ -112,12 +115,14 @@
                         <td>
                             ${unit.unitDateTo}
                         </td>   
+                        <!-- Iterate over the session object -->
                         <c:if test="${customer.validated != null}"> 
-                            <c:if test="${unit.customerId == 0}"> 
+                            <c:if test="${unit.customerID == 0}"> 
                                 <c:if test="${admin.adminCode != 378}">
                                     <td id="reserve">
                                         <html:form action="/reserveStorageUnit">
-                                            <html:hidden property="unitId" value="${unit.unitId}"/>
+                                            <!-- date picker -->
+                                            <html:hidden property="unitID" value="${unit.unitID}"/>
                                             <input type="text" name="dateTo" class="datepicker" value="Click Here">
                                             <html:submit property="Submit"><bean:message key="label.view.all.reserve.storage.unit"/></html:submit>                                 
                                         </html:form>
@@ -125,11 +130,13 @@
                                 </c:if>
                             </c:if>
                         </c:if> 
-                        <c:if test="${unit.customerId == 1}">
+                        <!-- Show if administrator -->
+                        <c:if test="${unit.customerID == 1}">
                             <c:if test="${admin.adminCode == 378}">
+                                <!-- CSS behaving oddly, required  -->
                                 <td style="border: none; width: 10%; padding-top: 10px;">
                                     <html:form action="/releaseStorageUnit">
-                                        <html:hidden property="unitId" value="${unit.unitId}"/>
+                                        <html:hidden property="unitID" value="${unit.unitID}"/>
                                         <html:submit property="Submit"><bean:message key="label.view.all.release.storage.unit"/></html:submit>
                                     </html:form>  
                                 </td>

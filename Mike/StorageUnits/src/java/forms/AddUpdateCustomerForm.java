@@ -5,10 +5,13 @@ import org.apache.struts.validator.ValidatorForm;
 /**
  *
  * @author Michael Fesser
+ * @since Jun XX, 2014
+ * 
+ * This class is the form used to add and update customers.
  */
 public class AddUpdateCustomerForm extends ValidatorForm {
 
-    private int customerId;
+    private int customerID;
     private String username;
     private String password;
     private String password2;
@@ -23,12 +26,12 @@ public class AddUpdateCustomerForm extends ValidatorForm {
     private String postalCode;
     private String phoneNumber;
 
-    public int getCustomerId() {
-        return customerId;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
     public String getUsername() {

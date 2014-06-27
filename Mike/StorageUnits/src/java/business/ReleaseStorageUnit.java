@@ -16,6 +16,8 @@ import util.DbUtils;
  *
  * @author Michael
  * @since Jun 12, 2014
+ * 
+ * This class is used to release storage units.  It is used by both the admins and customers.
  */
 public class ReleaseStorageUnit {
 
@@ -27,6 +29,14 @@ public class ReleaseStorageUnit {
     // The connection object.
     private Connection con;
 
+    /**
+     * This method accepts parameters then uses them to release ownership of a
+     * specific storage unit.
+     *
+     * @param releaseUnitForm
+     * @param storageUnits
+     * @throws Exception
+     */
     public void releaseUnit(ReleaseStorageUnitForm releaseUnitForm, ArrayList<StorageUnitForm> storageUnits) throws Exception {
         // Try to connect to the database.  
         try {
@@ -42,7 +52,7 @@ public class ReleaseStorageUnit {
             sql = "DELETE FROM `customer_storage_unit` WHERE `storage_unit_id` = ?";
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setInt(1, releaseUnitForm.getUnitId());
+            psAuthenticate.setInt(1, releaseUnitForm.getUnitID());
             // Run the query.
             psAuthenticate.executeUpdate();
 
@@ -53,13 +63,14 @@ public class ReleaseStorageUnit {
             psAuthenticate.setInt(1, 1);
             psAuthenticate.setString(2, "--/--/--");
             psAuthenticate.setString(3, "--/--/--");
-            psAuthenticate.setInt(4, releaseUnitForm.getUnitId());
-            psAuthenticate.setInt(5, 0);
+            psAuthenticate.setInt(4, 0);
+            psAuthenticate.setInt(5, releaseUnitForm.getUnitID());
             // Run the query.
             psAuthenticate.executeUpdate();
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+            // Thrown if there is a critical error with the database.
             throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.
@@ -68,13 +79,20 @@ public class ReleaseStorageUnit {
         setUnit(releaseUnitForm, storageUnits);  
     }
 
+    /** 
+     * This method updates an ArrayList that is used to update the session.  
+     * Passing the initial storage units ArrayList that is in was breaking on the back button.
+     * 
+     * @param releaseUnitForm
+     * @param storageUnits 
+     */
     public void setUnit(ReleaseStorageUnitForm releaseUnitForm, ArrayList<StorageUnitForm> storageUnits) {              
         for (StorageUnitForm storageUnit : storageUnits)  {
-            if (storageUnit.getUnitId() == releaseUnitForm.getUnitId()) {
+            if (storageUnit.getUnitID() == releaseUnitForm.getUnitID()) {
                 storageUnit.setCustomerId(0);
                 storageUnit.setUnitAvailability(1);
-                storageUnit.setUnitDateTo("");
-                storageUnit.setUnitDateFrom("");
+                storageUnit.setUnitDateTo("--/--/--");
+                storageUnit.setUnitDateFrom("--/--/--");
                 storageUnit.setUnitInUse(0);
             }
         }

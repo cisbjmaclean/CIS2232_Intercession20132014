@@ -28,20 +28,20 @@
         </logic:notPresent>
         <h3><bean:message key="admin.add.storage.unit.message"/></h3>
         <table>
-        <tr>
-            <td>
-                <logic:messagesPresent message="true">
-                    <html:messages id="msg2" message="true" property="success"><div class="infoMessageCheck" style="color: green"><bean:write name="msg2"/></div><br/></html:messages>
-                    <html:messages id="msg2" message="true" property="warn"><div class="warnExclaim"  style="color: yellow"><bean:write name="msg2"/></div><br/></html:messages>
-                    <html:messages id="msg2" message="true" property="error"><div class="errorX"  style="color: red"><bean:write name="msg2"/></div><br/></html:messages>				  		
-                </logic:messagesPresent>
-                <%-- the html:errors is populated if the validator is used. --%>    
-                <div style="color:red">
-                    <html:errors />
-                </div>
-            </td>
-        </tr>
-    </table>
+            <tr>
+                <td>
+                    <logic:messagesPresent message="true">
+                        <html:messages id="msg2" message="true" property="success"><div class="infoMessageCheck" style="color: green"><bean:write name="msg2"/></div><br/></html:messages>
+                        <html:messages id="msg2" message="true" property="warn"><div class="warnExclaim"  style="color: yellow"><bean:write name="msg2"/></div><br/></html:messages>
+                        <html:messages id="msg2" message="true" property="error"><div class="errorX"  style="color: red"><bean:write name="msg2"/></div><br/></html:messages>				  		
+                    </logic:messagesPresent>
+                    <%-- the html:errors is populated if the validator is used. --%>    
+                    <div style="color:red">
+                        <html:errors />
+                    </div>
+                </td>
+            </tr>
+        </table>
 
         <html:form action="/adminAddStorageUnit">
             <table class="mainTables">
@@ -75,9 +75,9 @@
                     </td>
                     <td>
                         <html:submit><bean:message key="label.admin.add.storage.unit.submit"/></html:submit>
-                    </td>
-                </tr>
-            </table>
+                        </td>
+                    </tr>
+                </table>
         </html:form>
     </body>
 </html:html>

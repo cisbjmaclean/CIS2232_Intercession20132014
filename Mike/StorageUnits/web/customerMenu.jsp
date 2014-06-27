@@ -26,44 +26,44 @@
                 logs for error messages.
             </div>
         </logic:notPresent>
-       
-<html:html lang="true">
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Menu Page</title>
-        </head>
-        <body>
-            <html:form action="/customerMenu">
-                <table>
-                    <tr>
-                        <td>
-                            <html:submit property="action"><bean:message key="label.customer.menu.view.my.storage.units"/></html:submit>                   
-                            </td>
-                        </tr>
+
+        <html:html lang="true">
+            <!DOCTYPE html>
+        <html>
+            <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <title>Menu Page</title>
+            </head>
+            <body>
+                <html:form action="/customerMenu">
+                    <table>
                         <tr>
                             <td>
-                            <html:submit property="action"><bean:message key="label.customer.menu.view.all.storage.units"/></html:submit>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                            <html:submit property="action"><bean:message key="label.customer.menu.view.search.units"/></html:submit>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                            <html:submit property="action"><bean:message key="label.customer.menu.profile"/></html:submit>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                            <html:submit property="action"><bean:message key="label.customer.menu.logout"/></html:submit>
-                            </td>
-                        </tr>
-                    </table>
-            </html:form>
-        </body>
-    </html>
-</html:html>
+                                <html:submit property="action"><bean:message key="label.customer.menu.view.my.storage.units"/></html:submit>                   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <html:submit property="action"><bean:message key="label.customer.menu.view.all.storage.units"/></html:submit>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <html:submit property="action"><bean:message key="label.customer.menu.view.search.units"/></html:submit>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <html:submit property="action"><bean:message key="label.customer.menu.profile"/></html:submit>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <html:submit property="action"><bean:message key="label.customer.menu.logout"/></html:submit>
+                                </td>
+                            </tr>
+                        </table>
+                </html:form>
+            </body>
+        </html>
+    </html:html>

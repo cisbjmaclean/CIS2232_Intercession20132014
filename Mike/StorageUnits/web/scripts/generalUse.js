@@ -6,7 +6,7 @@
  */
 
 /*
- * This function makes sure the admin cannot select more then one seach field.
+ * These functions make sure the admin cannot select more then one seach field.
  */
 function adminOptionCustomerEmail() {
     var customerEmail = document.getElementById('customerEmail').value;
@@ -55,22 +55,22 @@ function adminOptionCustomerLastName() {
 }
 
 function adminOptionUnitId() {   
-    var unitId = document.getElementById('unitId').value;
+    var unitID = document.getElementById('unitID').value;
     var unitCustomerId = document.getElementById('unitCustomerId').value;
     var unitCustomerLastName = document.getElementById('unitCustomerLastName').value;
     /*
      * This clears the other two options.
      */
 
-    if (unitId > 0 && unitCustomerId > 0) {
+    if (unitID > 0 && unitCustomerId > 0) {
         document.getElementById('unitCustomerId').value = "";
-    } else if (unitId > 0 && unitCustomerLastName.length > 0) {
+    } else if (unitID > 0 && unitCustomerLastName.length > 0) {
         document.getElementById('unitCustomerLastName').value = "";
     }
 }
 
 function adminOptionUnitCustomerId() {
-    var unitId = document.getElementById('unitId').value;
+    var unitID = document.getElementById('unitID').value;
     var unitCustomerId = document.getElementById('unitCustomerId').value;
     var unitCustomerLastName = document.getElementById('unitCustomerLastName').value;
 
@@ -79,22 +79,22 @@ function adminOptionUnitCustomerId() {
      */
     if (unitCustomerId  > 0 && unitCustomerLastName.length > 0) {
         document.getElementById('unitCustomerLastName').value = "";
-    } else if (unitCustomerId  > 0 && unitId  > 0) {
-        document.getElementById('unitId').value = "";
+    } else if (unitCustomerId  > 0 && unitID  > 0) {
+        document.getElementById('unitID').value = "";
     }
 
 }
 
 function adminOptionUnitCustomerLastName() {  
-    var unitId = document.getElementById('unitId').value;  
+    var unitID = document.getElementById('unitID').value;  
     var unitCustomerId = document.getElementById('unitCustomerId').value;
     var unitCustomerLastName = document.getElementById('unitCustomerLastName').value;
 
     /*
      * This clears the other two options.
      */
-    if (unitCustomerLastName.length > 0 && unitId > 0) {
-        document.getElementById('unitId').value = "";
+    if (unitCustomerLastName.length > 0 && unitID > 0) {
+        document.getElementById('unitID').value = "";
     } else if (unitCustomerLastName.length > 0 && unitCustomerId > 0) {
         document.getElementById('unitCustomerId').value = "";
     }

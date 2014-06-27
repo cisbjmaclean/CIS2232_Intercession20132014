@@ -20,6 +20,8 @@ import util.SortStorageUnits;
  *
  * @author Michael
  * @since Jun 19, 2014
+ *
+ * This class will allow the addition of a storage unit.
  */
 public class AdminAddStorageUnitAction extends Action {
 
@@ -29,16 +31,28 @@ public class AdminAddStorageUnitAction extends Action {
     private StorageUnitForm unit;
     private ArrayList<StorageUnitForm> storageUnits;
 
+    /**
+     * This action will pass the StorageUnit form to the AddStorageUnit class.
+     *
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         ActionMessages messages = new ActionMessages();
+        // Validate session
         authenticated = (LoginForm) request.getSession().getAttribute("admin");
         if (authenticated == null || authenticated.isValidated() == false || authenticated.getAdminCode() != 378) {
             messages.add("error", (new ActionMessage("session.invalid")));
             saveMessages(request, messages);
             return mapping.findForward("login");
         }
+        // Add storage unit and return true if successful
         try {
             unit = (StorageUnitForm) request.getAttribute("storageUnitForm");
             addStorageUnit = new AddStorageUnit();
@@ -47,9 +61,10 @@ public class AdminAddStorageUnitAction extends Action {
             request.getSession().setAttribute("storageUnits", SortStorageUnits.sortAdmin(storageUnits));
             messages.add("success", (new ActionMessage("unit.added")));
         } catch (Exception e) {
-            Logger.getLogger(AddStorageUnit.class.getName()).log(Level.SEVERE, null, e);          
+            // Used if there is a critical database error
+            Logger.getLogger(AddStorageUnit.class.getName()).log(Level.SEVERE, null, e);
             messages.add("error", (new ActionMessage("error.database")));
-        }     
+        }
         forwardTo = mapping.findForward("adminMain");
         saveMessages(request, messages);
         return forwardTo;

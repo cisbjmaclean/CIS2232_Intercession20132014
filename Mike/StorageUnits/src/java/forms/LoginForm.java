@@ -12,7 +12,7 @@ import org.apache.struts.validator.ValidatorForm;
  */
 public class LoginForm extends ValidatorForm {
 
-    private int customerId;
+    private int customerID;
     private String username;
     private String password;
     private int adminCode;
@@ -22,12 +22,12 @@ public class LoginForm extends ValidatorForm {
         this.adminCode = 0;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomerId(int customerID) {
+        this.customerID = customerID;
     }
 
     public String getUsername() {

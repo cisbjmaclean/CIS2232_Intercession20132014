@@ -1,7 +1,7 @@
-    <%-- 
-    Document   : customerStorageUnitSearch
-    Created on : Jun 20, 2014, 7:31:16 PM
-    Author     : Michael
+<%-- 
+Document   : customerStorageUnitSearch
+Created on : Jun 20, 2014, 7:31:16 PM
+Author     : Michael
 --%>
 
 <%@page contentType="text/html"%>
@@ -17,7 +17,8 @@
     <!DOCTYPE html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><bean:message key="label.customer.storage.unit.search.title"/></title>  
+        <title><bean:message key="label.customer.storage.unit.search.title"/></title> 
+        <!-- JQuery datepicker -->
         <script>
             $(function() {
                 $(".datepicker").datepicker({
@@ -53,7 +54,7 @@
                 </td>
             </tr>
         </table>
-                    
+
         <table id="customerUnitSearch">
             <html:form action="/customerStorageUnitSearch">   
 
@@ -87,9 +88,9 @@
                     <td>
                         <input type="text" name="dateTo" class="datepicker" value="Click Here">
                     </td>
-                     <td>
-                         <html:reset/>
-                        </td>
+                    <td>
+                        <html:reset/>
+                    </td>
                     <td>
                         <html:submit><bean:message key="label.customer.storage.unit.search.submit"/></html:submit>
                         </td>

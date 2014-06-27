@@ -16,11 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import util.DatabaseConnection;
 import util.DbUtils;
 
-
 /**
  *
  * @author Michael
  * @since Jun 21, 2014
+ *
+ * This class is used to both extend the end date of a storage unit and to flag
+ * if for in use status.
  */
 public class UpdateStorageUnit {
 
@@ -34,6 +36,7 @@ public class UpdateStorageUnit {
     private LoginForm user;
     private ReserveStorageUnitForm extendUnit;
     private StorageUnitInUseToggleForm storageUnitToggle;
+    // Used to set the date
     private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     private Calendar calendar = Calendar.getInstance();
     private String dateFrom;
@@ -41,6 +44,13 @@ public class UpdateStorageUnit {
     private int storageUnitToggleValue;
     private ArrayList<StorageUnitForm> storageUnits;
 
+    /**
+     * This method accepts a request and then updated the end date of a storage
+     * unit in the database.
+     *
+     * @param request
+     * @throws Exception
+     */
     public void extendUnit(HttpServletRequest request) throws Exception {
         // Try to connect to the database.  
         try {
@@ -62,12 +72,13 @@ public class UpdateStorageUnit {
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
             psAuthenticate.setString(1, dateTo);
-            psAuthenticate.setInt(2, extendUnit.getUnitId());
+            psAuthenticate.setInt(2, extendUnit.getUnitID());
             // Run the query.
             psAuthenticate.executeUpdate();
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+            // Thrown if there is a critical error with the database.
             throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.
@@ -75,9 +86,16 @@ public class UpdateStorageUnit {
         }
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
         setUnitExtend();
-       // SortStorageUnits.sortDefault(request, storageUnits);
+        // SortStorageUnits.sortDefault(request, storageUnits);
     }
 
+    /**
+     * This method accepts a request and then updates the in use status of the
+     * storage unit.
+     *
+     * @param request
+     * @throws Exception
+     */
     public void setStorageUnitInUse(HttpServletRequest request) throws Exception {
         // Try to connect to the database.  
         try {
@@ -91,7 +109,7 @@ public class UpdateStorageUnit {
         try {
             user = (LoginForm) request.getSession().getAttribute("customer");
             storageUnitToggle = (StorageUnitInUseToggleForm) request.getAttribute("storageUnitInUseToggleForm");
-            
+
             if (storageUnitToggle.getStorageUnitToggle() == 0) {
                 storageUnitToggleValue = 1;
             } else {
@@ -103,36 +121,37 @@ public class UpdateStorageUnit {
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
             psAuthenticate.setInt(1, storageUnitToggleValue);
-            psAuthenticate.setInt(2, storageUnitToggle.getUnitId());
+            psAuthenticate.setInt(2, storageUnitToggle.getUnitID());
             // Run the query.
             psAuthenticate.executeUpdate();
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
-            throw new Exception();        
+            // Thrown if there is a critical error with the database.
+            throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
         }
         storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
         setUnitUseToggle();
-       // SortStorageUnits.sortDefault(request, storageUnits);
+        // SortStorageUnits.sortDefault(request, storageUnits);
     }
 
     public void setUnitExtend() {
         for (StorageUnitForm storageUnit : storageUnits) {
-            if (storageUnit.getUnitId() == extendUnit.getUnitId()) {
-                storageUnit.setCustomerId(user.getCustomerId());
+            if (storageUnit.getUnitID() == extendUnit.getUnitID()) {
+                storageUnit.setCustomerId(user.getCustomerID());
                 storageUnit.setUnitDateFrom(dateFrom);
                 storageUnit.setUnitDateTo(dateTo);
             }
         }
     }
-    
+
     public void setUnitUseToggle() {
         for (StorageUnitForm storageUnit : storageUnits) {
-            if (storageUnit.getUnitId() == storageUnitToggle.getUnitId()) {
-                 storageUnit.setUnitInUse(storageUnitToggleValue);
+            if (storageUnit.getUnitID() == storageUnitToggle.getUnitID()) {
+                storageUnit.setUnitInUse(storageUnitToggleValue);
             }
         }
     }

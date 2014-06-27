@@ -18,9 +18,12 @@ import util.DbUtils;
 /**
  *
  * @author Michael Fesser
+ * @since June 25, 2014
+ *
+ * This class is used to test a login.
  */
 public class LoginTest {
-    
+
     // The object used for each new connection.
     private DatabaseConnection dbConnection = new DatabaseConnection();
     // Used to allow for more security when sending data to a database.
@@ -29,24 +32,24 @@ public class LoginTest {
     // The connection object.
     private Connection con;
     private ResultSet rs = null;
-    private int customerId;
+    private int customerID;
     private String authenticate;
-    
+
     public LoginTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -60,19 +63,20 @@ public class LoginTest {
         LoginForm validateLogin = new LoginForm();
         Login instance = new Login();
         String expResult = "customer";
-        
+
+        // The values to use for the login.
         validateLogin.setUsername("BJ");
         validateLogin.setPassword("password");
-        
+
         String result = "none";
-        
+
         try {
             result = instance.checkLogin(validateLogin);
         } catch (Exception ex) {
             Logger.getLogger(LoginTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        assertEquals(expResult, result);      
+
+        assertEquals(expResult, result);
     }
 
     /**
@@ -86,19 +90,20 @@ public class LoginTest {
         String expResult = "admin";
         validateLogin.setUsername("admin.pyrolight");
         validateLogin.setPassword("password");
-        
+
         String result = "none";
         try {
             result = instance.checkAdminLogin(validateLogin);
         } catch (Exception ex) {
             Logger.getLogger(LoginTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        assertEquals(expResult, result);      
+
+        assertEquals(expResult, result);
     }
-    
-        /**
-     * This method retrieves data from the database.
+
+    /**
+     * This method connects to the database and checks to see if a username has
+     * been taken. It returns false if it has.
      *
      * @param validateLogin
      * @return
@@ -124,8 +129,8 @@ public class LoginTest {
             rs = psAuthenticate.executeQuery();
             // Iterate over the result set.
             while (rs.next()) {
-                customerId = rs.getInt("cus_id");
-                validateLogin.setCustomerId(customerId);
+                customerID = rs.getInt("cus_id");
+                validateLogin.setCustomerId(customerID);
                 validateLogin.setValidated(true);
                 authenticate = "customer";
             }
@@ -139,6 +144,12 @@ public class LoginTest {
         return authenticate;
     }
 
+    /**
+     * This method connects to the database and validates the admin login.
+     *
+     * @param validateLogin
+     * @return
+     */
     public String checkAdminLogin(LoginForm validateLogin) {
         // Try to connect to the database.
         try {
@@ -177,5 +188,3 @@ public class LoginTest {
         return authenticate;
     }
 }
-
-

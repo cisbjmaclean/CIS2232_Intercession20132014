@@ -60,10 +60,11 @@ public class LoginAction extends Action {
         validateLogin = (LoginForm) request.getAttribute("loginForm");
         // Used to define the page to be forwarded to.  
         login = new Login();
+        // This is used for login tracking
         dateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss z");
         calendar = Calendar.getInstance();
         onDate = dateFormat.format(calendar.getTime());
-        
+
         try {
             if (validateLogin.getUsername().startsWith("admin.")) {
                 authenticate = login.checkAdminLogin(validateLogin);
@@ -82,7 +83,7 @@ public class LoginAction extends Action {
                 case "customer":
                     loadCustomer = new LoadCustomer();
                     request.getSession().setAttribute("customer", validateLogin);
-                    request.getSession().setAttribute("customerDetails", loadCustomer.setCustomerInformation(validateLogin.getCustomerId()));
+                    request.getSession().setAttribute("customerDetails", loadCustomer.setCustomerInformation(validateLogin.getCustomerID()));
                     messages.add("success", (new ActionMessage("login.success")));
                     forwardTo = mapping.findForward("customerStorageUnitView");
                     loginString = "successful login";
@@ -94,6 +95,7 @@ public class LoginAction extends Action {
                     break;
             }
         } catch (Exception e) {
+            // Used if there is a critical database error
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
             messages.add("error", (new ActionMessage("error.database")));
             forwardTo = mapping.findForward("login");

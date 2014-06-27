@@ -13,6 +13,9 @@ import webServices.business.UnitsInUseCheck;
 /**
  *
  * @author Michael Fesser
+ * @since Jun 19, 2014
+ *
+ * This is the login class. All users use this class to login.
  */
 public class Login {
 
@@ -24,16 +27,18 @@ public class Login {
     // The connection object.
     private Connection con;
     private ResultSet rs = null;
-    private int customerId;
+    private int customerID;
     private UnitsInUseCheck checkUnitsInUse;
     private String unitsInUse;
     private String authenticate = "none";
 
     /**
-     * This method retrieves data from the database.
+     * This method connects to the database and checks to see if a username has
+     * been taken. It returns false if it has.
      *
      * @param validateLogin
      * @return
+     * @throws java.lang.Exception
      */
     public String checkLogin(LoginForm validateLogin) throws Exception {
 
@@ -59,14 +64,15 @@ public class Login {
             // Iterate over the result set.
             while (rs.next()) {
                 if (validateLogin.getPassword().equals(rs.getString("cus_login_password"))) {
-                    customerId = rs.getInt("cus_id");
-                    validateLogin.setCustomerId(customerId);
+                    customerID = rs.getInt("cus_id");
+                    validateLogin.setCustomerId(customerID);
                     validateLogin.setValidated(true);
                     authenticate = "customer";
                 }
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            // Thrown if there is a critical error with the database.
             throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
@@ -75,6 +81,13 @@ public class Login {
         return authenticate;
     }
 
+    /**
+     * This method connects to the database and validates the admin login.
+     *
+     * @param validateLogin
+     * @return
+     * @throws Exception
+     */
     public String checkAdminLogin(LoginForm validateLogin) throws Exception {
         // Try to connect to the database.
         try {
@@ -107,6 +120,7 @@ public class Login {
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            // Thrown if there is a critical error with the database.
             throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
@@ -115,6 +129,14 @@ public class Login {
         return authenticate;
     }
 
+    /**
+     * This method is used to allow a remote login to the server to allow a
+     * customer to see which of their storage units are in use.
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     public String webServiceCheckStorageUnitsInUse(String username, String password) {
 
         // Try to connect to the database.
@@ -138,7 +160,7 @@ public class Login {
 
             // Iterate over the result set.
             while (rs.next()) {
-                customerId = rs.getInt("cus_id");
+                customerID = rs.getInt("cus_id");
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
@@ -147,8 +169,9 @@ public class Login {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
         }
-        if (customerId != 0) {
-            unitsInUse = checkUnitsInUse.getUnitsInUse(customerId);
+        // Call the method to return the units in use or return an error if login validation fails.
+        if (customerID != 0) {
+            unitsInUse = checkUnitsInUse.getUnitsInUse(customerID);
         } else {
             unitsInUse = "There was an error with the login.";
         }

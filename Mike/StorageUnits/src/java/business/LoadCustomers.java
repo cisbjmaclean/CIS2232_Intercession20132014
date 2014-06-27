@@ -16,6 +16,9 @@ import util.DbUtils;
  *
  * @author Michael
  * @since Jun 16, 2014
+ *
+ * This class is used to load all the customer from the database. It is used
+ * when an admin logs in.
  */
 public class LoadCustomers {
 
@@ -32,7 +35,13 @@ public class LoadCustomers {
     private CustomerForm customer;
     private LoginForm login;
 
-    public ArrayList loadCustomers(HttpServletRequest request) {
+    /**
+     * This method loads all the customers and their logins from the database.
+     *
+     * @param request
+     * @return
+     */
+    public ArrayList loadCustomers(HttpServletRequest request) throws Exception {
         try {
             con = dbConnection.databaseConnection();
         } catch (Exception e) {
@@ -49,7 +58,7 @@ public class LoadCustomers {
             rs = psAuthenticate.executeQuery();
             while (rs.next()) {
                 customer = new CustomerForm();
-                customer.setCustomerId(rs.getInt("cus_id"));
+                customer.setCustomerID(rs.getInt("cus_id"));
                 customer.setEmail(rs.getString("cus_email"));
                 customer.setFirstName(rs.getString("cus_first_name"));
                 customer.setMiddleInitial(rs.getString("cus_middle_initial"));
@@ -64,6 +73,8 @@ public class LoadCustomers {
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
             System.err.println("There was an issue with the query.");
+            // Thrown if there is a critical error with the database.
+            throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
@@ -95,27 +106,12 @@ public class LoadCustomers {
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            // Thrown if there is a critical error with the database.
             throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.
             DbUtils.close(rs, psAuthenticate, con);
         }
         return loadLogins;
-    }
-
-    public ArrayList<CustomerForm> getLoadCustomers() {
-        return loadCustomers;
-    }
-
-    public void setLoadCustomers(ArrayList<CustomerForm> loadCustomers) {
-        this.loadCustomers = loadCustomers;
-    }
-
-    public ArrayList<LoginForm> getLoadLogins() {
-        return loadLogins;
-    }
-
-    public void setLoadLogins(ArrayList<LoginForm> loadLogins) {
-        this.loadLogins = loadLogins;
     }
 }

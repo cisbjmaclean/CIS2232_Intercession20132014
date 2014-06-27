@@ -13,6 +13,9 @@ import util.DbUtils;
 /**
  *
  * @author Michael Fesser
+ * @since Jun 19, 2014
+ * 
+ * This class is used to load storage units.
  */
 public class LoadStorageUnits {
 
@@ -26,10 +29,10 @@ public class LoadStorageUnits {
     private Connection con;
     private ResultSet rs = null;
     private StorageUnitForm unit;
-    private int customerId = 0;
+    private int customerID = 0;
 
     /**
-     * This method retrieves data from the database.
+     * This method loads the storage units from the database.
      *
      * @return
      */
@@ -57,7 +60,7 @@ public class LoadStorageUnits {
             // Iterate over the result set.
             while (rs.next()) {
                 unit = new StorageUnitForm();
-                unit.setUnitId(rs.getInt("storage_unit_id"));
+                unit.setUnitID(rs.getInt("storage_unit_id"));
                 unit.setUnitType(rs.getString("storage_unit_type"));
                 unit.setUnitDimensions(rs.getString("storage_unit_dimensions"));
                 unit.setUnitAvailability(rs.getInt("storage_unit_availability"));
@@ -66,10 +69,11 @@ public class LoadStorageUnits {
                 unit.setUnitInUse(rs.getInt("storage_unit_in_use"));
                 unit.setCustomerId(rs.getInt("cus_id"));
                 storageUnits.add(unit);
-                customerId = 0;
+                customerID = 0;
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            // Thrown if there is a critical error with the database.
             throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.

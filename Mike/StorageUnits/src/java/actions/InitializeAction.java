@@ -20,6 +20,8 @@ import util.SortStorageUnits;
  *
  * @author Michael
  * @since Jun 15, 2014
+ *
+ * This class used to initialize the program.
  */
 public class InitializeAction extends Action {
 
@@ -28,7 +30,7 @@ public class InitializeAction extends Action {
     private ArrayList<StorageUnitForm> storageUnits;
 
     /**
-     *
+     * This action used to initialize the program.
      *
      * @param mapping
      * @param form
@@ -41,8 +43,10 @@ public class InitializeAction extends Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         ActionMessages messages = new ActionMessages();
+        // Clear any lingering session when the site is accessed
         Logout.logout(request, response);
-            
+
+        // Load the storage units
         try {
             loadUnits = new LoadStorageUnits();
             storageUnits = new ArrayList();

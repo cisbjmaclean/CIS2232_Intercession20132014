@@ -1,7 +1,7 @@
-    <%-- 
-    Document   : adminMenu
-    Created on : Jun 16, 2014, 3:35:14 PM
-    Author     : Michael
+<%-- 
+Document   : adminMenu
+Created on : Jun 16, 2014, 3:35:14 PM
+Author     : Michael
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>

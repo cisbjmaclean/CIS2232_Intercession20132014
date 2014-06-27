@@ -10,8 +10,11 @@ import util.DatabaseConnection;
 import util.DbUtils;
 
 /**
- *
+ * 
  * @author Michael Fesser
+ * @since Jun 19, 2014
+ * 
+ * This class is used to add the customer to the database.
  */
 public class AddCustomer {
 
@@ -25,6 +28,14 @@ public class AddCustomer {
     private ResultSet rs = null;
     private boolean usernameTaken = false;
     
+    
+    /**
+     * This method checks to see if the username has been taken.  If it has the customer
+     * cannot be added.
+     * 
+     * @param customerForm
+     * @return 
+     */
     public boolean checkUsername(AddUpdateCustomerForm customerForm) {
         // Try to connect to the database.  
         try {
@@ -62,6 +73,14 @@ public class AddCustomer {
         return usernameTaken;
     }
 
+    /**
+     * This method tries to add the customer to the database. If it cannot false
+     * is returned.
+     *
+     * @param customerForm
+     * @return
+     * @throws Exception
+     */
     public boolean addCustomer (AddUpdateCustomerForm customerForm) throws Exception {
         // Try to connect to the database.  
         try {
@@ -115,6 +134,7 @@ public class AddCustomer {
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+            // Thrown if there is a critical database error.
              throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.

@@ -6,12 +6,14 @@ import org.apache.struts.validator.ValidatorForm;
  *
  * @author Michael
  * @since Jun 16, 2014
+ *
+ * This class is the form used to search for customers.
  */
-public class AdminCustomerSearchForm extends ValidatorForm{
+public class AdminCustomerSearchForm extends ValidatorForm {
 
- private String customerEmail;
- private String customerUsername;
- private String customerLastName;
+    private String customerEmail;
+    private String customerUsername;
+    private String customerLastName;
 
     public String getCustomerEmail() {
         return customerEmail;

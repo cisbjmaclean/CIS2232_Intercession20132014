@@ -6,28 +6,29 @@ import org.apache.struts.validator.ValidatorForm;
  *
  * @author Michael Fesser
  * @since 5/30/2014
+ *
+ * This class is the form used to hold the details of the storage units.
  */
-
 public class StorageUnitForm extends ValidatorForm {
 
-    private int unitId;
+    private int unitID;
     private String unitType;
     private String unitDimensions;
     private int unitAvailability;
     private String unitDateFrom;
     private String unitDateTo;
     private int unitInUse;
-    public int customerId;
+    public int customerID;
 
     public StorageUnitForm() {
     }
 
-    public int getUnitId() {
-        return unitId;
+    public int getUnitID() {
+        return unitID;
     }
 
-    public void setUnitId(int unitId) {
-        this.unitId = unitId;
+    public void setUnitID(int unitID) {
+        this.unitID = unitID;
     }
 
     public String getUnitType() {
@@ -78,11 +79,11 @@ public class StorageUnitForm extends ValidatorForm {
         this.unitInUse = unitInUse;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomerId(int customerID) {
+        this.customerID = customerID;
     }
 }

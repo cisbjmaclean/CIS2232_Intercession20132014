@@ -6,19 +6,21 @@ import org.apache.struts.validator.ValidatorForm;
  *
  * @author Michael
  * @since Jun 19, 2014
+ *
+ * This class is the form used to search for storage units.
  */
-public class AdminStorageUnitSearchForm extends ValidatorForm{
+public class AdminStorageUnitSearchForm extends ValidatorForm {
 
-    private int unitId;
+    private int unitID;
     private int unitCustomerId;
     private String unitCustomerLastName;
 
-    public int getUnitId() {
-        return unitId;
+    public int getUnitID() {
+        return unitID;
     }
 
-    public void setUnitId(int unitId) {
-        this.unitId = unitId;
+    public void setUnitID(int unitID) {
+        this.unitID = unitID;
     }
 
     public int getUnitCustomerId() {

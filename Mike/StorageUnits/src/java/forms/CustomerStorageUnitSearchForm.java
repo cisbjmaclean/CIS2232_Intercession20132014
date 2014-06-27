@@ -6,9 +6,11 @@ import org.apache.struts.validator.ValidatorForm;
  *
  * @author Michael
  * @since Jun 20, 2014
+ *
+ * This class is the form used to search for storage units for customers.
  */
-public class CustomerStorageUnitSearchForm extends ValidatorForm{
-    
+public class CustomerStorageUnitSearchForm extends ValidatorForm {
+
     private int unitAvailability;
     private String unitDimensions;
     private String dateTo;

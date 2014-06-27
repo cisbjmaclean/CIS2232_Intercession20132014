@@ -18,6 +18,8 @@ import org.apache.struts.action.ActionMessages;
  *
  * @author Michael
  * @since Jun 16, 2014
+ *
+ * This class class is used to allow the admin to search for a user.
  */
 public class AdminCustomerSearchAction extends Action {
 
@@ -28,10 +30,23 @@ public class AdminCustomerSearchAction extends Action {
     private ArrayList<LoginForm> allLogins;
     private ArrayList<CustomerForm> searchCustomers;
 
+    /**
+     * This action will pass the AdminCustomerSearchForm to the SearchCustomers
+     * class.
+     *
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         ActionMessages messages = new ActionMessages();
+
+        // Validate session
         authenticated = (LoginForm) request.getSession().getAttribute("admin");
         if (authenticated == null || authenticated.isValidated() == false || authenticated.getAdminCode() != 378) {
             messages.add("error", (new ActionMessage("session.invalid")));
@@ -44,6 +59,7 @@ public class AdminCustomerSearchAction extends Action {
         allLogins = (ArrayList<LoginForm>) request.getSession().getAttribute("allLogins");
         searchCustomers = new ArrayList();
 
+        // This is used to determin which search criteria was chosen then the correct method is called
         if (searchForm.getCustomerLastName().equals("") && searchForm.getCustomerUsername().equals("") && searchForm.getCustomerLastName().equals("")) {
             searchCustomers = (ArrayList<CustomerForm>) request.getSession().getAttribute("allCustomers");
         } else if (searchForm.getCustomerEmail().length() > 0) {
@@ -52,7 +68,8 @@ public class AdminCustomerSearchAction extends Action {
             searchCustomers = searchCustomer.seachByUsername(searchForm, allLogins, allCustomers);
         } else if (searchForm.getCustomerLastName().length() > 0) {
             searchCustomers = searchCustomer.seachByLastName(searchForm, allCustomers);
-        }   
+        }
+        // Set the search results in the session
         request.setAttribute("customerList", searchCustomers);
         return mapping.findForward("adminCustomerSearchResults");
     }

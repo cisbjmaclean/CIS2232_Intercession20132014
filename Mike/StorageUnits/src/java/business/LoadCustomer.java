@@ -13,6 +13,9 @@ import util.DbUtils;
  *
  * @author Michael
  * @since Jun 10, 2014
+ *
+ * This class is used to load a single customer from the database. It is used
+ * during the login of a customer.
  */
 public class LoadCustomer {
 
@@ -26,6 +29,14 @@ public class LoadCustomer {
     private ResultSet rs = null;
     private CustomerForm customer;
 
+    /**
+     * This method is used to call the database and load the customers personal
+     * details from the database.
+     *
+     * @param customerID
+     * @return
+     * @throws Exception
+     */
     public CustomerForm setCustomerInformation(int customerID) throws Exception {
         try {
             con = dbConnection.databaseConnection();
@@ -43,7 +54,7 @@ public class LoadCustomer {
             rs = psAuthenticate.executeQuery();
             customer = new CustomerForm();
             while (rs.next()) {
-                customer.setCustomerId(rs.getInt("cus_id"));
+                customer.setCustomerID(rs.getInt("cus_id"));
                 customer.setEmail(rs.getString("cus_email"));
                 customer.setFirstName(rs.getString("cus_first_name"));
                 customer.setMiddleInitial(rs.getString("cus_middle_initial"));
@@ -57,6 +68,7 @@ public class LoadCustomer {
 
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            // Thrown if there is a critical error with the database.
             throw new Exception();
         } finally {
             // Close the result set, psAuthenicate,  and the connection objects.

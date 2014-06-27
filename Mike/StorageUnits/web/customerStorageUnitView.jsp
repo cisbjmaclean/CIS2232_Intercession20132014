@@ -53,8 +53,10 @@
             </tr>
         </table>
         <div class="picker">
+            <!-- Core to iterate over the session object -->
             <c:forEach var="unit" items="${storageUnits}">  
-                <c:if test="${customer.customerId == unit.customerId}">
+                <!-- Core used to check if the storage unit and customer have the same customer ID -->
+                <c:if test="${customer.customerID == unit.customerID}">
                     <table>
                         <tr>
                             <th>
@@ -77,8 +79,9 @@
                             </th>
                         </tr>      
                         <tr>
+                            <!-- JSTL used to display the variables of the session object -->
                             <td>
-                                ${unit.unitId}
+                                ${unit.unitID}
                             </td> 
                             <td>
                                 ${unit.unitType}
@@ -93,6 +96,7 @@
                                 ${unit.unitDateTo}
                             </td> 
                             <td>
+                                <!-- Core used to check if the unit is in use. -->
                                 <c:choose> 
                                     <c:when test="${unit.unitInUse == 0}">
                                         <bean:message key="label.customer.storage.unit.view.storage.unit.in.use.no"/>
@@ -106,25 +110,25 @@
                     </table>
                     <table id="customerStorageUnitView">
                         <tr>                           
-                                <html:form action="/extendStorageUnit">
+                            <html:form action="/extendStorageUnit">
                                 <td>
-                                    <html:hidden property="unitId" value="${unit.unitId}"/>
+                                    <html:hidden property="unitID" value="${unit.unitID}"/>
                                     <label><bean:message key="label.customer.view.all.months"/></label>
                                 </td>
                                 <td>
                                     <input type="text" name="dateTo" class="datepicker" value="Click Here">
                                     <html:submit property="Submit"><bean:message key="label.customer.storage.unit.view.extend.storage.unit"/></html:submit>
-                                </td>
-                                </html:form>                                
+                                    </td>
+                            </html:form>                                
                             <td>
                                 <html:form action="/releaseStorageUnit">
-                                    <html:hidden property="unitId" value="${unit.unitId}"/> 
+                                    <html:hidden property="unitID" value="${unit.unitID}"/> 
                                     <html:submit property="Submit"><bean:message key="label.customer.storage.unit.view.release.storage.unit"/></html:submit>
                                 </html:form>    
                             </td> 
                             <td>
                                 <html:form action="/storageUnitInUseToggle">
-                                    <html:hidden property="unitId" value="${unit.unitId}"/>
+                                    <html:hidden property="unitID" value="${unit.unitID}"/>
                                     <html:hidden property="storageUnitToggle" value="${unit.unitInUse}"/>  
                                     <html:submit property="Submit"><bean:message key="label.customer.storage.unit.view.storage.unit.toggle.in.use"/></html:submit>
                                 </html:form>    

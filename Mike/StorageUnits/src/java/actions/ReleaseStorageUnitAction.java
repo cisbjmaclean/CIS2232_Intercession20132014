@@ -21,6 +21,8 @@ import util.SortStorageUnits;
  *
  * @author Michael
  * @since Jun 12, 2014
+ *
+ * This class is used to release a storage unit
  */
 public class ReleaseStorageUnitAction extends Action {
 
@@ -31,6 +33,17 @@ public class ReleaseStorageUnitAction extends Action {
     private ReleaseStorageUnitForm releaseUnitForm;
     private ArrayList<StorageUnitForm> storageUnits;
 
+    /**
+     * This action will pass the ReleaseStorageUnitForm to the
+     * ReleaseStorageUnit class.
+     *
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -46,19 +59,22 @@ public class ReleaseStorageUnitAction extends Action {
             }
         }
 
+        // Pass the storage units and the release unit variable to the ReleaseStorageUnit class.
         try {
-        releaseUnitForm = (ReleaseStorageUnitForm) request.getAttribute("releaseStorageUnitForm");
-        storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
-        releaseUnit = new ReleaseStorageUnit();    
-        releaseUnit.releaseUnit(releaseUnitForm, storageUnits);      
-        request.getSession().setAttribute("storageUnits", SortStorageUnits.sortDefault(storageUnits));
-        } catch (Exception e){
-             Logger.getLogger(ReleaseStorageUnit.class.getName()).log(Level.SEVERE, null, e);
-                messages.add("error", (new ActionMessage("error.database")));
+            releaseUnitForm = (ReleaseStorageUnitForm) request.getAttribute("releaseStorageUnitForm");
+            storageUnits = (ArrayList<StorageUnitForm>) request.getSession().getAttribute("storageUnits");
+            releaseUnit = new ReleaseStorageUnit();
+            releaseUnit.releaseUnit(releaseUnitForm, storageUnits);
+            request.getSession().setAttribute("storageUnits", SortStorageUnits.sortDefault(storageUnits));
+        } catch (Exception e) {
+            // Used if there is a critical database error
+            Logger.getLogger(ReleaseStorageUnit.class.getName()).log(Level.SEVERE, null, e);
+            messages.add("error", (new ActionMessage("error.database")));
         }
-        
+
         messages.add("success", (new ActionMessage("customer.storage.unit.view.release.storage.unit.success")));
-              
+
+        // Forward based on who is logged in.
         if (adminAuthenticated != null && adminAuthenticated.getAdminCode() == 378) {
             forwardTo = mapping.findForward("adminStorageUnitView");
         } else {

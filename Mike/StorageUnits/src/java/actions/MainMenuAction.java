@@ -16,6 +16,8 @@ import util.Util;
 
 /**
  *
+ * This class holds the options for the main menu.
+ *
  * @author Michael
  * @since Jun 12, 2014
  */
@@ -24,6 +26,17 @@ public class MainMenuAction extends Action {
     private ActionForward forwardTo;
     private MultipleActionForm mainMenu;
 
+    /**
+     * This action will forward to a jsp based on the value from the main menu
+     * form.
+     *
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -32,6 +45,7 @@ public class MainMenuAction extends Action {
         Util.resources = ResourceBundle.getBundle("com.myapp.struts.ApplicationResource", Locale.getDefault());
         mainMenu = (MultipleActionForm) request.getAttribute("multipleActionForm");
 
+        // Depending on the what button was clicked on the main menu jsp forward to the correct tile
         if (mainMenu.getAction().equals(Util.resources.getString("label.main.menu.login"))) {
             forwardTo = mapping.findForward("login");
         } else if (mainMenu.getAction().equals(Util.resources.getString("label.main.menu.create"))) {
@@ -49,6 +63,7 @@ public class MainMenuAction extends Action {
         } else if (mainMenu.getAction().equals(Util.resources.getString("label.admin.menu.search"))) {
             forwardTo = mapping.findForward("adminSearch");
         } else if (mainMenu.getAction().equals(Util.resources.getString("label.admin.menu.view.all.customers"))) {
+            // Null pointer issues
             request.getSession().setAttribute("customerList", request.getSession().getAttribute("allCustomers"));
             forwardTo = mapping.findForward("adminCustomerSearchResults");
         } else if (mainMenu.getAction().equals(Util.resources.getString("label.admin.menu.add.customer"))) {
@@ -58,6 +73,7 @@ public class MainMenuAction extends Action {
         } else if (mainMenu.getAction().equals(Util.resources.getString("label.admin.menu.add.storage.unit"))) {
             forwardTo = mapping.findForward("adminAddStorageUnit");
         } else if (mainMenu.getAction().equals(Util.resources.getString("label.menu.logout"))) {
+            // Logout and clear session.
             Logout.logout(request, response);
             messages.add("success", (new ActionMessage("logout.success")));
             forwardTo = mapping.findForward("index");

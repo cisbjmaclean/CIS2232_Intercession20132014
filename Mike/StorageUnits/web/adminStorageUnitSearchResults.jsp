@@ -42,34 +42,35 @@
                 </td>
             </tr>
         </table>
-                    
+
         <!-- used for the calendar -->
         <div style="padding-bottom: 300px">
             <table class="searchResults">
+                <!-- iterate over the session object -->
                 <c:forEach var="unit" items="${unitList}">
                     <tr>
-                    <th>
-                        <bean:message key="label.admin.storage.unit.search.results.id"/>
-                    </th>
-                    <th>
-                        <bean:message key="label.admin.storage.unit.search.results.type"/>
-                    </th>
-                    <th>
-                        <bean:message key="label.admin.storage.unit.search.results.dimensions"/>
-                    </th>
-                    <th>
-                        <bean:message key="label.admin.storage.unit.search.results.availability"/>
-                    </th>
-                    <th>
-                        <bean:message key="label.admin.storage.unit.search.results.date.to"/>
-                    </th>
-                    <th>
-                        <bean:message key="label.admin.storage.unit.search.results.date.from"/>
-                    </th>
-                </tr>
+                        <th>
+                            <bean:message key="label.admin.storage.unit.search.results.id"/>
+                        </th>
+                        <th>
+                            <bean:message key="label.admin.storage.unit.search.results.type"/>
+                        </th>
+                        <th>
+                            <bean:message key="label.admin.storage.unit.search.results.dimensions"/>
+                        </th>
+                        <th>
+                            <bean:message key="label.admin.storage.unit.search.results.availability"/>
+                        </th>
+                        <th>
+                            <bean:message key="label.admin.storage.unit.search.results.date.to"/>
+                        </th>
+                        <th>
+                            <bean:message key="label.admin.storage.unit.search.results.date.from"/>
+                        </th>
+                    </tr>
                     <tr>
                         <td>
-                            ${unit.unitId}
+                            ${unit.unitID}
                         </td> 
                         <td>
                             ${unit.unitType}
@@ -85,12 +86,13 @@
                         </td> 
                         <td>
                             ${unit.unitDateTo}
-                        </td>   
-                        <c:if test="${unit.customerId == 1}">
+                        </td>
+                        <!-- Only show this option is the admin is logged in and the a storage unit has a customer attached to it -->
+                        <c:if test="${unit.customerID == 1}">
                             <c:if test="${admin.adminCode == 378}">
                                 <td>
                                     <html:form action="/releaseStorageUnit">
-                                        <html:hidden property="unitId" value="${unit.unitId}"/>
+                                        <html:hidden property="unitID" value="${unit.unitID}"/>
                                         <html:submit property="Submit"><bean:message key="label.storage.unit.search.results.release.storage.unit"/></html:submit>
                                     </html:form>  
                                 </td>

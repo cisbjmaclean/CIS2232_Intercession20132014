@@ -42,18 +42,19 @@
                 </td>
             </tr>
         </table>
-                    
+
         <html:form action="/updateCustomer">
             <table class="mainTables"> 
                 <tr>
                     <td>
                         <label><bean:message key="label.update.customer.id"/></label>
                     </td>
-                    <td><html:text property="customerId" readonly="true" value="${customer.customerId}"/>
+                    <td><html:text property="customerID" readonly="true" value="${customer.customerID}"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <!-- A toggle to allow the admin to change usernames when they are logged in.  It will replace the {disabled} value -->
                         <c:if test="${admin.adminCode != 378}" var="disabled" />
                         <label><bean:message key="label.update.customer.user.name"/></label>
                     </td>

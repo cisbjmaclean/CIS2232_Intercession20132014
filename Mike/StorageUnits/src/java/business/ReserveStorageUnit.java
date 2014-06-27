@@ -18,6 +18,8 @@ import util.DbUtils;
  *
  * @author Michael
  * @since Jun 13, 2014
+ * 
+ * This class allows customers to reserves storage units.
  */
 public class ReserveStorageUnit {
 
@@ -33,6 +35,14 @@ public class ReserveStorageUnit {
     private String dateFrom;
     private String dateTo;
 
+    /**
+     * This method accepts parameters and used them to reserved the specific storage unit requested.
+     * 
+     * @param reserveUnitForm
+     * @param user
+     * @param storageUnits
+     * @throws Exception 
+     */
     public void reserveUnit(ReserveStorageUnitForm reserveUnitForm, LoginForm user, ArrayList<StorageUnitForm> storageUnits) throws Exception {
         // Try to connect to the database.  
         try {
@@ -50,8 +60,8 @@ public class ReserveStorageUnit {
             sql = "INSERT INTO `customer_storage_unit`(`storage_unit_id`, `cus_id`) VALUES (?,?)";
             // Added security for the fields being sent to the database.
             psAuthenticate = con.prepareStatement(sql);
-            psAuthenticate.setInt(1, reserveUnitForm.getUnitId());
-            psAuthenticate.setInt(2, user.getCustomerId());
+            psAuthenticate.setInt(1, reserveUnitForm.getUnitID());
+            psAuthenticate.setInt(2, user.getCustomerID());
             // Run the query.
             psAuthenticate.executeUpdate();
 
@@ -63,12 +73,13 @@ public class ReserveStorageUnit {
             psAuthenticate.setString(2, dateFrom);
             psAuthenticate.setString(3, dateTo);
             psAuthenticate.setInt(4, 0);
-            psAuthenticate.setInt(5, reserveUnitForm.getUnitId());
+            psAuthenticate.setInt(5, reserveUnitForm.getUnitID());
             // Run the query.
             psAuthenticate.executeUpdate();
 
         } catch (Exception e) {
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
+            // Thrown if there is a critical error with the database.
             throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.
@@ -78,10 +89,17 @@ public class ReserveStorageUnit {
 
     }
 
+    /**
+     * This method updates and ArrayList that is used to update the session.
+     * 
+     * @param user
+     * @param reserveUnitForm
+     * @param storageUnits 
+     */
     public void setUnit(LoginForm user, ReserveStorageUnitForm reserveUnitForm, ArrayList<StorageUnitForm> storageUnits) {
         for (StorageUnitForm storageUnit : storageUnits) {
-            if (storageUnit.getUnitId() == reserveUnitForm.getUnitId()) {
-                storageUnit.setCustomerId(user.getCustomerId());
+            if (storageUnit.getUnitID() == reserveUnitForm.getUnitID()) {
+                storageUnit.setCustomerId(user.getCustomerID());
                 storageUnit.setUnitDateFrom(dateFrom);
                 storageUnit.setUnitDateTo(dateTo);
                 storageUnit.setUnitInUse(0);

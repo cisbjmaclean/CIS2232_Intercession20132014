@@ -15,8 +15,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Michael
  * @since Jun 22, 2014
+ *
+ * This class gets the units in use for the customer and returns a string.
  */
-
 @XmlRootElement(name = "UnitsInUseCheck")
 public class UnitsInUseCheck {
 
@@ -33,7 +34,15 @@ public class UnitsInUseCheck {
         this.unitsInUseString = unitsInUseString;
     }
 
-    public String getUnitsInUse(int customerId) {
+    /**
+     * This method accepts the ID of logged in user and then uses it to compare
+     * and determine which storage units belong to them. Further it determines
+     * which ones are in use and returns a xml string representation.
+     *
+     * @param customerID
+     * @return
+     */
+    public String getUnitsInUse(int customerID) {
         loadUnits = new LoadStorageUnits();
         units = new ArrayList();
         try {
@@ -42,12 +51,13 @@ public class UnitsInUseCheck {
             Logger.getLogger(UnitsInUseCheck.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        // Get the units in use that belong to the customer id.
         if (units.size() > 0) {
             unitsInUseString = "The storageUnits you currenlty have in use are:";
             for (StorageUnitForm storageUnit : units) {
-                if (storageUnit.getCustomerId() == customerId) {
+                if (storageUnit.getCustomerID() == customerID) {
                     if (storageUnit.getUnitInUse() == 1) {
-                        unitsInUseString += "\nStorage Unit " + storageUnit.getUnitId();
+                        unitsInUseString += "\nStorage Unit " + storageUnit.getUnitID();
                     }
                 }
             }
@@ -72,4 +82,3 @@ public class UnitsInUseCheck {
         return unitsInUseStringXML;
     }
 }
-

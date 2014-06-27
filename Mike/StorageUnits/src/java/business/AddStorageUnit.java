@@ -12,6 +12,8 @@ import util.DbUtils;
  *
  * @author Michael
  * @since Jun 19, 2014
+ *
+ * This class is used to add a new storage unit to the database.
  */
 public class AddStorageUnit {
 
@@ -22,7 +24,13 @@ public class AddStorageUnit {
     private String sql;
     // The connection object.
     private Connection con;
-    
+
+    /**
+     * This method adds the storage unit to the database.
+     *
+     * @param unit
+     * @throws Exception
+     */
     public void addStorageUnit(StorageUnitForm unit) throws Exception {
         // Try to connect to the database.  
         try {
@@ -33,7 +41,7 @@ public class AddStorageUnit {
         }
 
         // Try to generate the query.
-        try {        
+        try {
             // The query to send.
             sql = "INSERT INTO `storage_unit`(`storage_unit_type`, `storage_unit_dimensions`, `storage_unit_availability`, `storage_unit_date_from`, `storage_unit_date_to`) "
                     + "VALUES (?,?,?,?,?)";
@@ -42,18 +50,19 @@ public class AddStorageUnit {
             psAuthenticate.setString(1, unit.getUnitType());
             psAuthenticate.setString(2, unit.getUnitDimensions());
             psAuthenticate.setInt(3, unit.getUnitAvailability());
-            psAuthenticate.setString(4, "");
-            psAuthenticate.setString(5, "");
+            psAuthenticate.setString(4, "--/--/--");
+            psAuthenticate.setString(5, "--/--/--");
 
             // Run the query.
             psAuthenticate.executeUpdate();
 
         } catch (Exception e) {
+            // Thrown if there is a critical database error
             Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, e);
-             throw new Exception();
+            throw new Exception();
         } finally {
             // Close psAuthenicate,  and the connection objects.
             DbUtils.close(psAuthenticate, con);
-        }      
+        }
     }
 }
