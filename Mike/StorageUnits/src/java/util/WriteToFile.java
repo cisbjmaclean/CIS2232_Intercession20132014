@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class WriteToFile {
 
     // Set path
-    private static Path filepath = Paths.get("c:\\test\\logs.txt");
+    private static Path filepath = Paths.get("c:\\logs\\logs.txt");
     private static BufferedOutputStream output;
     private static BufferedWriter writer;
     private static boolean writerOpen;
