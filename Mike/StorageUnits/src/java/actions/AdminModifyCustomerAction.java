@@ -85,6 +85,7 @@ public class AdminModifyCustomerAction extends Action {
                 messages.add("error", (new ActionMessage("error.database")));
             }
             messages.add("success", (new ActionMessage("customer.deleted")));
+            saveMessages(request, messages);
             forwardTo = mapping.findForward("adminMain");
         }
         return forwardTo;
