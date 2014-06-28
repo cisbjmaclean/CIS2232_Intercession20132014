@@ -1,0 +1,61 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package forms;
+
+import org.apache.struts.action.ActionForm;
+
+/**
+ *
+ * @author Andrew
+ */
+public class AddLifeguardForm extends ActionForm{
+    private String firstName, lastName, phoneNumber, NLS, CPR;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getNLS() {
+        return NLS;
+    }
+
+    public void setNLS(String NLS) {
+        this.NLS = NLS;
+    }
+
+    public String getCPR() {
+        return CPR;
+    }
+
+    public void setCPR(String CPR) {
+        this.CPR = CPR;
+    }
+
+   
+    
+    
+}
