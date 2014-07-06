@@ -29,34 +29,63 @@
     <html:form action="/Menu">
         <center>      
             <table>
+                
                 <tr>
                     <td>            
-                        9:00-9:30 &nbsp;Setup and coffee/snacks
+                        <h3><bean:message key="label.cis2232.2014.intercession.label"/></h3><br/>
                     </td>
                 </tr>
                 <tr>
                     <td>            
-                        9:20 &nbsp;<a target="_blank" href="http://bjmac.hccis.info:8080/DigitalMediaStore/">Ian's Digital Media Sales</a>
+                        <hr/>
+                        <h3><bean:message key="label.cis2232.resources"/></h3>
                     </td>
                 </tr>
                 <tr>
                     <td>            
-                        9:40 &nbsp;Andrew's Pool Bookings
+                        <a target="_blank" href="http://bjmac.hccis.info:8080/styles/styles.css">Link to stylesheet</a>
                     </td>
                 </tr>
                 <tr>
                     <td>            
-                        10:00 &nbsp;<a  target="_blank"  href="http://bjmac.hccis.info:8080/Soccer">Ryan's Soccer Field/Bag Bookings</a>
+                        <a target="_blank" href="http://bjmac.hccis.info:8080/StudentWeb/">Student Web - class example</a><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>            &nbsp;
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <hr/>
+                        <h3><bean:message key="label.cis2232.student.examples"/></h3>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>            
+                        <a target="_blank" href="http://bjmac.hccis.info:8080/DigitalMediaStore/">Digital Media Sales (1/test) (Ian Mori)</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a target="_blank" href="http://bjmac.hccis.info:8080/LifeguardAppliccation6/">Pool Bookings (andrew/pw) (Andrew Reid)</a>
                     </td>
                 </tr>
                 <tr>
                     <td>            
-                        10:20 &nbsp;<a  target="_blank"  href="http://bjmac.hccis.info:8080/StorageUnits">Mike's Storage Unit Bookings</a>
+                        <a  target="_blank"  href="http://bjmac.hccis.info:8080/Soccer">Soccer Field/Bag Bookings (Ryan/1234) (Ryan Forrester)</a>
                     </td>
                 </tr>
                 <tr>
                     <td>            
-                        10:40 &nbsp;<a target="_blank"  href="http://bjmac.hccis.info:8080/RegistrationBoard">Roger's Professional Development</a>
+                        <a  target="_blank"  href="http://bjmac.hccis.info:8080/StorageUnits">Storage Unit Bookings (BJ/password) (Mike Fesser)</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>            
+                        <a target="_blank"  href="http://bjmac.hccis.info:8080/RegistrationBoard">Professional Development Component of Registration Board (Roger Myers)</a>
                     </td>
                 </tr>
 

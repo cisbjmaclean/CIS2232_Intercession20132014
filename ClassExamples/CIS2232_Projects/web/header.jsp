@@ -17,10 +17,12 @@ This provides the standard header for each page in the application.
     </head>
     <body>
         <div>
-            <h3>
+            <h1>
                 <bean:message key="welcome.title"/><br/>
+            </h1>
+            <h2>
                 <bean:message key="welcome.message"/>
-            </h3>
+            </h2>
         </div>        
     </body>
 

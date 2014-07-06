@@ -4,12 +4,15 @@ import business.Student;
 import forms.MenuForm;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import util.Util;
 
 /**
  *
@@ -27,12 +30,8 @@ public class Initialize extends Action {
         
         
         System.out.println("Initializing");
+        Util.resources = ResourceBundle.getBundle("resources.ApplicationResource", Locale.getDefault());
 
-        System.out.println("Loading the students from database");
-        Student.loadFromDatabase();
-        System.out.println("Loaded the students ("+Student.getStudents().size()+" students loaded)");
-        
-        request.getSession().setAttribute("AllStudents2", Student.getStudents().values());
         ActionForward findForward = mapping.findForward("main");
         return findForward;
 

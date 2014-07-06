@@ -6,10 +6,14 @@
 
 package util;
 
+import java.util.ResourceBundle;
+
 /**
  *
- * @author bjmaclean
+ * @author BJ
  */
 public class Util {
-    public static final boolean debugOn = true;
+
+    public static boolean debugOn = true;
+    public static ResourceBundle resources = null;
 }

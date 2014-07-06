@@ -18,6 +18,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import util.Util;
 
 /**
  *
@@ -39,51 +40,12 @@ public class ProcessMenu extends Action {
         ActionMessages messages = new ActionMessages();
 
         System.out.println("Session_id=" + request.getSession().getId());
-        if (menuForm.getOption().equalsIgnoreCase("add")) {
-            findForward = mapping.findForward("add");
+        findForward = mapping.findForward(menuForm.getAction());
 
             //will invoke code to add a student.
-        } else if (menuForm.getOption().equalsIgnoreCase("viewall")) {
-
-//            //Have to load the collection into the request.
-//            ArrayList<Student> theStudents = new ArrayList<Student>(Student.getStudents().values());
-//            request.setAttribute("Students", theStudents);
-            findForward = mapping.findForward("viewAll");
-        } else {
-            String parameterOption = request.getParameter("option");
-            //*************************************************************************************
-            // User chose to edit a student from a hyperlink
-
-            if (parameterOption != null && parameterOption.equalsIgnoreCase("edit")) {
-                //Have chosen to edit.  The studentId should be passed as a parameter as well.  
-                String studentId = request.getParameter("studentId");
-                try {
-                    //***********************************************************************************************
-                    //In this processing, will load the student information based on the student id.  If loaded will 
-                    //forward to the chooseEdit forward with a message indicating that the student was loaded correctly.
-                    //***********************************************************************************************
-                    
-                    Student loadStudent = StudentDAO.getStudentFromDatabase(studentId);
-                    messages.add("message1", (new ActionMessage("label.student.loaded.successfully")));
-                    request.setAttribute("studentForm", loadStudent);
-                    findForward = mapping.findForward("chooseEdit");
-                } catch (Exception e) {
-                    //***********************************************************************************************
-                    // If there is an exception.  Will forward the user to the add tile with an error that
-                    // the student could not be loaded.  This may change if enhanced in the future.  Something
-                    // strange would have had to happen for this case to occur.
-                    //***********************************************************************************************
-
-                    messages = new ActionMessages();
-                    messages.add("error", (new ActionMessage("label.error.loading.student")));
-                    findForward = mapping.findForward("add");
-                }
-                saveMessages(request, messages);
-
-            }
 
             
-        }
+     
 
         return findForward;
 

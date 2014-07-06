@@ -10,7 +10,7 @@ where the header, body and footers go.
 --%>
 
 <html:html>
-      <head><link rel="stylesheet" type="text/css" href="http://localhost:8080/StorageUnits/styles/styles.css"></head>
+      <head><link rel="stylesheet" type="text/css" href="http://bjmac.hccis.info:8080/StorageUnits/styles/styles.css"></head>
     <body>
 
         <!-- Header page information -->

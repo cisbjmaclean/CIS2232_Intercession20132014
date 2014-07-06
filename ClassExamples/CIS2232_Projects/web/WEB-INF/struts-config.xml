@@ -16,6 +16,8 @@
     </global-exceptions>
 
     <global-forwards>
+        <forward name="2013/14 Intercession"  path="mainTile"/>
+        <forward name="About"  path="aboutTile"/>
         <forward name="welcome"  path="/Welcome.do"/>
         <forward name="main"  path="mainTile"/>
     </global-forwards>
@@ -28,11 +30,8 @@
         <action path="/Menu" 
                 type="actions.ProcessMenu"
                 name="menuForm"
-                input="/welcomeStruts.jsp"
+                input="/welcome.jsp"
                 scope="request">
-                <forward name="chooseEdit" path="chooseEditTile"/>
-                <forward name="add" path="addStudentTile"/>
-                <forward name="viewAll" path="viewAllTile"/>                
         </action>
         
         <action path="/Initialize" 
@@ -41,20 +40,6 @@
                 input="/welcome.jsp" 
                 scope="request">
         </action>
-
-        
-        <action path="/Add" 
-                type="actions.AddStudent"
-                name="studentForm"
-                input="addStudentTile" 
-                scope="request"/>
-
-        <action path="/Edit" 
-                type="actions.EditStudent"
-                name="studentForm"
-                input="viewAllTile" 
-                scope="request"/>
-
         
     </action-mappings>
     
