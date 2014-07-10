@@ -2,4 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/StudentWeb_2.0/StudentInformation?wsdl" uri="src/conf/xml-resources/web-service-references/StudentInformation/wsdl/localhost_8080/StudentWeb_2.0/StudentInformation.wsdl"/>
     <system systemId="http://localhost:8080/StudentWeb_2.0/StudentInformation?xsd=1" uri="src/conf/xml-resources/web-service-references/StudentInformation/wsdl/localhost_8080/StudentWeb_2.0/StudentInformation.xsd_1.xsd"/>
+    <system systemId="http://bjmac.hccis.info:8080/StudentWeb/StudentInformation?wsdl" uri="src/conf/xml-resources/web-service-references/StudentInformation_1/wsdl/bjmac.hccis.info_8080/StudentWeb/StudentInformation.wsdl"/>
+    <system systemId="http://bjmac.hccis.info:8080/StudentWeb/StudentInformation?xsd=1" uri="src/conf/xml-resources/web-service-references/StudentInformation_1/wsdl/bjmac.hccis.info_8080/StudentWeb/StudentInformation.xsd_1.xsd"/>
 </catalog>

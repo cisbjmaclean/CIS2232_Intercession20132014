@@ -42,5 +42,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/services"/>
         <delete dir="${build.generated.dir}/jax-wsCache/StudentInformation"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-StudentInformation"/>
+    <target name="wsimport-client-StudentInformation_1" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/StudentInformation_1"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/StudentInformation_1" destdir="${build.generated.dir}/jax-wsCache/StudentInformation_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/StudentInformation_1/wsdl/bjmac.hccis.info_8080/StudentWeb/StudentInformation.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://bjmac.hccis.info:8080/StudentWeb/StudentInformation?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/StudentInformation_1/wsdl/bjmac.hccis.info_8080/StudentWeb/StudentInformation.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/StudentInformation_1"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/StudentInformation_1">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-StudentInformation_1" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/services"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/StudentInformation_1"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-StudentInformation, wsimport-client-StudentInformation_1"/>
 </project>
