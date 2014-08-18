@@ -46,11 +46,35 @@
                         <a target="_blank" href="http://bjmac.hccis.info:8080/styles/styles.css">Link to stylesheet</a>
                     </td>
                 </tr>
-                <tr>
-                    <td>            
-                        <a target="_blank" href="http://bjmac.hccis.info:8080/StudentWeb/">Student Web - class example</a><br/>
+
+                                <tr>
+                    <td>            &nbsp;
                     </td>
                 </tr>
+                
+                <tr>
+                    <td>
+                        <hr/>
+                        <h3>Class Examples</h3>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>            
+                        <a target="_blank" href="http://bjmac.hccis.info:8080/CourtBooking/">Court Booking (Fall 2013/2014)</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>            
+                        <a target="_blank"  href="http://bjmac.hccis.info:8080/RegistrationBoard">Registration Board (Intercession 2013/2014)</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>            
+                        <a target="_blank" href="http://bjmac.hccis.info:8080/StudentWeb/">Student Web (Intercession 2013/2014)</a><br/>
+                    </td>
+                </tr>
+
                 <tr>
                     <td>            &nbsp;
                     </td>
