@@ -46,6 +46,12 @@
                         <a target="_blank" href="http://bjmac.hccis.info:8080/styles/styles.css">Link to stylesheet</a>
                     </td>
                 </tr>
+                <tr>
+                    <td>            
+                        <a target="_blank" href="https://sam.hollandcollege.com/section/content/default.asp?WCI=pgDisplay&WCU=CRSCNT&ENTRY_ID=A4E26C762ABA4D3ABAC8F20ACFB0A4EC">CIS Programming Standards</a>
+                    </td>
+                </tr>
+                
 
                                 <tr>
                     <td>            &nbsp;
@@ -74,11 +80,57 @@
                         <a target="_blank" href="http://bjmac.hccis.info:8080/StudentWeb/">Student Web (Intercession 2013/2014)</a><br/>
                     </td>
                 </tr>
+                <tr>
+                    <td>            
+                        Squash PEI Registration (Fall 2014/2015)<br/>
+                    </td>
+                </tr>
 
+                
                 <tr>
                     <td>            &nbsp;
                     </td>
                 </tr>
+
+                                <tr>
+                    <td>
+                        <hr/>
+                        <h3>Student Projects (Fall 2014/2014)</h3>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>            
+                           Tennis League Manager
+                    </td>
+                </tr>
+                <tr>
+                    <td>            
+                           Course Offering
+                    </td>
+                </tr>
+                <tr>
+                    <td>            
+                           Pickup Hockey Manager
+                    </td>
+                </tr>
+                <tr>
+                    <td>            
+                           Incident Check
+                    </td>
+                </tr>
+                <tr>
+                    <td>            
+                           Room Booking
+                    </td>
+                </tr>
+                
+               <tr>
+                    <td>            
+                           55+ Games Registration
+                    </td>
+                </tr>
+
                 
                 <tr>
                     <td>
@@ -112,6 +164,7 @@
                         <a target="_blank"  href="http://bjmac.hccis.info:8080/RegistrationBoard">Professional Development Component of Registration Board (Roger Myers)</a>
                     </td>
                 </tr>
+
 
             </table>
 

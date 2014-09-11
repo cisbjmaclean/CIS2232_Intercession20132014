@@ -16,7 +16,7 @@
     </global-exceptions>
 
     <global-forwards>
-        <forward name="2013/14 Intercession"  path="mainTile"/>
+        <forward name="Class Examples"  path="mainTile"/>
         <forward name="About"  path="aboutTile"/>
         <forward name="welcome"  path="/Welcome.do"/>
         <forward name="main"  path="mainTile"/>
